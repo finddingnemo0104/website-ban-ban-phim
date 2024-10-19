@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SGU Click</title>
+    <link rel="icon" type="image/x-icon" href="/Image/logo.png" />
+    <link rel="stylesheet" href="/Style/quan-ly-san-pham.css" />
+    <link rel="stylesheet" href="/Style/quan-ly-khach-hang.css" />
+  </head>
+  <body>
+    <!-- Slogan bar -->
+    <SloganBar class="slogan-bar">
+      <img class="logo" src="/Image/logo.png" alt="logo" />
+      <p class="slogan" style="color: white">Chất phím, chất click !</p>
+    </SloganBar>
+
+    <div style="display: flex">
+      <!-- Navbar admin -->
+      <Navbar-admin class="navbar-admin">
+        <div class="hi-admin" style="height: 50px">
+          <i
+            class="fa-solid fa-circle-user"
+            style="
+              font-size: 25px;
+              color: #21568a;
+              padding-top: 5px;
+              margin-right: 10px;
+            "
+          >
+          </i>
+          <p style="margin-top: 12px">Xin chào Admin !</p>
+        </div>
+
+        <!-- Management options -->
+        <button
+          onclick="location.href='/Page/quan-ly-san-pham.html';"
+          class="management-option-button"
+        >
+          Quản lý sản phẩm
+        </button>
+        <button class="management-option-button">Quản lý đơn hàng</button>
+
+        <button
+          class="management-option-button"
+          style="background-color: #558dc4; color: white"
+        >
+          Quản lý khách hàng
+        </button>
+        <button class="management-option-button">Thống kê</button>
+      </Navbar-admin>
+
+      <div
+        class="bg-color"
+        style="height: 100vh; width: 100%; overflow-y: auto"
+      >
+        <!-- Title page -->
+        <div style="display: flex">
+          <p class="title-page">Khách hàng</p>
+
+          <div style="margin-left: auto; padding: 20px">
+            <button class="button-style" onclick="openAddProductModel()">
+              <i class="fa-solid fa-plus" style="font-size: 15px"></i>
+              <div style="padding-left: 10px; font-size: 15px">
+                Thêm khách hàng
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search options -->
+        <form
+          class="search-options-style"
+          onsubmit="filterCustomer(event)"
+        >
+          <!-- Search by product name -->
+          <div class="search-option">
+            <input
+              name="name"
+              type="text"
+              placeholder="Tìm theo tên khách hàng"
+              style="padding: 5px"
+            />
+          </div>
+          <!-- Search by gender -->
+          <div class="search-option">
+            <select name="gender" style="padding: 5px; width: 100px;">
+              <option value="all" selected>Tất cả</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Khác">Khác</option>
+            </select>
+          </div>
+
+          <!-- Filter button -->
+          <div class="search-option">
+            <button
+              class="button-style"
+              type="submit"
+              style="background-color: #15803d"
+            >
+              <i
+                class="fa-solid fa-filter"
+                style="font-size: 13px; padding-top: 1px"
+              ></i>
+              <div style="padding-left: 10px; font-size: 15px">Tìm kiếm</div>
+            </button>
+          </div>
+
+          <!-- Refresh button -->
+          <div class="search-option">
+            <button
+              class="button-style flex-container"
+              type="button"
+              style="background-color: #d1d5db"
+              onclick="showCustomerData()"
+            >
+              <i
+                class="fa-solid fa-rotate-right"
+                style="font-size: 13px; padding-top: 1px; color: black"
+              ></i>
+
+              <div
+                style="padding-left: 10px; font-size: 15px; color: black"
+                onclick="showCustomerData()"
+              >
+                Làm mới
+              </div>
+            </button>
+          </div>
+        </form>
+
+        <!-- Table product contaniner -->
+        <div class="table-customer-container">
+          <table></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Model add product container -->
+    <div class="model-add-product-container">
+      <div
+        style="height: 100%; width: 30%"
+        onclick="cancelAddCustomerModel()"
+      ></div>
+      <form class="add-product-container" onsubmit="addCustomer(event)">
+        <!-- Model header -->
+        <div class="model-header">
+          <h2 style="color: #21568a; width: 100%">Thêm khách hàng</h2>
+          <i
+            class="fa-solid fa-xmark close-icon"
+            onclick="cancelAddCustomerModel()"
+          ></i>
+        </div>
+
+        <!-- Model body -->
+        <div>
+          <div class="model-body">
+            <label for="name" style="width: 15%; margin-left: 20px"
+              >Tên khách hàng</label
+            >
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Tên khách hàng"
+                style="
+                  margin-left: 40px;
+                  width: 100%;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                "
+                onchange="isNotEmpty(event, 'tên', 'name-alert')"
+              />
+              <p id="name-alert" class="alert"></p>
+            </div>
+          </div>
+
+          <div class="model-body" style="margin-bottom: 30px">
+            <label for="gender" style="width: 15%; margin-left: 20px"
+              >Giới tính</label
+            >
+            <select
+              name="gender"
+              style="
+                border-radius: 5px;
+                margin-left: 40px;
+                padding: 3px;
+                width: 20.5%;
+              "
+            >
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Khác">Khác</option>
+            </select>
+          </div>
+
+          <div class="model-body">
+            <label for="email" style="width: 15%; margin-left: 20px"
+              >Email</label
+            >
+            <div>
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                style="
+                  margin-left: 40px;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                  width: 100%;
+                "
+                onchange="isNotEmpty(event, '', 'email-alert','email')"
+              />
+              <p id="email-alert" class="alert"></p>
+            </div>
+          </div>
+
+          <div class="model-body">
+            <label for="phone" style="width: 15%; margin-left: 20px"
+              >Số điện thoại</label
+            >
+            <div>
+              <input
+                type="text"
+                name="phone"
+                placeholder="Số điện thoại"
+                style="
+                  margin-left: 40px;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                  width: 100%;
+                "
+                onchange="isNotEmpty(event, 'số điện thoại', 'phone-alert')"
+              />
+              <p id="phone-alert" class="alert"></p>
+            </div>
+          </div>
+
+          <div class="model-body">
+            <label for="dob" style="width: 15%; margin-left: 20px"
+              >Ngày sinh</label
+            >
+            <div>
+              <input
+                type="date"
+                name="dob"
+                value="2024-01-01"
+                style="
+                  margin-left: 40px;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                  width: 210px;
+                "
+              />
+            </div>
+          </div>
+
+          <div class="model-body">
+            <label for="address" style="width: 15%; margin-left: 20px"
+              >Địa chỉ</label
+            >
+            <div>
+              <textarea
+                name="address"
+                type="text"
+                placeholder="Địa chi"
+                style="
+                  margin-left: 40px;
+                  width: 500px;
+                  height: 50px;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                "
+                onchange="isNotEmpty(event, 'địa chỉ', 'address-alert')"
+              ></textarea>
+              <p id="address-alert" class="alert"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Model footer -->
+        <div class="model-footer">
+          <button type="submit" class="confirm-button">Xác nhận</button>
+          <button
+            type="button"
+            class="cancel-button"
+            onclick="cancelAddCustomerModel()"
+          >
+            Hủy
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Model product details -->
+    <div class="model-view-details-container">
+      <div style="display: flex">
+        <i
+          class="fa-solid fa-left-long cancel-view-details"
+          onclick="cancelViewDetails()"
+        ></i>
+        <h1 style="color: #21568a">Thông tin chi tiết của khách hàng</h1>
+      </div>
+
+      <div class="product-details"></div>
+    </div>
+
+    <!-- Model edit product container -->
+    <div class="model-edit-product-container">
+      <div id="click-hide-model" style="height: 100%; width: 30%"></div>
+      <div class="edit-product-container">
+        <!-- Model header -->
+        <div class="model-header">
+          <h2 style="color: #21568a; width: 100%">
+            Cập nhật thông tin khách hàng
+          </h2>
+          <i
+            class="fa-solid fa-xmark close-icon"
+            onclick="cancelEditCustomerModel()"
+          ></i>
+        </div>
+
+        <!-- Model body -->
+        <div id="edit-model-body"></div>
+      </div>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/793699135f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/Page/customerData.js"></script>
+    <script src="/Page/quan-ly-khach-hang.js"></script>
+  </body>
+</html>
