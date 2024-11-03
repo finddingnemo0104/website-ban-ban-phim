@@ -1,4 +1,14 @@
-const data = JSON.parse(localStorage.getItem("products")) //lấy dữ liệu từ local storage xuống
+function getProduct() {
+    if (
+      localStorage.getItem("products") === null ||
+      JSON.parse(localStorage.getItem("products")).length === 0
+    ) {
+      localStorage.setItem("products", JSON.stringify(listProduct));
+    }
+    return JSON.parse(localStorage.getItem("products"));
+  }
+
+const data = getProduct(); //lấy dữ liệu từ local storage xuống
 
 const productGrid = document.getElementById("product-grid")//lấy thẻ có id trong " " 
 
