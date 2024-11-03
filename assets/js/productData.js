@@ -143,3 +143,17 @@ listProduct.push(
     "/Image/quan-ly-san-pham/ErgoDox-EZ.jpg"
   )
 );
+
+listProduct.push(
+  new Product(
+    "#SP000011",
+    "Corsair K20 RGB MK.3",
+    listCategory.co,
+    "Corsair",
+    "3500000",
+    50,
+    `Bàn phím cơ full-size với switch Cherry MX (Red/Blue/Brown), có đèn RGB, khung nhôm chắc chắn, tích hợp các phím macro chuyên dụng. Phù hợp cho game thủ và người làm việc chuyên nghiệp.`,
+    "/Image/quan-ly-san-pham/corsair-K70-RGB-MK.2.jpg"
+  )
+);
+

@@ -20,7 +20,7 @@ function openAddProductModel(e) {
 }
 
 addID.addEventListener("click", openAddProductModel);
-// ----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Hide model add product
 const closeID = document.getElementById("close-add-product");
@@ -36,7 +36,7 @@ function cancelModel(e) {
 closeID.addEventListener("click", cancelModel);
 cancelID.addEventListener("click", cancelModel);
 clickHideModelID.addEventListener("click", cancelModel);
-// ------------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Cancel model view product details
 const cancelViewDetailsID = document.getElementsByClassName(
@@ -50,7 +50,7 @@ function cancelViewDetails(e) {
 }
 
 cancelViewDetailsID.addEventListener("click", cancelViewDetails);
-//--------------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Display products data from localStorage into table
 const table = document.querySelector(".table-product-container table");
@@ -99,7 +99,7 @@ function showProductData(productData) {
       openConfirmDeleteModel(productID);
     });
   }
-  // -----------------------------------------
+  // --------------------------------------------------------------------------------- //
 
   // Get ID eye icon
   for (let i = 0; i < viewDetailsID.length; i++) {
@@ -110,11 +110,11 @@ function showProductData(productData) {
     });
   }
 }
-// ------------------------------------------
+// ---------------------------------------------------------------------------------//
 
 showProductData();
 
-// -------------------------------------------
+// ---------------------------------------------------------------------------------//
 
 // Display model view product details
 function viewDetails(e, productID) {
@@ -411,7 +411,7 @@ function editProduct(event, productID) {
   showProductData();
   viewDetails(event, productID);
 }
-// -------------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Hide edit product model
 function cancelEditProductModel() {
@@ -419,7 +419,7 @@ function cancelEditProductModel() {
     .getElementsByClassName("model-edit-product-container")[0]
     .classList.remove("open");
 }
-// ----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Preview image
 var openFile = function (input, idPreviewElement) {
@@ -462,7 +462,8 @@ function addProduct(event) {
   const price = formData.get("price");
   const quantity = formData.get("quantity");
   const description = formData.get("description");
-  const image = document.getElementById("output-image").src;
+  let image = document.getElementById("output-image").src;
+
   let isError = false;
 
   const listProduct = getProduct();
@@ -533,7 +534,7 @@ function addProduct(event) {
   });
   addProductForm.querySelector("textarea").value = "";
 }
-// -----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Get products data from localStorage
 function getProduct() {
@@ -545,7 +546,7 @@ function getProduct() {
   }
   return JSON.parse(localStorage.getItem("products"));
 }
-// -----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Add new product into localStorage
 function addProductIntoLocalStorage(product) {
@@ -594,7 +595,7 @@ function genderateProductID() {
 
   return `#SP${newProductID}`;
 }
-// -------------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Filter product
 function filterProduct(event) {
