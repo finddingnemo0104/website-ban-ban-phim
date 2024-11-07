@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SGU Click</title>
-    <link rel="icon" type="image/x-icon" href="/Image/logo.png" />
-    <link rel="stylesheet" href="/Style/quan-ly-san-pham.css" />
+    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-khach-hang.css">
   </head>
   <body class="open-model">
     <!-- Slogan bar -->
     <SloganBar class="slogan-bar">
-      <img class="logo" src="/Image/logo.png" alt="logo" />
+      <a href="index.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
       <p class="slogan" style="color: white">Chất phím, chất click !</p>
     </SloganBar>
 
@@ -39,7 +40,7 @@
           Quản lý sản phẩm
         </button>
         <button class="management-option-button">Quản lý đơn hàng</button>
-        <button class="management-option-button" onclick="location.href='/Page/quan-ly-khach-hang.html';" >Quản lý khách hàng</button>
+        <button class="management-option-button" onclick="location.href='./quan-ly-khach-hang.html';" >Quản lý khách hàng</button>
         <button class="management-option-button">Thống kê</button>
       </Navbar-admin>
 
@@ -323,7 +324,7 @@
               />
               <p id="image-alert" class="alert"></p>
               <img
-                src="/Image/quan-ly-san-pham/white.jpg"
+                src="./Image/quan-ly-san-pham/white.jpg"
                 id="output-image"
                 style="height: 100; width: 100px"
               />
@@ -378,7 +379,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="/Page/productData.js"></script>
-    <script src="/Page/quan-ly-san-pham.js"></script>
+    <script src="./assets/js/productData.js"></script>
+    <script src="./assets/js/quan-ly-san-pham.js"></script>
   </body>
 </html>

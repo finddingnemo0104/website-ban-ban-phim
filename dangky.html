@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="SHORTCUT ICON" href="image/coffee-cup.ico.png" />
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="/assets/css/trang-chu.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <script src="/assets/js/dang-ky.js"></script>
+  </head>
+
+  <body style="background-color: #d1e2f4; position: relative;;">
+    <img
+        src="/assets/Image/trang-chu/keyboard-sticker-1.png"
+        alt="hinh-dang-ky"
+        style="position: absolute; top: 20px; left: 100px; width: 250px;"
+      />
+      <img
+        src="/assets/Image/trang-chu/keyboard-sticker-3.png"
+        alt="hinh-dang-ky"
+        style="position: absolute; top: 20px; right: 100px; width: 250px;"
+      />
+      <img
+        src="/assets/Image/trang-chu/keyboard-sticker-2.png"
+        alt="hinh-dang-ky"
+        style="position: absolute; bottom: 20px; left: 100px; width: 250px;"
+      />
+      <img
+        src="/assets/Image/trang-chu/keyboard-sticker-4.png"
+        alt="hinh-dang-ky"
+        style="position: absolute; bottom: 20px; right: 100px; width: 250px;"
+      />
+    <section>
+      <div class="container">
+        <div class="registration-form">
+          <div class="logo">
+            <img src="/assets/Image/logo.png" alt="SGU Click Logo" />
+            <h2>Đăng Ký Khách Hàng</h2>
+          </div>
+          <form>
+            <div style="display: flex; padding: 50px;">
+              <div style="margin-right: 50px;">
+                <input type="text" placeholder="Họ và tên (*)" required />
+                <select required>
+                  <option value="">Giới tính (*)</option>
+                  <option value="male">Nam</option>
+                  <option value="female">Nữ</option>
+                </select>
+                <input type="date" required />
+                <input type="text" placeholder="Địa chỉ (*)" required />
+              </div>
+              <div>
+                <input type="email" placeholder="Email" required />
+                <input type="text" placeholder="Số điện thoại (*)" required />
+                <input type="password" placeholder="Mật khẩu (*)" required />
+                <input
+                  type="password"
+                  placeholder="Xác nhận mật khẩu (*)"
+                  required
+                />
+              </div>
+            </div>
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                <button type="submit" style="width: 200px;">Đăng ký</button>
+            </div>
+            <p class="register-link">
+              Bạn đã có tài khoản? <a href="/dangnhap.html">Đăng nhập ngay</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

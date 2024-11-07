@@ -1,6 +1,6 @@
 // Customer class
 class Customer {
-  constructor(ID, name, gender, email, phone, dob, address, status) {
+  constructor(ID, name, gender, email, phone, dob, address, status, password, role = listRole.customer) {
     this.ID = ID;
     this.name = name;
     this.gender = gender;
@@ -9,6 +9,8 @@ class Customer {
     this.dob = dob;
     this.address = address;
     this.status = status;
+    this.password = password;
+    this.role = role;
   }
 }
 
@@ -18,7 +20,27 @@ const listGender = {
   khac: "Khác"
 };
 
+const listRole = {
+  admin: "admin",
+  customer: "customer"
+}
+
 const listCustomer = [];
+
+listCustomer.push(
+  new Customer(
+    "",
+    "Admin",
+    listGender.khac,
+    "admin@example.com",
+    "0000000000",
+    new Date("1990-02-15"),
+    "123 Lê Lợi, Quận 1, Thành phố Hồ Chí Minh",
+    true,
+    "admin@123",
+    listRole.admin
+  )
+);
 
 listCustomer.push(
   new Customer(
@@ -29,7 +51,9 @@ listCustomer.push(
     "0912345678",
     new Date("1990-02-15"),
     "123 Lê Lợi, Quận 1, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -42,7 +66,9 @@ listCustomer.push(
     "0987654321",
     new Date("1995-06-24"),
     "456 Nguyễn Trãi, Quận 5, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -55,7 +81,9 @@ listCustomer.push(
     "0922334455",
     new Date("1988-11-09"),
     "789 Phan Đình Phùng, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -68,7 +96,9 @@ listCustomer.push(
     "0933221144",
     new Date("1992-03-10"),
     "321 Điện Biên Phủ, Quận 3, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -81,7 +111,9 @@ listCustomer.push(
     "0944556677",
     new Date("1985-07-19"),
     "654 Lý Thường Kiệt, Quận 10, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -94,7 +126,9 @@ listCustomer.push(
     "0955667788",
     new Date("1997-12-22"),
     "876 Hai Bà Trưng, Quận 1, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -107,7 +141,9 @@ listCustomer.push(
     "0911778899",
     new Date("1991-09-30"),
     "159 Võ Văn Tần, Quận 3, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -120,7 +156,9 @@ listCustomer.push(
     "0977889966",
     new Date("1993-01-25"),
     "742 Cách Mạng Tháng 8, Quận Tân Bình, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -133,7 +171,9 @@ listCustomer.push(
     "0902445566",
     new Date("1986-05-11"),
     "963 Nguyễn Văn Cừ, Quận 5, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );
 
@@ -146,6 +186,8 @@ listCustomer.push(
     "0988112233",
     new Date("1998-04-07"),
     "684 Trường Chinh, Quận Tân Phú, Thành phố Hồ Chí Minh",
-    true
+    true,
+    "",
+    listRole.customer
   )
 );

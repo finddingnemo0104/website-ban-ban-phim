@@ -21,7 +21,7 @@ function getCustomer() {
   }
   return JSON.parse(localStorage.getItem("customers"));
 }
-// -----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Genderate customer ID
 function genderateCustomerID() {
@@ -33,7 +33,7 @@ function genderateCustomerID() {
 
   return `#KH${newCustomerID}`;
 }
-// -------------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 function formatDate(date) {
   const day = String(date.getDate()).padStart(2, "0"); // Lấy ngày và thêm số 0 ở phía trước nếu cần
@@ -60,6 +60,8 @@ function showCustomerData(customerData) {
 
   for (let item = 0; item < customers.length; item++) {
     const customer = customers[item];
+    console.log(customer.role);
+    if (customer.role === listRole.admin) { continue};
     const html = `
             <tr>
               <td>${customer.ID}</td>
@@ -98,7 +100,7 @@ function showCustomerData(customerData) {
     });
   }
 }
-// ------------------------------------------
+// --------------------------------------------------------------------------------- //
 showCustomerData();
 
 // Display model add product
@@ -107,7 +109,7 @@ function openAddProductModel(e) {
     .getElementsByClassName("model-add-product-container")[0]
     .classList.add("open");
 }
-// ----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Hide model add customer
 function cancelAddCustomerModel(e) {
@@ -115,7 +117,7 @@ function cancelAddCustomerModel(e) {
     .getElementsByClassName("model-add-product-container")[0]
     .classList.remove("open");
 }
-// ------------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 //  Add customer
 // Check data is not empty
@@ -190,7 +192,7 @@ function addCustomer(event) {
     phoneAlertEle.innerHTML = "Số điện thoại không hợp lệ !";
     isError = true;
   }
-  // ---------------------
+  // --------------------------------------------------------------------------------- //
 
   // Check name
   if (name === "") {
@@ -202,7 +204,7 @@ function addCustomer(event) {
     nameAlertEle.innerHTML = "Tên khách hàng không hợp lệ !";
     isError = true;
   }
-  // ----------------
+  // --------------------------------------------------------------------------------- //
 
   // Check email
   if (customerFoundEmail && email !== "") {
@@ -214,7 +216,7 @@ function addCustomer(event) {
     emailAlertEle.innerHTML = "Email không hợp lệ !";
     isError = true;
   }
-  // ----------------
+  // --------------------------------------------------------------------------------- //
 
   if (address === "") {
     const addressAlertEle = document.getElementById("address-alert");
@@ -251,7 +253,7 @@ function addCustomer(event) {
   });
   addCustomerForm.querySelector("textarea").value = "";
 }
-// -----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Add new customer into localStorage
 function addCustomerIntoLocalStorage(customer) {
@@ -260,7 +262,7 @@ function addCustomerIntoLocalStorage(customer) {
 
   localStorage.setItem("customers", JSON.stringify(listCustomer));
 }
-// --------------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Display model view customer details
 function viewDetails(e, customerID) {
@@ -274,10 +276,10 @@ function viewDetails(e, customerID) {
   const formattedDate = new Date(customerFound.dob).toLocaleDateString("en-GB");
   let avatarURL =
     customerFound.gender === "Nam"
-      ? "/Image/quan-ly-khach-hang/male-customer.png"
+      ? "./assets/Image/quan-ly-khach-hang/male-customer.png"
       : customerFound.gender === "Nữ"
-      ? "/Image/quan-ly-khach-hang/female-customer.jpg"
-      : "/Image/quan-ly-khach-hang/other-customer.ipg";
+      ? "./assets/Image/quan-ly-khach-hang/female-customer.jpg"
+      : "./assets/Image/quan-ly-khach-hang/other-customer.ipg";
 
   // Display customer details
   const htmlCustomerDetails = `
@@ -330,6 +332,8 @@ function viewDetails(e, customerID) {
   const customerDetailsID = document.querySelector(".product-details");
 
   customerDetailsID.innerHTML = htmlCustomerDetails;
+
+  // --------------------------------------------------------------------------------- //
 
   // Display edit customer model
   const editButton = document.getElementById("edit-customer");
@@ -505,13 +509,15 @@ function cancelViewDetails(e) {
     .classList.remove("open");
 }
 
+// --------------------------------------------------------------------------------- //
+
 // Hide edit product model
 function cancelEditCustomerModel() {
   document
     .getElementsByClassName("model-edit-product-container")[0]
     .classList.remove("open");
 }
-// ----------------------------------------------
+// --------------------------------------------------------------------------------- //
 
 // Edit product
 function editCustomer(event, customerID) {
@@ -540,6 +546,8 @@ function editCustomer(event, customerID) {
     (customer) => customer.email === email && customer.ID !== customerID
   );
 
+// --------------------------------------------------------------------------------- //
+
   // Check phone number
   if (phone === "") {
     phoneAlertEle.innerHTML = "Không được để trống số điện thoại khách hàng !";
@@ -555,7 +563,8 @@ function editCustomer(event, customerID) {
     phoneAlertEle.innerHTML = "Số điện thoại không hợp lệ !";
     isError = true;
   }
-  // ------------------
+
+  // --------------------------------------------------------------------------------- //
 
   //Check name
   if (name === "") {
@@ -563,7 +572,8 @@ function editCustomer(event, customerID) {
     nameAlertEle.innerHTML = "Không được để trống tên khách hàng !";
     isError = true;
   }
-  // ------------------
+
+  // --------------------------------------------------------------------------------- //
 
   // Check email
   if (customerFoundEmail) {
@@ -575,7 +585,8 @@ function editCustomer(event, customerID) {
     emailAlertEle.innerHTML = "Email không hợp lệ !";
     isError = true;
   }
-  // --------------------
+
+  // --------------------------------------------------------------------------------- //
 
   if (address === "") {
     const addressAlertEle = document.getElementById("address-alert-edit");
@@ -600,7 +611,8 @@ function editCustomer(event, customerID) {
   showCustomerData();
   viewDetails(event, customerID);
 }
-// -------------------------------------------------
+
+// --------------------------------------------------------------------------------- //--
 
 // Change customer activity status
 function changeCustomerStatus(input, customerID) {
@@ -616,7 +628,7 @@ function changeCustomerStatus(input, customerID) {
   localStorage.setItem("customers", JSON.stringify(listCustomer));
   alert(`Đã khóa tài khoản của khách hàng ${customerID}`);
 }
-// ---------------------------
+// --------------------------------------------------------------------------------- //
 
 // Filter customer
 function filterCustomer(event) {

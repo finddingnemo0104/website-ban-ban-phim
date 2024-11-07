@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/Style/trang-chu2.css">
+    <link rel="stylesheet" href="/assets/css/trang-chu2.css">
 </head>
 <body>
     <div class="admin-container">
@@ -182,6 +182,7 @@
         // Lấy thông tin email của admin từ localStorage và hiển thị
         document.addEventListener("DOMContentLoaded", () => {
             const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            console.log(currentUser);
             if (currentUser && currentUser.role === "admin") {
                 document.getElementById("admin-email").innerText = `Email: ${currentUser.email}`;
             } else {

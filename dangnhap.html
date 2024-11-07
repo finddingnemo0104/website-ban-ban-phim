@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="/assets/css/trang-chu.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Phần Hình Minh Họa -->
+      <div class="left-panel"></div>
+
+      <!-- Phần Form Đăng Nhập -->
+      <div class="right-panel">
+        <div class="login-form">
+          <div class="logo">
+            <img src="/assets/Image/logo.png" alt="SGU Click Logo" />
+            <h2>CHÀO MỪNG ĐẾN VỚI</h2>
+            <p>SGU Click - Chất phím, chất click!</p>
+          </div>
+
+          <!-- Form đăng nhập -->
+          <form id="formLogin">
+            <input type="text" placeholder="Số điện thoại" required />
+            <input type="password" placeholder="Mật khẩu" required />
+            <div class="extra-options">
+              <a href="#" type="button" onclick="forgotPassword()"
+                >Quên mật khẩu?</a
+              >
+            </div>
+            <button type="submit">Đăng nhập</button>
+            <p class="register-link">
+              Bạn chưa có tài khoản? <a href="/dangky.html">Đăng ký ngay</a>
+            </p>
+          </form>
+
+          <!-- Form quên mật khẩu -->
+          <form style="display: none" id="formForgotPassword">
+            <input
+              id="phone"
+              type="text"
+              placeholder="Số điện thoại đã đăng ký"
+              required
+            />
+            <input
+              id="newPassword"
+              type="password"
+              placeholder="Mật khẩu mới"
+              required
+            />
+            <input
+              id="confirmNewPassword"
+              type="password"
+              placeholder="Xác nhân mật khẩu mới"
+              required
+            />
+            <button type="submit" onclick="createNewPassword()">Tạo mật khẩu mới</button>
+            <p class="register-link">
+              Bạn đã có tài khoản? <a href="/dangnhap.html">Đăng nhập ngay</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Nếu để script ở đầu thì cần dùng DOMContentLoaded -->
+    <script src="/assets/js/dang-nhap.js"></script>
+    <script src="/assets/js/customerData.js"></script>
+  </body>
+</html>

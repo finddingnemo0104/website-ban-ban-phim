@@ -15,7 +15,7 @@ body {
 
 .container {
     display: flex;
-    max-width: 800px;
+    max-width: 1000px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -27,8 +27,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 0px;
     position: relative;
+    background-image: url("/assets/Image/trang-chu/banner-dang-nhap.jpg");
+    background-size: cover;
 }
 
 .workspace-illustration {
@@ -105,7 +107,8 @@ body {
 }
 
 .registration-form{
-    background-color: #d0e7f7;
+    background-color: white;
+    padding: 50px;
 }
 
 
