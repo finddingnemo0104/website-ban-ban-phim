@@ -60,6 +60,8 @@ function showCustomerData(customerData) {
 
   for (let item = 0; item < customers.length; item++) {
     const customer = customers[item];
+    console.log(customer.role);
+    if (customer.role === listRole.admin) { continue};
     const html = `
             <tr>
               <td>${customer.ID}</td>
@@ -274,10 +276,10 @@ function viewDetails(e, customerID) {
   const formattedDate = new Date(customerFound.dob).toLocaleDateString("en-GB");
   let avatarURL =
     customerFound.gender === "Nam"
-      ? "/Image/quan-ly-khach-hang/male-customer.png"
+      ? "./assets/Image/quan-ly-khach-hang/male-customer.png"
       : customerFound.gender === "Nữ"
-      ? "/Image/quan-ly-khach-hang/female-customer.jpg"
-      : "/Image/quan-ly-khach-hang/other-customer.ipg";
+      ? "./assets/Image/quan-ly-khach-hang/female-customer.jpg"
+      : "./assets/Image/quan-ly-khach-hang/other-customer.ipg";
 
   // Display customer details
   const htmlCustomerDetails = `

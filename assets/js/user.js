@@ -34,7 +34,7 @@ function displayOrderHistory(phone) {
     const userOrders = orders.filter(order => order.customerPhone === phone);
     
     let totalAmount = 0;
-    const orderList = document.getElementById("order-list");
+    const orderList = document.getElementsByClassName("order-list")[0];
 //    orderList.innerHTML = "";
 
     userOrders.forEach(order => {
