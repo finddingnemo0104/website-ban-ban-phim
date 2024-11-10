@@ -61,7 +61,7 @@ function authenticateUser(phone, password) {
 // Redirect function based on role
 function redirectToRolePage(role) {
   if (role === "admin") {
-    window.location.href = "admin.html"; // Replace with actual admin page URL
+    window.location.href = "quan-ly-don-hang.html.html"; // Replace with actual admin page URL
   } else {
     window.location.href = "user.html"; // Replace with actual index/home page URL
   }

@@ -1,6 +1,6 @@
 /* Tổng quan CSS cho trang */
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     margin: 0;
     padding: 0;
     background-color: #f4f6f9;
@@ -9,7 +9,7 @@ body {
 
 /* Container cho admin */
 .admin-container {
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 40px auto;
     padding: 20px;
     background-color: #fff;
@@ -232,7 +232,7 @@ table button:hover {
 }
 
 /* Nút hành động */
-button {
+button:not(.management-option-button) {
     padding: 8px 15px;
     border: none;
     border-radius: 4px;

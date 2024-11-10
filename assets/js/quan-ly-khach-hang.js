@@ -60,7 +60,6 @@ function showCustomerData(customerData) {
 
   for (let item = 0; item < customers.length; item++) {
     const customer = customers[item];
-    console.log(customer.role);
     if (customer.role === listRole.admin) { continue};
     const html = `
             <tr>
