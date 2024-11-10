@@ -20,21 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Vui lòng nhập đầy đủ thông tin đăng nhập.");
       return;
     }
-    // if (phone === "0765184992" && password === "khai12345") {
-    //     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    //     if (currentUser && currentUser.role === "admin") {
-    //         document.getElementById("admin-email").innerText = `Email: ${currentUser.email}`;
-    //     } else {
-    //         // Nếu không phải admin, điều hướng về trang đăng nhập
-    //         window.location.href = "dangnhap.html";
-    //     }
-    //     displayOrders();
+     if (phone === "0869043004" && password === "thu012345") {
+         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+         if (currentUser && currentUser.role === "admin") {
+             document.getElementById("admin-email").innerText = `Email: ${currentUser.email}`;
+         } else {
+             // Nếu không phải admin, điều hướng về trang đăng nhập
+             window.location.href = "dangnhap.html";
+        }
+        displayOrders();
 
-    //     redirectToRolePage("admin");
+      redirectToRolePage("admin");
 
-    //     return;
-    // }
-    // Authenticate user
+         return;
+     }
+     //Authenticate user
     const customer = authenticateUser(phone, password);
     if (customer) {
       localStorage.setItem("currentUser", JSON.stringify(customer));
