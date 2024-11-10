@@ -1,6 +1,6 @@
 // Customer class
 class Customer {
-  constructor(ID, name, gender, email, phone, dob, address, status) {
+  constructor(ID, name, gender, email, phone, dob, address, status, password) {
     this.ID = ID;
     this.name = name;
     this.gender = gender;
@@ -9,6 +9,7 @@ class Customer {
     this.dob = dob;
     this.address = address;
     this.status = status;
+    this.password = password;
   }
 }
 
