@@ -1,76 +1,8 @@
-// import Product from "./productData.js";
-
-// let currentPage=1;
-// let perPage = 6;
-// let totalPage =0;
-// let perProduct=[];
-
-// let productSearch=[];
-
-// function renderProduct(arr){
-//     const productListContainer=document.querySelector(".product-grid");
-//     if(productListContainer){
-//         productListContainer.innerHTML="";
-
-//         arr.forEach((products) => {
-//         const productSection=document.createElement("section");
-//         productSection.classList.add("cart");
-        
-//         productSection.innerHTML = `
-//         <!-- <div class="product-card">
-            
-//             <img src="${products.image}" alt="${products.name}" onclick="window.location ='./detail.html?id=${
-//                 products.ID
-//             }'" link>
-            
-//             <p>${product.name}</p>
-//         </div>
-//         `;
-//     });
-// }
-// }
-
-// const createBtn = (list = Product) => {
-//     const quantity = Math.ceil(list.length / 12);
-//     const pageNumberContainer = document.querySelector(".product-grid");
-//     pageNumberContainer.innerHTML = "";
-//     if (quantity <= 1) return;
-//     for (let i = 1; i <= quantity; i++) {
-//       const btn = document.createElement("button");
-//       btn.classList.add(".pagination-item");
-//       btn.id = `page-number${i}`;
-//       btn.textContent = i;
-//       btn.value = i;
-  
-//       btn.onclick = () => {
-//         switchPage(i, list);
-//       };
-//       pageNumberContainer.append(btn);
-//     }
-//   };
-  
-//   const switchPage = (i, list = Product) => {
-//     const gameGrid = document.getElementById(".product-grid");
-//     gameGrid.innerHTML = "";
-//     const listbtn = document.getElementsByClassName(".pagination-item");
-//     for (const currbtn of listbtn) {
-//       currbtn.classList.remove("page-active");
-//     }
-//     const btn = document.getElementById(`page-number${i}`);
-//     if (btn == undefined) {
-//       createPage(0, 12, list);
-//       return;
-//     }
-//     createPage((btn.value - 1) * 12, btn.value * 12, list);
-//     btn.classList.add("page-active");
-//   };
-
-// Assuming you have a list of products
 const products = JSON.parse(localStorage.getItem("products")) || [];
-const productsPerPage = 6; // Number of products per page
+const productsPerPage = 6;
 let currentPage = 1;
 
-// Function to render products for the current page
+//render tất cả sản phẩm trong local storage
 function renderProducts(page) {
   const productGrid = document.getElementById("product-grid");
   productGrid.innerHTML = ""; // Clear existing products
@@ -88,15 +20,14 @@ function renderProducts(page) {
     `;
     productGrid.appendChild(productCard);
   });
-  viewDetails(event, productID);
 }
 
-// Function to create pagination buttons
-function createPagination() {
+// tạo nút trang
+function createPagination(productList) {
   const paginationContainer = document.querySelector(".pagination");
-  paginationContainer.innerHTML = ""; // Clear existing pagination
+  paginationContainer.innerHTML = ""; //
 
-  const totalPages = Math.ceil(products.length / productsPerPage);
+  const totalPages = Math.ceil(productList.length / productsPerPage);
 
   for (let i = 1; i <= totalPages; i++) {
     const paginationItem = document.createElement("li");
@@ -112,8 +43,8 @@ function createPagination() {
     paginationLink.addEventListener("click", (e) => {
       e.preventDefault();
       currentPage = i;
-      renderProducts(currentPage);
-      createPagination();
+      renderProducts1(currentPage, productList);
+      createPagination(productList);
     });
 
     paginationItem.appendChild(paginationLink);
@@ -121,6 +52,74 @@ function createPagination() {
   }
 }
 
-// Initial render
 renderProducts(currentPage);
-createPagination();
+createPagination(products);
+
+
+//Tìm kiếm cơ bản
+
+const searchBTN = document.getElementById("searchBTN")
+const searchText = document.getElementById("searchText")
+
+function renderProducts1(page,productList) {
+  const productGrid = document.getElementById("product-grid");
+  productGrid.innerHTML = ""; 
+
+  const start = (page - 1) * productsPerPage;
+  const end = start + productsPerPage;
+  const paginatedProducts = productList.slice(start, end);
+
+  paginatedProducts.forEach(product => {
+    const productCard = document.createElement("div");
+    productCard.classList.add("product-card");
+    productCard.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${product.ID}'">
+      <p>${product.name}</p>
+    `;
+    productGrid.appendChild(productCard);
+  });
+}
+
+
+//Tìm kiếm nâng cao(filter hãng, giá tiền)
+const filterByBrand =document.getElementById("search-filter-brand")
+const minPrice =document.getElementById("filter-price-min")
+const maxPrice =document.getElementById("filter-price-max")
+// const priceInputValue =document.querySelectorAll(".search-filter-price input")
+
+function productSearch(text){
+ const result=[];
+
+// for(let i=0;i<priceInputValue.length;i++){
+//   priceInputValue[i].addEventListener("input", e =>{
+//     let minInputPrice = parseInt(priceInputValue[0].value)
+//     let maxInputPrice = parseInt(priceInputValue[1].value)
+//   })
+// }
+
+ let minInputPrice, maxInputPrice
+ if(minPrice.value=="" || maxPrice.value==""){
+  minInputPrice=0
+  maxInputPrice=Number.MAX_SAFE_INTEGER
+ } else { 
+  minInputPrice=minPrice.value
+  maxInputPrice=maxPrice.value
+  }
+
+  for(const product of products)
+    if(product.name.toLowerCase().includes(text.toLowerCase()) 
+      && product.category.includes(filterByBrand.value)
+      && Number(product.price) >= Number(minInputPrice) && Number(product.price) <= Number(maxInputPrice))
+      
+      result.push(product);
+    return result;
+  
+}
+
+searchBTN.onclick = ()=>{
+  renderProducts1(1,productSearch(searchText.value))
+  createPagination(productSearch(searchText.value))
+}
+
+
+

@@ -21,17 +21,36 @@
                 <li><a href="#">Bàn phím mini</a></li>
             </ul>
         </nav>
-        <div class="search-cart">
-            <input type="text" placeholder="Tìm kiếm...">
-            <button>🔍</button>
+        <div class="search-cart" onsubmit="searchItems(event)">
+            <input id="search-text" type="text" placeholder="Tìm kiếm...">
+            <button>🔍 </button>
             <button>🛒</button>
         </div>
     </header>
 
     <!-- Banner Section -->
     <section class="imgheader">
-        <img src="./Image/header nền.png" alt="">
+        <!-- <img src="./assets/Image/header nền.png" alt=""> -->
     </section >
+    <div class="search-container">
+        <div class="search-bar" onsubmit="searchItems(event)">
+            <button id="searchBTN">🔍 </button>
+            <input id="searchText" type="text" placeholder="Tìm kiếm tên sản phẩm">
+        </div>
+        <select class="search-filter-brand" id="search-filter-brand">   
+            <option value="">Loại bàn phim</option>
+            <option value="Bàn phím gaming">Bàn phím gaming</option>
+            <option value="Bàn phím cơ">Bàn phím cơ</option>
+            <option value="Bàn phím không dây">Bàn phím không dây</option>
+            <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
+            <option value="Bàn phím mini">Bàn phím mini</option>
+        </select>
+        <div class="search-filter-price">
+            <p>Khoảng giá:</p>
+            <input id="filter-price-min" min="0" type="number"> - 
+            <input id="filter-price-max" min="0"  type="number">
+        </div>
+    </div>
 
     <section class="banner">
         <h2>Khám phá các sản phẩm độc đáo của SGU Click</h2>
@@ -98,6 +117,6 @@
     <footer class="footer"></footer>
     <script type="module" src="./assets/js/index.js"></script>
     <script type="module" src="./assets/js/Product.js"></script>
-    <script src="./assets/js/productData.js"></script>
+    <script type="module" src="./assets/js/productData.js"></script>
 </body>
 </html>

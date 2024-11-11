@@ -47,14 +47,15 @@ header nav ul li a {
   font-weight: bold;
 }
 
-header .search-cart {
-  display: flex;
-}
 
-header .search-cart input {
-  padding: 5px;
-  border: none;
-  border-radius: 4px;
+.search-cart {
+  display: flex;
+
+  input {
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+  }
 }
 
 header .search-cart button {
@@ -130,7 +131,6 @@ header .search-cart button:hover {
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/*---------------------------------------------------------------Phan trang-------------------------------------------------------------*/
 .pagination{
   display:flex;
   align-items: center;
@@ -161,3 +161,74 @@ header .search-cart button:hover {
   
 }
 
+.search-container{
+  width: 1479px;
+  height:20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #aec9e9;
+  color: white;
+}
+
+.search-bar{
+  display:flex;
+}
+.search-bar input {
+  width:75%;
+  padding: 5px;
+  text-align: center;
+  border-style: double;
+  border-color: #21568A;
+  margin-left: 80px;
+  background-color: #aec9e9;
+}
+
+.search-bar button{
+  position: relative;
+  left:85px;
+  background-color: #aec9e9;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border-color: #21568A;
+  border-style: double;
+  cursor: pointer;
+}
+
+.search-bar button:hover{
+  background-color: #777;
+}
+
+.search-filter-brand{
+  width: 11%;
+  height: 150%;
+  display: flex;
+  border: 2px double #21568A;
+  background-color: #aec9e9;
+}
+
+.search-filter-price{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-right:80px;
+
+  p{
+    color: #21568A;
+  }
+  
+  input{
+    width: 30%;
+    padding: 5px;
+    text-align: center;
+    border-style: double;
+    border-color: #21568A;
+    
+    background-color: #aec9e9;
+    
+  }
+
+
+}
