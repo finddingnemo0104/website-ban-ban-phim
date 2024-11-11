@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./assets/css/thongke.css" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">
+  </head>
+  <body>
+        <!-- Slogan bar -->
+        <SloganBar class="slogan-bar">
+          <a href="index.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
+          <p class="slogan" style="color: white">Chất phím, chất click !</p>
+        </SloganBar>
+    
+        <div style="display: flex">
+          <!-- Navbar admin -->
+          <Navbar-admin class="navbar-admin">
+            <div class="hi-admin" style="height: 50px">
+              <i
+                class="fa-solid fa-circle-user"
+                style="
+                  font-size: 25px;
+                  color: #21568a;
+                  padding-top: 5px;
+                  margin-right: 10px;
+                "
+              >
+              </i>
+              <p style="margin-top: 12px">Xin chào Admin !</p>
+            </div>
+    
+            <!-- Management options -->
+            <button
+              class="management-option-button"
+              onclick="location.href='./quan-ly-san-pham.html';"
+            >
+              Quản lý sản phẩm
+            </button>
+            <button class="management-option-button" onclick="location.href='./quan-ly-don-hang.html';">Quản lý đơn hàng</button>
+            <button class="management-option-button" onclick="location.href='./quan-ly-khach-hang.html';" >Quản lý khách hàng</button>
+            <button class="management-option-button" 
+            style="background-color: #558dc4; color: white" onclick="location.href='./thong-ke.html';">Thống kê</button>
+          </Navbar-admin>
+    <!-- Header -->
+    <!-- <header class="main-header">
+      <h1>Chất phím, chất click!</h1>
+    </header> -->
+
+    <div class="container" style="width: 100%;">
+      <!-- Sidebar Navigation -->
+      <!-- <nav admin class="sidebar">
+        <ul>
+          <li>
+            <a>Quản lý sản phẩm</a>
+          </li>
+          <li>
+            <a>Quản lý đơn hàng</a>
+          </li>
+          <li>
+            <a 
+              >Quản lý khách hàng</a
+            >
+          </li>
+          <li><a href="#statistics" class="nav-link">Thống kê</a></li>
+        </ul>
+      </nav Admin> -->
+
+      <!-- Main Content -->
+      <main class="content" style="width: 100%;">
+        <header class="overview-header">
+          <h2>Tổng quan</h2>
+          <div class="stats">
+            <div class="stat today">
+              Hôm nay<br /><span>12,000,000đ</span><br />4 đơn hàng
+            </div>
+            <div class="stat all">
+              Tất cả<br /><span>12,000,000đ</span><br />4 đơn hàng
+            </div>
+            <div class="stat last-month">
+              Tháng trước<br /><span>12,000,000đ</span><br />4 đơn hàng
+            </div>
+          </div>
+        </header>
+
+        <!--top Khách Hàng-->
+        <section class="top-section" id="top-customers">
+          <h3>Top 5 khách hàng</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên khách hàng</th>
+                <th>Email</th>
+                <th>Ngày mua</th>
+                <th>Tổng tiền</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>aaaa</td>
+                <td>abc@gmail.com</td>
+                <td>17/11/2024</td>
+                <td>20,000,000đ</td>
+                <td><a href="#">Xem chi tiết</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Top Selling -->
+        <section class="top-section" id="top-products">
+          <h3>Top 5 sản phẩm bán chạy nhất</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Đã bán</th>
+                <th>Tổng tiền</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Logitech G Pro X Mechanical</td>
+                <td>Bàn phím gaming</td>
+                <td>100</td>
+                <td>320,000,000đ</td>
+                <td><a href="#">Xem chi tiết</a></td>
+              </tr>
+              <!-- More rows as needed -->
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Least Selling -->
+        <section class="top-section" id="least-products">
+          <h3>Top 5 sản phẩm bán ế nhất</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Đã bán</th>
+                <th>Tổng tiền</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Logitech G Pro X Mechanical</td>
+                <td>Bàn phím gaming</td>
+                <td>2</td>
+                <td>6,400,000đ</td>
+                <td><a href="#">Xem chi tiết</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/793699135f.js"
+      crossorigin="anonymous"
+    ></script>
+    
+  </body>
+</html>

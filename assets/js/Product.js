@@ -88,6 +88,7 @@ function renderProducts(page) {
     `;
     productGrid.appendChild(productCard);
   });
+  viewDetails(event, productID);
 }
 
 // Function to create pagination buttons
