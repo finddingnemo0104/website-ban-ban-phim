@@ -421,8 +421,8 @@ tr:not(:first-child):hover {
 }
 
 .model-user-info-container {
-  height: 400px;
-  width: 200px;
+  height: auto;
+  width: 250px;
   position: absolute;
   top: 70px;
   left: 10px;
@@ -451,4 +451,14 @@ tr:not(:first-child):hover {
 .user-info-ele:hover {
   cursor: pointer;
   background-color: #efeeee;
+}
+
+.login-info {
+  background-color: #edf5fc;
+  padding: 10px 10px;
+  display: none;
+}
+
+.login-info.open {
+  display: block;
 }

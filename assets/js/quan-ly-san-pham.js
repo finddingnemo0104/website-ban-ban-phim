@@ -669,5 +669,15 @@ function showUserInfo() {
     showUserInfoEle.classList.add("open");
   }
 }
+
+function showLoginInfo() {
+  const showUserInfoEle = document.getElementsByClassName("login-info")[0];
+
+  if (showUserInfoEle.classList.contains("open")) {
+    showUserInfoEle.classList.remove("open");
+  } else {
+    showUserInfoEle.classList.add("open");
+  }
+}
 // ---------------------------
 
