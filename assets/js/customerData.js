@@ -33,11 +33,11 @@ listCustomer.push(
     "Admin",
     listGender.khac,
     "admin@example.com",
-    "0000000000",
+    "0",
     new Date("1990-02-15"),
     "123 Lê Lợi, Quận 1, Thành phố Hồ Chí Minh",
     true,
-    "admin@123",
+    "admin",
     listRole.admin
   )
 );

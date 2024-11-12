@@ -104,6 +104,7 @@ body {
   margin: 0px 50px;
   border-radius: 15px;
   margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 table {
@@ -393,4 +394,61 @@ tr:not(:first-child):hover {
 
 .model-edit-product-container.open .edit-product-container {
   transform: translateX(0%);
+}
+
+/* Show user infomation */
+.user {
+  font-size: 25px;
+  color: #21568a;
+  padding-top: 5px;
+  margin-right: 10px;
+}
+
+.user:hover {
+  cursor: pointer;
+}
+
+.show-user-info {
+  position: absolute;
+  bottom: -4px;
+  right: 5px;
+  font-size: 12px;
+  color: gray;
+}
+
+.show-user-info:hover {
+  cursor: pointer;
+}
+
+.model-user-info-container {
+  height: 400px;
+  width: 200px;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  visibility: hidden;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(18, 18, 18, 0.5);
+}
+.model-user-info-container.open {
+  visibility: visible;
+}
+
+.user-info-icon {
+  color: #21568a;
+  font-size: 18px;
+  margin: 0px 10px;
+}
+
+.user-info-ele {
+  display: flex;
+  padding: 10px 0px;
+  text-decoration: none;
+  color: black;
+}
+
+.user-info-ele:hover {
+  cursor: pointer;
+  background-color: #efeeee;
 }

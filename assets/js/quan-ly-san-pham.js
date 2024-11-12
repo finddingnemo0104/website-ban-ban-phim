@@ -493,7 +493,7 @@ function addProduct(event) {
     isError = true;
   }
 
-  if (!isValidNumber(price) && (price !== "")) {
+  if (!isValidNumber(price) && price !== "") {
     priceAlertEle.innerHTML = "Giá sản phẩm không hợp lệ !";
     isError = true;
   }
@@ -503,7 +503,7 @@ function addProduct(event) {
     isError = true;
   }
 
-  if (!isValidNumber(quantity) && (quantity !== "")) {
+  if (!isValidNumber(quantity) && quantity !== "") {
     quantityAlertEle.innerHTML = "Số lượng sản phẩm không hợp lệ !";
     isError = true;
   }
@@ -529,7 +529,7 @@ function addProduct(event) {
   alert("Thêm sản phẩm thành công!");
 
   const listInputEle = addProductForm.querySelectorAll("input");
-  listInputEle.forEach(inputEle => {
+  listInputEle.forEach((inputEle) => {
     inputEle.value = "";
   });
   addProductForm.querySelector("textarea").value = "";
@@ -657,4 +657,17 @@ function filterProduct(event) {
 
   showProductData(foundProducts);
 }
+// --------------------------------------------
+
+// Show user infomation
+function showUserInfo() {
+  const showUserInfoEle = document.getElementsByClassName("model-user-info-container")[0];
+
+  if (showUserInfoEle.classList.contains("open")) {
+    showUserInfoEle.classList.remove("open");
+  } else {
+    showUserInfoEle.classList.add("open");
+  }
+}
+// ---------------------------
 

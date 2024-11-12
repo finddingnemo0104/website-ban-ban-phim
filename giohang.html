@@ -1,0 +1,110 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/giohang.css"> <!-- Kết nối file CSS -->
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="https://storage.googleapis.com/a1aa/image/K80ED0J3PRoYMJv6Vq5hMeMuY0vv8wLeKJZkghsRqSD18MqTA.jpg" alt="Logo" class="logo">
+            <span class="greeting">Xin chào </span>
+        </div>
+        <nav class="nav">
+            <a href="#">Bàn phím cơ</a>
+            <a href="#">Bàn phím gaming</a>
+            <a href="#">Bàn phím không dây</a>
+            <a href="#">Bàn phím đối xứng</a>
+            <a href="#">Bàn phím mini</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" placeholder="Tìm kiếm" class="search-input">
+            <i class="fas fa-shopping-cart cart-icon"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1 class="title">Giỏ hàng</h1>
+
+        <!-- Shopping Cart Items -->
+        <div class="cart-container">
+            <!-- Items Section -->
+            <div class="cart-items">
+                <!-- Single Item -->
+                 <div id="donhang">
+                <div class="cart-item">
+                    <img src="https://storage.googleapis.com/a1aa/image/ovfrdeJCjYojx0M5zDMNh9iGFGjWRTAsYBxc5BkwywE28MqTA.jpg" alt="Logitech G Pro X Mechanical Gaming Keyboard" class="item-image">
+                    <div class="item-details">
+                        <h2>Logitech G Pro X Mechanical Gaming Keyboard</h2>
+                        <p>Bàn phím gaming</p>
+                        <p>Đơn giá: 1,000,000đ</p>
+                    </div>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="down()">-</button>
+                        <div class="cart-quantity">
+                        <input  placeholder="SL" id="quantity" class="SL" step="1" min="0" value="1" >
+                        </div>
+                        <button class="qty-btn" onclick="up()">+</button>
+                    </div>
+                    <p class="item-price" id="price">3,290,000đ</p>
+                    <button class="delete-btn" onclick="openModal()"><i class="fas fa-trash-alt"></i></button>
+                </div></div>
+                <!-- Lặp lại cho các sản phẩm khác -->
+                 
+            </div>
+            <!-- Order Summary Section -->
+            <div class="order-summary">
+                <h2 class="summary-title">Tổng đơn hàng</h2>
+                <div class="summary-detail">
+                    <div class="summary-row">
+                       <div id="tongcong"></div>
+                       <span id="sumprice"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí giao hàng</span>
+                        <span>0đ</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Thuế</span>
+                        <span>0đ</span>
+                    </div>
+                </div>
+                <div class="discount">
+                    <label for="discount-code">Mã giảm giá</label>
+                    <div class="discount-code">
+                        <input type="text" id="discount-code" class="code-input">
+                        <button class="apply-btn" >Xác nhận</button>
+                    </div>
+                </div>
+                <div class="total">
+                    <div class="summary-row">
+                        <span>Giảm giá</span>
+                        <span>0đ</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Tổng cộng</span>
+                        <span>10,000,000đ</span>
+                    </div>
+                </div>
+                <a href="file:///C:/Users/thach/OneDrive/M%C3%A1y%20t%C3%ADnh/test.html"><button class="checkout-btn" onclick="tt()">Thanh toán</button></a>
+                <button class="continue-btn">Tiếp tục mua sắm</button>
+            </div>
+        </div>
+    </main>
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Xoá sản phẩm</h2>
+            <p>Bạn có chắc chắn muốn xoá sản phẩm này không?</p>
+            <div class="modal-actions">
+                <button class="confirm-delete-btn" onclick="confirmDelete()">Xoá</button>
+                <button class="cancel-btn" onclick="closeModal()">Huỷ</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="./assets/js/giohang.js"></script>

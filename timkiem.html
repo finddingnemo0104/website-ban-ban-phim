@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keyboard Store</title>
+    <link rel="stylesheet" href="./assets/css/timkiem.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-title">
+        <h1>Chất phím, chất click!</h1>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="#" class="filter-category" data-category="mechanical"
+              >Bàn phím cơ</a
+            >
+          </li>
+          <li>
+            <a href="#" class="filter-category" data-category="gaming"
+              >Bàn phím gaming</a
+            >
+          </li>
+          <li>
+            <a href="#" class="filter-category" data-category="wireless"
+              >Bàn phím không dây</a
+            >
+          </li>
+          <li>
+            <a href="#" class="filter-category" data-category="symmetrical"
+              >Bàn phím đối xứng</a
+            >
+          </li>
+          <li>
+            <a href="#" class="filter-category" data-category="mini"
+              >Bàn phím mini</a
+            >
+          </li>
+        </ul>
+        <input type="search" id="search-input" placeholder="Tìm kiếm" />
+        <button class="cart-icon">&#128722;</button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="filter">
+        <input
+          type="text"
+          id="product-name"
+          placeholder="Tìm theo tên sản phẩm"
+        />
+        <select id="category-dropdown">
+          <option value="">Tất cả thể loại</option>
+          <option value="gaming">Bàn phím gaming</option>
+          <option value="wireless">Bàn phím không dây</option>
+          <option value="symmetrical">Bàn phím đối xứng</option>
+          <option value="mini">Bàn phím mini</option>
+        </select>
+        <div class="price-range">
+          <label>Khoảng giá:</label>
+          <input type="text" id="min-price" placeholder="50 000" />
+          <span>-</span>
+          <input type="text" id="max-price" placeholder="1 000 000" />
+        </div>
+      </div>
+
+      <div class="product-grid" id="product-grid"></div>
+
+      <div class="pagination">
+        <button class="prev-page" disabled>&lt; Trang trước</button>
+        <div class="page-numbers">
+          <!-- Các số trang sẽ được tạo động ở đây -->
+        </div>
+        <button class="next-page">Trang sau &gt;</button>
+      </div>
+    </main>
+    <script src="./assets/js/search.js"></script>
+  </body>
+</html>

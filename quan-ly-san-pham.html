@@ -6,12 +6,14 @@
     <title>SGU Click</title>
     <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
     <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
-    <link rel="stylesheet" href="./assets/css/quan-ly-khach-hang.css">
+    <link rel="stylesheet" href="./assets/css/quan-ly-khach-hang.css" />
   </head>
   <body class="open-model">
     <!-- Slogan bar -->
     <SloganBar class="slogan-bar">
-      <a href="index.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
+      <a href="index.html"
+        ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+      /></a>
       <p class="slogan" style="color: white">Chất phím, chất click !</p>
     </SloganBar>
 
@@ -19,16 +21,16 @@
       <!-- Navbar admin -->
       <Navbar-admin class="navbar-admin">
         <div class="hi-admin" style="height: 50px">
-          <i
-            class="fa-solid fa-circle-user"
-            style="
-              font-size: 25px;
-              color: #21568a;
-              padding-top: 5px;
-              margin-right: 10px;
-            "
-          >
-          </i>
+          <div style="display: flex; position: relative" >
+            <i
+              class="fa-solid fa-circle-user user" onclick="showUserInfo()"
+            >
+            </i>
+            <i
+              class="fa-solid fa-circle-chevron-down show-user-info"
+            ></i>
+          </div>
+
           <p style="margin-top: 12px">Xin chào Admin !</p>
         </div>
 
@@ -36,16 +38,35 @@
         <button
           class="management-option-button"
           style="background-color: #558dc4; color: white"
+          onclick="location.href='./quan-ly-san-pham.html';"
         >
           Quản lý sản phẩm
         </button>
-        <button class="management-option-button">Quản lý đơn hàng</button>
-        <button class="management-option-button" onclick="location.href='./quan-ly-khach-hang.html';" >Quản lý khách hàng</button>
-        <button class="management-option-button">Thống kê</button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-don-hang.html';"
+        >
+          Quản lý đơn hàng
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-khach-hang.html';"
+        >
+          Quản lý khách hàng
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./thong-ke.html';"
+        >
+          Thống kê
+        </button>
       </Navbar-admin>
 
       <!-- Body page -->
-      <div class="bg-color" style="height: 100vh; width: 100%; overflow-y: auto;">
+      <div
+        class="bg-color"
+        style="height: 100vh; width: 100%; overflow-y: auto"
+      >
         <!-- Title page -->
         <div style="display: flex">
           <p class="title-page">Sản phẩm</p>
@@ -204,7 +225,7 @@
             </div>
           </div>
 
-          <div class="model-body" style="margin-bottom: 30px;">
+          <div class="model-body" style="margin-bottom: 30px">
             <label for="category" style="width: 15%; margin-left: 20px"
               >Danh mục</label
             >
@@ -324,7 +345,7 @@
               />
               <p id="image-alert" class="alert"></p>
               <img
-                src="./Image/quan-ly-san-pham/white.jpg"
+                src="./assets/Image/quan-ly-san-pham/white.jpg"
                 id="output-image"
                 style="height: 100; width: 100px"
               />
@@ -355,7 +376,7 @@
     <!-- Model edit product container -->
     <div class="model-edit-product-container">
       <div id="click-hide-model" style="height: 100%; width: 30%"></div>
-      <div class="edit-product-container" >
+      <div class="edit-product-container">
         <!-- Model header -->
         <div class="model-header">
           <h2 style="color: #21568a; width: 100%">Sửa sản phẩm</h2>
@@ -366,13 +387,27 @@
         </div>
 
         <!-- Model body -->
-        <div id="edit-model-body">
-          
-        </div>
-
-        
+        <div id="edit-model-body"></div>
       </div>
     </div>
+
+    <!-- Model user info -->
+     <div class="model-user-info-container">
+      <div class="user-info-ele">
+        <i class="fa-solid fa-circle-user user-info-icon"></i>
+        <div>Thông tin tài khoản</div>
+      </div>
+
+      <div class="user-info-ele" href="">
+        <i class="fa-solid fa-rectangle-list user-info-icon"></i>
+        <div>Đơn hàng</div>
+      </div>
+
+      <a class="user-info-ele log-out" style="border-top: 1px solid gray;" href="dangnhap.html">
+        <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
+        <div>Đăng xuất</div>
+      </a>
+     </div>
 
     <script
       src="https://kit.fontawesome.com/793699135f.js"
