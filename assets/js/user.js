@@ -25,7 +25,7 @@ if (!localStorage.getItem("orders")) {
     localStorage.setItem("orders", JSON.stringify(sampleOrders));
 }
 document.addEventListener("DOMContentLoaded", () => {
-    const currentUserPhone = "0797169613"; // Số điện thoại của người dùng hiện tại
+    const currentUserPhone = "0869043004"; // Số điện thoại của người dùng hiện tại
     displayOrderHistory(currentUserPhone);
 });
 
