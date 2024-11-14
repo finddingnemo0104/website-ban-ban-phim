@@ -589,11 +589,11 @@ function cancelDeleteProduct() {
 function genderateProductID() {
   const listProduct = getProduct();
   const lastProduct = listProduct[listProduct.length - 1];
-  const lastProductID = parseInt(lastProduct.ID.split("#SP")[1]);
+  const lastProductID = parseInt(lastProduct.ID.split("SP")[1]);
   const numberID = lastProductID + 1;
   let newProductID = numberID.toString().padStart(5, "0");
 
-  return `#SP${newProductID}`;
+  return `SP${newProductID}`;
 }
 // --------------------------------------------------------------------------------- //
 

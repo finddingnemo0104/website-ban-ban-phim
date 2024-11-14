@@ -24,7 +24,7 @@ const listProduct = [];
 
 listProduct.push(
   new Product(
-    "#SP00001",
+    "SP00001",
     "Keychron K6",
     listCategory.co,
     "Keychron",
@@ -37,7 +37,7 @@ listProduct.push(
 
 listProduct.push(
   new Product(
-    "#SP00002",
+    "SP00002",
     "Corsair K70 RGB MK.2",
     listCategory.co,
     "Corsair",
@@ -49,7 +49,7 @@ listProduct.push(
 );
 listProduct.push(
   new Product(
-    "#SP00003",
+    "SP00003",
     "Razer BlackWidow V3",
     listCategory.gaming,
     "Razer",
@@ -62,7 +62,7 @@ listProduct.push(
 
 listProduct.push(
   new Product(
-    "#SP00004",
+    "SP00004",
     "SteelSeries Apex Pro",
     listCategory.gaming,
     "SteelSeries",
@@ -74,7 +74,7 @@ listProduct.push(
 );
 listProduct.push(
   new Product(
-    "#SP00005",
+    "SP00005",
     "Anne Pro 2",
     listCategory.mini,
     "Obinslab",
@@ -86,7 +86,7 @@ listProduct.push(
 );
 listProduct.push(
   new Product(
-    "#SP00006",
+    "SP00006",
     "Ducky One 2 Mini",
     listCategory.mini,
     "Ducky",
@@ -98,7 +98,7 @@ listProduct.push(
 );
 listProduct.push(
   new Product(
-    "#SP00007",
+    "SP00007",
     "Logitech MX Keys",
     listCategory.khongday,
     "Logitech",
@@ -110,7 +110,7 @@ listProduct.push(
 );
 listProduct.push(
   new Product(
-    "#SP00008",
+    "SP00008",
     "Keychron K2 (Version 2)",
     listCategory.khongday,
     "Keychron",
@@ -122,7 +122,7 @@ listProduct.push(
 );
 listProduct.push(
   new Product(
-    "#SP00009",
+    "SP00009",
     "Kinesis Freestyle2",
     listCategory.doixung,
     "Kinesis",
@@ -134,7 +134,7 @@ listProduct.push(
 );
 listProduct.push(
   new Product(
-    "#SP00010",
+    "SP00010",
     "ErgoDox EZ",
     listCategory.doixung,
     "ErgoDox",
@@ -147,7 +147,7 @@ listProduct.push(
 
 listProduct.push(
   new Product(
-    "#SP000011",
+    "SP000011",
     "Corsair K20 RGB MK.3",
     listCategory.co,
     "Corsair",
