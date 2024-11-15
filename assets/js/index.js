@@ -292,33 +292,33 @@ function showUserInfoTable() {
   currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const html = `
-   <tr>
-          <td class="label-info">Khách hàng</td>
-          <td class="value-info">${currentUser.name}</td>
-        </tr>
-        <tr>
-          <td class="label-info">Giới tính</td>
-          <td class="value-info">${currentUser.gender}</td>
-        </tr>
-        <tr>
-          <td class="label-info">Email</td>
-          <td class="value-info">${currentUser.email}</td>
-        </tr>
-        <tr>
-          <td class="label-info">Số điện thoại</td>
-          <td class="value-info">${currentUser.phone}</td>
-        </tr>
-        <tr>
-          <td class="label-info">Ngày sinh</td>
-          <td class="value-info">${
-            new Date(currentUser.dob).toISOString().split("T")[0]
-          }</td>
-        </tr>
-        <tr>
-          <td class="label-info">Địa chỉ</td>
-          <td class="value-info">${currentUser.address}</td>
-        </tr>
-  `;
+     <tr>
+            <td class="label-info">Khách hàng</td>
+            <td class="value-info">${currentUser.name}</td>
+          </tr>
+          <tr>
+            <td class="label-info">Giới tính</td>
+            <td class="value-info">${currentUser.gender}</td>
+          </tr>
+          <tr>
+            <td class="label-info">Email</td>
+            <td class="value-info">${currentUser.email}</td>
+          </tr>
+          <tr>
+            <td class="label-info">Số điện thoại</td>
+            <td class="value-info">${currentUser.phone}</td>
+          </tr>
+          <tr>
+            <td class="label-info">Ngày sinh</td>
+            <td class="value-info">${
+              new Date(currentUser.dob).toISOString().split("T")[0]
+            }</td>
+          </tr>
+          <tr>
+            <td class="label-info">Địa chỉ</td>
+            <td class="value-info">${currentUser.address}</td>
+          </tr>
+    `;
 
   const userInfoTableEle = document.getElementsByClassName("login-info")[0];
   userInfoTableEle.innerHTML = html;
