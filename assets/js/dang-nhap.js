@@ -20,21 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Vui lòng nhập đầy đủ thông tin đăng nhập.");
       return;
     }
-     if (phone === "0869043004" && password === "thu012345") {
-         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-         if (currentUser && currentUser.role === "admin") {
-             document.getElementById("admin-email").innerText = `Email: ${currentUser.email}`;
-         } else {
-             // Nếu không phải admin, điều hướng về trang đăng nhập
-             window.location.href = "dangnhap.html";
-        }
-        displayOrders();
+    if (phone === "0869043004" && password === "thu012345") {
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser && currentUser.role === "admin") {
+        document.getElementById(
+          "admin-email"
+        ).innerText = `Email: ${currentUser.email}`;
+      } else {
+        // Nếu không phải admin, điều hướng về trang đăng nhập
+        window.location.href = "dangnhap.html";
+      }
+      displayOrders();
 
       redirectToRolePage("admin");
 
-         return;
-     }
-     //Authenticate user
+      return;
+    }
+    //Authenticate user
     const customer = authenticateUser(phone, password);
     if (customer) {
       localStorage.setItem("currentUser", JSON.stringify(customer));
@@ -73,6 +75,19 @@ function forgotPassword() {
   document.getElementById("formForgotPassword").style.display = "block";
 }
 
+function isValidPassword(password) {
+  if (
+    password.length < 8 ||
+    !/[A-Z]/.test(password) ||
+    !/[a-z]/.test(password) ||
+    !/[0-9]/.test(password) ||
+    !/[\W_]/.test(password)
+  ) {
+    return false;
+  }
+  return true;
+}
+
 // Create new password
 function createNewPassword() {
   phone = document.getElementById("phone").value;
@@ -81,23 +96,23 @@ function createNewPassword() {
 
   const customers = getCustomer();
   const customer = customers.find((customer) => customer.phone === phone);
-  indexCustomer = listCustomer.findIndex((customer) => customer.phone === phone);
+  indexCustomer = listCustomer.findIndex(
+    (customer) => customer.phone === phone
+  );
   console.log(indexCustomer);
 
   if (!customer) {
     alert("Số điện thoại này chưa được đăng ký !");
-  }
-  else {
-    if (newPassWord != confirmNewPassWord) {
-        alert("Mật khẩu không trùng khớp !");
-    }
-    else {
-        customers[indexCustomer].password = newPassWord;
-        localStorage.setItem("customers", JSON.stringify(customers));
-        alert("Tạo mật khẩu mới thành công !");
-        document.getElementById("formForgotPassword").style.display = "none";
-        document.getElementById("formLogin").style.display = "block";
-    }
+  } else if (!isValidPassword(newPassWord)) {
+    alert(`Mật khẩu không hợp lệ !\nMật khẩu cần có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt.`);
+  } else if (newPassWord != confirmNewPassWord) {
+    alert("Mật khẩu không trùng khớp !");
+  } else {
+    customers[indexCustomer].password = newPassWord;
+    localStorage.setItem("customers", JSON.stringify(customers));
+    alert("Tạo mật khẩu mới thành công !");
+    document.getElementById("formForgotPassword").style.display = "none";
+    document.getElementById("formLogin").style.display = "block";
   }
 }
 
@@ -109,4 +124,3 @@ function addCustomerIntoLocalStorage(customer) {
   localStorage.setItem("customers", JSON.stringify(listCustomer));
 }
 // --------------------------------------------------------------------------------- //
-

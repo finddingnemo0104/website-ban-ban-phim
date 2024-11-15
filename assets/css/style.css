@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+  overflow: auto;
 }
 
 /* Header */
@@ -229,6 +230,7 @@ header .search-cart button:hover {
     background-color: #aec9e9;
     
   }
-
-
 }
+
+
+

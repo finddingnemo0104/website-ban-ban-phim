@@ -422,9 +422,9 @@ tr:not(:first-child):hover {
 
 .model-user-info-container {
   height: auto;
-  width: 250px;
+  width: auto;
   position: absolute;
-  top: 70px;
+  top: 80px;
   left: 10px;
   visibility: hidden;
   background-color: white;
@@ -443,7 +443,7 @@ tr:not(:first-child):hover {
 
 .user-info-ele {
   display: flex;
-  padding: 10px 0px;
+  padding: 10px 10px;
   text-decoration: none;
   color: black;
 }
@@ -455,10 +455,28 @@ tr:not(:first-child):hover {
 
 .login-info {
   background-color: #edf5fc;
-  padding: 10px 10px;
   display: none;
+  width: auto;
 }
 
 .login-info.open {
   display: block;
+}
+
+.login-info p {
+  padding: 5px;
+}
+
+.label-info {
+  font-weight: bold;
+  text-align: left; 
+  width: auto;
+}
+
+.value-info {
+  text-align: left;
+}
+
+.login-info td {
+  border: white; 
 }

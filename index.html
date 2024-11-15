@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGU Click Store</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/detail.css">
-</head>
-<body>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SGU Click</title>
+    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/detail.css" />
+    <link rel="stylesheet" href="./assets/css/trang-chu-user.css" />
+  </head>
+  <body>
     <!-- Header -->
     <!-- <header>
         <div class="logo">
@@ -29,129 +31,176 @@
         </div>
     </header> -->
 
-
     <SloganBar class="slogan-bar">
-        <a href="index.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
-        <p class="slogan" style="color: white">Chất phím, chất click !</p>
-      </SloganBar>
+      <a href="index.html"
+        ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+      /></a>
+      <p class="slogan" style="color: white">Chất phím, chất click !</p>
+    </SloganBar>
 
-<div class="header_bottom">
-        
-  <div class="user">
-      <img src="./assets/Image/Vector.png" alt="">
-      <div class="user-name">
-          <p class="xinchao">Xin chào</p>
-          <p class="name">Anh Tuấn</p>
+    <div class="header_bottom" style="background-color: white">
+      <div class="user">
+        <div
+          style="display: flex; position: relative"
+          onclick="showModel('model-user-info-container')"
+        >
+          <i class="fa-solid fa-circle-user"></i>
+          <i
+            class="fa-solid fa-circle-chevron-down show-user-info"
+            style="right: -5px"
+          ></i>
+        </div>
+        <div class="user-name">
+          <p class="xinchao">Xin chào anh Tuấn !</p>
+        </div>
       </div>
-  </div>
 
-  <div class="links">
-      <a href="">Bàn phím <br/> cơ</a>
-      <a href="">Bàn phím gaming</a>
-      <a href="">Bàn phím không dây</a>
-      <a href="">Bàn phím đối xứng</a>
-      <a href="">Bàn phím mini</a>
-      
-
-      
-      
-  </div>
-  <div class="search1">
-    <img src="./assets/Image/search.png">
-    <img src="./assets/Image/cart.png" class="cart" onclick="window.location">
-    <input type="text"placeholder="Tìm kiếm">
-  </div>
-</div>
+      <div class="links">
+        <a href=""
+          >Bàn phím <br />
+          cơ</a
+        >
+        <a href="">Bàn phím gaming</a>
+        <a href="">Bàn phím không dây</a>
+        <a href="">Bàn phím đối xứng</a>
+        <a href="">Bàn phím mini</a>
+      </div>
+      <div class="search1">
+        <img src="./assets/Image/search.png" />
+        <img
+          src="./assets/Image/cart.png"
+          class="cart"
+          onclick="window.location"
+        />
+        <input type="text" placeholder="Tìm kiếm" />
+      </div>
+    </div>
 
     <!-- Banner Section -->
     <section class="imgheader">
-        <!-- <img src="./assets/Image/header nền.png" alt=""> -->
-    </section >
+      <!-- <img src="./assets/Image/header nền.png" alt=""> -->
+    </section>
     <div class="search-container">
-        <div class="search-bar" onsubmit="searchItems(event)">
-            <button id="searchBTN">🔍 </button>
-            <input id="searchText" type="text" placeholder="Tìm kiếm tên sản phẩm">
-        </div>
-        <select class="search-filter-brand" id="search-filter-brand">   
-            <option value="">Loại bàn phim</option>
-            <option value="Bàn phím gaming">Bàn phím gaming</option>
-            <option value="Bàn phím cơ">Bàn phím cơ</option>
-            <option value="Bàn phím không dây">Bàn phím không dây</option>
-            <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
-            <option value="Bàn phím mini">Bàn phím mini</option>
-        </select>
-        <div class="search-filter-price">
-            <p>Khoảng giá:</p>
-            <input id="filter-price-min" min="0" type="number"> - 
-            <input id="filter-price-max" min="0"  type="number">
-        </div>
+      <div class="search-bar" onsubmit="searchItems(event)">
+        <button id="searchBTN">🔍</button>
+        <input
+          id="searchText"
+          type="text"
+          placeholder="Tìm kiếm tên sản phẩm"
+        />
+      </div>
+      <select class="search-filter-brand" id="search-filter-brand">
+        <option value-info="">Loại bàn phim</option>
+        <option value-info="Bàn phím gaming">Bàn phím gaming</option>
+        <option value-info="Bàn phím cơ">Bàn phím cơ</option>
+        <option value-info="Bàn phím không dây">Bàn phím không dây</option>
+        <option value-info="Bàn phím đối xứng">Bàn phím đối xứng</option>
+        <option value-info="Bàn phím mini">Bàn phím mini</option>
+      </select>
+      <div class="search-filter-price">
+        <p>Khoảng giá:</p>
+        <input id="filter-price-min" min="0" type="number" /> -
+        <input id="filter-price-max" min="0" type="number" />
+      </div>
     </div>
 
     <section class="banner">
-        <h2>Khám phá các sản phẩm độc đáo của SGU Click</h2>
+      <h2>Khám phá các sản phẩm độc đáo của SGU Click</h2>
     </section>
 
     <!-- Product Grid Section -->
     <section class="product-grid" id="product-grid">
-        <!-- <div class="product-card">
-            
-            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard" onclick="window.location ='./detail.html'" link>
-            
-            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-        </div>
-        <div class="product-card">
-            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-        </div>
-        <div class="product-card">
-            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-        </div>
-        <div class="product-card">
-            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-        </div>
-        <div class="product-card">
-            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-        </div>
-        <div class="product-card">
-            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-        </div> -->
+      <!-- <div class="product-card">
+    
+    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard" onclick="window.location ='./detail.html'" link>
+    
+    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+</div>
+<div class="product-card">
+    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+</div>
+<div class="product-card">
+    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+</div>
+<div class="product-card">
+    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+</div>
+<div class="product-card">
+    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+</div>
+<div class="product-card">
+    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+</div> -->
     </section>
 
     <ul class="pagination">
+      <!-- <li class="pagination-item pagination-item--active">
+    <a href="" class="pagination-item-link" id="page-number1">1</a>
+</li>
 
-        <!-- <li class="pagination-item pagination-item--active">
-            <a href="" class="pagination-item-link" id="page-number1">1</a>
-        </li>
+<li class="pagination-item">
+    <a href="" class="pagination-item-link" id="page-number2">2</a>
+</li>
 
-        <li class="pagination-item">
-            <a href="" class="pagination-item-link" id="page-number2">2</a>
-        </li>
+<li class="pagination-item">
+    <a href="" class="pagination-item-link" id="page-number3">3</a>
+</li>
 
-        <li class="pagination-item">
-            <a href="" class="pagination-item-link" id="page-number3">3</a>
-        </li>
+<li class="pagination-item">
+    <a href="" class="pagination-item-link" id="page-number4">4</a>
+</li>
 
-        <li class="pagination-item">
-            <a href="" class="pagination-item-link" id="page-number4">4</a>
-        </li>
+<li class="pagination-item">
+    <a href="" class="pagination-item-link" id="page-number...">...</a>
+</li>
 
-        <li class="pagination-item">
-            <a href="" class="pagination-item-link" id="page-number...">...</a>
-        </li>
-
-        <li class="pagination-item">
-            <a href="" class="pagination-item-link" id="page-number14">14</a>
-        </li> -->
-        
+<li class="pagination-item">
+    <a href="" class="pagination-item-link" id="page-number14">14</a>
+</li> -->
     </ul>
 
+    <!-- Model user info -->
+    <div class="model-user-info-container">
+      <div class="user-info-ele">
+        <i class="fa-solid fa-circle-user user-info-icon"></i>
+        <div onclick="showModel('login-info')">Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+      </div>
+
+      <table class="login-info">
+       
+      </table>
+
+      <a class="user-info-ele" href="don-hang.html">
+        <i class="fa-solid fa-rectangle-list user-info-icon"></i>
+        <div>Đơn hàng</div>
+      </a>
+
+      <a
+        class="user-info-ele log-out"
+        style="border-top: 1px solid gray"
+        href="dangnhap.html"
+      >
+        <i
+          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+          style="color: gray"
+        ></i>
+        <div>Đăng xuất</div>
+      </a>
+    </div>
+
     <footer class="footer"></footer>
-    <script type="module" src="./assets/js/index.js"></script>
+    <script
+      src="https://kit.fontawesome.com/793699135f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/index.js"></script>
     <script type="module" src="./assets/js/Product.js"></script>
     <script type="module" src="./assets/js/productData.js"></script>
-</body>
+  </body>
 </html>
