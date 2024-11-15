@@ -1,55 +1,58 @@
-*{
-    margin:0;
-    padding:0;
+body {
+  background-color: white;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
 
 .contain {
-    margin: 50px;
-    display: flex;
-    justify-content:space-between;
+  margin: 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.contain .title-product img{
-    width: 30%;
-    height: 30%;
+.contain .title-product img {
+  width: 30%;
+  height: 30%;
 }
 
 .contain .title-product {
-    width: 40%;
-    height: 40% ;
+  width: 40%;
+  height: 40%;
 }
 
 .contain .title-product h1 {
-    color: #21568A;
-    /* position: absolute; */
-    width: 367px;
-    height: 31px;
+  color: #21568a;
+  /* position: absolute; */
+  width: 367px;
+  height: 31px;
 
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16.1556px;
-    line-height: 24px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16.1556px;
+  line-height: 24px;
 }
 
-.contain .body-right{
-    width: 40%;
-    height: 40%;
+.contain .body-right {
+  width: 40%;
+  height: 40%;
 }
 
-.contain .body-right h1{
-/* position: absolute; */
-width: 389px;
-height: 81px;
+.contain .body-right h1 {
+  /* position: absolute; */
+  width: 389px;
+  height: 81px;
 
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 600;
-font-size: 27px;
-line-height: 40px;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 27px;
+  line-height: 40px;
 
-color: #21568A;
+  color: #21568a;
 }
 
 builder-component {
@@ -234,7 +237,7 @@ builder-component {
     }
   }
 
-  builder-component {
+builder-component {
   max-width: none !important;
 }
 .detail-container {
@@ -265,26 +268,26 @@ builder-component {
   }
 }
 
-.line{
-  border-bottom: 1px solid black ;
+.line {
+  border-bottom: 1px solid black;
   margin-top: 10px;
 }
 
 .slogan-bar {
-background-color: #21568a;
-height: 30px;
-display: flex;
+  background-color: #21568a;
+  height: 30px;
+  display: flex;
 }
 
 .slogan {
-width: 100%;
-text-align: center;
-margin: 6px;
+  width: 100%;
+  text-align: center;
+  margin: 6px;
 }
 
 .logo {
-position: absolute;
-height: 30px;
+  position: absolute;
+  height: 30px;
 }
 
 .header-icon{
@@ -314,61 +317,57 @@ height: 30px;
 }
 
 .user {
-    height: 100%;
-    width:30%;
-    /* background-color: blue; */
-    display: flex;
-    align-items: center;
+  height: 100%;
+  width: 50%;
+  /* background-color: blue; */
+  display: flex;
+  align-items: center;
 }
 
-.user>img{
-    width: 24px;
-    height: 24px;
-
+.user > img {
+  width: 24px;
+  height: 24px;
 }
 
-.user-name>p{
-    font-family: Poppins;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    text-align:center;
-    margin-left: 10px;
+.user-name > p {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  margin-left: 10px;
 }
 
 .links {
-    margin-top: 10px;
-    gap:50px;
-    display: flex;
-    margin-left: 30px;
+  margin-top: 10px;
+  gap: 50px;
+  display: flex;
+  margin-left: 30px;
 }
 
-.links>a {
-    
-    text-decoration: none;
-    color: #21568A;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 18px;
-    text-align: center;
-    display: block;
-    width: 100px;
-    height:100px;
-    
-
+.links > a {
+  text-decoration: none;
+  color: #21568a;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  display: block;
+  width: 100px;
+  height: 100px;
 }
 
 .header-search{
   width: 100%;
-  margin-right:0px;
+  margin-right: 0px;
 }
 .header-search input{
   margin-left:100px;
   background-color: #F2E9E9;
   border-style: none;
   border-radius: 10px;
-  width:50%;
-  height:70%;
+  width: 50%;
+  height: 70%;
   margin-top: 10px;
   position:relative;
   right:150px;
@@ -383,16 +382,15 @@ height: 30px;
 .header-search .cart{
   width: 24px;
   height: 24px;
-  position:relative;
-  left:250px;
+  position: relative;
+  left: 250px;
 }
 
 .header-search img{
   width: 18px;
   height: 18px;
-  position:relative;
-  left:10px;
-  top:5px;
+  position: relative;
+  left: 10px;
+  top: 5px;
   z-index: 99;
 }
-

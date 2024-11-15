@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin giao hàng</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            width: 420px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: translateY(-20px);
+            animation: slideDown 0.3s ease-out forwards;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #333;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        p {
+            margin: 10px 0;
+            color: #666;
+        }
+
+        .required {
+            color: red;
+        }
+
+        .shipping-address, .payment-method {
+            margin: 20px 0;
+        }
+
+        .radio-group {
+            margin: 12px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-group label {
+            color: #555;
+            cursor: pointer;
+        }
+
+        .input-address,
+        #the, #tg, #cvv {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+            transition: all 0.3s;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .confirm-btn, .cancel-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .confirm-btn {
+            background-color: #1e3a8a;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background-color: #162a6a;
+        }
+
+        .cancel-btn {
+            background-color: #e5e5e5;
+            color: #333;
+        }
+
+        .cancel-btn:hover {
+            background-color: #d4d4d4;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Modal Shipping Information -->
+<div class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Thông tin giao hàng</h2>
+            <span class="close-btn">&times;</span>
+        </div>
+        <div class="modal-body">
+            <label>Họ Tên</label>
+            <input type="text" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"><br><br>
+            <label>SĐT</label>
+            <input type="text" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+            <div class="shipping-address">
+                <p><strong>Địa chỉ giao hàng</strong></p>
+                <div class="radio-group">
+                    <label><input type="radio" name="address" checked onclick="off()"> Sử dụng địa chỉ mặc định</label>
+                    <label><input type="radio" name="address" id="other-address" onclick="on()"> Nhập địa chỉ khác</label>
+                    <input type="text" placeholder="Địa chỉ giao hàng" class="input-address" id="address-input">
+                </div>
+            </div>
+
+            <div class="payment-method">
+                <p><strong>Phương thức thanh toán</strong></p>
+                <div class="radio-group">
+                    <label><input type="radio" name="payment" onclick="uup()"> Thanh toán khi nhận hàng</label>
+                    <label><input type="radio" name="payment" onclick="uup()"> Chuyển khoản</label>
+                    <label><input type="radio" name="payment" onclick="up()"> Thanh toán bằng thẻ</label>
+                    <input type="text" placeholder="Số thẻ" id="the">
+                    <input type="text" placeholder="Thời hạn MM/YY" id="tg">
+                    <input type="text" placeholder="CVV/CVC" id="cvv">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="file:///C:/Users/thach/OneDrive/M%C3%A1y%20t%C3%ADnh/do_an/giohang.html"><button class="confirm-btn">Xác nhận</button></a>
+            <a href="file:///C:/Users/thach/OneDrive/M%C3%A1y%20t%C3%ADnh/do_an/giohang.html"><button class="cancel-btn">Hủy</button></a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function on() {
+        document.getElementById("address-input").style.display = "block";
+    }
+    function off() {
+        document.getElementById("address-input").style.display = "none";
+    }
+    function up() {
+        document.getElementById("the").style.display = "block";
+        document.getElementById("tg").style.display = "block";
+        document.getElementById("cvv").style.display = "block";
+    }
+    function uup() {
+        document.getElementById("the").style.display = "none";
+        document.getElementById("tg").style.display = "none";
+        document.getElementById("cvv").style.display = "none";
+    }
+</script>
+
+</body>
+</html>

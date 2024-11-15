@@ -60,6 +60,7 @@ function showCustomerData(customerData) {
 
   for (let item = 0; item < customers.length; item++) {
     const customer = customers[item];
+    if (customer.role === listRole.admin) { continue};
     const html = `
             <tr>
               <td>${customer.ID}</td>
@@ -234,7 +235,9 @@ function addCustomer(event) {
     phone,
     dob,
     address,
-    true
+    true,
+    "",
+    "customer"
   );
 
   addCustomerIntoLocalStorage(newCustomer);
@@ -274,10 +277,10 @@ function viewDetails(e, customerID) {
   const formattedDate = new Date(customerFound.dob).toLocaleDateString("en-GB");
   let avatarURL =
     customerFound.gender === "Nam"
-      ? "/Image/quan-ly-khach-hang/male-customer.png"
+      ? "./assets/Image/quan-ly-khach-hang/male-customer.png"
       : customerFound.gender === "Nữ"
-      ? "/Image/quan-ly-khach-hang/female-customer.jpg"
-      : "/Image/quan-ly-khach-hang/other-customer.ipg";
+      ? "./assets/Image/quan-ly-khach-hang/female-customer.jpg"
+      : "./assets/Image/quan-ly-khach-hang/other-customer.ipg";
 
   // Display customer details
   const htmlCustomerDetails = `
@@ -664,4 +667,48 @@ function filterCustomer(event) {
   });
 
   showCustomerData(foundCustomers);
+}
+
+// Show model
+function showModel(model) {
+  const modelEle = document.getElementsByClassName(model)[0];
+
+  if (modelEle.classList.contains("open")) {
+    modelEle.classList.remove("open");
+    document.removeEventListener("click", handleOutsideClick);
+  } else {
+    modelEle.classList.add("open");
+    setTimeout(() => {
+      document.addEventListener("click", handleOutsideClick);
+    }, 0); 
+  }
+
+  function handleOutsideClick(event) {
+    if (!modelEle.contains(event.target)) {
+      modelEle.classList.remove("open"); 
+      document.removeEventListener("click", handleOutsideClick); 
+    }
+  }
+
+  showUserInfoTable();
+} 
+// ---------------------------
+
+// Show user information table
+function showUserInfoTable() {
+  currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const html = `
+  <tr>
+          <td class="label-info">Tên đăng nhập</td>
+          <td class="value-info">${currentUser.phone}</td>
+        </tr>
+        <tr>
+          <td class="label-info">Mật khẩu</td>
+          <td class="value-info">${currentUser.password}</td>
+        </tr>
+  `
+
+  const userInfoTableEle = document.getElementsByClassName("login-info")[0];
+  userInfoTableEle.innerHTML = html;
 }
