@@ -1,4 +1,15 @@
-const products = JSON.parse(localStorage.getItem("products")) || [];
+function getProduct() {
+  if (
+    localStorage.getItem("products") === null ||
+    JSON.parse(localStorage.getItem("products")).length === 0
+  ) {
+    localStorage.setItem("products", JSON.stringify(listProduct));
+  }
+  return JSON.parse(localStorage.getItem("products"));
+}
+
+const products = getProduct();
+
 const productsPerPage = 6;
 let currentPage = 1;
 
