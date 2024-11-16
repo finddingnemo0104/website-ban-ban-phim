@@ -217,12 +217,6 @@ function addCustomer(event) {
   }
   // --------------------------------------------------------------------------------- //
 
-  if (address === "") {
-    const addressAlertEle = document.getElementById("address-alert");
-    addressAlertEle.innerHTML = "Không được để trống địa chỉ khách hàng !";
-    isError = true;
-  }
-
   if (isError === true) {
     return;
   }
@@ -280,7 +274,7 @@ function viewDetails(e, customerID) {
       ? "./assets/Image/quan-ly-khach-hang/male-customer.png"
       : customerFound.gender === "Nữ"
       ? "./assets/Image/quan-ly-khach-hang/female-customer.jpg"
-      : "./assets/Image/quan-ly-khach-hang/other-customer.ipg";
+      : "./assets/Image/quan-ly-khach-hang/other-customer.jpg";
 
   // Display customer details
   const htmlCustomerDetails = `
@@ -405,7 +399,7 @@ function viewDetails(e, customerID) {
                 type="text"
                 name="email"
                 placeholder="Email"
-                value=${customerFound.email}
+                value="${customerFound.email}"
                 style="
                   margin-left: 40px;
                   padding: 3px;
@@ -479,7 +473,6 @@ function viewDetails(e, customerID) {
                 border: 1px solid #636262;
               "
             >${customerFound.address}</textarea>
-            <p id="address-alert-edit" class="alert"></p>
             </div>
           </div>
 
@@ -582,18 +575,12 @@ function editCustomer(event, customerID) {
     isError = true;
   }
 
-  if (!isValidEmail(email)) {
+  if (email!== "" && !isValidEmail(email)) {
     emailAlertEle.innerHTML = "Email không hợp lệ !";
     isError = true;
   }
 
   // --------------------------------------------------------------------------------- //
-
-  if (address === "") {
-    const addressAlertEle = document.getElementById("address-alert-edit");
-    addressAlertEle.innerHTML = "Không được để trống địa chỉ khách hàng !";
-    isError = true;
-  }
 
   if (isError === true) {
     return;
