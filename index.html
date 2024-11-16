@@ -6,8 +6,8 @@
     <title>SGU Click</title>
     <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
     <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/detail.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <!-- Header -->
@@ -47,7 +47,7 @@
           ></i>
         </div>
         <div class="user-name">
-          <p class="xinchao">Xin chào anh Tuấn !</p>
+          <p class="xinchao">Xin chào !</p>
         </div>
       </div>
 
@@ -172,17 +172,17 @@
         <div>Đơn hàng</div>
       </a>
 
-      <a
+      <div
         class="user-info-ele log-out"
         style="border-top: 1px solid gray"
-        href="dangnhap.html"
+        onclick="logOut()"
       >
         <i
           class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
           style="color: gray"
         ></i>
         <div>Đăng xuất</div>
-      </a>
+      </div>
     </div>
 
     <footer class="footer"></footer>
@@ -190,6 +190,8 @@
       src="https://kit.fontawesome.com/793699135f.js"
       crossorigin="anonymous"
     ></script>
+
+    <script src="./assets/js/common.js"></script>
     <script src="./assets/js/index.js"></script>
     <script type="module" src="./assets/js/Product.js"></script>
     <script type="module" src="./assets/js/productData.js"></script>

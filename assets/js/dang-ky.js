@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
       !fullName ||
       !gender ||
       !dob ||
-      !address ||
-      !email ||
       !phone ||
       !password ||
       !confirmPassword
@@ -36,18 +34,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!isValidName(fullName)) {
-        alert("Tên không hợp lệ !");
-        return;
-      }
-
-    if (!isValidEmail(email)) {
-      alert("Email không hợp lệ !");
+      alert("Tên không hợp lệ !");
       return;
     }
 
-    if (!isValidPhoneNumber(password)) {
+    const customers = getCustomer();
+
+    if (email && !isValidEmail(email)) {
+      alert("Email không hợp lệ !");
+      return;
+    } else {
+      const customer = customers.find((customer) => customer.email === email);
+      if (customer) {
+        alert("Email này đã được đăng ký !");
+        return;
+      }
+    }
+
+    if (!isValidPhoneNumber(phone)) {
       alert("Số điện thoại không hợp lệ !");
       return;
+    } else {
+      const customer = customers.find((customer) => customer.phone === phone);
+      if (customer) {
+        alert("Số điện thoại này đã được đăng ký !");
+        return;
+      }
     }
 
     if (password !== confirmPassword) {
@@ -123,5 +135,17 @@ function genderateCustomerID() {
   let newCustomerID = numberID.toString().padStart(5, "0");
 
   return `#KH${newCustomerID}`;
+}
+// --------------------------------------------------------------------------------- //
+
+// Get customers data from localStorage
+function getCustomer() {
+  if (
+    localStorage.getItem("customers") === null ||
+    JSON.parse(localStorage.getItem("customers")).length === 0
+  ) {
+    localStorage.setItem("customers", JSON.stringify(listCustomer));
+  }
+  return JSON.parse(localStorage.getItem("customers"));
 }
 // --------------------------------------------------------------------------------- //

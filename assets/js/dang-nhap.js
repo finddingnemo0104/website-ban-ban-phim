@@ -89,7 +89,8 @@ function isValidPassword(password) {
 }
 
 // Create new password
-function createNewPassword() {
+function createNewPassword(e) {
+  e.preventDefault();
   phone = document.getElementById("phone").value;
   newPassWord = document.getElementById("newPassword").value;
   confirmNewPassWord = document.getElementById("confirmNewPassword").value;
@@ -99,7 +100,6 @@ function createNewPassword() {
   indexCustomer = listCustomer.findIndex(
     (customer) => customer.phone === phone
   );
-  console.log(indexCustomer);
 
   if (!customer) {
     alert("Số điện thoại này chưa được đăng ký !");
@@ -124,3 +124,5 @@ function addCustomerIntoLocalStorage(customer) {
   localStorage.setItem("customers", JSON.stringify(listCustomer));
 }
 // --------------------------------------------------------------------------------- //
+
+

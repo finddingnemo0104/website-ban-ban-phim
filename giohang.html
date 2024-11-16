@@ -1,311 +1,41 @@
 <html lang="en">
-  <style>
-    /* General Styles */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Header */
-    .header {
-      background-color: #1e3a8a;
-      color: white;
-      padding: 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo {
-      /* height: 50px;
-      width: 50px; */
-    }
-
-    .greeting {
-      margin-left: 16px;
-    }
-
-    .nav a {
-      color: white;
-      margin: 0 12px;
-      text-decoration: none;
-    }
-
-    .nav a:hover {
-      text-decoration: underline;
-    }
-
-    .search-container {
-      display: flex;
-      align-items: center;
-    }
-
-    .search-input {
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-
-    .cart-icon {
-      font-size: 24px;
-      margin-left: 16px;
-    }
-
-    /* Main Content */
-    .main-content {
-      max-width: 1200px;
-      margin: 32px auto;
-      padding: 0 16px;
-    }
-
-    .title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 24px;
-    }
-
-    /* Cart */
-    .cart-container {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .cart-items {
-      width: 65%;
-    }
-
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .item-image {
-      width: 100px;
-      height: 50px;
-    }
-
-    .item-details {
-      flex: 1;
-      margin-left: 16px;
-    }
-
-    .item-details h2 {
-      font-size: 18px;
-      margin: 0;
-    }
-
-    .quantity-control {
-      display: flex;
-      align-items: center;
-    }
-
-    .qty-btn {
-      padding: 8px;
-      margin: 3px;
-      background-color: #e5e5e5;
-      border-radius: 6px;
-    }
-
-    .item-price {
-      font-weight: bold;
-    }
-
-    .delete-btn {
-      background-color: transparent;
-      color: #e53e3e;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Order Summary */
-    .order-summary {
-      width: 30%;
-      background-color: white;
-      padding: 24px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .summary-title {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 16px;
-    }
-
-    .summary-detail {
-      margin-bottom: 16px;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .discount {
-      margin-bottom: 16px;
-    }
-
-    .discount-code {
-      display: flex;
-    }
-
-    .code-input {
-      flex: 1;
-      padding: 8px;
-      border-radius: 4px 0 0 4px;
-      border: 1px solid #ccc;
-    }
-
-    .apply-btn {
-      padding: 8px;
-      background-color: #1e3a8a;
-      color: white;
-      border: none;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-    }
-
-    .total-row {
-      font-weight: bold;
-      font-size: 18px;
-    }
-
-    .checkout-btn,
-    .continue-btn {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 12px;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .checkout-btn {
-      background-color: #1e3a8a;
-      color: white;
-    }
-
-    .continue-btn {
-      background-color: blue;
-    }
-    .SL {
-      width: 30px;
-      text-align: center;
-    }
-    /* Modal Styles */
-    .modal {
-      display: none; /* Ẩn modal mặc định */
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .modal-content {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      width: 300px;
-      text-align: center;
-      position: relative;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .confirm-delete-btn {
-      background-color: #5d3ee5;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .cancel-btn {
-      background-color: #f0f0f0;
-      color: #333;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/assets/css/giohang.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGU Click</title>
     <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./assets/css/giohang.css" />
+    <link rel="stylesheet" href="./assets/css/empty.css">
     <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">
     <link rel="stylesheet" href="./assets/css/detail.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <!-- Kết nối file CSS -->
-  </head>
-  <body>
-    <!-- Slogan bar -->
-    <SloganBar class="slogan-bar">
-      <a href="index.html"
-        ><img class="logo" src="./assets/Image/logo.png" alt="logo"
-      /></a>
-      <p class="slogan" style="color: white">Chất phím, chất click !</p>
-    </SloganBar>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
     <!-- Header -->
     <!-- <header class="header">
-      <div class="logo-container">
-        <img
-          src="https://storage.googleapis.com/a1aa/image/K80ED0J3PRoYMJv6Vq5hMeMuY0vv8wLeKJZkghsRqSD18MqTA.jpg"
-          alt="Logo"
-          class="logo"
-        />
-        <span class="greeting">Xin chào Thùy Trang !</span>
-      </div>
-      <nav class="nav">
-        <a href="#">Bàn phím cơ</a>
-        <a href="#">Bàn phím gaming</a>
-        <a href="#">Bàn phím không dây</a>
-        <a href="#">Bàn phím đối xứng</a>
-        <a href="#">Bàn phím mini</a>
-      </nav>
-      <div class="search-container">
-        <input type="text" placeholder="Tìm kiếm" class="search-input" />
-        <i class="fas fa-shopping-cart cart-icon"></i>
-      </div>
+        <div class="logo-container">
+            <img src="https://storage.googleapis.com/a1aa/image/K80ED0J3PRoYMJv6Vq5hMeMuY0vv8wLeKJZkghsRqSD18MqTA.jpg" alt="Logo" class="logo">
+            <span class="greeting">Xin chào Thạch Phú !</span>
+        </div>
+        <nav class="nav">
+            <a href="#">Bàn phím cơ</a>
+            <a href="#">Bàn phím gaming</a>
+            <a href="#">Bàn phím không dây</a>
+            <a href="#">Bàn phím đối xứng</a>
+            <a href="#">Bàn phím mini</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" placeholder="Tìm kiếm" class="search-input">
+            <i class="fas fa-shopping-cart cart-icon"></i>
+        </div>
     </header> -->
-
+    <SloganBar class="slogan-bar">
+        <a href="index.html"
+          ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+        /></a>
+        <p class="slogan" style="color: white">Chất phím, chất click !</p>
+      </SloganBar>
+  
       <div class="header-container">
         <div class="user">
           <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
@@ -316,7 +46,7 @@
             ></i>
           </div>
           <div class="user-name">
-            <p class="xinchao">Xin chào anh Tuấn !</p>
+            <p class="xinchao">Xin chào !</p>
           </div>
         </div>
   
@@ -338,105 +68,107 @@
         </div>
       </div>
 
+    <a href="orderSummary.html"><button class="view-order-btn">Xem đơn hàng đã mua</button></a>
     <!-- Main Content -->
     <main class="main-content">
-      <h1 class="title">Giỏ hàng</h1>
+        <h1 class="title">Giỏ hàng</h1>
 
-      <!-- Shopping Cart Items -->
-      <div class="cart-container">
-        <!-- Items Section -->
-        <div class="cart-items">
-          <!-- Single Item -->
-          <div id="donhang">
-            <div class="cart-item"></div>
-          </div>
-          <!-- Lặp lại cho các sản phẩm khác -->
+        <!-- Shopping Cart Items -->
+        <div class="cart-container">
+            <!-- Items Section -->
+            <div class="cart-items">
+                <!-- Single Item -->
+                 <div id="donhang">
+                <div class="cart-item">      
+                </div></div>
+                <!-- Lặp lại cho các sản phẩm khác -->                
+            </div>
+            <!-- Order Summary Section -->
+            <div class="order-summary">
+                <h2 class="summary-title">Tổng đơn hàng</h2>
+                <div class="summary-detail">
+                    <div class="summary-row">
+                       <div id="tongcong"></div>
+                       <span id="sumprice"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí giao hàng</span>
+                        <span>0đ</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Thuế</span>
+                        <span>0đ</span>
+                    </div>
+                </div>
+                <div class="discount">
+                    <label for="discount-code">Mã giảm giá</label>
+                    <div class="discount-code">
+                        <input type="text" id="discount-code" class="code-input">
+                        <button class="apply-btn" >Xác nhận</button>
+                    </div>
+                </div>
+                <div class="total">
+                    <div class="summary-row">
+                        <span>Giảm giá</span>
+                        <span>0đ</span>
+                    </div>
+                    <div class="summary-row total-row" >
+                        <span>Tổng cộng</span>
+                        <span id="total">10,000,000đ</span>
+                    </div>
+                </div>
+                <a href="thongtin.html"><button class="checkout-btn">Thanh toán</button></a>
+                <button class="continue-btn">Tiếp tục mua sắm</button>
+            </div>
+           
         </div>
-        <!-- Order Summary Section -->
-        <div class="order-summary">
-          <h2 class="summary-title">Tổng đơn hàng</h2>
-          <div class="summary-detail">
-            <div class="summary-row">
-              <div id="tongcong"></div>
-              <span id="sumprice"></span>
-            </div>
-            <div class="summary-row">
-              <span>Phí giao hàng</span>
-              <span>0đ</span>
-            </div>
-            <div class="summary-row">
-              <span>Thuế</span>
-              <span>0đ</span>
-            </div>
-          </div>
-          <!-- <div class="discount">
-            <label for="discount-code">Mã giảm giá</label>
-            <div class="discount-code">
-              <input type="text" id="discount-code" class="code-input" />
-              <button class="apply-btn">Xác nhận</button>
-            </div>
-          </div> -->
-          <div class="total">
-            <!-- <div class="summary-row">
-              <span>Giảm giá</span>
-              <span>0đ</span>
-            </div> -->
-            <div class="summary-row total-row">
-              <span>Tổng cộng</span>
-              <span>10,000,000đ</span>
-            </div>
-          </div>
-          <button class="checkout-btn" onclick="window.location.href = 'thongtin.html'" >Thanh toán</button>
-          <button class="continue-btn" onclick="window.location.href = 'index.html';">Tiếp tục mua sắm</button>
-        </div>
-      </div>
     </main>
     <div class="modal" id="deleteModal">
-      <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2>Xoá sản phẩm</h2>
-        <p>Bạn có chắc chắn muốn xoá sản phẩm này không?</p>
-        <div class="modal-actions">
-          <button class="confirm-delete-btn" onclick="confirmDelete()">
-            Xoá
-          </button>
-          <button class="cancel-btn" onclick="closeModal()">Huỷ</button>
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Xoá sản phẩm</h2>
+            <p>Bạn có chắc chắn muốn xoá sản phẩm này không?</p>
+            <div class="modal-actions">
+                <button class="confirm-delete-btn" onclick="confirmDelete()">Xoá</button>
+                <button class="cancel-btn" onclick="closeModal()">Huỷ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model user info -->
+    <div class="model-user-info-container">
+        <div class="user-info-ele">
+          <i class="fa-solid fa-circle-user user-info-icon"></i>
+          <div onclick="showModel('login-info')">Thông tin tài khoản</div>
+          <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+        </div>
+  
+        <table class="login-info"></table>
+  
+        <a class="user-info-ele" href="don-hang.html">
+          <i class="fa-solid fa-rectangle-list user-info-icon"></i>
+          <div>Đơn hàng</div>
+        </a>
+  
+        <div
+          class="user-info-ele log-out"
+          style="border-top: 1px solid gray"
+          onclick="logOut()"
+        >
+          <i
+            class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+            style="color: gray"
+          ></i>
+          <div>Đăng xuất</div>
         </div>
       </div>
-    </div>
-  
-   <!-- Model user info -->
-   <div class="model-user-info-container">
-    <div class="user-info-ele">
-      <i class="fa-solid fa-circle-user user-info-icon"></i>
-      <div onclick="showModel('login-info')">Thông tin tài khoản</div>
-      <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
-    </div>
 
-    <table class="login-info"></table>
-
-    <a class="user-info-ele" href="don-hang.html">
-      <i class="fa-solid fa-rectangle-list user-info-icon"></i>
-      <div>Đơn hàng</div>
-    </a>
-
-    <a
-      class="user-info-ele log-out"
-      style="border-top: 1px solid gray"
-      href="dangnhap.html"
-    >
-      <i
-        class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
-        style="color: gray"
-      ></i>
-      <div>Đăng xuất</div>
-    </a>
-  </div> 
-
-  </body>
-  <script
+    <script
       src="https://kit.fontawesome.com/793699135f.js"
       crossorigin="anonymous"
     ></script>
-  <script src="./assets/js/cart.js"></script>
-</html>
+    <script src="./assets/js/common.js"></script>
+
+</body>
+<script src="./assets/js/cart.js"></script>
+

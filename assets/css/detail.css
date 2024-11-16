@@ -387,6 +387,10 @@ height: 30px;
   left:250px;
 }
 
+.cart:hover {
+  cursor: pointer;
+}
+
 .header-search img{
   width: 18px;
   height: 18px;
