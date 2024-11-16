@@ -84,7 +84,7 @@ function renderProducts1(page,productList) {
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${product.ID}'">
+      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
       <p>${product.name}</p>
     `;
     productGrid.appendChild(productCard);
