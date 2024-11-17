@@ -24,9 +24,8 @@ function getQueryParam(param) {
   return urlParams.get(param);
 }
 
-const productID = getQueryParam('id');
+const productID = getQueryParam("id");
 console.log(productID); // Sử dụng productID để thực hiện các thao tác tiếp theo
-
 
 // Display model view product details
 function viewDetails(e, productID) {

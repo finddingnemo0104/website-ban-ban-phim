@@ -7,7 +7,6 @@
 body {
   margin: 0px;
   padding: 0px;
-  overflow: hidden;
 }
 
 .slogan-bar {
@@ -421,10 +420,10 @@ tr:not(:first-child):hover {
 }
 
 .model-user-info-container {
-  height: 400px;
-  width: 200px;
+  height: auto;
+  width: auto;
   position: absolute;
-  top: 70px;
+  top: 80px;
   left: 10px;
   visibility: hidden;
   background-color: white;
@@ -443,7 +442,7 @@ tr:not(:first-child):hover {
 
 .user-info-ele {
   display: flex;
-  padding: 10px 0px;
+  padding: 10px 10px;
   text-decoration: none;
   color: black;
 }
@@ -451,4 +450,32 @@ tr:not(:first-child):hover {
 .user-info-ele:hover {
   cursor: pointer;
   background-color: #efeeee;
+}
+
+.login-info {
+  background-color: #edf5fc;
+  display: none;
+  width: auto;
+}
+
+.login-info.open {
+  display: block;
+}
+
+.login-info p {
+  padding: 5px;
+}
+
+.label-info {
+  font-weight: bold;
+  text-align: left; 
+  width: auto;
+}
+
+.value-info {
+  text-align: left;
+}
+
+.login-info td {
+  border: white; 
 }

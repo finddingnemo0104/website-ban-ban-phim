@@ -11,7 +11,7 @@
   <body>
     <!-- Slogan bar -->
     <SloganBar class="slogan-bar">
-      <a href="index.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
+      <a href="quan-ly-san-pham.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
       <p class="slogan" style="color: white">Chất phím, chất click !</p>
     </SloganBar>
 
@@ -19,16 +19,16 @@
       <!-- Navbar admin -->
       <Navbar-admin class="navbar-admin">
         <div class="hi-admin" style="height: 50px">
-          <i
-            class="fa-solid fa-circle-user"
-            style="
-              font-size: 25px;
-              color: #21568a;
-              padding-top: 5px;
-              margin-right: 10px;
-            "
-          >
-          </i>
+          <div style="display: flex; position: relative" >
+            <i
+              class="fa-solid fa-circle-user user" onclick="showModel('model-user-info-container')"
+            >
+            </i>
+            <i
+              class="fa-solid fa-circle-chevron-down show-user-info"
+            ></i>
+          </div>
+
           <p style="margin-top: 12px">Xin chào Admin !</p>
         </div>
 
@@ -279,9 +279,7 @@
                   border-radius: 5px;
                   border: 1px solid #636262;
                 "
-                onchange="isNotEmpty(event, 'địa chỉ', 'address-alert')"
               ></textarea>
-              <p id="address-alert" class="alert"></p>
             </div>
           </div>
         </div>
@@ -333,11 +331,30 @@
       </div>
     </div>
 
+        <!-- Model user info -->
+        <div class="model-user-info-container">
+          <div class="user-info-ele" onclick="showModel('login-info')">
+            <i class="fa-solid fa-circle-user user-info-icon"></i>
+            <div>Thông tin tài khoản</div>
+            <i class="fa-solid fa-angle-down" style="padding-left: 5px;"></i>
+          </div>
+    
+          <table class="login-info">
+            
+          </table>
+    
+          <div class="user-info-ele log-out" style="border-top: 1px solid gray;" onclick="logOut()">
+            <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
+            <div>Đăng xuất</div>
+          </div>
+         </div>
+
     <script
       src="https://kit.fontawesome.com/793699135f.js"
       crossorigin="anonymous"
     ></script>
 
+    <script src="./assets/js/common.js"></script>
     <script src="./assets/js/customerData.js"></script>
     <script src="./assets/js/quan-ly-khach-hang.js"></script>
   </body>

@@ -658,16 +658,3 @@ function filterProduct(event) {
   showProductData(foundProducts);
 }
 // --------------------------------------------
-
-// Show user infomation
-function showUserInfo() {
-  const showUserInfoEle = document.getElementsByClassName("model-user-info-container")[0];
-
-  if (showUserInfoEle.classList.contains("open")) {
-    showUserInfoEle.classList.remove("open");
-  } else {
-    showUserInfoEle.classList.add("open");
-  }
-}
-// ---------------------------
-

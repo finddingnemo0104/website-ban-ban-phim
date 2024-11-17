@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
     <link rel="stylesheet" href="./assets/css/quan-ly-khach-hang.css" />
   </head>
-  <body class="open-model">
+  <body class="open-model" style="overflow: hidden;">
     <!-- Slogan bar -->
     <SloganBar class="slogan-bar">
-      <a href="index.html"
+      <a href="quan-ly-san-pham.html"
         ><img class="logo" src="./assets/Image/logo.png" alt="logo"
       /></a>
       <p class="slogan" style="color: white">Chất phím, chất click !</p>
@@ -23,7 +23,7 @@
         <div class="hi-admin" style="height: 50px">
           <div style="display: flex; position: relative" >
             <i
-              class="fa-solid fa-circle-user user" onclick="showUserInfo()"
+              class="fa-solid fa-circle-user user" onclick="showModel('model-user-info-container')"
             >
             </i>
             <i
@@ -393,20 +393,20 @@
 
     <!-- Model user info -->
      <div class="model-user-info-container">
-      <div class="user-info-ele">
+      <div class="user-info-ele" onclick="showModel('login-info')">
         <i class="fa-solid fa-circle-user user-info-icon"></i>
         <div>Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px;"></i>
       </div>
 
-      <div class="user-info-ele" href="">
-        <i class="fa-solid fa-rectangle-list user-info-icon"></i>
-        <div>Đơn hàng</div>
-      </div>
+      <table class="login-info">
+        
+      </table>
 
-      <a class="user-info-ele log-out" style="border-top: 1px solid gray;" href="dangnhap.html">
+      <div class="user-info-ele log-out" style="border-top: 1px solid gray;" onclick="logOut()">
         <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
         <div>Đăng xuất</div>
-      </a>
+      </div>
      </div>
 
     <script
@@ -414,6 +414,7 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="./assets/js/common.js"></script>
     <script src="./assets/js/productData.js"></script>
     <script src="./assets/js/quan-ly-san-pham.js"></script>
   </body>
