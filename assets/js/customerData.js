@@ -30,6 +30,21 @@ const listCustomer = [];
 listCustomer.push(
   new Customer(
     "",
+    "Admin1",
+    listGender.khac,  
+    "admin1@example.com",
+    "0869043004",
+    new Date("1990-02-15"),
+    "123 Lê Lợi, Quận 1, Thành phố Hồ Chí Minh",
+    true,
+    "admin",
+    listRole.admin
+  )
+);
+
+listCustomer.push(
+  new Customer(
+    "",
     "Admin",
     listGender.khac,
     "admin@example.com",
