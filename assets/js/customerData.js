@@ -112,6 +112,7 @@ listCustomer.push(
     new Date("1992-03-10"),
     "321 Điện Biên Phủ, Quận 3, Thành phố Hồ Chí Minh",
     true,
+  
     "",
     listRole.customer
   )

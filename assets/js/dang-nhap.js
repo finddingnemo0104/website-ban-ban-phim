@@ -16,26 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const phone = loginForm.querySelector('input[type="text"]').value;
     const password = loginForm.querySelector('input[type="password"]').value;
 
-    if (!phone || !password) {
-      alert("Vui lòng nhập đầy đủ thông tin đăng nhập.");
-      return;
-    }
-
-     if (phone === "0869043004" && password === "admin") {
-         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-         console.log("currentUser");
-         if (currentUser && currentUser.role === "admin") {
-            //  document.getElementById("admin-email").innerText = `Email: ${currentUser.email}`;
-             window.location.href = "admin.html";
-         } else {
-             // Nếu không phải admin, điều hướng về trang đăng nhập
-             window.location.href = "user.html";
-        }
-        displayOrders();
-      redirectToRolePage("admin");
-
-      return;
-    }
+    
+    
     //Authenticate user
     const customer = authenticateUser(phone, password);
     if (customer) {
