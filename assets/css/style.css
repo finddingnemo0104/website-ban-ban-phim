@@ -16,6 +16,10 @@ body {
     color: white;
   }
   
+  .slogan{
+    color: white;
+  }
+
   .imgheader img {
     width: 100%; 
     height: auto; 
@@ -234,4 +238,23 @@ body {
 
   .cart:hover{
     cursor: pointer;
+  }
+
+  .user-info-container{
+    display: flex; 
+    position: relative
+  }
+  
+  .show-user-info{
+    right:-5px !important;
+  }
+  .fa-angle-down{
+    padding-left: 5px;
+  }
+  .model-user-info-container{
+    z-index: 10;
+  }
+  
+  .log-out{
+    border-top: 1px solid gray;
   }

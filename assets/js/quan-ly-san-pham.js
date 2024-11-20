@@ -593,7 +593,7 @@ function genderateProductID() {
   const numberID = lastProductID + 1;
   let newProductID = numberID.toString().padStart(5, "0");
 
-  return `SP${newProductID}`;
+  return `#SP${newProductID}`;
 }
 // --------------------------------------------------------------------------------- //
 

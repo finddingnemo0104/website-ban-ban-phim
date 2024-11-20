@@ -34,16 +34,15 @@
       <a href="index.html"
         ><img class="logo" src="./assets/Image/logo.png" alt="logo"
       /></a>
-      <p class="slogan" style="color: white">Chất phím, chất click !</p>
+      <p class="slogan">Chất phím, chất click !</p>
     </SloganBar>
 
     <div class="header-container">
       <div class="user">
-        <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
+        <div id="user-info-container" class="user-info-container">
           <i class="fa-solid fa-circle-user"></i>
           <i
-            class="fa-solid fa-circle-chevron-down show-user-info"
-            style="right: -5px"
+            class="fa-solid fa-circle-chevron-down show-user-info"            
           ></i>
         </div>
         <div class="user-name">
@@ -75,7 +74,7 @@
       <!-- <img src="./assets/Image/header nền.png" alt=""> -->
     </section>
     <div class="search-container">
-      <div class="search-bar" onsubmit="searchItems(event)">
+      <div class="search-bar">
         <button id="searchBTN">🔍</button>
         <input
           id="searchText"
@@ -162,8 +161,8 @@
     <div class="model-user-info-container">
       <div class="user-info-ele">
         <i class="fa-solid fa-circle-user user-info-icon"></i>
-        <div onclick="showModel('login-info')">Thông tin tài khoản</div>
-        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+        <div id="user-info">Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" ></i>
       </div>
 
       <table class="login-info"></table>
@@ -174,13 +173,13 @@
       </a>
 
       <div
+        id="user-logout"
         class="user-info-ele log-out"
-        style="border-top: 1px solid gray"
-        onclick="logOut()"
+               
       >
         <i
           class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
-          style="color: gray"
+          
         ></i>
         <div>Đăng xuất</div>
       </div>
@@ -194,7 +193,6 @@
 
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/index.js"></script>
-    <script src="./assets/js/productData.js"></script>
     <script type="module" src="./assets/js/Product.js"></script>
   </body>
 </html>
