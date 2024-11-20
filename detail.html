@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGU Click Store</title>
+    <title>SGU Click</title>
+    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/detail.css">
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">
 </head>
 <body>
  <!-- Slogan bar  -->
@@ -17,11 +19,16 @@
 <div class="header-container">
         
   <div class="user">
-      <img src="./assets/Image/Vector.png" alt="">
-      <div class="user-name">
-          <p class="xinchao">Xin chào</p>
-          <p class="name">Anh Tuấn</p>
-      </div>
+    <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
+      <i class="fa-solid fa-circle-user"></i>
+      <i
+        class="fa-solid fa-circle-chevron-down show-user-info"
+        style="right: -5px"
+      ></i>
+    </div>
+    <div class="user-name">
+      <p class="xinchao">Xin chào !</p>
+    </div>
   </div>
 
   <div class="links">
@@ -33,11 +40,11 @@
       
 
       
- 
+      
   </div>
   <div class="header-search">
     <img src="./assets/Image/search.png">
-    <img src="./assets/Image/cart.png" class="cart" onclick="window.location">
+    <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
     <input type="text"placeholder="Tìm kiếm">
   </div>
 </div>
@@ -82,8 +89,40 @@
       
   </div>
   
-</body>
-<script src="./assets/js/Details.js"></script>
-</html>
 
+    <!-- Model user info -->
+    <div class="model-user-info-container" style="z-index: 10;">
+      <div class="user-info-ele">
+        <i class="fa-solid fa-circle-user user-info-icon"></i>
+        <div onclick="showModel('login-info')">Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+      </div>
+
+      <table class="login-info"></table>
+
+      <a class="user-info-ele" href="don-hang.html">
+        <i class="fa-solid fa-rectangle-list user-info-icon"></i>
+        <div>Đơn hàng</div>
+      </a>
+
+      <div
+        class="user-info-ele log-out"
+        style="border-top: 1px solid gray"
+        onclick="logOut()"
+      
+        <i
+          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+          style="color: gray"
+        ></i>
+        <div>Đăng xuất</div>
+      </div>
+    </div>
+    <script
+    src="https://kit.fontawesome.com/793699135f.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="./assets/js/common.js"></script><script src="./assets/js/Details.js"></script>
+
+</body>
+</html>
 

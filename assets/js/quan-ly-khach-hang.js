@@ -217,12 +217,6 @@ function addCustomer(event) {
   }
   // --------------------------------------------------------------------------------- //
 
-  if (address === "") {
-    const addressAlertEle = document.getElementById("address-alert");
-    addressAlertEle.innerHTML = "Không được để trống địa chỉ khách hàng !";
-    isError = true;
-  }
-
   if (isError === true) {
     return;
   }
@@ -280,7 +274,7 @@ function viewDetails(e, customerID) {
       ? "./assets/Image/quan-ly-khach-hang/male-customer.png"
       : customerFound.gender === "Nữ"
       ? "./assets/Image/quan-ly-khach-hang/female-customer.jpg"
-      : "./assets/Image/quan-ly-khach-hang/other-customer.ipg";
+      : "./assets/Image/quan-ly-khach-hang/other-customer.jpg";
 
   // Display customer details
   const htmlCustomerDetails = `
@@ -405,7 +399,7 @@ function viewDetails(e, customerID) {
                 type="text"
                 name="email"
                 placeholder="Email"
-                value=${customerFound.email}
+                value="${customerFound.email}"
                 style="
                   margin-left: 40px;
                   padding: 3px;
@@ -479,7 +473,6 @@ function viewDetails(e, customerID) {
                 border: 1px solid #636262;
               "
             >${customerFound.address}</textarea>
-            <p id="address-alert-edit" class="alert"></p>
             </div>
           </div>
 
@@ -582,18 +575,12 @@ function editCustomer(event, customerID) {
     isError = true;
   }
 
-  if (!isValidEmail(email)) {
+  if (email!== "" && !isValidEmail(email)) {
     emailAlertEle.innerHTML = "Email không hợp lệ !";
     isError = true;
   }
 
   // --------------------------------------------------------------------------------- //
-
-  if (address === "") {
-    const addressAlertEle = document.getElementById("address-alert-edit");
-    addressAlertEle.innerHTML = "Không được để trống địa chỉ khách hàng !";
-    isError = true;
-  }
 
   if (isError === true) {
     return;
@@ -667,48 +654,4 @@ function filterCustomer(event) {
   });
 
   showCustomerData(foundCustomers);
-}
-
-// Show model
-function showModel(model) {
-  const modelEle = document.getElementsByClassName(model)[0];
-
-  if (modelEle.classList.contains("open")) {
-    modelEle.classList.remove("open");
-    document.removeEventListener("click", handleOutsideClick);
-  } else {
-    modelEle.classList.add("open");
-    setTimeout(() => {
-      document.addEventListener("click", handleOutsideClick);
-    }, 0); 
-  }
-
-  function handleOutsideClick(event) {
-    if (!modelEle.contains(event.target)) {
-      modelEle.classList.remove("open"); 
-      document.removeEventListener("click", handleOutsideClick); 
-    }
-  }
-
-  showUserInfoTable();
-} 
-// ---------------------------
-
-// Show user information table
-function showUserInfoTable() {
-  currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  const html = `
-  <tr>
-          <td class="label-info">Tên đăng nhập</td>
-          <td class="value-info">${currentUser.phone}</td>
-        </tr>
-        <tr>
-          <td class="label-info">Mật khẩu</td>
-          <td class="value-info">${currentUser.password}</td>
-        </tr>
-  `
-
-  const userInfoTableEle = document.getElementsByClassName("login-info")[0];
-  userInfoTableEle.innerHTML = html;
 }

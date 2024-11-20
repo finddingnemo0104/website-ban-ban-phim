@@ -1,4 +1,15 @@
-const products = JSON.parse(localStorage.getItem("products")) || [];
+function getProduct() {
+  if (
+    localStorage.getItem("products") === null ||
+    JSON.parse(localStorage.getItem("products")).length === 0
+  ) {
+    localStorage.setItem("products", JSON.stringify(listProduct));
+  }
+  return JSON.parse(localStorage.getItem("products"));
+}
+
+const products = getProduct();
+
 const productsPerPage = 6;
 let currentPage = 1;
 
@@ -11,11 +22,13 @@ function renderProducts(page) {
   const end = start + productsPerPage;
   const paginatedProducts = products.slice(start, end);
 
-  paginatedProducts.forEach(product => {
+  paginatedProducts.forEach(product => { 
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?ID=${product.ID}'">
+
+      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
+
       <p>${product.name}</p>
     `;
 
@@ -74,7 +87,7 @@ function renderProducts1(page,productList) {
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${product.ID}'">
+      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
       <p>${product.name}</p>
     `;
     productGrid.appendChild(productCard);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Keyboard Store</title>
+    <title>Tim kiem</title>
     <link rel="stylesheet" href="./assets/css/timkiem.css" />
   </head>
   <body>
@@ -12,7 +12,7 @@
         <h1>Chất phím, chất click!</h1>
       </div>
       <nav>
-        <ul>
+        <ul class="category-list">
           <li>
             <a href="#" class="filter-category" data-category="mechanical"
               >Bàn phím cơ</a
@@ -39,43 +39,52 @@
             >
           </li>
         </ul>
-        <input type="search" id="search-input" placeholder="Tìm kiếm" />
-        <button class="cart-icon">&#128722;</button>
+        <div class="search-container">
+          <input type="search" id="search-input" placeholder="Tìm kiếm" />
+          <button class="cart-icon">&#128722;</button>
+        </div>
       </nav>
     </header>
 
     <main>
-      <div class="filter">
-        <input
-          type="text"
-          id="product-name"
-          placeholder="Tìm theo tên sản phẩm"
-        />
-        <select id="category-dropdown">
-          <option value="">Tất cả thể loại</option>
-          <option value="gaming">Bàn phím gaming</option>
-          <option value="wireless">Bàn phím không dây</option>
-          <option value="symmetrical">Bàn phím đối xứng</option>
-          <option value="mini">Bàn phím mini</option>
-        </select>
-        <div class="price-range">
-          <label>Khoảng giá:</label>
-          <input type="text" id="min-price" placeholder="50 000" />
-          <span>-</span>
-          <input type="text" id="max-price" placeholder="1 000 000" />
+      <section class="filter">
+        <div class="filter-item">
+          <input
+            type="text"
+            id="product-name"
+            placeholder="Tìm theo tên sản phẩm"
+          />
         </div>
-      </div>
+        <div class="filter-item">
+          <select id="category-dropdown">
+            <option value="">Tất cả thể loại</option>
+            <option value="gaming">Bàn phím gaming</option>
+            <option value="wireless">Bàn phím không dây</option>
+            <option value="symmetrical">Bàn phím đối xứng</option>
+            <option value="mini">Bàn phím mini</option>
+          </select>
+        </div>
+        <div class="filter-item price-range">
+          <label for="min-price">Khoảng giá:</label>
+          <input type="number" id="min-price" placeholder="50,000" />
+          <span>-</span>
+          <input type="number" id="max-price" placeholder="1,000,000" />
+        </div>
+      </section>
 
-      <div class="product-grid" id="product-grid"></div>
+      <section class="product-grid" id="product-grid">
+        <!-- Product items will be dynamically inserted here -->
+      </section>
 
-      <div class="pagination">
+      <section class="pagination">
         <button class="prev-page" disabled>&lt; Trang trước</button>
         <div class="page-numbers">
-          <!-- Các số trang sẽ được tạo động ở đây -->
+          <!-- Pagination numbers will be dynamically generated here -->
         </div>
         <button class="next-page">Trang sau &gt;</button>
-      </div>
+      </section>
     </main>
-    <script src="./assets/js/search.js"></script>
+
+    <script src="./javascript/search.js"></script>
   </body>
 </html>

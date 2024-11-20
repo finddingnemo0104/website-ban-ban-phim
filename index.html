@@ -6,9 +6,8 @@
     <title>SGU Click</title>
     <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
     <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/detail.css" />
-    <link rel="stylesheet" href="./assets/css/trang-chu-user.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <!-- Header -->
@@ -38,33 +37,38 @@
       <p class="slogan" style="color: white">Chất phím, chất click !</p>
     </SloganBar>
 
-<div class="header-container">
-        
-  <div class="user">
-      <img src="./assets/Image/Vector.png" alt="">
-      <div class="user-name">
-          <p class="xinchao">Xin chào</p>
-          <p class="name">Anh Tuấn</p>
+    <div class="header-container">
+      <div class="user">
+        <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
+          <i class="fa-solid fa-circle-user"></i>
+          <i
+            class="fa-solid fa-circle-chevron-down show-user-info"
+            style="right: -5px"
+          ></i>
+        </div>
+        <div class="user-name">
+          <p class="xinchao">Xin chào !</p>
+        </div>
       </div>
-  </div>
 
-  <div class="links">
-      <a href="">Bàn phím <br/> cơ</a>
-      <a href="">Bàn phím gaming</a>
-      <a href="">Bàn phím không dây</a>
-      <a href="">Bàn phím đối xứng</a>
-      <a href="">Bàn phím mini</a>
-      
+      <div class="links">
+        <a href=""
+          >Bàn phím <br />
+          cơ</a
+        >
+        <a href="">Bàn phím gaming</a>
+        <a href="">Bàn phím không dây</a>
+        <a href="">Bàn phím đối xứng</a>
+        <a href="">Bàn phím mini</a>
+      </div>
+      <div class="header-search">
+        <img src="./assets/Image/search.png" />
+        <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
+        </a>
+        <input type="text" placeholder="Tìm kiếm" />
+      </div>
+    </div>
 
-      
-      
-  </div>
-  <div class="header-search">
-    <img src="./assets/Image/search.png">
-    <img src="./assets/Image/cart.png" class="cart" onclick="window.location">
-    <input type="text"placeholder="Tìm kiếm">
-  </div>
-</div>
 
     <!-- Banner Section -->
     <section class="imgheader">
@@ -80,12 +84,12 @@
         />
       </div>
       <select class="search-filter-brand" id="search-filter-brand">
-        <option value-info="">Loại bàn phim</option>
-        <option value-info="Bàn phím gaming">Bàn phím gaming</option>
-        <option value-info="Bàn phím cơ">Bàn phím cơ</option>
-        <option value-info="Bàn phím không dây">Bàn phím không dây</option>
-        <option value-info="Bàn phím đối xứng">Bàn phím đối xứng</option>
-        <option value-info="Bàn phím mini">Bàn phím mini</option>
+        <option value="">Loại bàn phim</option>
+        <option value="Bàn phím gaming">Bàn phím gaming</option>
+        <option value="Bàn phím cơ">Bàn phím cơ</option>
+        <option value="Bàn phím không dây">Bàn phím không dây</option>
+        <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
+        <option value="Bàn phím mini">Bàn phím mini</option>
       </select>
       <div class="search-filter-price">
         <p>Khoảng giá:</p>
@@ -101,57 +105,57 @@
     <!-- Product Grid Section -->
     <section class="product-grid" id="product-grid">
       <!-- <div class="product-card">
-    
-    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard" onclick="window.location ='./detail.html'" link>
-    
-    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-</div>
-<div class="product-card">
-    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-</div>
-<div class="product-card">
-    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-</div>
-<div class="product-card">
-    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-</div>
-<div class="product-card">
-    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-</div>
-<div class="product-card">
-    <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
-    <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
-</div> -->
+            
+            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard" onclick="window.location ='./detail.html'" link>
+            
+            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+        </div>
+        <div class="product-card">
+            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+        </div>
+        <div class="product-card">
+            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+        </div>
+        <div class="product-card">
+            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+        </div>
+        <div class="product-card">
+            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+        </div>
+        <div class="product-card">
+            <img src="./Image/logictech.webp" alt="Logitech G Pro X Mechanical Gaming Keyboard">
+            <p>Logitech G Pro X Mechanical Gaming Keyboard</p>
+        </div> -->
     </section>
 
     <ul class="pagination">
       <!-- <li class="pagination-item pagination-item--active">
-    <a href="" class="pagination-item-link" id="page-number1">1</a>
-</li>
+            <a href="" class="pagination-item-link" id="page-number1">1</a>
+        </li>
 
-<li class="pagination-item">
-    <a href="" class="pagination-item-link" id="page-number2">2</a>
-</li>
+        <li class="pagination-item">
+            <a href="" class="pagination-item-link" id="page-number2">2</a>
+        </li>
 
-<li class="pagination-item">
-    <a href="" class="pagination-item-link" id="page-number3">3</a>
-</li>
+        <li class="pagination-item">
+            <a href="" class="pagination-item-link" id="page-number3">3</a>
+        </li>
 
-<li class="pagination-item">
-    <a href="" class="pagination-item-link" id="page-number4">4</a>
-</li>
+        <li class="pagination-item">
+            <a href="" class="pagination-item-link" id="page-number4">4</a>
+        </li>
 
-<li class="pagination-item">
-    <a href="" class="pagination-item-link" id="page-number...">...</a>
-</li>
+        <li class="pagination-item">
+            <a href="" class="pagination-item-link" id="page-number...">...</a>
+        </li>
 
-<li class="pagination-item">
-    <a href="" class="pagination-item-link" id="page-number14">14</a>
-</li> -->
+        <li class="pagination-item">
+            <a href="" class="pagination-item-link" id="page-number14">14</a>
+        </li> -->
     </ul>
 
     <!-- Model user info -->
@@ -162,26 +166,24 @@
         <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
       </div>
 
-      <table class="login-info">
-       
-      </table>
+      <table class="login-info"></table>
 
       <a class="user-info-ele" href="don-hang.html">
         <i class="fa-solid fa-rectangle-list user-info-icon"></i>
         <div>Đơn hàng</div>
       </a>
 
-      <a
+      <div
         class="user-info-ele log-out"
         style="border-top: 1px solid gray"
-        href="dangnhap.html"
+        onclick="logOut()"
       >
         <i
           class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
           style="color: gray"
         ></i>
         <div>Đăng xuất</div>
-      </a>
+      </div>
     </div>
 
     <footer class="footer"></footer>
@@ -189,8 +191,10 @@
       src="https://kit.fontawesome.com/793699135f.js"
       crossorigin="anonymous"
     ></script>
+
+    <script src="./assets/js/common.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/productData.js"></script>
     <script type="module" src="./assets/js/Product.js"></script>
-    <script type="module" src="./assets/js/productData.js"></script>
   </body>
 </html>

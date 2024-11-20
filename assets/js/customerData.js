@@ -35,7 +35,7 @@ listCustomer.push(
     "admin@example.com",
     "0",
     new Date("1990-02-15"),
-    "123 Lê Lợi, Quận 1, Thành phố Hồ Chí Minh",
+    "",
     true,
     "admin",
     listRole.admin
@@ -50,9 +50,9 @@ listCustomer.push(
     "nguyenminhtuan@example.com",
     "0912345678",
     new Date("1990-02-15"),
-    "123 Lê Lợi, Quận 1, Thành phố Hồ Chí Minh",
-    true,
     "",
+    true,
+    "123",
     listRole.customer
   )
 );
@@ -191,3 +191,4 @@ listCustomer.push(
     listRole.customer
   )
 );
+

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
     <link rel="stylesheet" href="./assets/css/quan-ly-khach-hang.css" />
   </head>
-  <body class="open-model">
+  <body class="open-model" style="overflow: hidden;">
     <!-- Slogan bar -->
     <SloganBar class="slogan-bar">
       <a href="quan-ly-san-pham.html"
@@ -403,10 +403,10 @@
         
       </table>
 
-      <a class="user-info-ele log-out" style="border-top: 1px solid gray;" href="dangnhap.html">
+      <div class="user-info-ele log-out" style="border-top: 1px solid gray;" onclick="logOut()">
         <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
         <div>Đăng xuất</div>
-      </a>
+      </div>
      </div>
 
     <script
@@ -414,6 +414,7 @@
       crossorigin="anonymous"
     ></script>
 
+    <script src="./assets/js/common.js"></script>
     <script src="./assets/js/productData.js"></script>
     <script src="./assets/js/quan-ly-san-pham.js"></script>
   </body>
