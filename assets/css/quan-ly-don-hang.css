@@ -1,293 +1,224 @@
-/* Tổng quan CSS cho trang */
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
 body {
-    /* font-family: Arial, sans-serif; */
-    margin: 0;
-    padding: 0;
-    background-color: #f4f6f9;
-    color: #333;
+  margin: 0px;
+  padding: 0px;
 }
 
-/* Container cho admin */
-.admin-container {
-    /* max-width: 1200px; */
-    margin: 40px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+.slogan-bar {
+  background-color: #21568a;
+  height: 30px;
+  display: flex;
 }
 
-/* Header Section */
-header {
-    text-align: center;
+.slogan {
+  width: 100%;
+  text-align: center;
+  margin: 6px;
+}
+
+.logo {
+  position: absolute;
+  height: 30px;
+}
+
+.hi-admin {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  padding: 10px 10px;
+  border-bottom: 1px solid #b4cae1;
+  background-color: white;
+}
+
+.navbar-admin {
+  width: 20%;
+  background-color: white;
+}
+
+/* Management options */
+.management-option-button {
+  font-family: "Times New Roman", Times, serif;
+  border: 0px;
+  background-color: transparent;
+  font-weight: 900;
+  font-size: 20px;
+  color: #21568a;
+  cursor: pointer;
+  height: 100px;
+  width: 100%;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.management-option-button:hover, .management-option-button.active {
+  color: white;
+  background-color: #558dc4;
+}
+/* ------------------- */
+
+.bg-color {
+  background-color: #eaf1fb;
+}
+
+.button-style {
+  color: white;
+  background-color: #21568a;
+  padding: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+}
+
+.title-page {
+  font-size: 30px;
+  color: #21568a;
+  font-weight: 900;
+  padding-left: 30px;
+  margin: 15px;
+}
+
+/* Search options style */
+.search-options-style {
+  background-color: white;
+  height: 70px;
+  margin: 0px 50px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Base Styles */
+.search-option {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #ffffff;
+    padding: 15px;
     margin-bottom: 20px;
 }
 
-header h1 {
-    font-size: 24px;
-    color: #2c3e50;
-}
-
-header p {
-    color: #7f8c8d;
-}
-
-/* Admin Info Section */
-.admin-info {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #ecf0f1;
-    border-radius: 5px;
-}
-
-.admin-info h2 {
-    margin-top: 0;
-    font-size: 20px;
-    color: #34495e;
-}
-
-.admin-info p {
-    margin: 5px 0;
-}
-
-/* Navigation cho admin */
-.admin-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.admin-nav ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-.admin-nav ul li a {
-    color: #2980b9;
-    text-decoration: none;
-}
-
-.admin-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Order Management Section */
-#order-management h2 {
-    color: #34495e;
-    font-size: 22px;
-    border-bottom: 2px solid #2980b9;
-    padding-bottom: 5px;
-}
-
-/* Bảng quản lý đơn hàng */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-table thead {
-    background-color: #2980b9;
-    color: #fff;
-    font-weight: bold;
-    text-align: left;
-}
-
-table th, table td {
-    padding: 15px;
-    text-align: left;
-}
-
-table tr:nth-child(even) {
-    background-color: #f4f6f9;
-}
-
-table tr:hover {
-    background-color: #eaf1f8;
-}
-
-table select {
-    padding: 5px;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-}
-
-table button {
+/* Input and Select Styles */
+.search-option input,
+.search-option select {
+    flex: 1 1 auto;
     padding: 8px 12px;
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
     font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    min-width: 140px;
 }
 
-table button:hover {
-    background-color: #c0392b;
-}
-
-
-/* Order Management Section */
-#order-management h2,
-#order-details h2 {
-    font-size: 22px;
-    color: #333;
-    padding: 15px 20px;
-    background-color: #f7f9fc;
-    border-bottom: 1px solid #ddd;
-}
-
-.order-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.order-table th, .order-table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-.order-table thead {
-    background-color: #1d72b8;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.order-table tbody tr:nth-child(even) {
-    background-color: #f4f6f9;
-}
-
-.order-table tbody tr:hover {
-    background-color: #eef3f9;
-}
-
-.order-table select {
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
-/* Bảng chi tiết sản phẩm */
-.detail-table, .history-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.detail-table th, .detail-table td, .history-table th, .history-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-.detail-table thead, .history-table thead {
-    background-color: #1d72b8;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.detail-table tbody tr:nth-child(even), .history-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-#order-total {
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-/* Trạng thái đơn hàng */
-.order-table .status {
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
+.search-option input[type="date"] {
     text-align: center;
+    font-size: 14px;
 }
 
-.status.chua-xu-ly {
-    background-color: #f9c74f;
-    color: #333;
+/* Labels (e.g., "Từ ngày") */
+.search-option span {
+    font-size: 14px;
+    color: #374151;
 }
 
-.status.da-xac-nhan {
-    background-color: #43aa8b;
-    color: #fff;
-}
-
-.status.da-giao-thanh-cong {
-    background-color: #4CAF50;
-    color: #fff;
-}
-
-.status.da-huy {
-    background-color: #f94144;
-    color: #fff;
-}
-
-/* Nút hành động */
-button:not(.management-option-button) {
-    padding: 8px 15px;
-    border: none;
+.button-style {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
     border-radius: 4px;
+    border: none;
+    font-size: 14px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-    background-color: #4CAF50;
-    color: #ffffff;
-    margin: 2px;
+    outline: none;
 }
 
-button.view-btn {
-    background-color: #1d72b8;
+.filter-btn {
+    background-color: #15803d;
+    color: white;
+    font-weight: bold;
 }
 
-button.view-btn:hover {
-    background-color: #155a8a;
+.filter-btn:hover {
+    background-color: #166534;
 }
 
-button.edit-btn {
-    background-color: #ffc107;
+.refresh-btn {
+    background-color: #d1d5db;
+    color: black;
+    font-weight: bold;
 }
 
-button.edit-btn:hover {
-    background-color: #e0a800;
+.refresh-btn:hover {
+    background-color: #d1d5db;
 }
 
-button.delete-btn {
-    background-color: #dc3545;
+/* Table product container */
+.table-product-container {
+  background-color: white;
+  margin: 0px 50px;
+  border-radius: 15px;
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
-button.delete-btn:hover {
-    background-color: #c82333;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
 }
 
-button.close-btn {
-    background-color: #6c757d;
-    color: #fff;
-    padding: 8px 15px;
-    margin-top: 10px;
+td,
+th {
+  border: none;
+  text-align: center;
+  padding: 8px;
 }
 
-button.close-btn:hover {
-    background-color: #5a6268;
+/* Status column specific styles */
+.status-delivered, .status-canceled, .status-pending {
+  display: inline-block;
+  padding: 5px 15px;
+  text-align: center;
+  border-radius: 15px;
+  font-weight: bold;
+  width: auto;
+  margin: 5px 0;
+
+  border: 2px solid transparent;
 }
 
-/* Bố cục các phần tử trong chi tiết đơn hàng */
-#order-details p {
-    font-size: 14px;
-    margin: 5px 0;
+.status-delivered {
+  color: green;
+  border-color: #0c0;
 }
 
-#order-details h3 {
-    font-size: 18px;
-    margin-top: 20px;
-    color: #333;
+.status-canceled {
+  color: red; 
+  border-color: red; 
 }
 
+.status-pending {
+  color: #FFCC00;
+  border-color: #FFCC00;
+}
+
+tr td:nth-child(2) {
+  text-align: left;
+}
+
+/* Hover effect for rows */
+tr:not(:first-child):hover {
+  background-color: #e8e8eb;
+}
+
+.view-details {
+  color: #21568a;
+  cursor: pointer;
+  padding-right: 15px;
+}
