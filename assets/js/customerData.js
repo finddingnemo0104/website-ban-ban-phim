@@ -208,13 +208,10 @@ listCustomer.push(
   )
 );
 
-// Check if customer data is not already stored in localStorage
+
 if (!localStorage.getItem("customers")) {
-  // Serialize the listCustomer array to a JSON string
   const serializedCustomers = JSON.stringify(listCustomer);
-  // Store the serialized data in localStorage under the key "customerData"
   localStorage.setItem("customers", serializedCustomers);
-  console.log("Customer data initialized in localStorage.");
 } else {
   console.log("Customer data already exists in localStorage.");
 }
