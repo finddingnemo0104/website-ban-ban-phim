@@ -7,23 +7,22 @@
     <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/detail.css">
-    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">    
 </head>
 <body>
  <!-- Slogan bar  -->
       <SloganBar class="slogan-bar">
         <a href="index.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
-        <p class="slogan" style="color: white">Chất phím, chất click !</p>
+        <p class="slogan">Chất phím, chất click !</p>
       </SloganBar>
 
 <div class="header-container">
         
   <div class="user">
-    <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
+    <div id="user-info-container" class="user-info-container">
       <i class="fa-solid fa-circle-user"></i>
       <i
         class="fa-solid fa-circle-chevron-down show-user-info"
-        style="right: -5px"
       ></i>
     </div>
     <div class="user-name">
@@ -89,12 +88,13 @@
       
   </div>
   
+
     <!-- Model user info -->
-    <div class="model-user-info-container" style="z-index: 10;">
+    <div class="model-user-info-container">
       <div class="user-info-ele">
         <i class="fa-solid fa-circle-user user-info-icon"></i>
-        <div onclick="showModel('login-info')">Thông tin tài khoản</div>
-        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+        <div id="user-info">Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down"></i>
       </div>
 
       <table class="login-info"></table>
@@ -105,13 +105,12 @@
       </a>
 
       <div
-        class="user-info-ele log-out"
-        style="border-top: 1px solid gray"
-        onclick="logOut()"
-      >
+        id="user-logout"
+        class="user-info-ele log-out">
+
         <i
-          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
-          style="color: gray"
+          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon logout"
+          
         ></i>
         <div>Đăng xuất</div>
       </div>
@@ -120,7 +119,9 @@
     src="https://kit.fontawesome.com/793699135f.js"
     crossorigin="anonymous"
   ></script>
-  <script src="./assets/js/common.js"></script><script src="./assets/js/Details.js"></script>
+  <script src="./assets/js/common.js"></script>
+  <script src="./assets/js/Details.js"></script>
 
 </body>
 </html>
+

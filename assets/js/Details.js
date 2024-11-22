@@ -11,6 +11,7 @@ function getProduct() {
 
 const data = getProduct(); // Retrieve data from local storage
 
+
 function getProductIdFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   return decodeURIComponent(urlParams.get("id"));
@@ -29,6 +30,7 @@ function displayProductDetails(product) {
     const productImage = document.getElementById("product-image");
     const productDetail = document.getElementById("product-detail");
 
+
     productTitle.textContent = product.name;
     productPrice.textContent = product.price.toLocaleString("vi-VN", {
       style: "currency",
@@ -43,11 +45,14 @@ function displayProductDetails(product) {
   }
 }
 
+
 // Main function to display product based on ID from URL
 function displayProduct() {
   const productId = getProductIdFromURL();
   const product = findProductById(productId);
+
   displayProductDetails(product);
+
 }
 
 // Trigger product display when the document is loaded
