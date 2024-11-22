@@ -1,5 +1,5 @@
 <html lang="en">
-<link rel="stylesheet" href="/assets/css/giohang.css">
+<link rel="stylesheet" href="./assets/css/giohang.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -95,22 +95,18 @@
                         <span>Phí giao hàng</span>
                         <span>0đ</span>
                     </div>
-                    <div class="summary-row">
-                        <span>Thuế</span>
-                        <span>0đ</span>
-                    </div>
                 </div>
                 <div class="discount">
                     <label for="discount-code">Mã giảm giá</label>
                     <div class="discount-code">
                         <input type="text" id="discount-code" class="code-input">
-                        <button class="apply-btn" >Xác nhận</button>
+                        <button class="apply-btn" onclick="dis()">Xác nhận</button>
                     </div>
                 </div>
                 <div class="total">
                     <div class="summary-row">
-                        <span>Giảm giá</span>
-                        <span>0đ</span>
+                        <span id="giam_gia">Giảm giá</span>
+                        <span id="tien_giam_gia">0đ</span>
                     </div>
                     <div class="summary-row total-row" >
                         <span>Tổng cộng</span>
@@ -162,13 +158,11 @@
           <div>Đăng xuất</div>
         </div>
       </div>
-
     <script
       src="https://kit.fontawesome.com/793699135f.js"
       crossorigin="anonymous"
     ></script>
     <script src="./assets/js/common.js"></script>
-
 </body>
 <script src="./assets/js/cart.js"></script>
-
+<script src="add.js"></script>

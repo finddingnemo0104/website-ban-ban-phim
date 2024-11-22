@@ -34,15 +34,16 @@
       <a href="index.html"
         ><img class="logo" src="./assets/Image/logo.png" alt="logo"
       /></a>
-      <p class="slogan">Chất phím, chất click !</p>
+      <p class="slogan" style="color: white">Chất phím, chất click !</p>
     </SloganBar>
 
     <div class="header-container">
       <div class="user">
-        <div id="user-info-container" class="user-info-container">
+        <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
           <i class="fa-solid fa-circle-user"></i>
           <i
-            class="fa-solid fa-circle-chevron-down show-user-info"            
+            class="fa-solid fa-circle-chevron-down show-user-info"
+            style="right: -5px"
           ></i>
         </div>
         <div class="user-name">
@@ -51,27 +52,30 @@
       </div>
 
       <div class="links">
-        <a href="#" data-category="Bàn phím cơ">Bàn phím <br/>cơ</a>
-        <a href="#" data-category="Bàn phím gaming">Bàn phím gaming</a>
-        <a href="#" data-category="Bàn phím không dây">Bàn phím không dây</a>
-        <a href="#" data-category="Bàn phím đối xứng">Bàn phím đối xứng</a>
-        <a href="#" data-category="Bàn phím mini">Bàn phím mini</a>
+        <a href=""
+          >Bàn phím <br />
+          cơ</a
+        >
+        <a href="">Bàn phím gaming</a>
+        <a href="">Bàn phím không dây</a>
+        <a href="">Bàn phím đối xứng</a>
+        <a href="">Bàn phím mini</a>
       </div>
       <div class="header-search">
         <img src="./assets/Image/search.png" />
+        <span id = "cart-count" class="cart-count"></span>
         <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
         </a>
         <input type="text" placeholder="Tìm kiếm" />
       </div>
     </div>
 
-
     <!-- Banner Section -->
     <section class="imgheader">
       <!-- <img src="./assets/Image/header nền.png" alt=""> -->
     </section>
     <div class="search-container">
-      <div class="search-bar">
+      <div class="search-bar" onsubmit="searchItems(event)">
         <button id="searchBTN">🔍</button>
         <input
           id="searchText"
@@ -93,7 +97,6 @@
         <input id="filter-price-max" min="0" type="number" />
       </div>
     </div>
-
     <section class="banner">
       <h2>Khám phá các sản phẩm độc đáo của SGU Click</h2>
     </section>
@@ -158,8 +161,8 @@
     <div class="model-user-info-container">
       <div class="user-info-ele">
         <i class="fa-solid fa-circle-user user-info-icon"></i>
-        <div id="user-info">Thông tin tài khoản</div>
-        <i class="fa-solid fa-angle-down" ></i>
+        <div onclick="showModel('login-info')">Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
       </div>
 
       <table class="login-info"></table>
@@ -170,13 +173,13 @@
       </a>
 
       <div
-        id="user-logout"
         class="user-info-ele log-out"
-               
+        style="border-top: 1px solid gray"
+        onclick="logOut()"
       >
         <i
           class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
-          
+          style="color: gray"
         ></i>
         <div>Đăng xuất</div>
       </div>
@@ -190,6 +193,8 @@
 
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/productData.js"></script>
     <script type="module" src="./assets/js/Product.js"></script>
   </body>
 </html>
+<script src="./assets/js/add.js"></script>

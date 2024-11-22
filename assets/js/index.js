@@ -62,7 +62,7 @@ function viewDetails(e, productID) {
             <button class="button-style" id="edit-product" style="margin-top: 10px">
             <i
               class="fa-solid fa-pen-to-square"
-              style="font-size: 13px; padding-top: 1px"
+              style="font-size: 13px; padding-top: 1px"<button class="add-to-cart">Thêm vào giỏ hàng</button>
             ></i>
             <div style="padding-left: 10px; font-size: 15px">Sửa sản phẩm</div>
           </button>
