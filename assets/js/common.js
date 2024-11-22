@@ -105,11 +105,11 @@ function showAdminInfoTable() {
 
 isValidLogin();
 
-const logout =document.getElementById("user-logout")
-logout.onclick=()=>{logOut()}
+// const logout =document.getElementById("user-logout")
+// logout.onclick=()=>{logOut()}
 
-const userInfo =document.getElementById("user-info")
-userInfo.onclick=()=>{showModel('login-info')}
+// const userInfo =document.getElementById("user-info")
+// userInfo.onclick=()=>{showModel('login-info')}
 
-const userInfoContainer =document.getElementById("user-info-container")
-userInfoContainer.onclick=()=>{showModel('model-user-info-container')}
+// const userInfoContainer =document.getElementById("user-info-container")
+// userInfoContainer.onclick=()=>{showModel('model-user-info-container')}

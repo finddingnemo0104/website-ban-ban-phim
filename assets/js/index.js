@@ -1,4 +1,4 @@
-const products = JSON.parse(localStorage.getItem("products")) || [];
+const products = getProduct();
 function getProduct() {
   if (
     localStorage.getItem("products") === null ||
@@ -62,7 +62,7 @@ function viewDetails(e, productID) {
             <button class="button-style" id="edit-product" style="margin-top: 10px">
             <i
               class="fa-solid fa-pen-to-square"
-              style="font-size: 13px; padding-top: 1px"<button class="add-to-cart">Thêm vào giỏ hàng</button>
+              style="font-size: 13px; padding-top: 1px"
             ></i>
             <div style="padding-left: 10px; font-size: 15px">Sửa sản phẩm</div>
           </button>
