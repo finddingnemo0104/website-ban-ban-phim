@@ -212,7 +212,8 @@ builder-component {
   }
 
   .add-to-cart:hover{
-    background-color: #777;
+    color:white;
+    background-color:#C50003;
   }
 
   @media (max-width: 991px) {
@@ -387,9 +388,11 @@ height: 30px;
   left:250px;
 }
 
+
 .cart:hover {
   cursor: pointer;
 }
+
 
 .header-search img{
   width: 18px;

@@ -1,4 +1,4 @@
-const products = JSON.parse(localStorage.getItem("products")) || [];
+const products = getProduct();
 function getProduct() {
   if (
     localStorage.getItem("products") === null ||

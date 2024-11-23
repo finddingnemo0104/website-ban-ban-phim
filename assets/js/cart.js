@@ -155,10 +155,16 @@ listProduct.push(
     "/assets/Image/quan-ly-san-pham/corsair-K70-RGB-MK.2.jpg"
   )
 );
-
-
-
-let savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+let user = JSON.parse(localStorage.getItem("currentUser")) || [];
+let IdUser = user.ID;
+const discountCodes = ["SGU1", "SGU2", "SGU3", "SGU4", "SGU5"];
+function saveDiscountCodes(codes) {
+  if (typeof(Storage) !== "undefined") {
+      localStorage.setItem("discountCodes", JSON.stringify(codes));
+  }
+}
+saveDiscountCodes(discountCodes);
+let savedCart = JSON.parse(localStorage.getItem("cart"+IdUser)) || [];
 
 // Hiển thị sản phẩm trong giỏ hàng
 savedCart.forEach(product => {
@@ -167,71 +173,117 @@ savedCart.forEach(product => {
 
 // Thêm sản phẩm vào giỏ hàng
 function addProductToCart(product) {
-    const newProductElement = document.createElement("div");
-    newProductElement.classList.add("cart-item");
-    newProductElement.setAttribute("data-id", product.ID);
+  const newProductElement = document.createElement("div");
+  newProductElement.classList.add("cart-item");
+  newProductElement.setAttribute("data-id", product.ID);
 
-    newProductElement.innerHTML = `
-        <img src="${product.image}" 
-             alt="Sản phẩm mới" class="item-image">
-        <div class="item-details">
-            <h2>${product.name}</h2>
-            <p>${product.category}</p>
-            <p>Đơn giá: ${product.price}đ</p>
-        </div>
-        <div class="quantity-control">
-            <button class="qty-btn" onclick="decreaseQuantity('${product.ID}')">-</button>
-            <div class="cart-quantity">
-                <input type="number" class="SL" step="1" min="1" value="${product.quantity}" readonly>
-            </div>
-            <button class="qty-btn" onclick="increaseQuantity('${product.ID}')">+</button>
-        </div>
-        <p class="item-price">${product.price * product.quantity}đ</p>
-        <button class="delete-btn" onclick="openDeleteModal('${product.ID}')">
-            <i class="fas fa-trash-alt"></i>
-        </button>
-    `;
+  newProductElement.innerHTML = `
+      <img src="${product.image}" alt="Sản phẩm mới" class="item-image">
+      <div class="item-details">
+          <h2>${product.name}</h2>
+          <p>${product.category}</p>
+          <p>Đơn giá: ${product.price}VNĐ</p>
+      </div>
+      <div class="quantity-control">
+          <button class="qty-btn" onclick="decreaseQuantity('${product.ID}')">-</button>
+          <div class="cart-quantity">
+              <input type="number" class="SL" step="1" min="1" value="${product.quantity}" 
+                  onchange="updateQuantity('${product.ID}', this.value)">
+          </div>
+          <button class="qty-btn" onclick="increaseQuantity('${product.ID}')">+</button>
+      </div>
+      <p class="item-price" id="price-${product.ID}">${product.price * product.quantity}VNĐ</p>
+      <button class="delete-btn" onclick="openDeleteModal('${product.ID}')">
+          <i class="fas fa-trash-alt"></i>
+      </button>
+  `;
 
-    document.querySelector(".cart-items").appendChild(newProductElement);
+  document.querySelector(".cart-items").appendChild(newProductElement);
 }
+
+// Cập nhật số lượng khi người dùng nhập từ bàn phím
+function updateQuantity(productID, quantity) {
+  const product = savedCart.find(p => p.ID === productID);
+  if (product) {
+      const products = JSON.parse(localStorage.getItem('products')) || [];
+
+      const stockProduct = products.find(p => p.ID === productID);
+
+      if (stockProduct) {
+          const updatedQuantity = Math.max(1, parseInt(quantity));
+
+          // Kiểm tra nếu số lượng nhập vào vượt quá số lượng trong kho
+          if (updatedQuantity > stockProduct.quantity) {
+              alert("Số lượng nhập vào vượt quá số lượng sản phẩm có sẵn trong kho! Sản phẩm chỉ còn " + stockProduct.quantity);
+              
+              product.quantity = stockProduct.quantity;
+
+              localStorage.setItem("cart" + IdUser, JSON.stringify(savedCart));
+
+              updateCartDisplay();
+              return;
+          }
+
+          product.quantity = updatedQuantity;
+
+          localStorage.setItem("cart" + IdUser, JSON.stringify(savedCart));
+
+          updateCartDisplay();
+      } else {
+          alert("Sản phẩm không tồn tại trong kho!");
+      }
+  }
+}
+
+
 
 // Tăng số lượng sản phẩm trong giỏ hàng
 function increaseQuantity(productID) {
-    const product = savedCart.find(p => p.ID === productID);
-    if (product) {
-        product.quantity += 1;
-        localStorage.setItem("cart", JSON.stringify(savedCart));
-        updateCartDisplay();
-    }
+  const product = savedCart.find(p => p.ID === productID);
+  if (product) {
+      const products = JSON.parse(localStorage.getItem('products')) || [];
+      const stockProduct = products.find(p => p.ID === productID);
+      if (stockProduct) {
+          if (product.quantity < stockProduct.quantity) {
+              product.quantity += 1;
+              localStorage.setItem("cart" + IdUser, JSON.stringify(savedCart));
+              updateCartDisplay();
+          } else {
+              alert("Không đủ số lượng sản phẩm trong kho!");
+          }
+      } else {
+          alert("Sản phẩm không tồn tại trong kho!");
+      }
+  }
 }
+
+
 
 // Giảm số lượng sản phẩm trong giỏ hàng
 function decreaseQuantity(productID) {
-    const product = savedCart.find(p => p.ID === productID);
-    if (product && product.quantity > 1) {
-        product.quantity -= 1;
-        localStorage.setItem("cart", JSON.stringify(savedCart));
-        updateCartDisplay();
-    }
-    updateTotal();
+  const product = savedCart.find(p => p.ID === productID);
+  if (product && product.quantity > 1) {
+      product.quantity -= 1;
+      localStorage.setItem("cart" + IdUser, JSON.stringify(savedCart));
+      updateCartDisplay();
+  }
 }
 
 // Cập nhật hiển thị giỏ hàng
 function updateCartDisplay() {
-    document.querySelector(".cart-items").innerHTML = '';
-
-    savedCart.forEach(product => {
-        addProductToCart(product);
-    });
-
-    checkEmptyCart();
-    updateTotal();
+  document.querySelector(".cart-items").innerHTML = '';
+  savedCart.forEach(product => {
+      addProductToCart(product);
+  });
+  checkEmptyCart();
+  updateTotal();
 }
+
 
 // Xóa sản phẩm khỏi giỏ hàng
 function removeProductFromCart(productID) {
     savedCart = savedCart.filter(product => product.ID !== productID);
-    localStorage.setItem("cart", JSON.stringify(savedCart));
+    localStorage.setItem("cart"+IdUser, JSON.stringify(savedCart));
     updateCartDisplay();
 }
 
@@ -269,27 +321,50 @@ function continueShopping() {
   window.location.href = "index.html";
 }
 function updateTotal() {
-  let Tong = JSON.parse(localStorage.getItem("cart")) || [];
+  let Tong = JSON.parse(localStorage.getItem("cart"+IdUser)) || [];
   let count = 0;
   let sum = 0;
   Tong.forEach(product => {
       sum += product.price * product.quantity;
       count += product.quantity;
   });
-
   // Hàm định dạng giá tiền với dấu phân cách nghìn và thêm 'đ'
   let formattedSum = formatCurrency(sum);
-  let sumQuantity ="Tổng cộng " + count + " đơn hàng";
+  let sumQuantity ="Tổng cộng " + count + " sản phẩm";
   document.getElementById("sumprice").innerHTML = formattedSum; 
   // Hiển thị số lượng và tổng giá tiền
   document.getElementById("tongcong").innerHTML = sumQuantity;
   document.getElementById("total").innerHTML = formattedSum;
-  localStorage.setItem("total", formattedSum);
+  localStorage.setItem("total", sum);
 }
+function dis() {
+  let discountCodes = JSON.parse(localStorage.getItem("discountCodes")) || []; 
+  const disCount = document.getElementById("discount-code").value;
 
+  if (discountCodes.includes(disCount)) {
+    document.getElementById("giam_gia").innerHTML = "Giảm giá 10%";
+    let sum = JSON.parse(localStorage.getItem("total"));
+    let discountPrice = sum * 0.1;
+    let giamgia = formatCurrency(discountPrice);
+    let sumPrice = formatCurrency(sum - discountPrice);
+    document.getElementById("tien_giam_gia").innerHTML = giamgia;
+    document.getElementById("total").innerHTML = sumPrice;
+    localStorage.setItem("total",sum);
+    localStorage.setItem("discnt", 1);
+    const updatedCodes = discountCodes.filter(code => code !== disCount);
+    localStorage.setItem("discountCodes", JSON.stringify(updatedCodes));
+  } else {
+    localStorage.setItem("discnt", 0);
+    document.getElementById("giam_gia").innerHTML = "Mã giảm giá không hợp lệ hoặc đã được sử";
+    document.getElementById("tien_giam_gia").innerHTML = "0";
+    document.getElementById("total").innerHTML = formatCurrency(
+      JSON.parse(localStorage.getItem("total"))
+    );
+  }
+}
 // Hàm định dạng giá tiền với dấu phân cách nghìn
 function formatCurrency(amount) {
-  return amount.toLocaleString('vi-VN') + ' đ'; 
+  return amount.toLocaleString('vi-VN') + ' VNĐ'; 
 }
 let productToDeleteID = null;
 
@@ -300,13 +375,14 @@ function openDeleteModal(productID) {
 
 function closeModal() {  
     document.getElementById("deleteModal").style.display = "none"; 
-function confirmDelete() {
-    if (productToDeleteID) {
-        // Xóa sản phẩm khỏi giỏ hàng
-        removeProductFromCart(productToDeleteID);
-        closeModal(); // Đóng modal sau khi xác nhận
-    }
 }
+function confirmDelete() {
+  if (productToDeleteID) {
+      removeProductFromCart(productToDeleteID);
+      productToDeleteID = null;
+      closeModal(); 
+  }
 }
 checkEmptyCart();
+
 

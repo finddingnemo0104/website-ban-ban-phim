@@ -1,3 +1,4 @@
+const products = getProduct();
 function getProduct() {
   if (
     localStorage.getItem("products") === null ||
@@ -7,8 +8,6 @@ function getProduct() {
   }
   return JSON.parse(localStorage.getItem("products"));
 }
-
-const products = getProduct();
 
 const productsPerPage = 6;
 let currentPage = 1;
@@ -26,9 +25,14 @@ function renderProducts(page) {
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
-      <p>${product.name}</p>
-    `;
+    <div class="wrap-img-cart">
+  <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
+    </div>
+  <p>${product.name}</p>
+  <span class="price">${Number(product.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</span>
+  <button class="add-to-cart-BTN"> Thêm vào giỏ hàng </button>
+`;
+
     productGrid.appendChild(productCard);
   });
 }
@@ -84,9 +88,13 @@ function renderProducts1(page,productList) {
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
-      <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
-      <p>${product.name}</p>
-    `;
+    <div class="wrap-img-cart">
+  <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
+    </div>
+  <p>${product.name}</p>
+  <span class="price">${Number(product.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</span> 
+  <button class="add-to-cart-BTN"> Thêm vào giỏ hàng </button>
+`;
     productGrid.appendChild(productCard);
   });
 }
@@ -109,7 +117,7 @@ function productSearch(text){
 // }
 
  let minInputPrice, maxInputPrice
- if(minPrice.value=="" || maxPrice.value==""){
+ if(minPrice.value=="" && maxPrice.value==""){
   minInputPrice=0
   maxInputPrice=Number.MAX_SAFE_INTEGER
  } else { 
@@ -132,5 +140,19 @@ searchBTN.onclick = ()=>{
   createPagination(productSearch(searchText.value))
 }
 
+
+function filterByCategory(category) {
+  const filteredProducts = products.filter(product => product.category === category);
+  renderProducts1(1, filteredProducts);
+  createPagination(filteredProducts);
+}
+
+document.querySelectorAll(".links a").forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault();
+    const category = event.target.dataset.category;
+    filterByCategory(category);
+  });
+});
 
 

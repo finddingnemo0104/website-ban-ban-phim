@@ -70,19 +70,17 @@
       </div>
 
     <!-- Order Summary -->
-    <section class="order-summary">
-        <h2>Tóm Tắt Đơn Hàng</h2>
-        <div class="order-details">
-            
-        </div>
-        <div class="order-items">
-          
-        </div>
-        <div class="order-total">
-          
-        </div>
-        <button onclick="window.location.href='index.html';" class="return">Quay lại trang chủ</button>
-    </section>
+    <div class="order-summary">
+      <div id="name"></div><br>
+      <div id="sdt"></div><br>
+      <div id="adr"></div><br>
+      <div id="time"></div><br>
+      <div class="order-items"></div><br>
+      <strong><div id="giam_gia" class="giam_gia"></div></strong><br>
+      <div class="order-total"><br>
+          <p id="totalPrice"></p>
+      </div>
+  </div>
     
         <!-- Model user info -->
         <div class="model-user-info-container">
@@ -111,7 +109,9 @@
               <div>Đăng xuất</div>
             </div>
           </div>
-
+          <ul style="text-align: center;" id="sldonhang">
+          </ul>
+        
 </body>
 <script
 src="https://kit.fontawesome.com/793699135f.js"

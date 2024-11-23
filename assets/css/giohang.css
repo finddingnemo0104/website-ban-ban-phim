@@ -87,8 +87,10 @@ body {
 }
 
 .item-image {
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 100px;
+    margin-right: 50px;
+    margin-left: -50px;
 }
 
 .item-details {
@@ -104,6 +106,7 @@ body {
 .quantity-control {
     display: flex;
     align-items: center;
+    margin: 0px 0px 0px 40px;
 }
 
 .qty-btn {
@@ -116,6 +119,8 @@ body {
 
 .item-price {
     font-weight: bold;
+    margin-left: 50px;
+    margin-right: 10px;
 }
 
 .delete-btn {
@@ -275,3 +280,4 @@ body {
 .view-order-btn:hover {
     background-color: #45a049; 
 }
+
