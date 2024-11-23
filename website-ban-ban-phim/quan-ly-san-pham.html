@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SGU Click</title>
+    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-khach-hang.css" />
+  </head>
+  <body class="open-model" style="overflow: hidden;">
+    <!-- Slogan bar -->
+    <SloganBar class="slogan-bar">
+      <a href="quan-ly-san-pham.html"
+        ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+      /></a>
+      <p class="slogan" style="color: white">Chất phím, chất click !</p>
+    </SloganBar>
+
+    <div style="display: flex">
+      <!-- Navbar admin -->
+      <Navbar-admin class="navbar-admin">
+        <div class="hi-admin" style="height: 50px">
+          <div style="display: flex; position: relative" >
+            <i
+              class="fa-solid fa-circle-user user" onclick="showModel('model-user-info-container')"
+            >
+            </i>
+            <i
+              class="fa-solid fa-circle-chevron-down show-user-info"
+            ></i>
+          </div>
+
+          <p style="margin-top: 12px">Xin chào Admin !</p>
+        </div>
+
+        <!-- Management options -->
+        <button
+          class="management-option-button"
+          style="background-color: #558dc4; color: white"
+          onclick="location.href='./quan-ly-san-pham.html';"
+        >
+          Quản lý sản phẩm
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-don-hang.html';"
+        >
+          Quản lý đơn hàng
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-khach-hang.html';"
+        >
+          Quản lý khách hàng
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./thong-ke.html';"
+        >
+          Thống kê
+        </button>
+      </Navbar-admin>
+
+      <!-- Body page -->
+      <div
+        class="bg-color"
+        style="height: 100vh; width: 100%; overflow-y: auto"
+      >
+        <!-- Title page -->
+        <div style="display: flex">
+          <p class="title-page">Sản phẩm</p>
+
+          <div style="margin-left: auto; padding: 20px">
+            <button class="button-style" id="add-product">
+              <i class="fa-solid fa-plus" style="font-size: 15px"></i>
+              <div style="padding-left: 10px; font-size: 15px">
+                Thêm sản phẩm
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search options -->
+        <form class="search-options-style" onsubmit="filterProduct(event)">
+          <!-- Search by product name -->
+          <div class="search-option">
+            <input
+              name="name"
+              type="text"
+              placeholder="Tìm theo tên sản phẩm"
+              style="padding: 5px"
+            />
+          </div>
+
+          <!-- Search by brand-->
+          <div class="search-option">
+            <input
+              name="brand"
+              type="text"
+              placeholder="Tìm theo tên hãng"
+              style="padding: 5px"
+            />
+          </div>
+
+          <!-- Filter by category -->
+          <div class="search-option">
+            <select name="category" style="padding: 5px">
+              <option value="all" selected>Tất cả sản phẩm</option>
+              <option value="Bàn phím cơ">Bàn phím cơ</option>
+              <option value="Bàn phím gaming">Bàn phím gaming</option>
+              <option value="Bàn phím không dây">Bàn phím không dây</option>
+              <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
+              <option value="Bàn phím mini">Bàn phím mini</option>
+            </select>
+          </div>
+
+          <!-- Arrange option -->
+          <div class="search-option">
+            <select name="sort" style="padding: 5px">
+              <option value="lastest-product" selected>
+                Sản phẩm mới nhất
+              </option>
+              <option value="price-decrease">Giá từ cao đến thấp</option>
+              <option value="price-increase">Giá từ thấp đến cao</option>
+            </select>
+          </div>
+
+          <!-- Filter button -->
+          <div class="search-option">
+            <button
+              class="button-style"
+              type="submit"
+              style="background-color: #15803d"
+            >
+              <i
+                class="fa-solid fa-filter"
+                style="font-size: 13px; padding-top: 1px"
+              ></i>
+              <div style="padding-left: 10px; font-size: 15px">
+                Lọc sản phẩm
+              </div>
+            </button>
+          </div>
+
+          <!-- Refresh button -->
+          <div class="search-option">
+            <button
+              class="button-style flex-container"
+              type="button"
+              style="background-color: #d1d5db"
+              onclick="showProductData()"
+            >
+              <i
+                class="fa-solid fa-rotate-right"
+                style="font-size: 13px; padding-top: 1px; color: black"
+              ></i>
+
+              <div style="padding-left: 10px; font-size: 15px; color: black">
+                Làm mới
+              </div>
+            </button>
+          </div>
+        </form>
+
+        <!-- Table product contaniner -->
+        <div class="table-product-container">
+          <table></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Model cofirm delete -->
+    <div class="model-confirm-delete-container">
+      <div class="dialog-cofirm-delete">
+        <div>
+          <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+          <h1 class="header-alert">Xóa sản phẩm</h1>
+          <h3 style="font-weight: normal; text-align: center">
+            Bạn có chắc muốn xóa sản phẩm này?
+          </h3>
+        </div>
+        <div class="model-footer">
+          <button class="confirm-button" id="cofirm-delete-product">
+            Xác nhận
+          </button>
+          <button class="cancel-button" onclick="cancelDeleteProduct()">
+            Hủy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Model add product container -->
+    <div class="model-add-product-container">
+      <div id="click-hide-model" style="height: 100%; width: 30%"></div>
+      <form class="add-product-container" onsubmit="addProduct(event)">
+        <!-- Model header -->
+        <div class="model-header">
+          <h2 style="color: #21568a; width: 100%">Thêm sản phẩm</h2>
+          <i class="fa-solid fa-xmark close-icon" id="close-add-product"></i>
+        </div>
+
+        <!-- Model body -->
+        <div>
+          <div class="model-body">
+            <label for="name" style="width: 15%; margin-left: 20px"
+              >Tên sản phẩm</label
+            >
+            <div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Tên sản phẩm"
+                style="
+                  margin-left: 40px;
+                  width: 100%;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                "
+                onchange="isNotEmpty(event, 'tên', 'name-alert')"
+              />
+              <p id="name-alert" class="alert"></p>
+            </div>
+          </div>
+
+          <div class="model-body" style="margin-bottom: 30px">
+            <label for="category" style="width: 15%; margin-left: 20px"
+              >Danh mục</label
+            >
+            <select
+              name="category"
+              style="
+                border-radius: 5px;
+                margin-left: 40px;
+                padding: 3px;
+                width: 20.5%;
+              "
+            >
+              <option value="Bàn phím cơ">Bàn phím cơ</option>
+              <option value="Bàn phím gaming">Bàn phím gamin</option>
+              <option value="Bàn phím không dây">Bàn phím không dây</option>
+              <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
+              <option value="Bàn phím mini">Bàn phím mini</option>
+            </select>
+          </div>
+
+          <div class="model-body">
+            <label for="brand" style="width: 15%; margin-left: 20px"
+              >Hãng</label
+            >
+            <div>
+              <input
+                type="text"
+                name="brand"
+                placeholder="Hãng"
+                style="
+                  margin-left: 40px;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                  width: 100%;
+                "
+                onchange="isNotEmpty(event, 'hãng', 'brand-alert')"
+              />
+              <p id="brand-alert" class="alert"></p>
+            </div>
+          </div>
+
+          <div class="model-body">
+            <label for="price" style="width: 15%; margin-left: 20px"
+              >Đơn giá</label
+            >
+            <div>
+              <input
+                type="text"
+                name="price"
+                placeholder="Đơn giá"
+                style="
+                  margin-left: 40px;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                  width: 100%;
+                "
+                onchange="isNotEmpty(event, 'giá', 'price-alert')"
+              />
+              <p id="price-alert" class="alert"></p>
+            </div>
+          </div>
+
+          <div class="model-body">
+            <label for="quantity" style="width: 15%; margin-left: 20px"
+              >Số lượng</label
+            >
+            <div>
+              <input
+                type="text"
+                name="quantity"
+                placeholder="Số lượng"
+                style="
+                  margin-left: 40px;
+                  padding: 3px;
+                  border-radius: 5px;
+                  border: 1px solid #636262;
+                  width: 100%;
+                "
+                onchange="isNotEmpty(event, 'số lượng', 'quantity-alert')"
+              />
+              <p id="quantity-alert" class="alert"></p>
+            </div>
+          </div>
+
+          <div class="model-body">
+            <label for="description" style="width: 15%; margin-left: 20px"
+              >Mô tả sản phẩm</label
+            >
+            <textarea
+              name="description"
+              type="text"
+              placeholder="Mô tả sản phẩm"
+              style="
+                margin-left: 40px;
+                width: 70%;
+                height: 150px;
+                padding: 3px;
+                border-radius: 5px;
+                border: 1px solid #636262;
+              "
+            ></textarea>
+          </div>
+
+          <div class="model-body">
+            <label for="image" style="width: 15%; margin-left: 20px"
+              >Hình ảnh</label
+            >
+            <div>
+              <input
+                type="file"
+                name="image"
+                style="margin-left: 40px"
+                id="image-product"
+                onchange="openFile(this, 'output-image')"
+              />
+              <p id="image-alert" class="alert"></p>
+              <img
+                src="./assets/Image/quan-ly-san-pham/white.jpg"
+                id="output-image"
+                style="height: 100; width: 100px"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Model footer -->
+        <div class="model-footer">
+          <button type="submit" class="confirm-button">Xác nhận</button>
+          <button type="button" class="cancel-button" id="cancel-add-product">
+            Hủy
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Model product details -->
+    <div class="model-view-details-container">
+      <div style="display: flex">
+        <i class="fa-solid fa-left-long cancel-view-details"></i>
+        <h1 style="color: #21568a">Chi tiết sản phẩm</h1>
+      </div>
+
+      <div class="product-details"></div>
+    </div>
+
+    <!-- Model edit product container -->
+    <div class="model-edit-product-container">
+      <div id="click-hide-model" style="height: 100%; width: 30%"></div>
+      <div class="edit-product-container">
+        <!-- Model header -->
+        <div class="model-header">
+          <h2 style="color: #21568a; width: 100%">Sửa sản phẩm</h2>
+          <i
+            class="fa-solid fa-xmark close-icon"
+            onclick="cancelEditProductModel()"
+          ></i>
+        </div>
+
+        <!-- Model body -->
+        <div id="edit-model-body"></div>
+      </div>
+    </div>
+
+    <!-- Model user info -->
+     <div class="model-user-info-container">
+      <div class="user-info-ele" onclick="showModel('login-info')">
+        <i class="fa-solid fa-circle-user user-info-icon"></i>
+        <div>Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px;"></i>
+      </div>
+
+      <table class="login-info">
+        
+      </table>
+
+      <div class="user-info-ele log-out" style="border-top: 1px solid gray;" onclick="logOut()">
+        <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
+        <div>Đăng xuất</div>
+      </div>
+     </div>
+
+    <script
+      src="https://kit.fontawesome.com/793699135f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="./assets/js/common.js"></script>
+    <script src="./assets/js/productData.js"></script>
+    <script src="./assets/js/quan-ly-san-pham.js"></script>
+  </body>
+</html>

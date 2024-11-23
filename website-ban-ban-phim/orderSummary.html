@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGU Click</title>
+    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
+    <link rel="stylesheet" href="./assets/css/detail.css" />
+    <link rel="stylesheet" href="./assets/css/orderSummary.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <!-- <header class="header">
+        <div class="logo-container">
+            <img src="https://storage.googleapis.com/a1aa/image/K80ED0J3PRoYMJv6Vq5hMeMuY0vv8wLeKJZkghsRqSD18MqTA.jpg" alt="Logo" class="logo">
+            <span class="greeting">Xin chào Thạch Phú !</span>
+        </div>
+        <nav class="nav">
+            <a href="#">Bàn phím cơ</a>
+            <a href="#">Bàn phím gaming</a>
+            <a href="#">Bàn phím không dây</a>
+            <a href="#">Bàn phím đối xứng</a>
+            <a href="#">Bàn phím mini</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" placeholder="Tìm kiếm" class="search-input">
+            <i class="fas fa-shopping-cart cart-icon"></i>
+        </div>
+    </header> -->
+
+    <SloganBar class="slogan-bar">
+        <a href="index.html"
+          ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+        /></a>
+        <p class="slogan" style="color: white">Chất phím, chất click !</p>
+      </SloganBar>
+  
+      <div class="header-container">
+        <div class="user">
+          <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
+            <i class="fa-solid fa-circle-user"></i>
+            <i
+              class="fa-solid fa-circle-chevron-down show-user-info"
+              style="right: -5px"
+            ></i>
+          </div>
+          <div class="user-name">
+            <p class="xinchao">Xin chào !</p>
+          </div>
+        </div>
+  
+        <div class="links">
+          <a href=""
+            >Bàn phím <br />
+            cơ</a
+          >
+          <a href="">Bàn phím gaming</a>
+          <a href="">Bàn phím không dây</a>
+          <a href="">Bàn phím đối xứng</a>
+          <a href="">Bàn phím mini</a>
+        </div>
+        <div class="header-search">
+          <img src="./assets/Image/search.png" />
+          <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
+          </a>
+          <input type="text" placeholder="Tìm kiếm" />
+        </div>
+      </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <div id="name"></div><br>
+      <div id="sdt"></div><br>
+      <div id="adr"></div><br>
+      <div id="time"></div><br>
+      <div class="order-items"></div><br>
+      <strong><div id="giam_gia" class="giam_gia"></div></strong><br>
+      <div class="order-total"><br>
+          <p id="totalPrice"></p>
+      </div>
+  </div>
+    
+        <!-- Model user info -->
+        <div class="model-user-info-container">
+            <div class="user-info-ele">
+              <i class="fa-solid fa-circle-user user-info-icon"></i>
+              <div onclick="showModel('login-info')">Thông tin tài khoản</div>
+              <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+            </div>
+      
+            <table class="login-info"></table>
+      
+            <a class="user-info-ele" href="don-hang.html">
+              <i class="fa-solid fa-rectangle-list user-info-icon"></i>
+              <div>Đơn hàng</div>
+            </a>
+      
+            <div
+              class="user-info-ele log-out"
+              style="border-top: 1px solid gray"
+              onclick="logOut()"
+            >
+              <i
+                class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+                style="color: gray"
+              ></i>
+              <div>Đăng xuất</div>
+            </div>
+          </div>
+          <ul style="text-align: center;" id="sldonhang">
+          </ul>
+        
+</body>
+<script
+src="https://kit.fontawesome.com/793699135f.js"
+crossorigin="anonymous"
+></script>
+<script src="./assets/js/common.js"></script>
+</html>
+<script src="./assets/js/oderSummary.js"></script>

@@ -1,0 +1,293 @@
+/* Tổng quan CSS cho trang */
+body {
+    /* font-family: Arial, sans-serif; */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Container cho admin */
+.admin-container {
+    /* max-width: 1200px; */
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header Section */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+header p {
+    color: #7f8c8d;
+}
+
+/* Admin Info Section */
+.admin-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ecf0f1;
+    border-radius: 5px;
+}
+
+.admin-info h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: #34495e;
+}
+
+.admin-info p {
+    margin: 5px 0;
+}
+
+/* Navigation cho admin */
+.admin-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.admin-nav ul li a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+.admin-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Order Management Section */
+#order-management h2 {
+    color: #34495e;
+    font-size: 22px;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 5px;
+}
+
+/* Bảng quản lý đơn hàng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background-color: #2980b9;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+}
+
+table tr:nth-child(even) {
+    background-color: #f4f6f9;
+}
+
+table tr:hover {
+    background-color: #eaf1f8;
+}
+
+table select {
+    padding: 5px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+}
+
+table button {
+    padding: 8px 12px;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+table button:hover {
+    background-color: #c0392b;
+}
+
+
+/* Order Management Section */
+#order-management h2,
+#order-details h2 {
+    font-size: 22px;
+    color: #333;
+    padding: 15px 20px;
+    background-color: #f7f9fc;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-table th, .order-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.order-table thead {
+    background-color: #1d72b8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.order-table tbody tr:nth-child(even) {
+    background-color: #f4f6f9;
+}
+
+.order-table tbody tr:hover {
+    background-color: #eef3f9;
+}
+
+.order-table select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Bảng chi tiết sản phẩm */
+.detail-table, .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.detail-table th, .detail-table td, .history-table th, .history-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.detail-table thead, .history-table thead {
+    background-color: #1d72b8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.detail-table tbody tr:nth-child(even), .history-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#order-total {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Trạng thái đơn hàng */
+.order-table .status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.status.chua-xu-ly {
+    background-color: #f9c74f;
+    color: #333;
+}
+
+.status.da-xac-nhan {
+    background-color: #43aa8b;
+    color: #fff;
+}
+
+.status.da-giao-thanh-cong {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.status.da-huy {
+    background-color: #f94144;
+    color: #fff;
+}
+
+/* Nút hành động */
+button:not(.management-option-button) {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    background-color: #4CAF50;
+    color: #ffffff;
+    margin: 2px;
+}
+
+button.view-btn {
+    background-color: #1d72b8;
+}
+
+button.view-btn:hover {
+    background-color: #155a8a;
+}
+
+button.edit-btn {
+    background-color: #ffc107;
+}
+
+button.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+button.delete-btn {
+    background-color: #dc3545;
+}
+
+button.delete-btn:hover {
+    background-color: #c82333;
+}
+
+button.close-btn {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 8px 15px;
+    margin-top: 10px;
+}
+
+button.close-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Bố cục các phần tử trong chi tiết đơn hàng */
+#order-details p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+#order-details h3 {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #333;
+}
+

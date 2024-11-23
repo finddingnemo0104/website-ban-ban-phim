@@ -1,0 +1,168 @@
+<html lang="en">
+<link rel="stylesheet" href="./assets/css/giohang.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGU Click</title>
+    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
+    <link rel="stylesheet" href="./assets/css/empty.css">
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">
+    <link rel="stylesheet" href="./assets/css/detail.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <!-- <header class="header">
+        <div class="logo-container">
+            <img src="https://storage.googleapis.com/a1aa/image/K80ED0J3PRoYMJv6Vq5hMeMuY0vv8wLeKJZkghsRqSD18MqTA.jpg" alt="Logo" class="logo">
+            <span class="greeting">Xin chào Thạch Phú !</span>
+        </div>
+        <nav class="nav">
+            <a href="#">Bàn phím cơ</a>
+            <a href="#">Bàn phím gaming</a>
+            <a href="#">Bàn phím không dây</a>
+            <a href="#">Bàn phím đối xứng</a>
+            <a href="#">Bàn phím mini</a>
+        </nav>
+        <div class="search-container">
+            <input type="text" placeholder="Tìm kiếm" class="search-input">
+            <i class="fas fa-shopping-cart cart-icon"></i>
+        </div>
+    </header> -->
+    <SloganBar class="slogan-bar">
+        <a href="index.html"
+          ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+        /></a>
+        <p class="slogan" style="color: white">Chất phím, chất click !</p>
+      </SloganBar>
+  
+      <div class="header-container">
+        <div class="user">
+          <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
+            <i class="fa-solid fa-circle-user"></i>
+            <i
+              class="fa-solid fa-circle-chevron-down show-user-info"
+              style="right: -5px"
+            ></i>
+          </div>
+          <div class="user-name">
+            <p class="xinchao">Xin chào !</p>
+          </div>
+        </div>
+  
+        <div class="links">
+          <a href=""
+            >Bàn phím <br />
+            cơ</a
+          >
+          <a href="">Bàn phím gaming</a>
+          <a href="">Bàn phím không dây</a>
+          <a href="">Bàn phím đối xứng</a>
+          <a href="">Bàn phím mini</a>
+        </div>
+        <div class="header-search">
+          <img src="./assets/Image/search.png" />
+          <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
+          </a>
+          <input type="text" placeholder="Tìm kiếm" />
+        </div>
+      </div>
+
+    <a href="orderSummary.html"><button class="view-order-btn">Xem đơn hàng đã mua</button></a>
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1 class="title">Giỏ hàng</h1>
+
+        <!-- Shopping Cart Items -->
+        <div class="cart-container">
+            <!-- Items Section -->
+            <div class="cart-items">
+                <!-- Single Item -->
+                 <div id="donhang">
+                <div class="cart-item">      
+                </div></div>
+                <!-- Lặp lại cho các sản phẩm khác -->                
+            </div>
+            <!-- Order Summary Section -->
+            <div class="order-summary">
+                <h2 class="summary-title">Tổng đơn hàng</h2>
+                <div class="summary-detail">
+                    <div class="summary-row">
+                       <div id="tongcong"></div>
+                       <span id="sumprice"></span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí giao hàng</span>
+                        <span>0đ</span>
+                    </div>
+                </div>
+                <div class="discount">
+                    <label for="discount-code">Mã giảm giá</label>
+                    <div class="discount-code">
+                        <input type="text" id="discount-code" class="code-input">
+                        <button class="apply-btn" onclick="dis()">Xác nhận</button>
+                    </div>
+                </div>
+                <div class="total">
+                    <div class="summary-row">
+                        <span id="giam_gia">Giảm giá</span>
+                        <span id="tien_giam_gia">0đ</span>
+                    </div>
+                    <div class="summary-row total-row" >
+                        <span>Tổng cộng</span>
+                        <span id="total">10,000,000đ</span>
+                    </div>
+                </div>
+                <a href="thongtin.html"><button class="checkout-btn">Thanh toán</button></a>
+                <button class="continue-btn">Tiếp tục mua sắm</button>
+            </div>
+           
+        </div>
+    </main>
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Xoá sản phẩm</h2>
+            <p>Bạn có chắc chắn muốn xoá sản phẩm này không?</p>
+            <div class="modal-actions">
+                <button class="confirm-delete-btn" onclick="confirmDelete()">Xoá</button>
+                <button class="cancel-btn" onclick="closeModal()">Huỷ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model user info -->
+    <div class="model-user-info-container">
+        <div class="user-info-ele">
+          <i class="fa-solid fa-circle-user user-info-icon"></i>
+          <div onclick="showModel('login-info')">Thông tin tài khoản</div>
+          <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+        </div>
+  
+        <table class="login-info"></table>
+  
+        <a class="user-info-ele" href="don-hang.html">
+          <i class="fa-solid fa-rectangle-list user-info-icon"></i>
+          <div>Đơn hàng</div>
+        </a>
+  
+        <div
+          class="user-info-ele log-out"
+          style="border-top: 1px solid gray"
+          onclick="logOut()"
+        >
+          <i
+            class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+            style="color: gray"
+          ></i>
+          <div>Đăng xuất</div>
+        </div>
+      </div>
+    <script
+      src="https://kit.fontawesome.com/793699135f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/common.js"></script>
+</body>
+<script src="./assets/js/cart.js"></script>
+<script src="add.js"></script>
