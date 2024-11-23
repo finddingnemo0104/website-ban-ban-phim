@@ -1,67 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SGU Click</title>
-    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
-    <link rel="stylesheet" href="./assets/css/quan-ly-don-hang.css" />
-  </head>
-  <body>
-    <!-- Slogan bar -->
-    <SloganBar class="slogan-bar">
-      <a href="quan-ly-don-hang.html"
-        ><img class="logo" src="./assets/Image/logo.png" alt="logo"
-      /></a>
-      <p class="slogan" style="color: white">Chất phím, chất click!</p>
-    </SloganBar>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SGU Click</title>
+  <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
+  <link rel="stylesheet" href="./assets/css/quan-ly-don-hang.css" />
+</head>
+<body>
+  <!-- Slogan bar -->
+  <div class="slogan-bar">
+    <a href="quan-ly-don-hang.html">
+      <img class="logo" src="./assets/Image/logo.png" alt="logo" />
+    </a>
+    <p class="slogan" style="color: white">Chất phím, chất click!</p>
+  </div>
 
-    <div style="display: flex">
-      <!-- Navbar admin -->
-      <Navbar-admin class="navbar-admin">
-        <div class="hi-admin" style="height: 50px">
-          <div style="display: flex; position: relative">
-            <i
-              class="fa-solid fa-circle-user user"
-              onclick="showModel('model-user-info-container')"
-            ></i>
-            <i class="fa-solid fa-circle-chevron-down show-user-info"></i>
-          </div>
-          <p style="margin-top: 12px">Xin chào Admin!</p>
+  <div style="display: flex">
+    <!-- Navbar admin -->
+    <div class="navbar-admin">
+      <div class="hi-admin" style="height: 50px">
+        <div style="display: flex; position: relative">
+          <i
+            class="fa-solid fa-circle-user user"
+            onclick="showModel('model-user-info-container')"
+          ></i>
+          <i class="fa-solid fa-circle-chevron-down show-user-info"></i>
         </div>
+        <p style="margin-top: 12px">Xin chào Admin!</p>
+      </div>
 
-        <!-- Management options -->
-        <button
-          class="management-option-button"
-          onclick="location.href='./quan-ly-san-pham.html';"
-        >
-          Quản lý sản phẩm
-        </button>
-        <button
-          class="management-option-button active"
-          onclick="location.href='./quan-ly-don-hang.html';"
-        >
-          Quản lý đơn hàng
-        </button>
-        <button
-          class="management-option-button"
-          onclick="location.href='./quan-ly-khach-hang.html';"
-        >
-          Quản lý khách hàng
-        </button>
-        <button
-          class="management-option-button"
-          onclick="location.href='./thong-ke.html';"
-        >
-          Thống kê
-        </button>
-      </Navbar-admin>
-
-      <!-- Body page -->
-      <div
-        class="bg-color"
-        style="height: 100vh; width: 100%; overflow-y: auto"
+      <!-- Management options -->
+      <button
+        class="management-option-button"
+        onclick="location.href='./quan-ly-san-pham.html';"
       >
+        Quản lý sản phẩm
+      </button>
+      <button
+        class="management-option-button active"
+        onclick="location.href='./quan-ly-don-hang.html';"
+      >
+        Quản lý đơn hàng
+      </button>
+      <button
+        class="management-option-button"
+        onclick="location.href='./quan-ly-khach-hang.html';"
+      >
+        Quản lý khách hàng
+      </button>
+      <button
+        class="management-option-button"
+        onclick="location.href='./thong-ke.html';"
+      >
+        Thống kê
+      </button>
+    </div>
+
+    <!-- Body page -->
+    <div class="bg-color" style="height: 100vh; width: 100%; overflow-y: auto">
+      <!-- Order Management Section -->
+      <div id="order-management">
         <!-- Title page -->
         <div style="display: flex">
           <p class="title-page">Đơn hàng</p>
@@ -70,29 +69,25 @@
         <!-- Search options -->
         <form class="search-options-style" onsubmit="filterOrders(event)">
           <div class="search-option">
-              <input
-                  name="customer"
-                  type="text"
-                  placeholder="Tên khách hàng"
-              />
-              <select name="status">
-                  <option value="all" selected>Trạng thái đơn hàng</option>
-                  <option value="delivered">Đã giao</option>
-                  <option value="canceled">Hủy đơn</option>
-                  <option value="pending">Chưa xử lý</option>
-              </select>
-              <span>Từ ngày</span>
-              <input name="start-date" type="date" />
-              <span> - </span>
-              <input name="end-date" type="date" />
-              <button class="button-style filter-btn" type="submit">
-                  <i class="fa-solid fa-filter"></i>
-                  <span>Lọc</span>
-              </button>
-              <button class="button-style refresh-btn" type="button" onclick="refreshOrders()">
-                  <i class="fa-solid fa-rotate-right"></i>
-                  <span>Làm mới</span>
-              </button>
+            <input name="customer" type="text" placeholder="Tên khách hàng" />
+            <select name="status">
+              <option value="all" selected>Trạng thái đơn hàng</option>
+              <option value="delivered">Đã giao</option>
+              <option value="canceled">Hủy đơn</option>
+              <option value="pending">Chưa xử lý</option>
+            </select>
+            <span>Từ ngày</span>
+            <input name="start-date" type="date" />
+            <span> - </span>
+            <input name="end-date" type="date" />
+            <button class="button-style filter-btn" type="submit">
+              <i class="fa-solid fa-filter"></i>
+              <span>Lọc</span>
+            </button>
+            <button class="button-style refresh-btn" type="button" onclick="refreshOrders()">
+              <i class="fa-solid fa-rotate-right"></i>
+              <span>Làm mới</span>
+            </button>
           </div>
         </form>
 
@@ -109,70 +104,57 @@
                 <th>Thao tác</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>11134</td>
-                <td>A+ môn web</td>
-                <td>11/17/2024</td>
-                <td>345,434,000đ</td>
-                <td><span class="order-status status-delivered">Đã giao</span></td>
-                <td class="action-icons">
-                  <i
-                    class="fa-solid fa-eye"
-                    onclick="viewOrderDetails('11134')"
-                  ></i>
-                  <i
-                    class="fa-solid fa-trash"
-                    onclick="deleteOrder('11134')"
-                  ></i>
-                </td>
-              </tr>
-              <tr>
-                <td>11134</td>
-                <td>A+ môn web</td>
-                <td>11/17/2024</td>
-                <td>345,434,000đ</td>
-                <td><span class="order-status status-canceled">Hủy đơn</span></td>
-                <td class="action-icons">
-                  <i
-                    class="fa-solid fa-eye"
-                    onclick="viewOrderDetails('11134')"
-                  ></i>
-                  <i
-                    class="fa-solid fa-trash"
-                    onclick="deleteOrder('11134')"
-                  ></i>
-                </td>
-              </tr>
-              <tr>
-                <td>11134</td>
-                <td>A+ môn web</td>
-                <td>11/17/2024</td>
-                <td>345,434,000đ</td>
-                <td><span class="order-status status-pending">Chưa xử lý</span></td>
-                <td class="action-icons">
-                  <i
-                    class="fa-solid fa-eye"
-                    onclick="viewOrderDetails('11134')"
-                  ></i>
-                  <i
-                    class="fa-solid fa-trash"
-                    onclick="deleteOrder('11134')"
-                  ></i>
-                </td>
-              </tr>
+            <tbody id="order-list">
+              <!-- Orders will be dynamically inserted here -->
             </tbody>
           </table>
         </div>
       </div>
-    </div>
 
-    <script
-      src="https://kit.fontawesome.com/793699135f.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="./assets/js/common.js"></script>
-    <script src="./assets/js/orderData.js"></script>
-    <script src="./assets/js/quan-ly-don-hang.js"></script>
-  </body>
+      <!-- Order Details Section -->
+      <div id="order-details" style="display: none; padding: 20px;">
+        <!-- Back Button -->
+        <button class="back-button" onclick="closeOrderDetails()">
+          <i class="fa-solid fa-arrow-left"></i> Quay lại
+        </button>
+      
+        <!-- Order Title -->
+        <h2 class="details-title">Chi tiết đơn hàng</h2>
+        <p class="customer-name" id="customer-name"></p>
+      
+        <div class="order-header">
+          <h3 class="order-id" id="order-id"></h3>
+          <span class="order-status" id="order-status"></span>
+        </div>
+      
+        <p class="order-date" id="order-date"></p>
+        <p class="order-address" id="order-address"></p>
+      
+        <h3 class="product-list-title">Danh sách sản phẩm</h3>
+        <table class="product-list">
+          <thead>
+            <tr>
+              <th>Tên sản phẩm</th>
+              <th>Số lượng</th>
+              <th>Giá</th>
+            </tr>
+          </thead>
+          <tbody id="order-products-list"></tbody>
+        </table>
+      
+        <p class="order-total" id="order-total"></p>
+      
+        <h3 class="history-title">Lịch sử đơn hàng</h3>
+        <ul id="order-history" class="order-history"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script
+    src="https://kit.fontawesome.com/793699135f.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="./assets/js/common.js"></script>
+  <script src="./assets/js/quan-ly-don-hang.js"></script>
+</body>
 </html>
