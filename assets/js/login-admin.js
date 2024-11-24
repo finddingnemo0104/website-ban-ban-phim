@@ -14,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const user = authenticateUser(phone, password);
         if (user) {
             localStorage.setItem("currentUser", JSON.stringify({ phone, role: user.role, email: user.email, status: user.status }));
-            redirectToRolePage(user.role);
-            window.location.href("user.html");
+            redirectToRolePage();
         } else {
             alert("Thông tin đăng nhập không chính xác.");
         }
@@ -28,17 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // Authenticate user function
 function authenticateUser(phone, password) {
     const users = JSON.parse(localStorage.getItem('customers')) || [];
-    return users.find(user => user.phone === phone && user.password === password);
+    return users.find(user => user.phone === phone && user.password === password && user.role == "admin");
 }
 
 // Register user function with localStorage
 
 
 // Redirect function based on role
-function redirectToRolePage(role) {
-    if (role === "admin") {
-        window.location.href = "quan-ly-don-hang.html"; // Replace with actual admin page URL
-    } else {
-        window.location.href = "user.html"; // Replace with actual index/home page URL
-    }
+function redirectToRolePage() {
+    window.location.href = "quan-ly-don-hang.html";
 }

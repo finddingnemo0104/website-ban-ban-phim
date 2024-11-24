@@ -332,11 +332,6 @@ function closeOrderDetails() {
   document.getElementById("order-management").style.display = "block";
 }
 
-// Function đăng xuất
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.href = "dangnhap.html";
-}
 function saveOrdersToLocalStorage(orders) {
   localStorage.setItem("orders", JSON.stringify(orders));
 }

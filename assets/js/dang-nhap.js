@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const customer = authenticateUser(phone, password);
     if (customer) {
       localStorage.setItem("currentUser", JSON.stringify(customer));
-      redirectToRolePage(customer.role);
+      redirectToRolePage();
      
     } else {
       alert("Thông tin đăng nhập không chính xác.");
@@ -35,17 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
 function authenticateUser(phone, password) {
   const customers = getCustomer();
   return customers.find( // duyệt danh sách để kiểm tra điều kiện
-    (customer) => customer.phone === phone && customer.password === password
+    (customer) => customer.phone === phone && customer.password === password && customer.role == "customer"
   );
 }
 
 // điều hướng đến trang tương ứng
-function redirectToRolePage(role) {
-  if (role === "admin") {
-    window.location.href = "quan-ly-don-hang.html"; // Replace with actual admin page URL
-  } else {
-    window.location.href = "index.html"; // Replace with actual index/home page URL
-  }
+function redirectToRolePage() {
+  window.location.href = "index.html";
 }
 
 // hàm quên pass
