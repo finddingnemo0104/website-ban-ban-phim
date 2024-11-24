@@ -63,41 +63,33 @@ document.addEventListener("DOMContentLoaded", () => {
 function displayOrders() {
   const orders = getOrdersFromLocalStorage();
   const orderList = document.getElementById("order-list");
-  orderList.innerHTML = "";
+  orderList.innerHTML = ""; // Clear existing rows
 
   orders.forEach((order) => {
+    const total = order.products.reduce((sum, product) => sum + product.quantity * product.price, 0);
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${order.id}</td>/
+      <td>${order.id}</td>
       <td>${order.customer}</td>
       <td>${order.date}</td>
+      <td>${total.toLocaleString()}đ</td>
       <td>
-          <select onchange="updateStatus(${order.id}, this.value)">
-              <option value="chưa xử lý" ${
-                order.status === "chưa xử lý" ? "selected" : ""
-              }>Chưa xử lý</option>
-              <option value="đã xác nhận" ${
-                order.status === "đã xác nhận" ? "selected" : ""
-              }>Đã xác nhận</option>
-              <option value="đã giao thành công" ${
-                order.status === "đã giao thành công" ? "selected" : ""
-              }>Đã giao thành công</option>
-              <option value="đã hủy" ${
-                order.status === "đã hủy" ? "selected" : ""
-              }>Đã hủy</option>
-          </select>
+        <select class="status-dropdown" onchange="updateStatus(${order.id}, this.value)">
+          <option value="chưa xử lý" ${order.status === "chưa xử lý" ? "selected" : ""}>Chưa xử lý</option>
+          <option value="đã xác nhận" ${order.status === "đã xác nhận" ? "selected" : ""}>Đã xác nhận</option>
+          <option value="đã giao thành công" ${order.status === "đã giao thành công" ? "selected" : ""}>Đã giao thành công</option>
+          <option value="đã hủy" ${order.status === "đã hủy" ? "selected" : ""}>Đã hủy</option>
+        </select>
       </td>
-      <td>
-          <button onclick="viewOrderDetails(${
-            order.id
-          })">Xem chi tiết</button>
-          <button onclick="showEditOrderForm(${order.id})">Sửa</button>
-          <button onclick="deleteOrder(${order.id})">Xóa</button>
+      <td class="action-icons">
+        <i class="fa-solid fa-eye" onclick="viewOrderDetails(${order.id})"></i>
+        <i class="fa-solid fa-trash" onclick="deleteOrder(${order.id})"></i>
       </td>
-  `;
+    `;
     orderList.appendChild(row);
   });
 }
+
 // Hiển thị form thêm đơn hàng
 function showAddOrderForm() {
   document.getElementById("order-management").style.display = "none";
@@ -252,31 +244,24 @@ function addEditProductField() {
 // Hàm để xem chi tiết đơn hàng
 function viewOrderDetails(orderId) {
   const orders = getOrdersFromLocalStorage();
-  const order = orders.find((o) => o.id === orderId);
+  const order = orders.find((o) => o.id === parseInt(orderId));
 
   if (order) {
-    document.getElementById(
-      "customer-name"
-    ).innerText = `Tên khách hàng: ${order.customer}`;
-    document.getElementById(
-      "order-id"
-    ).innerText = `Mã đơn hàng: #${order.id}`;
-    document.getElementById(
-      "order-date"
-    ).innerText = `Ngày đặt hàng: ${order.date}`;
-    document.getElementById(
-      "order-address"
-    ).innerText = `Địa chỉ: ${order.address}`;
+    // Populate the details section
+    document.getElementById("customer-name").innerText = `Tên khách hàng: ${order.customer}`;
+    document.getElementById("order-id").innerText = `Mã đơn hàng: #${order.id}`;
+    document.getElementById("order-date").innerText = `Ngày đặt hàng: ${order.date}`;
+    document.getElementById("order-address").innerText = `Địa chỉ: ${order.address}`;
 
     const productList = document.getElementById("order-products-list");
-    productList.innerHTML = "";
+    productList.innerHTML = ""; // Clear existing products
     order.products.forEach((product) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-                  <td>${product.name}</td>
-                  <td>${product.quantity}</td>
-                  <td>${product.price.toLocaleString()}đ</td>
-              `;
+        <td>${product.name}</td>
+        <td>${product.quantity}</td>
+        <td>${product.price.toLocaleString()}đ</td>
+      `;
       productList.appendChild(row);
     });
 
@@ -284,20 +269,21 @@ function viewOrderDetails(orderId) {
       (sum, product) => sum + product.quantity * product.price,
       0
     );
-    document.getElementById(
-      "order-total"
-    ).innerText = `Tổng cộng: ${total.toLocaleString()}đ`;
+    document.getElementById("order-total").innerText = `Tổng cộng: ${total.toLocaleString()}đ`;
 
     const historyList = document.getElementById("order-history");
-    historyList.innerHTML = "";
+    historyList.innerHTML = ""; 
     order.history.forEach((entry) => {
       const listItem = document.createElement("li");
       listItem.innerText = `Trạng thái: ${entry.status} - Ngày: ${entry.date}`;
       historyList.appendChild(listItem);
     });
 
+    // Show the details section and hide the orders list
     document.getElementById("order-management").style.display = "none";
     document.getElementById("order-details").style.display = "block";
+  } else {
+    alert("Không tìm thấy thông tin đơn hàng!");
   }
 }
 
@@ -317,16 +303,27 @@ function updateStatus(orderId, newStatus) {
     alert(
       `Trạng thái đơn hàng ${orderId} đã được cập nhật thành: ${newStatus}`
     );
+  } else {
+    alert(`Không tìm thấy đơn hàng #${orderId}!`);
   }
 }
 
 // Function để xóa đơn hàng
 function deleteOrder(orderId) {
   let orders = getOrdersFromLocalStorage();
-  orders = orders.filter((order) => order.id !== orderId);
-  saveOrdersToLocalStorage(orders);
-  displayOrders();
-  alert(`Đơn hàng ${orderId} đã được xóa.`);
+  const orderIndex = orders.findIndex((order) => order.id === orderId);
+
+  if (orderIndex !== -1) {
+    const confirmDelete = confirm(`Bạn có chắc chắn muốn xóa đơn hàng #${orderId}?`);
+    if (confirmDelete) {
+      orders.splice(orderIndex, 1);
+      saveOrdersToLocalStorage(orders);
+      displayOrders();
+      alert(`Đơn hàng #${orderId} đã được xóa thành công.`);
+    }
+  } else {
+    alert(`Không tìm thấy đơn hàng #${orderId}!`);
+  }
 }
 
 // Đóng chi tiết đơn hàng và quay lại danh sách đơn hàng
@@ -335,11 +332,6 @@ function closeOrderDetails() {
   document.getElementById("order-management").style.display = "block";
 }
 
-// Function đăng xuất
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.href = "dangnhap.html";
-}
 function saveOrdersToLocalStorage(orders) {
   localStorage.setItem("orders", JSON.stringify(orders));
 }

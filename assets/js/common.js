@@ -24,6 +24,11 @@ function logOut() {
   window.location.href = "dangnhap.html";
 }
 
+function logoutAdmin() {
+  localStorage.removeItem("currentUser");
+  window.location.href = "login-admin.html";
+}
+
 // Show model
 function showModel(model) {
   const modelEle = document.getElementsByClassName(model)[0];
