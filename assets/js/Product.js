@@ -1,3 +1,4 @@
+const products = getProduct();
 function getProduct() {
   if (
     localStorage.getItem("products") === null ||
@@ -7,8 +8,6 @@ function getProduct() {
   }
   return JSON.parse(localStorage.getItem("products"));
 }
-
-const products = getProduct();
 
 const productsPerPage = 6;
 let currentPage = 1;
@@ -31,7 +30,7 @@ function renderProducts(page) {
     </div>
   <p>${product.name}</p>
   <span class="price">${Number(product.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</span>
-  <button class="add-to-cart-BTN"> Thêm vào giỏ hàng </button>
+  <button class="add-to-cart-BTN" onclick="addToCard('${product.ID}')"> Thêm vào giỏ hàng </button>
 `;
 
     productGrid.appendChild(productCard);
@@ -155,3 +154,5 @@ document.querySelectorAll(".links a").forEach(link => {
     filterByCategory(category);
   });
 });
+
+
