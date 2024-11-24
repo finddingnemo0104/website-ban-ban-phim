@@ -21,7 +21,6 @@ function displayOrders(ordersKey) {
   const summary = document.querySelector(".summary");
 
   if (orders.length === 0) {
-    // If no orders exist, display default message
     orderList.innerHTML = `<p>Không có đơn hàng nào.</p>`;
     summary.innerHTML = `
       <h2>Tổng quan</h2>
@@ -142,5 +141,15 @@ function displayOrdersList(orders) {
 
 // Placeholder for view details functionality
 function viewOrderDetails(orderIndex) {
-  alert(`Chi tiết đơn hàng #${orderIndex + 1}`);
+  const currentCustomerId = JSON.parse(localStorage.getItem("currentUser")).ID;
+  const ordersKey = `orders${currentCustomerId}`;
+  const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+
+  if (orders[orderIndex]) {
+    // Store selected order details in localStorage for orderSummary.html
+    localStorage.setItem("selectedOrder", JSON.stringify(orders[orderIndex]));
+    window.location.href = `orderSummary.html?orderIndex=${orderIndex}`;
+  } else {
+    alert("Đơn hàng không tồn tại.");
+  }
 }
