@@ -513,7 +513,7 @@ function addProduct(event) {
   }
 
   const newProduct = new Product(
-    genderateProductID(),
+    generateProductID(),
     name,
     category,
     brand,
@@ -585,8 +585,8 @@ function cancelDeleteProduct() {
     .classList.remove("open");
 }
 
-// Genderate product ID
-function genderateProductID() {
+// Generate product ID
+function generateProductID() {
   const listProduct = getProduct();
   const lastProduct = listProduct[listProduct.length - 1];
   const lastProductID = parseInt(lastProduct.ID.split("SP")[1]);

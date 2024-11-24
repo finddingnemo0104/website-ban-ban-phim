@@ -23,8 +23,8 @@ function getCustomer() {
 }
 // --------------------------------------------------------------------------------- //
 
-// Genderate customer ID
-function genderateCustomerID() {
+// Generate customer ID
+function generateCustomerID() {
   const listCustomer = getCustomer();
   const lastCustomer = listCustomer[listCustomer.length - 1];
   const lastCustomerID = parseInt(lastCustomer.ID.split("#KH")[1]);
@@ -222,7 +222,7 @@ function addCustomer(event) {
   }
 
   const newCustomer = new Customer(
-    genderateCustomerID(),
+    gennerateCustomerID(),
     name,
     gender,
     email,
