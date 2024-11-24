@@ -30,9 +30,6 @@ function authenticateUser(phone, password) {
     return users.find(user => user.phone === phone && user.password === password && user.role == "admin");
 }
 
-// Register user function with localStorage
-
-
 // Redirect function based on role
 function redirectToRolePage() {
     window.location.href = "quan-ly-don-hang.html";

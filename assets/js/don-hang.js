@@ -1,86 +1,132 @@
-if (!localStorage.getItem("orders")) {
-  const sampleOrders = [
-    {
-      id: 1,
-      customerPhone: "0797169613",
-      date: "2024-11-01",
-      address: "279A An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh",
-      status: "Đã giao hàng",
-      products: [
-        {
-          name: "Logitech G Pro X Mechanical Gaming Keyboard",
-          quantity: 1,
-          price: 2000000,
-        },
-        { name: "Chuột Logitech G502 HERO", quantity: 2, price: 1500000 },
-      ],
-    },
-    {
-      id: 2,
-      customerPhone: "0797169613",
-      date: "2024-11-02",
-      address: "100 Nguyễn Huệ, Quận 1, TP Hồ Chí Minh",
-      status: "Chờ thanh toán",
-      products: [
-        { name: "Bàn phím cơ Ducky One 2", quantity: 1, price: 3000000 },
-      ],
-    },
-  ];
-  localStorage.setItem("orders", JSON.stringify(sampleOrders));
-}
 document.addEventListener("DOMContentLoaded", () => {
-  const currentUserPhone = "0869043004"; // Số điện thoại của người dùng hiện tại
-  displayOrderHistory(currentUserPhone);
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!currentUser || !currentUser.ID) {
+    alert("Vui lòng đăng nhập trước khi truy cập trang này.");
+    window.location.href = "dangnhap.html";
+    return;
+  }
+
+  const currentCustomerId = currentUser.ID;
+
+  const ordersKey = `orders${currentCustomerId}`;
+  displayOrders(ordersKey);
 });
 
-function displayOrderHistory(phone) {
-  const orders = JSON.parse(localStorage.getItem("orders")) || [];
-  const userOrders = orders.filter((order) => order.customerPhone === phone);
+// Function to display orders dynamically
+function displayOrders(ordersKey) {
+  const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
 
-  let totalAmount = 0;
-  const orderList = document.getElementsByClassName("order-list")[0];
-  //    orderList.innerHTML = "";
+  if (orders.length === 0) {
+    document.querySelector(".order-list").innerHTML = `<p>Không có đơn hàng nào.</p>`;
+    return;
+  }
 
-  userOrders.forEach((order) => {
-    const totalOrderPrice = order.products.reduce(
-      (total, item) => total + item.price * item.quantity,
+  let totalSpent = 0;
+  const orderList = document.querySelector(".order-list");
+  orderList.innerHTML = ""; // Clear existing orders
+
+  orders.forEach((order, index) => {
+    const orderTotal = order.items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
       0
     );
-    totalAmount += totalOrderPrice;
+    totalSpent += orderTotal;
 
     const orderItem = document.createElement("div");
     orderItem.className = "order-item";
     orderItem.innerHTML = `
-            <div class="order-header">
-                <h3>Đơn hàng #${order.id}</h3>
-                <span class="order-status">${order.status}</span>
-            </div>
-            <div class="order-details">
-                <p>Ngày đặt: ${order.date}</p>
-                <p>Địa chỉ: ${order.address}</p>
-                ${order.products
-                  .map(
-                    (product) => `
-                    <p>${product.name} - Số lượng: ${
-                      product.quantity
-                    } - ${product.price.toLocaleString()}đ</p>
-                `
-                  )
-                  .join("")}
-                <p class="total-price">Tổng cộng: ${totalOrderPrice.toLocaleString()}đ</p>
-                <button class="details-btn" onclick="viewOrderDetails(${
-                  order.id
-                })">Xem chi tiết</button>
-            </div>
-        `;
+      <div class="order-header">
+        <h3>Đơn hàng #${index + 1}</h3>
+        <span class="order-status">${order.status || "Chưa xử lý"}</span>
+      </div>
+      <div class="order-details">
+        <p>Ngày đặt: ${order.orderDate}</p>
+        <p>Địa chỉ: ${order.customerInfo.address}</p>
+        ${order.items
+          .map(
+            (item) => `
+          <p>${item.name} - Số lượng: ${item.quantity} - ${parseInt(item.price).toLocaleString()}đ</p>
+        `
+          )
+          .join("")}
+        <p class="total-price">Tổng cộng: ${orderTotal.toLocaleString()}đ</p>
+        <button class="details-btn" onclick="viewOrderDetails(${index})">Xem chi tiết</button>
+      </div>
+    `;
     orderList.appendChild(orderItem);
   });
 
-  // document.getElementById("total-orders").textContent = userOrders.length;
-  // document.getElementById("total-amount").textContent = totalAmount.toLocaleString();
+  // Update total summary in the aside
+  document.querySelector(".summary").innerHTML = `
+    <h2>Tổng quan</h2>
+    <p>Tổng số đơn hàng: ${orders.length}</p>
+    <p>Tổng chi tiêu: ${totalSpent.toLocaleString()}đ</p>
+    <label for="status-filter">Lọc theo trạng thái:</label>
+    <select id="status-filter" onchange="filterOrders(this.value)">
+      <option value="all">Chọn trạng thái</option>
+      <option value="Đã giao hàng">Đã giao hàng</option>
+      <option value="Chờ thanh toán">Chờ thanh toán</option>
+    </select>
+  `;
 }
 
-// Tạm thời chỉ hiển thị một thông báo khi nhấn nút "Xem chi tiết"
-function viewOrderDetails(orderId) {
-  alert(`Chi tiết đơn hàng ${orderId}`);
+// Filter orders by status
+function filterOrders(status) {
+  const currentCustomerId = "12345"; // Replace with dynamic customer ID
+  const ordersKey = `orders#${currentCustomerId}`;
+  const allOrders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+
+  const filteredOrders =
+    status === "all"
+      ? allOrders
+      : allOrders.filter((order) => order.status === status);
+
+  // Update order list with filtered orders
+  displayOrdersList(filteredOrders);
+}
+
+function displayOrdersList(orders) {
+  const orderList = document.querySelector(".order-list");
+  orderList.innerHTML = ""; // Clear existing orders
+
+  if (orders.length === 0) {
+    orderList.innerHTML = `<p>Không có đơn hàng nào với trạng thái này.</p>`;
+    return;
+  }
+
+  orders.forEach((order, index) => {
+    const orderTotal = order.items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    const orderItem = document.createElement("div");
+    orderItem.className = "order-item";
+    orderItem.innerHTML = `
+      <div class="order-header">
+        <h3>Đơn hàng #${index + 1}</h3>
+        <span class="order-status">${order.status || "Chưa xử lý"}</span>
+      </div>
+      <div class="order-details">
+        <p>Ngày đặt: ${order.orderDate}</p>
+        <p>Địa chỉ: ${order.customerInfo.address}</p>
+        ${order.items
+          .map(
+            (item) => `
+          <p>${item.name} - Số lượng: ${item.quantity} - ${parseInt(item.price).toLocaleString()}đ</p>
+        `
+          )
+          .join("")}
+        <p class="total-price">Tổng cộng: ${orderTotal.toLocaleString()}đ</p>
+        <button class="details-btn" onclick="viewOrderDetails(${index})">Xem chi tiết</button>
+      </div>
+    `;
+    orderList.appendChild(orderItem);
+  });
+}
+
+// Placeholder for view details functionality
+function viewOrderDetails(orderIndex) {
+  alert(`Chi tiết đơn hàng #${orderIndex + 1}`);
 }

@@ -15,15 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault(); 
     const phone = loginForm.querySelector('input[type="text"]').value;  
     const password = loginForm.querySelector('input[type="password"]').value;
-
-    
     
     // Hàm xác thực thông tin của khách hàng
     const customer = authenticateUser(phone, password);
     if (customer) {
       localStorage.setItem("currentUser", JSON.stringify(customer));
       redirectToRolePage();
-     
     } else {
       alert("Thông tin đăng nhập không chính xác.");
     }
