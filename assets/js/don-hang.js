@@ -17,13 +17,27 @@ document.addEventListener("DOMContentLoaded", () => {
 function displayOrders(ordersKey) {
   const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
 
+  const orderList = document.querySelector(".order-list");
+  const summary = document.querySelector(".summary");
+
   if (orders.length === 0) {
-    document.querySelector(".order-list").innerHTML = `<p>Không có đơn hàng nào.</p>`;
+    // If no orders exist, display default message
+    orderList.innerHTML = `<p>Không có đơn hàng nào.</p>`;
+    summary.innerHTML = `
+      <h2>Tổng quan</h2>
+      <p>Tổng số đơn hàng: 0</p>
+      <p>Tổng chi tiêu: 0đ</p>
+      <label for="status-filter">Lọc theo trạng thái:</label>
+      <select id="status-filter" onchange="filterOrders(this.value)">
+        <option value="all">Chọn trạng thái</option>
+        <option value="Đã giao hàng">Đã giao hàng</option>
+        <option value="Chờ thanh toán">Chờ thanh toán</option>
+      </select>
+    `;
     return;
   }
 
   let totalSpent = 0;
-  const orderList = document.querySelector(".order-list");
   orderList.innerHTML = ""; // Clear existing orders
 
   orders.forEach((order, index) => {
@@ -58,7 +72,7 @@ function displayOrders(ordersKey) {
   });
 
   // Update total summary in the aside
-  document.querySelector(".summary").innerHTML = `
+  summary.innerHTML = `
     <h2>Tổng quan</h2>
     <p>Tổng số đơn hàng: ${orders.length}</p>
     <p>Tổng chi tiêu: ${totalSpent.toLocaleString()}đ</p>
