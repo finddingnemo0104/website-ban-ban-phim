@@ -2,12 +2,20 @@ function isValidLogin() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (!currentUser) {
     window.location.href = "dangnhap.html";
+    return;
   }
 
   if (!currentUser.status) {
     alert("Tài khoản đã bị khóa !");
     window.location.href = "dangnhap.html";
     localStorage.removeItem("currentUser");
+    return;
+  }
+
+  const currentURL = window.location.pathname;
+  if ((currentUser.role === "admin") && !(currentURL === "/quan-ly-san-pham.html" || currentURL === "/quan-ly-don-hang.html" || currentURL === "/quan-ly-khach-hang.html" || currentURL === "/thong-ke.html")) {
+    window.location.href = "quan-ly-san-pham.html";
+    return;
   }
 }
 

@@ -50,3 +50,22 @@ function updateCartCount() {
 
   
   document.addEventListener("DOMContentLoaded", updateCartCount);
+  function addToCard(id) {
+    const product = listPro.find((p) => p.ID === id);
+  
+    if (product) {
+      const cartItem = cart.find((item) => item.ID === id);
+  
+      if (cartItem) {
+        cartItem.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+  
+      localStorage.setItem("cart" + IDUser, JSON.stringify(cart));
+  
+      updateCartCount();
+    } else {
+      console.error(`Product with ID ${id} not found.`);
+    }
+  }

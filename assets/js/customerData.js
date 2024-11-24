@@ -30,11 +30,11 @@ const listCustomer = [];
 listCustomer.push(
   new Customer(
     "",
-    "Admin",
-    listGender.khac,
-    "admin@example.com",
-    "0",
-    new Date("1990-02-15"),
+    "",
+    "",
+    "",
+    "admin@",
+    "",
     "",
     true,
     "admin",

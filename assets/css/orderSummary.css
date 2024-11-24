@@ -79,6 +79,7 @@ body {
     color: #333;
 }
 .giam_gia{
-    margin:0px 0px -30px 1285px;
-    height: 10px;
+    text-align: right;
+    margin-top: 20px;
+    position: relative;
 }
