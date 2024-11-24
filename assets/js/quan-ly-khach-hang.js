@@ -609,12 +609,13 @@ function changeCustomerStatus(input, customerID) {
 
   if (input.checked) {
     listCustomer[indexCustomer].status = true;
+    alert(`Đã mở tài khoản của khách hàng ${customerID}`);
   } else {
     listCustomer[indexCustomer].status = false;
+    alert(`Đã khóa tài khoản của khách hàng ${customerID}`);
   }
 
   localStorage.setItem("customers", JSON.stringify(listCustomer));
-  alert(`Đã khóa tài khoản của khách hàng ${customerID}`);
 }
 // --------------------------------------------------------------------------------- //
 

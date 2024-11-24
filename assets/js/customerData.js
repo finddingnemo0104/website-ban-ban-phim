@@ -208,7 +208,6 @@ listCustomer.push(
   )
 );
 
-
 if (!localStorage.getItem("customers")) {
   const serializedCustomers = JSON.stringify(listCustomer);
   localStorage.setItem("customers", serializedCustomers);
