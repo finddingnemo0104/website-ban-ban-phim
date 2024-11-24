@@ -67,11 +67,30 @@ body {
 
 .button-style {
   color: white;
-  background-color: #21568a;
+  background-color: #15803d;
   padding: 6px;
   border-radius: 10px;
   cursor: pointer;
   display: flex;
+}
+
+.button-style i {
+  margin-right: 5px;
+}
+
+.button-style span {
+  font-size: 14px;
+}
+
+/* Green Filter Button */
+.filter-btn {
+  background-color: #15803d;
+}
+
+/* Gray Refresh Button */
+.refresh-btn {
+  background-color: #d1d5db;
+  color: black;
 }
 
 .title-page {
