@@ -1,4 +1,3 @@
-const products = getProduct();
 function getProduct() {
   if (
     localStorage.getItem("products") === null ||
@@ -8,6 +7,8 @@ function getProduct() {
   }
   return JSON.parse(localStorage.getItem("products"));
 }
+
+const products = getProduct();
 
 const productsPerPage = 6;
 let currentPage = 1;
@@ -154,5 +155,3 @@ document.querySelectorAll(".links a").forEach(link => {
     filterByCategory(category);
   });
 });
-
-
