@@ -13,8 +13,31 @@ function isValidLogin() {
   }
 
   const currentURL = window.location.pathname;
-  if ((currentUser.role === "admin") && !(currentURL === "/quan-ly-san-pham.html" || currentURL === "/quan-ly-don-hang.html" || currentURL === "/quan-ly-khach-hang.html" || currentURL === "/thong-ke.html")) {
+  if (
+    currentUser.role === "admin" &&
+    !(
+      currentURL === "/quan-ly-san-pham.html" ||
+      currentURL === "/quan-ly-don-hang.html" ||
+      currentURL === "/quan-ly-khach-hang.html" ||
+      currentURL === "/thong-ke.html"
+    )
+  ) {
     window.location.href = "quan-ly-san-pham.html";
+    return;
+  }
+
+  if (
+    currentUser.role === "customer" &&
+    !(
+      currentURL === "/index.html" ||
+      currentURL === "/detail.html" ||
+      currentURL === "/don-hang.html" ||
+      currentURL === "/giohang.html" ||
+      currentURL === "/orderSummary.html" ||
+      currentURL === "/thongtin.html"
+    )
+  ) {
+    window.location.href = "index.html";
     return;
   }
 }
@@ -54,8 +77,7 @@ function showModel(model) {
 
   if (currentUser.role === "admin") {
     showAdminInfoTable();
-  }
-  else {
+  } else {
     showCustomerInfoTable();
   }
 }

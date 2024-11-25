@@ -30,12 +30,12 @@ const listCustomer = [];
 listCustomer.push(
   new Customer(
     "",
-    "Admin1",
-    listGender.khac,  
-    "admin1@example.com",
+    "",
+    "",  
+    "",
     "0869043004",
-    new Date("1990-02-15"),
-    "123 Lê Lợi, Quận 1, Thành phố Hồ Chí Minh",
+    "",
+    "",
     true,
     "admin",
     listRole.admin
@@ -45,11 +45,11 @@ listCustomer.push(
 listCustomer.push(
   new Customer(
     "",
-    "Admin",
-    listGender.khac,
-    "admin@example.com",
+    "",
+    "",
+    "",
     "0",
-    new Date("1990-02-15"),
+    "",
     "",
     true,
     "admin",
@@ -82,7 +82,7 @@ listCustomer.push(
     new Date("1995-06-24"),
     "456 Nguyễn Trãi, Quận 5, Thành phố Hồ Chí Minh",
     true,
-    "",
+    "123",
     listRole.customer
   )
 );
@@ -97,7 +97,7 @@ listCustomer.push(
     new Date("1988-11-09"),
     "789 Phan Đình Phùng, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
     true,
-    "",
+    "123",
     listRole.customer
   )
 );
@@ -207,7 +207,6 @@ listCustomer.push(
     listRole.customer
   )
 );
-
 
 if (!localStorage.getItem("customers")) {
   const serializedCustomers = JSON.stringify(listCustomer);

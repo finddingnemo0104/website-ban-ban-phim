@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Register customer
     registerCustomer({
-      ID: genderateCustomerID(),
+      ID: generateCustomerID(),
       fullName,
       gender,
       email,
@@ -126,8 +126,8 @@ function isValidName(name) {
   return regex.test(name);
 }
 
-// Genderate customer ID
-function genderateCustomerID() {
+// Generate customer ID
+function generateCustomerID() {
   const listCustomer = getCustomer();
   const lastCustomer = listCustomer[listCustomer.length - 1];
   const lastCustomerID = parseInt(lastCustomer.ID.split("#KH")[1]);

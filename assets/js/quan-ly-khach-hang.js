@@ -23,8 +23,8 @@ function getCustomer() {
 }
 // --------------------------------------------------------------------------------- //
 
-// Genderate customer ID
-function genderateCustomerID() {
+// Generate customer ID
+function generateCustomerID() {
   const listCustomer = getCustomer();
   const lastCustomer = listCustomer[listCustomer.length - 1];
   const lastCustomerID = parseInt(lastCustomer.ID.split("#KH")[1]);
@@ -222,7 +222,7 @@ function addCustomer(event) {
   }
 
   const newCustomer = new Customer(
-    genderateCustomerID(),
+    gennerateCustomerID(),
     name,
     gender,
     email,
@@ -609,12 +609,13 @@ function changeCustomerStatus(input, customerID) {
 
   if (input.checked) {
     listCustomer[indexCustomer].status = true;
+    alert(`Đã mở tài khoản của khách hàng ${customerID}`);
   } else {
     listCustomer[indexCustomer].status = false;
+    alert(`Đã khóa tài khoản của khách hàng ${customerID}`);
   }
 
   localStorage.setItem("customers", JSON.stringify(listCustomer));
-  alert(`Đã khóa tài khoản của khách hàng ${customerID}`);
 }
 // --------------------------------------------------------------------------------- //
 

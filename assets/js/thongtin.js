@@ -1,60 +1,74 @@
 let User = JSON.parse(localStorage.getItem("currentUser")) || [];
 let IDUser = User.ID;
+let infUser = JSON.parse(localStorage.getItem("currentUser"));
+
+const orderStatus = {
+  pending: "Chưa xử lý",
+  confirmed: "Đã xác nhận",
+  successful: "Đã giao thành công",
+  canceled: "Đã hủy"
+}
+  
 function showadr() {
-    document.getElementById('address-input').style.display = 'block';
+  document.getElementById("address-input").style.display = "block";
 }
 
 function hideadr() {
-    document.getElementById('address-input').style.display = 'none';
+  document.getElementById("address-input").style.display = "none";
 }
 
 function showBank() {
-    // Hiển thị thông tin chuyển khoản
-    const ttck = document.getElementById("ttck");
-    if (ttck) {
-        ttck.style.display = "block";
-        ttck.innerHTML = `
+  // Hiển thị thông tin chuyển khoản
+  const ttck = document.getElementById("ttck");
+  if (ttck) {
+    ttck.style.display = "block";
+    ttck.innerHTML = `
             <label><strong>STK: 123456789</strong></label><br>
             <label><strong>Ngân hàng: ACB</strong></label><br>
             <label><strong>Tên tài khoản: SGU CLICK</strong></label><br>
             <button type="submit" id="ck" onclick="dtt()">Đã chuyển khoản</button><br>
         `;
-    }
-    document.getElementById('the').style.display = 'none';
-    document.getElementById('tg').style.display = 'none';
-    document.getElementById('cvv').style.display = 'none';
+  }
+  document.getElementById("the").style.display = "none";
+  document.getElementById("tg").style.display = "none";
+  document.getElementById("cvv").style.display = "none";
 
-    autoClickButton();
+  autoClickButton();
 }
 let isConfirmed = false;
-function dtt(){
-    const button = document.getElementById('ck');
-    button.classList.add('clicked');
-    isConfirmed=true;
+function dtt() {
+  const button = document.getElementById("ck");
+  button.classList.add("clicked");
+  isConfirmed = true;
 }
 function showCard() {
-    document.getElementById('the').style.display = 'block';
-    document.getElementById('tg').style.display = 'block';
-    document.getElementById('cvv').style.display = 'block';
-    document.getElementById("ttck").style.display = "none"; 
-    
+  document.getElementById("the").style.display = "block";
+  document.getElementById("tg").style.display = "block";
+  document.getElementById("cvv").style.display = "block";
+  document.getElementById("ttck").style.display = "none";
 }
-function hideCard(){
-    document.getElementById('the').style.display = 'none';
-    document.getElementById('tg').style.display = 'none';
-    document.getElementById('cvv').style.display = 'none';
-    document.getElementById("ttck").style.display = "none"; 
+function hideCard() {
+  document.getElementById("the").style.display = "none";
+  document.getElementById("tg").style.display = "none";
+  document.getElementById("cvv").style.display = "none";
+  document.getElementById("ttck").style.display = "none";
 }
-document.querySelector('.close-btn').addEventListener('click', () => {
-    document.querySelector('.modal').style.display = 'none';
+document.querySelector(".close-btn").addEventListener("click", () => {
+  document.querySelector(".modal").style.display = "none";
 });
-function checkDefault(){
-      const defaultAdr=document.getElementById("default_address").checked;
-      let adr = JSON.parse(localStorage.getItem("currentUser")) || [];
-      let address="( "+adr.address+" )"
-      if(defaultAdr&&adr.address!=="") document.getElementById("defAdr").innerHTML=address;
+function checkDefault() {
+  const defaultAdr = document.getElementById("default_address").checked;
+  let adr = JSON.parse(localStorage.getItem("currentUser")) || [];
+  let address = "( " + adr.address + " )";
+  if (defaultAdr && adr.address !== "")
+    document.getElementById("defAdr").innerHTML = address;
 }
 checkDefault();
+
+const nameDef = document.getElementById("hoTen");
+const phoneDef = document.getElementById("SDT");
+nameDef.placeholder=infUser.name;
+phoneDef.placeholder=infUser.phone;
 function validateForm(event) {
     const name = document.getElementById("hoTen");
     const phone = document.getElementById("SDT");
@@ -74,17 +88,11 @@ function validateForm(event) {
         window.location.href = "index.html";
         return true;
     }
-
-    if (name.value.trim() === "") {
-        alert("Họ tên không được để trống!");
-        name.focus();
-        event.preventDefault();
-        return false;
-    }
+    
 
     // Validate phone number
     const phoneRegex = /^[0-9]{10}$/;
-    if (phone.value.trim() === "" || !phoneRegex.test(phone.value.trim())) {
+    if (phone.value.trim() !== "" && !phoneRegex.test(phone.value.trim())) {
         alert("SĐT không hợp lệ! Vui lòng nhập 10 chữ số.");
         phone.focus();
         event.preventDefault();
@@ -174,9 +182,10 @@ function validateForm(event) {
     let sum = JSON.parse(localStorage.getItem("total")) || 0;
     // Prepare the order object, overwriting customer info  
     const orderData = {
+        orderID: generateOrderID(),
         customerInfo: {
-            name: name.value.trim(),
-            phone: phone.value.trim(),
+            name: name.value.trim()||infUser.fullName,
+            phone: phone.value.trim()||infUser.phone,
             address: otherAdr ? adr.value.trim() : addr.address,
             paymentMethod: payCard ? "Thẻ" : "Khác",
             cardInfo: payCard ? {
@@ -188,7 +197,8 @@ function validateForm(event) {
         discount: dis,
         orderDate: formattedTime,
         items: JSON.parse(localStorage.getItem("cart" + IDUser)) || [],
-        total: sum
+        total: sum,
+        orderStatus: orderStatus.pending,
     };
     localStorage.setItem("discnt", 0);
     // Save the order and cart together
@@ -199,26 +209,50 @@ function validateForm(event) {
 
     // Redirect to the order summary page
     window.location.href = "orderSummary.html";
-    return true;
+  return true;
 }
 
 // Save both cart and order together
 function saveOrder(data) {
-    const orders = JSON.parse(localStorage.getItem("orders" + IDUser)) || [];
-    orders.push(data);  // Add new order to existing orders
-    localStorage.setItem("orders" + IDUser, JSON.stringify(orders));
+  const orders = JSON.parse(localStorage.getItem("orders" + IDUser)) || [];
+  orders.push(data); // Add new order to existing orders
+  localStorage.setItem("orders" + IDUser, JSON.stringify(orders));
 }
 
 // Add event listener for the confirm button
-document.querySelector('.confirm-btn').addEventListener('click', (e) => {
-    if (!validateForm(e)) {
-        e.preventDefault();
-    }
+document.querySelector(".confirm-btn").addEventListener("click", (e) => {
+  if (!validateForm(e)) {
+    e.preventDefault();
+  }
 });
 function autoClickButton() {
-    setTimeout(() => {
-        if (!isConfirmed) {
-            document.getElementById("ck").click();
+  setTimeout(() => {
+    if (!isConfirmed) {
+      document.getElementById("ck").click();
+    }
+  }, 5000);
+}
+
+function generateOrderID() {
+  const orderKeys = Object.keys(localStorage).filter((key) =>
+    key.startsWith("orders#")
+  );
+
+  let orderIDs = [];
+
+  orderKeys.forEach((key) => {
+    const orders = JSON.parse(localStorage.getItem(key)); 
+    orders.forEach((order) => {
+      if (order.orderID) {
+        const orderNumber = parseInt(order.orderID.split("#DH")[1]);
+        if (!isNaN(orderNumber)) {
+          orderIDs.push(orderNumber); 
         }
-    }, 5000);
+      }
+    });
+  });
+
+  const maxOrderID = Math.max(...orderIDs);
+  const nextOrderID = (maxOrderID + 1).toString().padStart(5, "0");
+  return `#DH${nextOrderID}`;
 }
