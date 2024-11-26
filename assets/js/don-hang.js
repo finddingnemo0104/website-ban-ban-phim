@@ -31,6 +31,7 @@ function displayOrders(ordersKey) {
         <option value="all">Chọn trạng thái</option>
         <option value="Đã giao hàng">Đã giao hàng</option>
         <option value="Chờ thanh toán">Chờ thanh toán</option>
+        <option value="Chưa xử lý">Chưa xử lý</option>
       </select>
     `;
     return;
@@ -80,22 +81,40 @@ function displayOrders(ordersKey) {
       <option value="all">Chọn trạng thái</option>
       <option value="Đã giao hàng">Đã giao hàng</option>
       <option value="Chờ thanh toán">Chờ thanh toán</option>
+      <option value="Chưa xử lý">Chưa xử lý</option>
     </select>
   `;
 }
 
 // Filter orders by status
 function filterOrders(status) {
-  const currentCustomerId = "12345"; // Replace with dynamic customer ID
+  // Get the current user from localStorage
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser || !currentUser.ID) {
+    console.error("User is not logged in or missing user ID.");
+    return;
+  }
+  
+  const currentCustomerId = currentUser.ID;
   const ordersKey = `orders#${currentCustomerId}`;
   const allOrders = JSON.parse(localStorage.getItem(ordersKey)) || [];
 
-  const filteredOrders =
+  // Filter orders based on the status
+  const filteredOrders = 
     status === "all"
       ? allOrders
-      : allOrders.filter((order) => order.status === status);
+      : allOrders.filter((order) => {
+          if (status === "Chưa xử lý") {
+            return order.orderStatus === "Chưa xử lý";
+          } else if (status === "Chờ thanh toán") {
+            return order.orderStatus === "Chờ thanh toán";
+          } else if (status === "Đã giao hàng") {
+            return order.orderStatus === "Đã giao hàng";
+          }
+          return false;
+      });
 
-  // Update order list with filtered orders
+  // Update the order list display with the filtered orders
   displayOrdersList(filteredOrders);
 }
 
@@ -119,7 +138,7 @@ function displayOrdersList(orders) {
     orderItem.innerHTML = `
       <div class="order-header">
         <h3>Đơn hàng #${index + 1}</h3>
-        <span class="order-status">${order.status || "Chưa xử lý"}</span>
+        <span class="order-status">${order.orderStatus || "Chưa xử lý"}</span>
       </div>
       <div class="order-details">
         <p>Ngày đặt: ${order.orderDate}</p>
