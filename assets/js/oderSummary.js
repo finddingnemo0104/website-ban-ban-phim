@@ -168,3 +168,6 @@ function show(i){
     document.getElementById("totalPrice").innerHTML = `<p id="totalPrice"><strong>Tổng tiền:</strong> ${formatPrice(sum)}</p><br>`  ;
 }
 
+function goBackToOrders() {
+    window.location.href = "don-hang.html";
+  }

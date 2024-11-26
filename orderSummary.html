@@ -35,7 +35,7 @@
           ><img class="logo" src="./assets/Image/logo.png" alt="logo"
         /></a>
         <p class="slogan" style="color: white">Chất phím, chất click !</p>
-      </SloganBar>
+    </SloganBar>
   
       <div class="header-container">
         <div class="user">
@@ -80,37 +80,44 @@
       <div class="order-total"><br>
           <p id="totalPrice"></p>
       </div>
-  </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-button-container" style="margin-top: 20px;">
+      <button onclick="goBackToOrders()" class="back-button" style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        ← Quay lại
+      </button>
+    </div>
     
-        <!-- Model user info -->
-        <div class="model-user-info-container">
-            <div class="user-info-ele">
-              <i class="fa-solid fa-circle-user user-info-icon"></i>
-              <div onclick="showModel('login-info')">Thông tin tài khoản</div>
-              <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
-            </div>
-      
-            <table class="login-info"></table>
-      
-            <a class="user-info-ele" href="don-hang.html">
-              <i class="fa-solid fa-rectangle-list user-info-icon"></i>
-              <div>Đơn hàng</div>
-            </a>
-      
-            <div
-              class="user-info-ele log-out"
-              style="border-top: 1px solid gray"
-              onclick="logOut()"
-            >
-              <i
-                class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
-                style="color: gray"
-              ></i>
-              <div>Đăng xuất</div>
-            </div>
-          </div>
-          <ul style="text-align: center;" id="sldonhang">
-          </ul>
+  <!-- Model user info -->
+  <div class="model-user-info-container">
+      <div class="user-info-ele">
+        <i class="fa-solid fa-circle-user user-info-icon"></i>
+        <div onclick="showModel('login-info')">Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+      </div>
+
+      <table class="login-info"></table>
+
+      <a class="user-info-ele" href="don-hang.html">
+        <i class="fa-solid fa-rectangle-list user-info-icon"></i>
+        <div>Đơn hàng</div>
+      </a>
+
+      <div
+        class="user-info-ele log-out"
+        style="border-top: 1px solid gray"
+        onclick="logOut()"
+      >
+        <i
+          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+          style="color: gray"
+        ></i>
+        <div>Đăng xuất</div>
+      </div>
+  </div>
+  <ul style="text-align: center;" id="sldonhang">
+  </ul>
         
 </body>
 <script

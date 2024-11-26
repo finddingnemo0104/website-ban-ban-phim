@@ -1,50 +1,50 @@
-// if (!localStorage.getItem("orders")) {
-//   const orders = [
-//     {
-//       id: 1,
-//       customer: "Nguyễn Văn A",
-//       customerPhone: "0765184992",
-//       date: "2024-11-01",
-//       address: "279A An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh",
-//       status: "chưa xử lý",
-//       products: [
-//         {
-//           name: "Logitech G Pro X Mechanical Gaming Keyboard",
-//           quantity: 1,
-//           price: 2000000,
-//         },
-//         {
-//           name: "Logitech G Pro X Mechanical Gaming Keyboard",
-//           quantity: 2,
-//           price: 2000000,
-//         },
-//       ],
-//       history: [
-//         { status: "chưa xử lý", date: "2024-11-01" },
-//         { status: "đã xác nhận", date: "2024-11-02" },
-//       ],
-//     },
-//     {
-//       id: 2,
-//       customer: "Minh Thư",
-//       customerPhone: "0364748018",
-//       date: "2024-11-01",
-//       address: "279A An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh",
-//       status: "chưa xử lý",
-//       products: [
-//         { name: "Laptop", quantity: 1, price: 2000000 },
-//         { name: "Laptop", quantity: 2, price: 2000000 },
-//       ],
-//       history: [
-//         { status: "chưa xử lý", date: "2024-11-01" },
-//         { status: "đã xác nhận", date: "2024-11-02" },
-//       ],
-//     },
-//   ];
+if (!localStorage.getItem("orders")) {
+  const orders = [
+    {
+      id: 1,
+      customer: "Nguyễn Văn A",
+      customerPhone: "0765184992",
+      date: "2024-11-01",
+      address: "279A An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh",
+      status: "chưa xử lý",
+      products: [
+        {
+          name: "Logitech G Pro X Mechanical Gaming Keyboard",
+          quantity: 1,
+          price: 2000000,
+        },
+        {
+          name: "Logitech G Pro X Mechanical Gaming Keyboard",
+          quantity: 2,
+          price: 2000000,
+        },
+      ],
+      history: [
+        { status: "chưa xử lý", date: "2024-11-01" },
+        { status: "đã xác nhận", date: "2024-11-02" },
+      ],
+    },
+    {
+      id: 2,
+      customer: "Minh Thư",
+      customerPhone: "0364748018",
+      date: "2024-11-01",
+      address: "279A An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh",
+      status: "chưa xử lý",
+      products: [
+        { name: "Laptop", quantity: 1, price: 2000000 },
+        { name: "Laptop", quantity: 2, price: 2000000 },
+      ],
+      history: [
+        { status: "chưa xử lý", date: "2024-11-01" },
+        { status: "đã xác nhận", date: "2024-11-02" },
+      ],
+    },
+  ];
 
-//   // Lưu dữ liệu mẫu vào `localStorage` nếu chưa có
-//   localStorage.setItem("orders", JSON.stringify(orders));
-// }
+  // Lưu dữ liệu mẫu vào `localStorage` nếu chưa có
+  localStorage.setItem("orders", JSON.stringify(orders));
+}
 
 // Lấy thông tin email của admin từ localStorage và hiển thị
 document.addEventListener("DOMContentLoaded", () => {
