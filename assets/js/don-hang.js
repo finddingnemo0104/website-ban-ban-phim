@@ -96,23 +96,13 @@ function filterOrders(status) {
   }
   
   const currentCustomerId = currentUser.ID;
-  const ordersKey = `orders#${currentCustomerId}`;
+  const ordersKey = `orders${currentCustomerId}`;
   const allOrders = JSON.parse(localStorage.getItem(ordersKey)) || [];
-
   // Filter orders based on the status
   const filteredOrders = 
     status === "all"
       ? allOrders
-      : allOrders.filter((order) => {
-          if (status === "Chưa xử lý") {
-            return order.orderStatus === "Chưa xử lý";
-          } else if (status === "Chờ thanh toán") {
-            return order.orderStatus === "Chờ thanh toán";
-          } else if (status === "Đã giao hàng") {
-            return order.orderStatus === "Đã giao hàng";
-          }
-          return false;
-      });
+      : allOrders.filter((order) => order.orderStatus === status);
 
   // Update the order list display with the filtered orders
   displayOrdersList(filteredOrders);
@@ -151,13 +141,10 @@ function displayOrdersList(orders) {
           )
           .join("")}
         <p class="total-price">Tổng cộng: ${orderTotal.toLocaleString()}đ</p>
-        <button class="details-btn">Xem chi tiết</button>
+        <button class="details-btn" onclick="viewOrderDetails(${index})">Xem chi tiết</button>
       </div>
     `;
-    console.log(dicument.querySelector('.details-btn'));
-    dicument.querySelector('.details-btn').addEventListener('click', () => {
-        viewOrderDetails(index);
-    })
+
     orderList.appendChild(orderItem);
   });
 }
