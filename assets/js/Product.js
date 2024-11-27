@@ -117,9 +117,9 @@ function productSearch(text){
 // }
 
  let minInputPrice, maxInputPrice
- if(minPrice.value=="" && maxPrice.value==""){
+ if(minPrice.value==="" || maxPrice.value===""){
   minInputPrice=0
-  maxInputPrice=Number.MAX_SAFE_INTEGER
+  maxInputPrice=0
  } else { 
   minInputPrice=minPrice.value
   maxInputPrice=maxPrice.value
