@@ -131,7 +131,7 @@ if (orders.length === 0) {
             sldonhang.appendChild(li);
         }
     }
-    show(1);
+    show(localStorage.getItem('orderIndex'));
     }
 function show(i){
         let order = orders[i-1]; 

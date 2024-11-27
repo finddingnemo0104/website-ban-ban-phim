@@ -151,9 +151,13 @@ function displayOrdersList(orders) {
           )
           .join("")}
         <p class="total-price">Tổng cộng: ${orderTotal.toLocaleString()}đ</p>
-        <button class="details-btn" onclick="viewOrderDetails(${index})">Xem chi tiết</button>
+        <button class="details-btn">Xem chi tiết</button>
       </div>
     `;
+    console.log(dicument.querySelector('.details-btn'));
+    dicument.querySelector('.details-btn').addEventListener('click', () => {
+        viewOrderDetails(index);
+    })
     orderList.appendChild(orderItem);
   });
 }
@@ -163,10 +167,12 @@ function viewOrderDetails(orderIndex) {
   const currentCustomerId = JSON.parse(localStorage.getItem("currentUser")).ID;
   const ordersKey = `orders${currentCustomerId}`;
   const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
+  console.log(orderIndex);
 
   if (orders[orderIndex]) {
     // Store selected order details in localStorage for orderSummary.html
     localStorage.setItem("selectedOrder", JSON.stringify(orders[orderIndex]));
+    localStorage.setItem('orderIndex', ''+(orderIndex+1));
     window.location.href = `orderSummary.html?orderIndex=${orderIndex}`;
   } else {
     alert("Đơn hàng không tồn tại.");
