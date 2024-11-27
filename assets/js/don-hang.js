@@ -127,7 +127,7 @@ function displayOrdersList(orders) {
     orderItem.className = "order-item";
     orderItem.innerHTML = `
       <div class="order-header">
-        <h3>Đơn hàng #${index + 1}</h3>
+        <h3>Đơn hàng #000${index + 1}</h3>
         <span class="order-status">${order.orderStatus || "Chưa xử lý"}</span>
       </div>
       <div class="order-details">
