@@ -13,7 +13,7 @@ body {
 /* Phần đầu trang */
 .main-header {
   height: 20px;
-  background-color: #3498db;
+  background-color: #1e3a8a;
   color: #ffffff;
   text-align: center;
   font-size: 10px;
@@ -42,7 +42,7 @@ body {
 }
 
 .sidebar ul li a {
-  color: #3498db;
+  color: #1e3a8a;
   text-decoration: none;
   padding: 12px 20px;
   display: block;
@@ -52,7 +52,7 @@ body {
 
 .sidebar ul li a:hover,
 .sidebar ul li a:focus {
-  background-color: #3498db; /* Nền xanh dương khi rê chuột */
+  background-color: #1e3a8a; /* Nền xanh dương khi rê chuột */
   color: #ffffff; /* Chữ màu trắng khi rê chuột */
 }
 
@@ -67,7 +67,7 @@ body {
 .content {
   flex: 1;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #eaf1fb;
 }
 
 .overview-header h2 {
@@ -81,16 +81,16 @@ body {
 }
 
 .stat {
-  background-color: #3498db;
+  background-color: #1e3a8a;
   color: #fff;
-  padding: 15px;
+  padding: 50px;
   border-radius: 5px;
   text-align: center;
   flex: 1;
 }
 
 .stat.today {
-  background-color: #3498db;
+  background-color: #1e3a8a;
 }
 
 .stat.all {
@@ -129,13 +129,8 @@ body {
   border: 1px solid #ddd;
 }
 
-.table th {
-  background-color: #3498db;
-  color: #fff;
-}
-
 .table td a {
-  color: #3498db;
+  color: #1e3a8a;
   text-decoration: none;
 }
 
@@ -144,5 +139,81 @@ body {
 }
 
 .table tbody tr:hover {
-  background-color: #eaf2fb;
+  background-color: #e8e8eb;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.table-container {
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.filters {
+  margin-bottom: 10px;
+}
+
+.filters select,
+.filters input,
+.filters button {
+  margin-right: 10px;
+  padding: 8px;
+  font-size: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #f1f1f1;
+  text-align: left;
+}
+
+th {
+  background-color: #f1f1f1;
+}
+
+td.status.delivered {
+  color: green;
+  font-weight: bold;
+}
+
+td.status.cancelled {
+  color: red;
+  font-weight: bold;
+}
+
+td.status.processing {
+  color: orange;
+  font-weight: bold;
+}
+
+button.action-btn {
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button.action-btn:hover {
+  background-color: #45a049;
+}
+
+tfoot {
+  background-color: #f1f1f1;
+  font-weight: bold;
 }
