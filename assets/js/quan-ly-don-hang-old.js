@@ -340,3 +340,127 @@ function getOrdersFromLocalStorage() {
   return JSON.parse(localStorage.getItem("orders")) || [];
 }
 
+// Bao's part
+// Hàm lọc đơn hàng theo tên khách hàng, tình trạng, và ngày tháng
+function filterOrders(event) {
+  event.preventDefault();
+
+  const customerName = event.target.customer.value.trim().toLowerCase();
+  const status = event.target.status.value; // Lấy giá trị tình trạng đơn hàng từ dropdown
+  const startDate = event.target["start-date"].value;
+  const endDate = event.target["end-date"].value;
+
+  let filteredOrders = getOrdersFromLocalStorage(); // Lấy tất cả các đơn hàng từ localStorage
+
+  // Lọc theo tên khách hàng
+  if (customerName) {
+    filteredOrders = filteredOrders.filter((order) =>
+      order.customer.toLowerCase().includes(customerName)
+    );
+  }
+
+  // Lọc theo tình trạng đơn hàng
+  if (status && status !== "all") {
+    filteredOrders = filteredOrders.filter((order) => order.status === status);
+  }
+
+  // Lọc theo khoảng thời gian
+  if (startDate && endDate) {
+    filteredOrders = filteredOrders.filter((order) => {
+      const orderDate = new Date(order.date);
+      return orderDate >= new Date(startDate) && orderDate <= new Date(endDate);
+    });
+  }
+
+  // Hiển thị các đơn hàng đã lọc
+  displayOrders(filteredOrders);
+}
+
+// Hàm hiển thị danh sách đơn hàng (có thể dùng lại cho cả lọc và làm mới)
+function displayOrders(orders = getOrdersFromLocalStorage()) {
+  const orderList = document.getElementById("order-list");
+  orderList.innerHTML = ""; // Clear existing rows
+
+  orders.forEach((order) => {
+    const total = order.products.reduce(
+      (sum, product) => sum + product.quantity * product.price,
+      0
+    );
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${order.id}</td>
+      <td>${order.customer}</td>
+      <td>${order.date}</td>
+      <td>${total.toLocaleString()}đ</td>
+      <td>
+        <select class="status-dropdown" onchange="updateStatus(${
+          order.id
+        }, this.value)">
+          <option value="pending" ${
+            order.status === "pending" ? "selected" : ""
+          }>Chưa xử lý</option>
+          <option value="delivered" ${
+            order.status === "delivered" ? "selected" : ""
+          }>Đã giao</option>
+          <option value="canceled" ${
+            order.status === "canceled" ? "selected" : ""
+          }>Hủy đơn</option>
+        </select>
+      </td>
+      <td class="action-icons">
+        <i class="fa-solid fa-eye" onclick="viewOrderDetails(${order.id})"></i>
+        <i class="fa-solid fa-trash" onclick="deleteOrder(${order.id})"></i>
+      </td>
+    `;
+    orderList.appendChild(row);
+  });
+}
+// Hàm làm mới (reset filter và hiển thị lại tất cả đơn hàng)
+function refreshOrders() {
+  // Clear the filter inputs
+  const form = document.getElementById("order-filter-form");
+  form.reset(); // This will reset all the fields in the form
+
+  // Display all orders (without any filter)
+  displayOrders();
+}
+
+// Hàm hiển thị danh sách đơn hàng (có thể dùng lại cho cả lọc và làm mới)
+function displayOrders(orders = getOrdersFromLocalStorage()) {
+  const orderList = document.getElementById("order-list");
+  orderList.innerHTML = ""; // Clear existing rows
+
+  orders.forEach((order) => {
+    const total = order.products.reduce(
+      (sum, product) => sum + product.quantity * product.price,
+      0
+    );
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${order.id}</td>
+      <td>${order.customer}</td>
+      <td>${order.date}</td>
+      <td>${total.toLocaleString()}đ</td>
+      <td>
+        <select class="status-dropdown" onchange="updateStatus(${
+          order.id
+        }, this.value)">
+          <option value="pending" ${
+            order.status === "pending" ? "selected" : ""
+          }>Chưa xử lý</option>
+          <option value="delivered" ${
+            order.status === "delivered" ? "selected" : ""
+          }>Đã giao</option>
+          <option value="canceled" ${
+            order.status === "canceled" ? "selected" : ""
+          }>Hủy đơn</option>
+        </select>
+      </td>
+      <td class="action-icons">
+        <i class="fa-solid fa-eye" onclick="viewOrderDetails(${order.id})"></i>
+        <i class="fa-solid fa-trash" onclick="deleteOrder(${order.id})"></i>
+      </td>
+    `;
+    orderList.appendChild(row);
+  });
+}

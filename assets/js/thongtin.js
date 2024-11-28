@@ -91,9 +91,9 @@ function validateForm(event) {
     
 
     // Validate phone number
-    const phoneRegex = /^[0-9]{10}$/;
+    const phoneRegex = /^[0-9]{10,11}$/;
     if (phone.value.trim() !== "" && !phoneRegex.test(phone.value.trim())) {
-        alert("SĐT không hợp lệ! Vui lòng nhập 10 chữ số.");
+        alert("SĐT không hợp lệ! Vui lòng nhập 10 hoặc 11 chữ số.");
         phone.focus();
         event.preventDefault();
         return false;
@@ -184,7 +184,7 @@ function validateForm(event) {
     const orderData = {
         orderID: generateOrderID(),
         customerInfo: {
-            name: name.value.trim()||infUser.fullName,
+            name: name.value.trim()||infUser.name,
             phone: phone.value.trim()||infUser.phone,
             address: otherAdr ? adr.value.trim() : addr.address,
             paymentMethod: payCard ? "Thẻ" : "Khác",
@@ -251,6 +251,10 @@ function generateOrderID() {
       }
     });
   });
+
+  if (orderIDs.length === 0) {
+    return `#DH00001`;
+  }
 
   const maxOrderID = Math.max(...orderIDs);
   const nextOrderID = (maxOrderID + 1).toString().padStart(5, "0");
