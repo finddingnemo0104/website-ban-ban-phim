@@ -21,6 +21,7 @@ function displayOrders(ordersKey) {
   const summary = document.querySelector(".summary");
 
   if (orders.length === 0) {
+    // If no orders exist, display default message
     orderList.innerHTML = `<p>Không có đơn hàng nào.</p>`;
     summary.innerHTML = `
       <h2>Tổng quan</h2>
@@ -31,7 +32,6 @@ function displayOrders(ordersKey) {
         <option value="all">Chọn trạng thái</option>
         <option value="Đã giao hàng">Đã giao hàng</option>
         <option value="Chờ thanh toán">Chờ thanh toán</option>
-        <option value="Chưa xử lý">Chưa xử lý</option>
       </select>
     `;
     return;
@@ -51,7 +51,7 @@ function displayOrders(ordersKey) {
     orderItem.className = "order-item";
     orderItem.innerHTML = `
       <div class="order-header">
-        <h3>Đơn hàng #000${index + 1}</h3>
+        <h3>Đơn hàng #${index + 1}</h3>
         <span class="order-status">${order.status || "Chưa xử lý"}</span>
       </div>
       <div class="order-details">
@@ -81,30 +81,22 @@ function displayOrders(ordersKey) {
       <option value="all">Chọn trạng thái</option>
       <option value="Đã giao hàng">Đã giao hàng</option>
       <option value="Chờ thanh toán">Chờ thanh toán</option>
-      <option value="Chưa xử lý">Chưa xử lý</option>
     </select>
   `;
 }
 
 // Filter orders by status
 function filterOrders(status) {
-  // Get the current user from localStorage
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  if (!currentUser || !currentUser.ID) {
-    console.error("User is not logged in or missing user ID.");
-    return;
-  }
-  
-  const currentCustomerId = currentUser.ID;
-  const ordersKey = `orders${currentCustomerId}`;
+  const currentCustomerId = "12345"; // Replace with dynamic customer ID
+  const ordersKey = `orders#${currentCustomerId}`;
   const allOrders = JSON.parse(localStorage.getItem(ordersKey)) || [];
-  // Filter orders based on the status
-  const filteredOrders = 
+
+  const filteredOrders =
     status === "all"
       ? allOrders
-      : allOrders.filter((order) => order.orderStatus === status);
+      : allOrders.filter((order) => order.status === status);
 
-  // Update the order list display with the filtered orders
+  // Update order list with filtered orders
   displayOrdersList(filteredOrders);
 }
 
@@ -127,8 +119,8 @@ function displayOrdersList(orders) {
     orderItem.className = "order-item";
     orderItem.innerHTML = `
       <div class="order-header">
-        <h3>Đơn hàng #000${index + 1}</h3>
-        <span class="order-status">${order.orderStatus || "Chưa xử lý"}</span>
+        <h3>Đơn hàng #${index + 1}</h3>
+        <span class="order-status">${order.status || "Chưa xử lý"}</span>
       </div>
       <div class="order-details">
         <p>Ngày đặt: ${order.orderDate}</p>
@@ -144,24 +136,11 @@ function displayOrdersList(orders) {
         <button class="details-btn" onclick="viewOrderDetails(${index})">Xem chi tiết</button>
       </div>
     `;
-
     orderList.appendChild(orderItem);
   });
 }
 
 // Placeholder for view details functionality
 function viewOrderDetails(orderIndex) {
-  const currentCustomerId = JSON.parse(localStorage.getItem("currentUser")).ID;
-  const ordersKey = `orders${currentCustomerId}`;
-  const orders = JSON.parse(localStorage.getItem(ordersKey)) || [];
-  console.log(orderIndex);
-
-  if (orders[orderIndex]) {
-    // Store selected order details in localStorage for orderSummary.html
-    localStorage.setItem("selectedOrder", JSON.stringify(orders[orderIndex]));
-    localStorage.setItem('orderIndex', ''+(orderIndex+1));
-    window.location.href = `orderSummary.html?orderIndex=${orderIndex}`;
-  } else {
-    alert("Đơn hàng không tồn tại.");
-  }
+  alert(`Chi tiết đơn hàng #${orderIndex + 1}`);
 }
