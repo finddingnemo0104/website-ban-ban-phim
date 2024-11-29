@@ -1,29 +1,29 @@
-if (!localStorage.getItem("orders")) {
-    const sampleOrders = [
-        {
-            id: 1,
-            customerPhone: "0797169613",
-            date: "2024-11-01",
-            address: "279A An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh",
-            status: "Đã giao hàng",
-            products: [
-                { name: "Logitech G Pro X Mechanical Gaming Keyboard", quantity: 1, price: 2000000 },
-                { name: "Chuột Logitech G502 HERO", quantity: 2, price: 1500000 }
-            ]
-        },
-        {
-            id: 2,
-            customerPhone: "0797169613",
-            date: "2024-11-02",
-            address: "100 Nguyễn Huệ, Quận 1, TP Hồ Chí Minh",
-            status: "Chờ thanh toán",
-            products: [
-                { name: "Bàn phím cơ Ducky One 2", quantity: 1, price: 3000000 }
-            ]
-        }
-    ];
-    localStorage.setItem("orders", JSON.stringify(sampleOrders));
-}
+// if (!localStorage.getItem("orders")) {
+//     const sampleOrders = [
+//         {
+//             id: 1,
+//             customerPhone: "0797169613",
+//             date: "2024-11-01",
+//             address: "279A An Dương Vương, Phường 3, Quận 5, TP Hồ Chí Minh",
+//             status: "Đã giao hàng",
+//             products: [
+//                 { name: "Logitech G Pro X Mechanical Gaming Keyboard", quantity: 1, price: 2000000 },
+//                 { name: "Chuột Logitech G502 HERO", quantity: 2, price: 1500000 }
+//             ]
+//         },
+//         {
+//             id: 2,
+//             customerPhone: "0797169613",
+//             date: "2024-11-02",
+//             address: "100 Nguyễn Huệ, Quận 1, TP Hồ Chí Minh",
+//             status: "Chờ thanh toán",
+//             products: [
+//                 { name: "Bàn phím cơ Ducky One 2", quantity: 1, price: 3000000 }
+//             ]
+//         }
+//     ];
+//     localStorage.setItem("orders", JSON.stringify(sampleOrders));
+// }
 document.addEventListener("DOMContentLoaded", () => {
     const currentUserPhone = "0869043004"; // Số điện thoại của người dùng hiện tại
     displayOrderHistory(currentUserPhone);

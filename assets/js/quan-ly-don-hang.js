@@ -37,15 +37,14 @@ function displayOrders() {
         <td>${order.total.toLocaleString()}đ</td>
         <td>
           <select class="status-dropdown" onchange="updateOrderStatus('${order.orderID}', this.value)">
-            <option value="chưa xử lý" ${order.orderStatus === "chưa xử lý" ? "selected" : ""}>Chưa xử lý</option>
-            <option value="đã xác nhận" ${order.orderStatus === "đã xác nhận" ? "selected" : ""}>Đã xác nhận</option>
-            <option value="đã giao thành công" ${order.orderStatus === "đã giao thành công" ? "selected" : ""}>Đã giao thành công</option>
-            <option value="đã hủy" ${order.orderStatus === "đã hủy" ? "selected" : ""}>Đã hủy</option>
+            <option value="Chưa xử lý" ${order.orderStatus === "Chưa xử lý" ? "selected" : ""}>Chưa xử lý</option>
+            <option value="Đã xác nhận" ${order.orderStatus === "Đã xác nhận" ? "selected" : ""}>Đã xác nhận</option>
+            <option value="Đã giao thành công" ${order.orderStatus === "Đã giao thành công" ? "selected" : ""}>Đã giao thành công</option>
+            <option value="Đã hủy" ${order.orderStatus === "Đã hủy" ? "selected" : ""}>Đã hủy</option>
           </select>
         </td>
         <td class="action-icons">
-          <i class="fa-solid fa-eye" onclick="viewOrderDetails('${order.orderID}')"></i>
-          <i class="fa-solid fa-trash" onclick="deleteOrder('${order.orderID}')"></i>
+          <i class="fa-solid fa-eye view-order" onclick="viewOrderDetails('${order.orderID}')"></i>
         </td>
       `;
     orderList.appendChild(row);
