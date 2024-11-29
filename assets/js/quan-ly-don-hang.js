@@ -7,7 +7,6 @@ function getOrders() {
     const ordersOfCustomer = JSON.parse(localStorage.getItem(key));
     orders = orders.concat(ordersOfCustomer);
   });
-  console.log(orders);
   return orders;
 }
 

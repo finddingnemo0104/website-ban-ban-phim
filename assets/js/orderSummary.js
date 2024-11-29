@@ -132,6 +132,8 @@ if (orders.length === 0) {
     //     }
     // }
     show(localStorage.getItem('orderIndex'));
+    let sl=JSON.parse(localStorage.getItem("cart" + IDUser));
+    document.getElementById("cart-count").innerHTML=sl.length;
     }
 function show(i){
     let order = orders[i-1]; 

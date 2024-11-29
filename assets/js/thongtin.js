@@ -184,6 +184,7 @@ function validateForm(event) {
     const orderData = {
         orderID: generateOrderID(),
         customerInfo: {
+            customerID: infUser.ID,
             name: name.value.trim()||infUser.name,
             phone: phone.value.trim()||infUser.phone,
             address: otherAdr ? adr.value.trim() : addr.address,
@@ -200,6 +201,7 @@ function validateForm(event) {
         total: sum,
         orderStatus: orderStatus.pending,
     };
+
     localStorage.setItem("discnt", 0);
     // Save the order and cart together
     saveOrder(orderData);

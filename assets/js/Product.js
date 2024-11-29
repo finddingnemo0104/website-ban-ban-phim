@@ -93,7 +93,7 @@ function renderProducts1(page,productList) {
     </div>
   <p>${product.name}</p>
   <span class="price">${Number(product.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</span> 
-  <button class="add-to-cart-BTN"> Thêm vào giỏ hàng </button>
+  <button class="add-to-cart-BTN" onclick="addToCard('${product.ID}')"> Thêm vào giỏ hàng </button>
 `;
     productGrid.appendChild(productCard);
   });
@@ -117,13 +117,24 @@ function productSearch(text){
 // }
 
  let minInputPrice, maxInputPrice
- if(minPrice.value=="" && maxPrice.value==""){
-  minInputPrice=0
-  maxInputPrice=Number.MAX_SAFE_INTEGER
- } else { 
+//  if(minPrice.value=="" && maxPrice.value==""){
+//   minInputPrice=0
+//   maxInputPrice=Number.MAX_SAFE_INTEGER
+//  } else { 
+//   minInputPrice=minPrice.value
+//   maxInputPrice=maxPrice.value
+//   }
+
+if(minPrice.value===""){
+  minInputPrice=0;
+} else{
   minInputPrice=minPrice.value
+}
+if(maxPrice.value===""){
+  maxInputPrice= Number.MAX_SAFE_INTEGER;
+} else{
   maxInputPrice=maxPrice.value
-  }
+}
 
   for(const product of products)
     if(product.name.toLowerCase().includes(text.toLowerCase()) 

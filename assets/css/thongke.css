@@ -8,6 +8,7 @@
 
 body {
   background-color: #f5f5f5;
+  overflow: hidden;
 }
 
 /* Phần đầu trang */
@@ -21,7 +22,8 @@ body {
 
 .container {
   display: flex;
-  min-height: 100vh;
+  height: calc(100vh - 30px);
+  overflow-y: auto;
 }
 
 /* Thiết kế thanh bên */
