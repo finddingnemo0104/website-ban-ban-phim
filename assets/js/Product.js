@@ -117,13 +117,26 @@ function productSearch(text){
 // }
 
  let minInputPrice, maxInputPrice
- if(minPrice.value==="" || maxPrice.value===""){
-  minInputPrice=0
-  maxInputPrice=0
- } else { 
+//  if(minPrice.value==="" || maxPrice.value===""){
+//   minInputPrice=0
+//   maxInputPrice=1000000000
+//  } else { 
+//   minInputPrice=minPrice.value
+//   maxInputPrice=maxPrice.value
+//   }
+
+if(minPrice.value===""){
+  minInputPrice=0;
+} else{
   minInputPrice=minPrice.value
+}
+
+if(maxPrice.value===""){
+  maxInputPrice=100000000;
+} else{
   maxInputPrice=maxPrice.value
-  }
+}
+
 
   for(const product of products)
     if(product.name.toLowerCase().includes(text.toLowerCase()) 
