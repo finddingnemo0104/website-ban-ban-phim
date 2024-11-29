@@ -136,7 +136,6 @@ if (orders.length === 0) {
 function show(i){
     let order = orders[i-1]; 
     let customerInfo = order?.customerInfo || {};
-    let customer
     document.getElementById("name").innerHTML = `<p><strong>Tên khách hàng: </strong> ${customerInfo.name}</p>`;
     document.getElementById("sdt").innerHTML = `<p><strong>Số điện thoại: </strong> ${customerInfo.phone }</p>`;
     document.getElementById("adr").innerHTML = `<p><strong>Địa chỉ giao hàng: </strong> ${customerInfo.address }</p>`;
