@@ -234,9 +234,9 @@ function filterOrders(event) {
 
   // Lọc danh sách đơn hàng
   const filteredOrders = orders.filter((order) => {
-    // Kiểm tra tên khách hàng
+    // Kiểm tra tên khách hàng (so sánh với customerInfo.name)
     const matchesCustomer = customerName
-      ? order.customerInfo.customerID.toLowerCase().includes(customerName)
+      ? order.customerInfo.name.toLowerCase().includes(customerName) // Sử dụng customerInfo.name
       : true;
 
     // Kiểm tra trạng thái đơn hàng (orderStatus)
@@ -306,13 +306,10 @@ function displayFilteredOrders(filteredOrders) {
     orderList.appendChild(row);
   });
 }
-function refreshOrders() {
-  // Lấy form
-  const form = document.querySelector(".search-options-style");
 
-  // Đặt lại các giá trị trong form về mặc định
+function refreshOrders() {
+  const form = document.querySelector(".search-options-style");
   form.reset(); // Reset toàn bộ form, bao gồm các trường nhập liệu và dropdowns
 
-  // Lọc lại tất cả đơn hàng (không có bộ lọc)
   displayOrders(); // Hiển thị lại tất cả đơn hàng
 }
