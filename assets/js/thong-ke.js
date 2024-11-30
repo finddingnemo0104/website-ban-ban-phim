@@ -117,9 +117,10 @@ function updateTopCustomersTable(customers) {
           <td>${customer.customerId}</td>
           <td>${customer.name}</td>
           <td>${customer.total.toLocaleString()}đ</td>
-          <td><button onclick="viewOrderDetails(${
-            customer.orderId
-          })">Xem</button></td>
+         <td><i class="fa-solid fa-eye view-order" onclick="viewCustomerOrders('${
+           customer.customerId
+         }')"></i></td>
+
         `;
     customerTable.appendChild(row);
   });
@@ -283,3 +284,98 @@ document.getElementById("refresh-button").addEventListener("click", () => {
   // Làm mới dữ liệu lọc
   // displayStatistics();
 });
+function filterOrders() {
+  const orders = getOrdersFromLocalStorage();
+
+  const productType = document.getElementById("product-type").value;
+  const startDate = document.getElementById("start-date").value;
+  const endDate = document.getElementById("end-date").value;
+
+  let filteredOrders = orders;
+
+  // Lọc theo loại sản phẩm
+  if (productType !== "all") {
+    filteredOrders = filteredOrders.filter((order) =>
+      order.items.some((product) => product.category === productType)
+    );
+  }
+
+  // Lọc theo khoảng thời gian
+  if (startDate) {
+    filteredOrders = filteredOrders.filter(
+      (order) => new Date(order.orderDate) >= new Date(startDate)
+    );
+  }
+  if (endDate) {
+    filteredOrders = filteredOrders.filter(
+      (order) => new Date(order.orderDate) <= new Date(endDate)
+    );
+  }
+
+  // Hiển thị kết quả lọc trong bảng
+  const tableBody = document.getElementById("filtered-orders");
+  tableBody.innerHTML = "";
+
+  filteredOrders.forEach((order, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${order.orderID}</td>
+      <td>${order.customerInfo.name}</td>
+      <td>${order.orderDate}</td>
+      <td>${calculateOrderTotal(order).toLocaleString()}đ</td>
+      <td>${order.orderStatus}</td>
+     <td>
+      <button onclick="viewOrderDetails1('${
+        order.orderID
+      }')">Xem các hóa đơn</button>
+    </td>
+  `;
+    tableBody.appendChild(row);
+  });
+}
+
+// Event listener for the filter button
+document
+  .getElementById("filter-button")
+  .addEventListener("click", filterOrders);
+document.getElementById("refresh-button").addEventListener("click", () => {
+  // Làm mới dữ liệu lọc
+  displayStatistics();
+});
+// This function is triggered when the "eye" icon is clicked for a customer in the top 5 list.
+// function viewCustomerOrders(customerId) {
+//   console.log("Clicked view for customer:", customerId); // Kiểm tra khi nhấn vào biểu tượng
+//   const orders = getOrdersFromLocalStorage(); // Lấy tất cả đơn hàng từ localStorage
+
+//   const customerOrders = orders.filter(
+//     (order) => order.customerInfo.customerID === customerId
+//   );
+//   console.log("Found customer orders:", customerOrders); // Kiểm tra đơn hàng tìm thấy
+
+//   if (customerOrders.length > 0) {
+//     // Lấy phần tử để hiển thị đơn hàng
+//     const tableBody = document.querySelector("#customer-orders-table tbody");
+//     if (tableBody) {
+//       // Xóa nội dung cũ trước khi thêm mới
+//       tableBody.innerHTML = "";
+//       customerOrders.forEach((order) => {
+//         const row = document.createElement("tr");
+
+//         // Thêm thông tin đơn hàng vào bảng
+//         row.innerHTML = `
+//           <td>${order.orderID}</td>
+//           <td>${order.orderDate}</td>
+//           <td>${order.total}</td>
+//           <td>${order.orderStatus}</td>
+//         `;
+//         tableBody.appendChild(row);
+//       });
+//     } else {
+//       console.error("Không tìm thấy phần tử bảng để hiển thị đơn hàng!");
+//     }
+//   } else {
+//     console.log("No orders found for this customer.");
+//     alert("Không tìm thấy đơn hàng của khách hàng này.");
+//   }
+// }
