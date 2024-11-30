@@ -230,13 +230,13 @@ function filterOrders(event) {
     : null; // Ngày kết thúc (nếu có)
 
   // Lấy danh sách đơn hàng từ localStorage hoặc nguồn dữ liệu
-  const orders = getOrders();
+  const orders = getOrders(); // Hàm này lấy đơn hàng từ localStorage hoặc nguồn dữ liệu khác
 
   // Lọc danh sách đơn hàng
   const filteredOrders = orders.filter((order) => {
     // Kiểm tra tên khách hàng (so sánh với customerInfo.name)
     const matchesCustomer = customerName
-      ? order.customerInfo.name.toLowerCase().includes(customerName) // Sử dụng customerInfo.name
+      ? order.customerInfo.name.toLowerCase().includes(customerName)
       : true;
 
     // Kiểm tra trạng thái đơn hàng (orderStatus)
@@ -275,7 +275,7 @@ function displayFilteredOrders(filteredOrders) {
 
     row.innerHTML = `
       <td>${order.orderID}</td>
-      <td>${order.customerInfo.customerID}</td>
+      <td>${order.customerInfo.name}</td>
       <td>${orderDate}</td>
       <td>${order.total.toLocaleString()}đ</td>
       <td>
