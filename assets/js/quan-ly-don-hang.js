@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function displayOrders() {
   const orders = getOrders();
+  orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
   const orderList = document.getElementById("order-list");
   orderList.innerHTML = ""; // Clear existing rows
 
@@ -63,7 +64,19 @@ function updateOrderStatus(orderID, newStatus) {
 
   orders[orderIndex].orderStatus = newStatus;
 
-  saveOrdersToLocalStorage(orders);
+  const statusChange = {
+    status: newStatus,
+    date: new Date().toLocaleString("vi-VN"), // Lấy thời gian thay đổi trạng thái
+  };
+
+  if (!orders[orderIndex].history) {
+    orders[orderIndex].history = []; // Nếu chưa có lịch sử, khởi tạo mảng
+  }
+
+  // Thêm trạng thái mới vào lịch sử
+  orders[orderIndex].history.push(statusChange);
+
+  saveOneOrder(orders[orderIndex]);
 
   displayOrders();
 
@@ -73,34 +86,43 @@ function updateOrderStatus(orderID, newStatus) {
 }
 
 
-function saveOrdersToLocalStorage(orders) {
-  const existingOrders = Object.keys(localStorage).reduce((acc, key) => {
-    if (key.startsWith("orders#")) {
-      acc[key] = JSON.parse(localStorage.getItem(key));
-    }
-    return acc;
-  }, {});
-  orders.forEach((order) => {
-    const key = `orders${order.orderID}`;
-    if (existingOrders[key]) {
-      // If the key already exists, update the order
-      const existingOrderIndex = existingOrders[key].findIndex(
-        (existingOrder) => existingOrder.orderID === order.orderID
-      );
-      if (existingOrderIndex !== -1) {
-        existingOrders[key][existingOrderIndex] = order;
-      } else {
-        existingOrders[key].push(order);
-      }
-    } else {
-      existingOrders[key] = [order];
-    }
-  });
+// function saveOrdersToLocalStorage(orders) {
+//   const existingOrders = Object.keys(localStorage).reduce((acc, key) => {
+//     if (key.startsWith("orders#")) {
+//       acc[key] = JSON.parse(localStorage.getItem(key));
+//     }
+//     return acc;
+//   }, {});
+//   orders.forEach((order) => {
+//     const key = `orders${order.orderID}`;
+//     if (existingOrders[key]) {
+//       // If the key already exists, update the order
+//       const existingOrderIndex = existingOrders[key].findIndex(
+//         (existingOrder) => existingOrder.orderID === order.orderID
+//       );
+//       if (existingOrderIndex !== -1) {
+//         existingOrders[key][existingOrderIndex] = order;
+//       } else {
+//         existingOrders[key].push(order);
+//       }
+//     } else {
+//       existingOrders[key] = [order];
+//     }
+//   });
 
-  // Save updated data back to localStorage
-  Object.keys(existingOrders).forEach((key) => {
-    localStorage.setItem(key, JSON.stringify(existingOrders[key]));
-  });
+//   // Save updated data back to localStorage
+//   Object.keys(existingOrders).forEach((key) => {
+//     localStorage.setItem(key, JSON.stringify(existingOrders[key]));
+//   });
+// }
+
+function saveOneOrder(updateOrder) {
+  const customerID = updateOrder.customerInfo.customerID;
+  const localStorageKey = `orders${customerID}`;
+  const ordersOfCustomer = JSON.parse(localStorage.getItem(localStorageKey));
+  const updateOrderIndex = ordersOfCustomer.findIndex((order, index) => order.orderID === updateOrder.orderID);
+  ordersOfCustomer[updateOrderIndex] = updateOrder;
+  localStorage.setItem(localStorageKey, JSON.stringify(ordersOfCustomer));
 }
 
 
@@ -109,11 +131,21 @@ function viewOrderDetails(orderId) {
   const order = orders.find((o) => o.orderID === orderId);
 
   if (order) {
-    document.getElementById("customer-name").innerText = `Tên khách hàng: ${order.customerInfo.name || "Không xác định"}`;
-    document.getElementById("order-id").innerText = `Mã đơn hàng: #${order.orderID}`;
-    document.getElementById("order-date").innerText = `Ngày đặt hàng: ${order.orderDate || "Không xác định"}`;
-    document.getElementById("order-address").innerText = `Địa chỉ:${order.customerInfo.address || "Không xác định"}`;
+    // Hiển thị thông tin cơ bản của đơn hàng
+    document.getElementById("customer-name").innerText = `Tên khách hàng: ${
+      order.customerInfo.name || "Không xác định"
+    }`;
+    document.getElementById(
+      "order-id"
+    ).innerText = `Mã đơn hàng: #${order.orderID}`;
+    document.getElementById("order-date").innerText = `Ngày đặt hàng: ${
+      order.orderDate || "Không xác định"
+    }`;
+    document.getElementById("order-address").innerText = `Địa chỉ: ${
+      order.customerInfo.address || "Không xác định"
+    }`;
 
+    // Hiển thị sản phẩm trong đơn hàng
     const productList = document.getElementById("order-products-list");
     productList.innerHTML = "";
     if (order.items && order.items.length > 0) {
@@ -132,20 +164,27 @@ function viewOrderDetails(orderId) {
       productList.appendChild(emptyRow);
     }
 
-    document.getElementById("order-total").innerText = `Tổng cộng: ${parseInt(order.total || 0).toLocaleString()}đ`;
+    // Hiển thị tổng cộng đơn hàng
+    document.getElementById("order-total").innerText = `Tổng cộng: ${parseInt(
+      order.total || 0
+    ).toLocaleString()}đ`;
+
+    // Hiển thị lịch sử trạng thái (nếu có)
     const historyList = document.getElementById("order-history");
-    historyList.innerHTML = ""; 
+    historyList.innerHTML = "";
     if (order.history && order.history.length > 0) {
       order.history.forEach((entry) => {
         const listItem = document.createElement("li");
-        listItem.innerText = `Trạng thái: ${entry.status || "Không rõ"} - Ngày: ${entry.date || "Không rõ"}`;
+        listItem.innerText = `Trạng thái: ${entry.status} - Ngày: ${entry.date}`;
         historyList.appendChild(listItem);
       });
     } else {
       const emptyHistory = document.createElement("li");
-      emptyHistory.innerText = "Không có lịch sử trạng thái.";
+      emptyHistory.innerText = "Chưa có lịch sử trạng thái.";
       historyList.appendChild(emptyHistory);
     }
+
+    // Hiển thị chi tiết đơn hàng
     document.getElementById("order-management").style.display = "none";
     document.getElementById("order-details").style.display = "block";
   } else {
@@ -175,4 +214,103 @@ function viewOrderDetails(orderId) {
 function closeOrderDetails() {
   document.getElementById("order-details").style.display = "none";
   document.getElementById("order-management").style.display = "block";
+}
+
+function filterOrders(event) {
+  event.preventDefault(); // Ngăn chặn submit form
+
+  // Lấy giá trị từ form
+  const form = event.target;
+  const customerName = form.customer.value.toLowerCase().trim(); // Tên khách hàng cần lọc
+  const status = form.status.value; // Trạng thái đơn hàng cần lọc
+  const startDate = form["start-date"].value
+    ? new Date(form["start-date"].value)
+    : null; // Ngày bắt đầu (nếu có)
+  const endDate = form["end-date"].value
+    ? new Date(form["end-date"].value)
+    : null; // Ngày kết thúc (nếu có)
+
+  // Lấy danh sách đơn hàng từ localStorage hoặc nguồn dữ liệu
+  const orders = getOrders(); // Hàm này lấy đơn hàng từ localStorage hoặc nguồn dữ liệu khác
+
+  // Lọc danh sách đơn hàng
+  const filteredOrders = orders.filter((order) => {
+    // Kiểm tra tên khách hàng (so sánh với customerInfo.name)
+    const matchesCustomer = customerName
+      ? order.customerInfo.name.toLowerCase().includes(customerName)
+      : true;
+
+    // Kiểm tra trạng thái đơn hàng (orderStatus)
+    const matchesStatus =
+      status && status !== "all" ? order.orderStatus === status : true;
+
+    // Kiểm tra khoảng thời gian
+    const orderDate = new Date(order.orderDate);
+    const matchesDateRange =
+      (!startDate || orderDate >= startDate) &&
+      (!endDate || orderDate <= endDate);
+
+    // Trả về kết quả nếu thỏa mãn tất cả tiêu chí
+    return matchesCustomer && matchesStatus && matchesDateRange;
+  });
+
+  // Hiển thị danh sách đơn hàng đã lọc
+  displayFilteredOrders(filteredOrders);
+}
+
+function displayFilteredOrders(filteredOrders) {
+  const orderList = document.getElementById("order-list");
+  orderList.innerHTML = ""; // Xóa danh sách cũ
+
+  if (filteredOrders.length === 0) {
+    orderList.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align: center;">Không tìm thấy đơn hàng nào</td>
+      </tr>`;
+    return;
+  }
+
+  filteredOrders.forEach((order) => {
+    const orderDate = new Date(order.orderDate).toLocaleDateString("vi-VN"); // Định dạng ngày
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${order.orderID}</td>
+      <td>${order.customerInfo.name}</td>
+      <td>${orderDate}</td>
+      <td>${order.total.toLocaleString()}đ</td>
+      <td>
+        <select class="status-dropdown" onchange="updateOrderStatus('${
+          order.orderID
+        }', this.value)">
+          <option value="Chưa xử lý" ${
+            order.orderStatus === "Chưa xử lý" ? "selected" : ""
+          }>Chưa xử lý</option>
+          <option value="Đã xác nhận" ${
+            order.orderStatus === "Đã xác nhận" ? "selected" : ""
+          }>Đã xác nhận</option>
+          <option value="Đã giao thành công" ${
+            order.orderStatus === "Đã giao thành công" ? "selected" : ""
+          }>Đã giao thành công</option>
+          <option value="Đã hủy" ${
+            order.orderStatus === "Đã hủy" ? "selected" : ""
+          }>Đã hủy</option>
+        </select>
+      </td>
+      <td class="action-icons">
+        <i class="fa-solid fa-eye view-order" onclick="viewOrderDetails('${
+          order.orderID
+        }')"></i>
+      </td>
+    `;
+
+    orderList.appendChild(row);
+  });
+}
+
+function refreshOrders() {
+  const form = document.querySelector(".search-options-style");
+  form.reset(); // Reset toàn bộ form, bao gồm các trường nhập liệu và dropdowns
+
+  displayOrders(); // Hiển thị lại tất cả đơn hàng
 }

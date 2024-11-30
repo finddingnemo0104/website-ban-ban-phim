@@ -21,16 +21,25 @@ function renderProducts(page) {
   const end = start + productsPerPage;
   const paginatedProducts = products.slice(start, end);
 
-  paginatedProducts.forEach(product => { 
+  paginatedProducts.forEach((product) => {
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
     <div class="wrap-img-cart">
-  <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
+  <img src="${product.image}" alt="${
+      product.name
+    }" onclick="window.location ='./detail.html?id=${encodeURIComponent(
+      product.ID
+    )}'">
     </div>
   <p>${product.name}</p>
-  <span class="price">${Number(product.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</span>
-  <button class="add-to-cart-BTN" onclick="addToCard('${product.ID}')"> Thêm vào giỏ hàng </button>
+  <span class="price">${Number(product.price).toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  })}</span>
+  <button class="add-to-cart-BTN" onclick="addToCard('${
+    product.ID
+  }')"> Thêm vào giỏ hàng </button>
 `;
 
     productGrid.appendChild(productCard);
@@ -70,100 +79,121 @@ function createPagination(productList) {
 renderProducts(currentPage);
 createPagination(products);
 
-
 //Tìm kiếm cơ bản
 
-const searchBTN = document.getElementById("searchBTN")
-const searchText = document.getElementById("searchText")
+const searchBTN = document.getElementById("searchBTN");
+const searchText = document.getElementById("searchText");
 
-function renderProducts1(page,productList) {
+function renderProducts1(page, productList) {
   const productGrid = document.getElementById("product-grid");
-  productGrid.innerHTML = ""; 
+  productGrid.innerHTML = "";
 
   const start = (page - 1) * productsPerPage;
   const end = start + productsPerPage;
   const paginatedProducts = productList.slice(start, end);
 
-  paginatedProducts.forEach(product => {
+  paginatedProducts.forEach((product) => {
     const productCard = document.createElement("div");
     productCard.classList.add("product-card");
     productCard.innerHTML = `
     <div class="wrap-img-cart">
-  <img src="${product.image}" alt="${product.name}" onclick="window.location ='./detail.html?id=${encodeURIComponent(product.ID)}'">
+  <img src="${product.image}" alt="${
+      product.name
+    }" onclick="window.location ='./detail.html?id=${encodeURIComponent(
+      product.ID
+    )}'">
     </div>
   <p>${product.name}</p>
-  <span class="price">${Number(product.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" })}</span> 
-  <button class="add-to-cart-BTN" onclick="addToCard('${product.ID}')"> Thêm vào giỏ hàng </button>
+  <span class="price">${Number(product.price).toLocaleString("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  })}</span> 
+  <button class="add-to-cart-BTN" onclick="addToCard('${
+    product.ID
+  }')"> Thêm vào giỏ hàng </button>
 `;
     productGrid.appendChild(productCard);
   });
 }
 
-
 //Tìm kiếm nâng cao(filter hãng, giá tiền)
-const filterByBrand =document.getElementById("search-filter-brand")
-const minPrice =document.getElementById("filter-price-min")
-const maxPrice =document.getElementById("filter-price-max")
+const filterByBrand = document.getElementById("search-filter-brand");
+const minPrice = document.getElementById("filter-price-min");
+const maxPrice = document.getElementById("filter-price-max");
 // const priceInputValue =document.querySelectorAll(".search-filter-price input")
 
-function productSearch(text){
- const result=[];
+function productSearch(text) {
+  const result = [];
 
-// for(let i=0;i<priceInputValue.length;i++){
-//   priceInputValue[i].addEventListener("input", e =>{
-//     let minInputPrice = parseInt(priceInputValue[0].value)
-//     let maxInputPrice = parseInt(priceInputValue[1].value)
-//   })
-// }
+  // for(let i=0;i<priceInputValue.length;i++){
+  //   priceInputValue[i].addEventListener("input", e =>{
+  //     let minInputPrice = parseInt(priceInputValue[0].value)
+  //     let maxInputPrice = parseInt(priceInputValue[1].value)
+  //   })
+  // }
 
- let minInputPrice, maxInputPrice
-//  if(minPrice.value=="" && maxPrice.value==""){
-//   minInputPrice=0
-//   maxInputPrice=Number.MAX_SAFE_INTEGER
-//  } else { 
-//   minInputPrice=minPrice.value
-//   maxInputPrice=maxPrice.value
-//   }
+  let minInputPrice, maxInputPrice;
+  //  if(minPrice.value=="" && maxPrice.value==""){
+  //   minInputPrice=0
+  //   maxInputPrice=Number.MAX_SAFE_INTEGER
+  //  } else {
+  //   minInputPrice=minPrice.value
+  //   maxInputPrice=maxPrice.value
+  //   }
 
-if(minPrice.value===""){
-  minInputPrice=0;
-} else{
-  minInputPrice=minPrice.value
-}
-if(maxPrice.value===""){
-  maxInputPrice= Number.MAX_SAFE_INTEGER;
-} else{
-  maxInputPrice=maxPrice.value
-}
+  if (minPrice.value < 0 || maxPrice < 0) {
+    alert(`Giá sản phẩm không thể âm. Vui lòng nhập lại !`);
+    return null;
+  }
 
-  for(const product of products)
-    if(product.name.toLowerCase().includes(text.toLowerCase()) 
-      && product.category.includes(filterByBrand.value)
-      && Number(product.price) >= Number(minInputPrice) && Number(product.price) <= Number(maxInputPrice))
-      
+  if (minPrice.value === "") {
+    minInputPrice = 0;
+  } else {
+    minInputPrice = minPrice.value;
+  }
+  if (maxPrice.value === "") {
+    maxInputPrice = Number.MAX_SAFE_INTEGER;
+  } else {
+    maxInputPrice = maxPrice.value;
+  }
+
+  if (minInputPrice > maxInputPrice) {
+    alert(`Giá tối đa ${maxPrice.value} không thể nhỏ hơn giá tối thiểu ${minPrice.value}. Vui lòng nhập lại !`);
+    return null;
+  }
+
+  for (const product of products)
+    if (
+      product.name.toLowerCase().includes(text.toLowerCase()) &&
+      product.category.includes(filterByBrand.value) &&
+      Number(product.price) >= Number(minInputPrice) &&
+      Number(product.price) <= Number(maxInputPrice)
+    )
       result.push(product);
-    return result;
-  
+  return result;
 }
 
-searchBTN.onclick = ()=>{
-  renderProducts1(1,productSearch(searchText.value))
-  createPagination(productSearch(searchText.value))
-}
-
+searchBTN.onclick = () => {
+  const searchProducts =  productSearch(searchText.value);
+  if (searchProducts === null) {
+    return;
+  }
+  renderProducts1(1, searchProducts);
+  createPagination(productSearch(searchText.value));
+};
 
 function filterByCategory(category) {
-  const filteredProducts = products.filter(product => product.category === category);
+  const filteredProducts = products.filter(
+    (product) => product.category === category
+  );
   renderProducts1(1, filteredProducts);
   createPagination(filteredProducts);
 }
 
-document.querySelectorAll(".links a").forEach(link => {
-  link.addEventListener("click", event => {
+document.querySelectorAll(".links a").forEach((link) => {
+  link.addEventListener("click", (event) => {
     event.preventDefault();
     const category = event.target.dataset.category;
     filterByCategory(category);
   });
 });
-
-

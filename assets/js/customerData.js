@@ -29,36 +29,6 @@ const listCustomer = [];
 
 listCustomer.push(
   new Customer(
-    "",
-    "",
-    "",  
-    "",
-    "0869043004",
-    "",
-    "",
-    true,
-    "admin",
-    listRole.admin
-  )
-);
-
-listCustomer.push(
-  new Customer(
-    "",
-    "",
-    "",
-    "",
-    "0",
-    "",
-    "",
-    true,
-    "admin",
-    listRole.admin
-  )
-);
-
-listCustomer.push(
-  new Customer(
     "#KH00001",
     "Nguyễn Minh Tuấn",
     listGender.nam,

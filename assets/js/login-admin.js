@@ -1,36 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Login Form Validation
-    const loginForm = document.querySelector('.login-form form');
-    loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const phone = loginForm.querySelector('input[type="text"]').value;
-        const password = loginForm.querySelector('input[type="password"]').value;
-        
-        if (!phone || !password) {
-            alert("Vui lòng nhập đầy đủ thông tin đăng nhập.");
-            return;
-        }
-        // Authenticate user
-        const user = authenticateUser(phone, password);
-        if (user) {
-            localStorage.setItem("currentUser", JSON.stringify({ phone, role: user.role, email: user.email, status: user.status }));
-            redirectToRolePage();
-        } else {
-            alert("Thông tin đăng nhập không chính xác.");
-        }
-    });
+  // Login Form Validation
+  const loginForm = document.querySelector(".login-form form");
+  loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = loginForm.querySelector('input[type="text"]').value;
+    const password = loginForm.querySelector('input[type="password"]').value;
 
-    // Registration Form Validation
-   
+    if (!name || !password) {
+      alert("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+      return;
+    }
+    // Authenticate user
+    const admin = authenticateUser(name, password);
+    if (admin) {
+      localStorage.setItem("currentUser", JSON.stringify(admin));
+      redirectToRolePage();
+    } else {
+      alert("Thông tin đăng nhập không chính xác.");
+    }
+  });
+
+  // Registration Form Validation
 });
 
+function getAdmins() {
+  if (
+    localStorage.getItem("admins") === null ||
+    JSON.parse(localStorage.getItem("admins")).length === 0
+  ) {
+    localStorage.setItem("admins", JSON.stringify(listAdmin));
+  }
+  return JSON.parse(localStorage.getItem("admins"));
+}
+
 // Authenticate user function
-function authenticateUser(phone, password) {
-    const users = JSON.parse(localStorage.getItem('customers')) || [];
-    return users.find(user => user.phone === phone && user.password === password && user.role == "admin");
+function authenticateUser(name, password) {
+  const admins = getAdmins();
+  return admins.find(
+    (admin) => admin.name === name && admin.password === password
+  );
 }
 
 // Redirect function based on role
 function redirectToRolePage() {
-    window.location.href = "quan-ly-don-hang.html";
+  window.location.href = "quan-ly-don-hang.html";
 }
