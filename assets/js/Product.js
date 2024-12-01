@@ -153,7 +153,7 @@ searchBTN.onclick = ()=>{
   createPagination(productSearch(searchText.value))
 }
 
-
+//Filter sp tren header
 function filterByCategory(category) {
   const filteredProducts = products.filter(product => product.category === category);
   renderProducts1(1, filteredProducts);
