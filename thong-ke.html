@@ -74,16 +74,34 @@
           <h2>Tổng quan</h2>
           <div class="stats">
             <div class="stat today">
-              Hôm nay<br /><span><!--tinh tien hom nay--></span><br /><span style="font-size: 18px">Số đơn hàng</span>
+              Hôm nay<br /><span ><!--tinh tien hom nay--></span>
             </div>
             <div class="stat all">
-              Tất cả<br /><span>  <!--tinh tien tat ca--></span><br /><span style="font-size: 18px">Số đơn hàng:</span>
+              Tất cả<br /><span>  <!--tinh tien tat ca--></span>
             </div>
             <div class="stat last-month">
-              Tháng trước<br /><span><!--tinh tien thang truoc--></span><br /><span style="font-size: 18px">Số đơn hàng</span>
+              Tháng này<br /><span><!--tinh tien thang nay--></span>
             </div>
           </div>
         </header>
+
+        <div class="filters">
+          <label for="product-type">Loại sản phẩm:</label>
+          <select id="product-type">
+            <option value="all">Tất cả</option>
+            <option value="Bàn phím cơ">Bàn phím cơ</option>
+            <option value="Bàn phím gaming">Bàn phím gaming</option>
+            <option value="Bàn phím không dây">Bàn phím không dây</option>
+            <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
+            <option value="Bàn phím mini">Bàn phím mini</option>
+          </select>
+          <label for="start-date">Từ ngày:</label>
+          <input type="date" id="start-date">
+          <label for="end-date">Đến ngày:</label>
+          <input type="date" id="end-date">
+          <button id="filter-button">+ Lọc</button>
+          <button id="refresh-button">Cập nhật</button>
+        </div>
       
         <!--top Khách Hàng-->
         <!-- Top Orders -->
@@ -92,10 +110,9 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>Mã Đơn Hàng</th>
+        <th>STT</th>
+        <th>Mã khách hàng</th>
         <th>Khách Hàng</th>
-        <th>Ngày Mua</th>
         <th>Tổng Tiền</th>
         <th>Thao Tác</th>
       </tr>
@@ -113,7 +130,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>STT</th>
+        <th>Mã sản phẩm</th>
         <th>Tên sản phẩm</th>
         <th>Danh mục</th>
         <th>Đã bán</th>
@@ -133,7 +151,8 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>STT</th>
+        <th>Mã sản phẩm</th>
         <th>Tên sản phẩm</th>
         <th>Danh mục</th>
         <th>Đã bán</th>
@@ -146,39 +165,8 @@
     </tbody>
   </table>
 </section>
-<div class="filters">
-  <label for="product-type">Loại sản phẩm:</label>
-  <select id="product-type">
-    <option value="all">Tất cả</option>
-    <option value="Bàn phím cơ">Bàn phím cơ</option>
-    <option value="Bàn phím gaming">Bàn phím gaming</option>
-    <option value="Bàn phím không dây">Bàn phím không dây</option>
-    <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
-    <option value="Bàn phím mini">Bàn phím mini</option>
-  </select>
-  <label for="start-date">Từ ngày:</label>
-  <input type="date" id="start-date">
-  <label for="end-date">Đến ngày:</label>
-  <input type="date" id="end-date">
-  <button id="filter-button">+ Lọc</button>
-  <button id="refresh-button">Cập nhật</button>
-</div>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Mã hóa đơn</th>
-      <th>Tên khách hàng</th>
-      <th>Ngày đặt hàng</th>
-      <th>Tổng tiền</th>
-      <th>Tình trạng</th>
-      <th>Thao tác</th>
-    </tr>
-  </thead>
-  <tbody id="filtered-orders">
-    <!-- Kết quả lọc sẽ hiển thị ở đây -->
-  </tbody>
-</table>
+
+
 
 
       </main>

@@ -178,23 +178,21 @@ function addProductToCart(product) {
   newProductElement.setAttribute("data-id", product.ID);
 
   newProductElement.innerHTML = `
-      <img src="${product.image}" alt="Sản phẩm mới" class="item-image">
+      <img src="${product.image}" alt="Product Image" class="item-image">
       <div class="item-details">
           <h2>${product.name}</h2>
           <p>${product.category}</p>
-          <p>Đơn giá: ${product.price}VNĐ</p>
+          <p>Đơn giá: ${formatCurrency(product.price)} </p>
       </div>
       <div class="quantity-control">
           <button class="qty-btn" onclick="decreaseQuantity('${product.ID}')">-</button>
-          <div class="cart-quantity">
-              <input type="number" class="SL" step="1" min="1" value="${product.quantity}" 
-                  onchange="updateQuantity('${product.ID}', this.value)">
-          </div>
+          <input type="number" class="SL" step="1" min="1" value="${product.quantity}" 
+                 onchange="updateQuantity('${product.ID}', this.value)" />
           <button class="qty-btn" onclick="increaseQuantity('${product.ID}')">+</button>
       </div>
-      <p class="item-price" id="price-${product.ID}">${product.price * product.quantity}VNĐ</p>
+      <p class="item-price" id="price-${product.ID}">${formatCurrency(product.price * product.quantity)} </p>
       <button class="delete-btn" onclick="openDeleteModal('${product.ID}')">
-          <i class="fas fa-trash-alt"></i>
+          <i class="fas fa-trash-alt"></i> 
       </button>
   `;
 

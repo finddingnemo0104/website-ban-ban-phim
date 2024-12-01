@@ -526,3 +526,11 @@ tr:not(:first-child):hover {
 .login-info td {
   border: white; 
 }
+
+.view-order {
+  color: #21568a;
+}
+
+.view-order:hover {
+  cursor: pointer;
+}

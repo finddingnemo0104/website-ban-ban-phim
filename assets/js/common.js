@@ -84,7 +84,7 @@ function showModel(model) {
 
 // Show user information table
 function showCustomerInfoTable() {
-  currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const html = `
      <tr>
@@ -121,7 +121,7 @@ function showCustomerInfoTable() {
 
 // Show user information table
 function showAdminInfoTable() {
-  currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const html = `
      <tr>
@@ -138,7 +138,18 @@ function showAdminInfoTable() {
   userInfoTableEle.innerHTML = html;
 }
 
-isValidLogin();
+const currentUser = localStorage.getItem("currentUser");
+const currentURL = window.location.pathname;
+
+if (
+  !currentUser &&
+  (currentURL === "/index.html" || currentURL === "/detail.html")
+) {
+  document.getElementsByClassName("user")[0].classList.remove("open");
+  document.getElementsByClassName("header-search")[0].classList.remove("open");
+} else {
+  isValidLogin();
+}
 
 // const logout =document.getElementById("user-logout")
 // logout.onclick=()=>{logOut()}

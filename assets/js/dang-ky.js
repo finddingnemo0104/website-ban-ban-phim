@@ -1,4 +1,32 @@
+import { vietnameseProvinces } from "../vietnamese-provinces-data.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Chèn dữ liệu thành phố
+  populateProvinces();
+
+  // Chèn dữ liệu quận vào form chọn quận khi chọn xong thành phố
+  document
+    .getElementById("province-input")
+    .addEventListener("change", function () {
+      const selectedProvinceCode = this.value;
+      if (selectedProvinceCode === "") {
+        document.getElementById("district-input").required = false;
+      }
+
+      populateDistricts(selectedProvinceCode);
+    });
+
+  document
+    .getElementById("district-input")
+    .addEventListener("change", function () {
+      const selectedDistrictCode = this.value;
+      if (selectedDistrictCode === "") {
+        document.getElementById("ward-input").required = false;
+        document.getElementById("address").required = false;
+      }
+      populateWards(selectedDistrictCode);
+    });
+
   const registrationForm = document.querySelector(".registration-form form");
   registrationForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -21,14 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       'input[placeholder="Xác nhận mật khẩu (*)"]'
     ).value;
 
-    if (
-      !name ||
-      !gender ||
-      !dob ||
-      !phone ||
-      !password ||
-      !confirmPassword
-    ) {
+    if (!name || !gender || !dob || !phone || !password || !confirmPassword) {
       alert("Vui lòng nhập đầy đủ thông tin đăng ký.");
       return;
     }
@@ -151,3 +172,49 @@ function getCustomer() {
   return JSON.parse(localStorage.getItem("customers"));
 }
 // --------------------------------------------------------------------------------- //
+
+function populateProvinces() {
+  const provinceSelect = document.getElementById("province-input");
+  provinceSelect.innerHTML = `<option value="">Chọn tỉnh/thành</option>`;
+  vietnameseProvinces.forEach((province) => {
+    provinceSelect.innerHTML += `<option value="${province.Code}">${province.FullName}</option>`;
+  });
+}
+
+function populateDistricts(provinceCode) {
+  const districtSelect = document.getElementById("district-input");
+  const wardSelect = document.getElementById("ward-input");
+  districtSelect.innerHTML = `<option value="">Chọn quận/huyện</option>`;
+  districtSelect.disabled = !provinceCode;
+  districtSelect.required = true;
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = true;
+
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
+  province.District.forEach((district) => {
+    districtSelect.innerHTML += `<option value="${district.Code}">${district.FullName}</option>`;
+  });
+}
+
+function populateWards(districtCode) {
+  const wardSelect = document.getElementById("ward-input");
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = !districtCode;
+  wardSelect.required = true;
+
+  const provinceCode = document.getElementById("province-input").value;
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
+  const district = province.District.find(
+    (district) => district.Code === districtCode
+  );
+  district.Ward.forEach((ward) => {
+    wardSelect.innerHTML += `<option value="${ward.Code}">${ward.FullName}</option>`;
+  });
+
+  document.getElementById("address").disabled = false;
+  document.getElementById("address").required = true;
+}

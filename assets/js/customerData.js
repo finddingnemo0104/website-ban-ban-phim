@@ -1,6 +1,28 @@
+import { vietnameseProvinces } from "../vietnamese-provinces-data.js";
+
 // Customer class
+class Address {
+  constructor(province, district, ward, address) {
+    this.province = province;
+    this.district = district;
+    this.ward = ward;
+    this.address = address;
+  }
+}
+
 class Customer {
-  constructor(ID, name, gender, email, phone, dob, address, status, password, role = listRole.customer) {
+  constructor(
+    ID,
+    name,
+    gender,
+    email,
+    phone,
+    dob,
+    address,
+    status,
+    password,
+    role = listRole.customer
+  ) {
     this.ID = ID;
     this.name = name;
     this.gender = gender;
@@ -17,45 +39,36 @@ class Customer {
 const listGender = {
   nam: "Nam",
   nu: "Nữ",
-  khac: "Khác"
+  khac: "Khác",
 };
 
 const listRole = {
   admin: "admin",
-  customer: "customer"
-}
+  customer: "customer",
+};
 
 const listCustomer = [];
 
-listCustomer.push(
-  new Customer(
-    "",
-    "",
-    "",  
-    "",
-    "0869043004",
-    "",
-    "",
-    true,
-    "admin",
-    listRole.admin
-  )
-);
+function getRandomAddress() {
+  const randomProvince =
+    vietnameseProvinces[Math.floor(Math.random() * vietnameseProvinces.length)];
+  const randomDistrict =
+    randomProvince.District[
+      Math.floor(Math.random() * randomProvince.District.length)
+    ];
+  const randomWard =
+    randomDistrict.Ward[Math.floor(Math.random() * randomDistrict.Ward.length)];
+  const randomAddressDetail = `Số nhà ${Math.floor(
+    Math.random() * 100
+  )}, Đường ABC`;
 
-listCustomer.push(
-  new Customer(
-    "",
-    "",
-    "",
-    "",
-    "0",
-    "",
-    "",
-    true,
-    "admin",
-    listRole.admin
-  )
-);
+  return new Address(
+    randomProvince.FullName,
+    randomDistrict.FullName,
+    randomWard.FullName,
+    randomAddressDetail
+  );
+}
 
 listCustomer.push(
   new Customer(
@@ -65,7 +78,7 @@ listCustomer.push(
     "nguyenminhtuan@example.com",
     "0912345678",
     new Date("1990-02-15"),
-    "",
+    getRandomAddress(vietnameseProvinces),
     true,
     "123",
     listRole.customer
@@ -80,7 +93,7 @@ listCustomer.push(
     "tranthihuong@example.com",
     "0987654321",
     new Date("1995-06-24"),
-    "456 Nguyễn Trãi, Quận 5, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "123",
     listRole.customer
@@ -95,7 +108,7 @@ listCustomer.push(
     "lehoangkhoi@example.com",
     "0922334455",
     new Date("1988-11-09"),
-    "789 Phan Đình Phùng, Quận Phú Nhuận, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "123",
     listRole.customer
@@ -110,9 +123,9 @@ listCustomer.push(
     "phamngocbich@example.com",
     "0933221144",
     new Date("1992-03-10"),
-    "321 Điện Biên Phủ, Quận 3, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
-  
+
     "",
     listRole.customer
   )
@@ -126,7 +139,7 @@ listCustomer.push(
     "hoangvannam@example.com",
     "0944556677",
     new Date("1985-07-19"),
-    "654 Lý Thường Kiệt, Quận 10, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "",
     listRole.customer
@@ -141,7 +154,7 @@ listCustomer.push(
     "vuthimai@example.com",
     "0955667788",
     new Date("1997-12-22"),
-    "876 Hai Bà Trưng, Quận 1, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "",
     listRole.customer
@@ -156,7 +169,7 @@ listCustomer.push(
     "dothanhhung@example.com",
     "0911778899",
     new Date("1991-09-30"),
-    "159 Võ Văn Tần, Quận 3, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "",
     listRole.customer
@@ -171,7 +184,7 @@ listCustomer.push(
     "buithilan@example.com",
     "0977889966",
     new Date("1993-01-25"),
-    "742 Cách Mạng Tháng 8, Quận Tân Bình, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "",
     listRole.customer
@@ -186,7 +199,7 @@ listCustomer.push(
     "nguyenquanghai@example.com",
     "0902445566",
     new Date("1986-05-11"),
-    "963 Nguyễn Văn Cừ, Quận 5, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "",
     listRole.customer
@@ -201,7 +214,7 @@ listCustomer.push(
     "trananhthu@example.com",
     "0988112233",
     new Date("1998-04-07"),
-    "684 Trường Chinh, Quận Tân Phú, Thành phố Hồ Chí Minh",
+    getRandomAddress(vietnameseProvinces),
     true,
     "",
     listRole.customer

@@ -17,30 +17,30 @@
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossorigin="anonymous"
     />
-    <script src="/assets/js/dang-ky.js"></script>
+    <script type="module" src="/assets/js/dang-ky.js"></script>
   </head>
 
-  <body style="background-color: #d1e2f4; position: relative;;">
+  <body style="background-color: #d1e2f4; position: relative">
     <img
-        src="/assets/Image/trang-chu/keyboard-sticker-1.png"
-        alt="hinh-dang-ky"
-        style="position: absolute; top: 20px; left: 100px; width: 250px;"
-      />
-      <img
-        src="/assets/Image/trang-chu/keyboard-sticker-3.png"
-        alt="hinh-dang-ky"
-        style="position: absolute; top: 20px; right: 100px; width: 250px;"
-      />
-      <img
-        src="/assets/Image/trang-chu/keyboard-sticker-2.png"
-        alt="hinh-dang-ky"
-        style="position: absolute; bottom: 20px; left: 100px; width: 250px;"
-      />
-      <img
-        src="/assets/Image/trang-chu/keyboard-sticker-4.png"
-        alt="hinh-dang-ky"
-        style="position: absolute; bottom: 20px; right: 100px; width: 250px;"
-      />
+      src="/assets/Image/trang-chu/keyboard-sticker-1.png"
+      alt="hinh-dang-ky"
+      style="position: absolute; top: 20px; left: 100px; width: 250px"
+    />
+    <img
+      src="/assets/Image/trang-chu/keyboard-sticker-3.png"
+      alt="hinh-dang-ky"
+      style="position: absolute; top: 20px; right: 100px; width: 250px"
+    />
+    <img
+      src="/assets/Image/trang-chu/keyboard-sticker-2.png"
+      alt="hinh-dang-ky"
+      style="position: absolute; bottom: 20px; left: 100px; width: 250px"
+    />
+    <img
+      src="/assets/Image/trang-chu/keyboard-sticker-4.png"
+      alt="hinh-dang-ky"
+      style="position: absolute; bottom: 20px; right: 100px; width: 250px"
+    />
     <section>
       <div class="container">
         <div class="registration-form">
@@ -49,8 +49,8 @@
             <h2>Đăng Ký Khách Hàng</h2>
           </div>
           <form>
-            <div style="display: flex; padding: 50px;">
-              <div style="margin-right: 50px;">
+            <div style="display: flex; padding: 50px">
+              <div style="margin-right: 50px">
                 <input type="text" placeholder="Họ và tên (*)" required />
                 <select required>
                   <option selected disabled value="">Giới tính (*)</option>
@@ -59,11 +59,20 @@
                   <option value="Khác">Khác</option>
                 </select>
                 <input type="date" required />
-                <input type="text" placeholder="Địa chỉ" />
-              </div>
-              <div>
                 <input type="email" placeholder="Email" />
                 <input type="text" placeholder="Số điện thoại (*)" required />
+              </div>
+              <div>
+                <select id="province-input">
+                  <option value="">Tỉnh / Thành phố</option>
+                </select>
+                <select id="district-input" disabled>
+                  <option value="">Quận / Huyện</option>
+                </select>
+                <select id="ward-input" disabled>
+                  <option value="">Xã / Phường / Thị trấn</option>
+                </select>
+                <input id="address" type="text" placeholder="Địa chỉ" disabled />
                 <input type="password" placeholder="Mật khẩu (*)" required />
                 <input
                   type="password"
@@ -72,8 +81,14 @@
                 />
               </div>
             </div>
-            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-                <button type="submit" style="width: 200px;">Đăng ký</button>
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+              "
+            >
+              <button type="submit" style="width: 200px">Đăng ký</button>
             </div>
             <p class="register-link">
               Bạn đã có tài khoản? <a href="/dangnhap.html">Đăng nhập ngay</a>
@@ -82,5 +97,7 @@
         </div>
       </div>
     </section>
+
+
   </body>
 </html>

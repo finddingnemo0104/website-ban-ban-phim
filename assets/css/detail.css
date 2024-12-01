@@ -306,9 +306,8 @@ height: 30px;
 
 .header-container{
     flex: 1;
-    gap: 100px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-left:52px;
     height: 60px;
     /* background-color: red; */
@@ -316,16 +315,20 @@ height: 30px;
 
 .user {
     height: 100%;
-    width:50%;
-    /* background-color: blue; */
+    /* width:50%; */
     display: flex;
+    /* background-color: blue; */
     align-items: center;
+    visibility: hidden;
+}
+
+.user.open {
+  visibility: visible;
 }
 
 .user>img{
     width: 24px;
     height: 24px;
-
 }
 
 .user-name>p{
@@ -338,14 +341,13 @@ height: 30px;
 }
 
 .links {
-    margin-top: 10px;
-    gap:50px;
+    margin-top: 20px;
+    gap:80px;
     display: flex;
     margin-left: 30px;
 }
 
 .links>a {
-    
     text-decoration: none;
     color: #21568A;
     font-size: 18px;
@@ -353,16 +355,21 @@ height: 30px;
     line-height: 18px;
     text-align: center;
     display: block;
-    width: 100px;
+    /* width: 100px; */
     height:100px;
-    
-
 }
 
 .header-search{
-  width: 100%;
+  /* width: 100%; */
   margin-right:0px;
+  padding-right: 1rem;
+  visibility: hidden;
 }
+
+.header-search.open {
+  visibility: visible;
+}
+
 .header-search input{
   margin-left:100px;
   background-color: #F2E9E9;
@@ -372,7 +379,7 @@ height: 30px;
   height:70%;
   margin-top: 10px;
   position:relative;
-  right:150px;
+  /* right:150px; */
   font-size: 16px;
   color:#504E4E;
   padding-left:30px;
@@ -384,8 +391,10 @@ height: 30px;
 .header-search .cart{
   width: 24px;
   height: 24px;
+  margin-right: 4rem;
   position:relative;
-  left:250px;
+  top: 1rem;
+  /* left:250px; */
 }
 
 
