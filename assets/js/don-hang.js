@@ -19,6 +19,7 @@ function displayOrders(ordersKey) {
 
   const orderList = document.querySelector(".order-list");
   const summary = document.querySelector(".summary");
+  
 
   if (orders.length === 0) {
     orderList.innerHTML = `<p>Không có đơn hàng nào.</p>`;
@@ -46,13 +47,12 @@ function displayOrders(ordersKey) {
       0
     );
     totalSpent += orderTotal;
-
     const orderItem = document.createElement("div");
     orderItem.className = "order-item";
     orderItem.innerHTML = `
       <div class="order-header">
         <h3>Đơn hàng #000${index + 1}</h3>
-        <span class="order-status">${order.status || "Chưa xử lý"}</span>
+        <span class="order-status">${order.orderStatus || "Chưa xử lý"}</span>
       </div>
       <div class="order-details">
         <p>Ngày đặt: ${order.orderDate}</p>
