@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("province-input")
     .addEventListener("change", function () {
       const selectedProvinceCode = this.value;
+      if (selectedProvinceCode === "") {
+        document.getElementById("district-input").required = false;
+      }
+
       populateDistricts(selectedProvinceCode);
     });
 
@@ -16,6 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("district-input")
     .addEventListener("change", function () {
       const selectedDistrictCode = this.value;
+      if (selectedDistrictCode === "") {
+        document.getElementById("ward-input").required = false;
+        document.getElementById("address").required = false;
+      }
       populateWards(selectedDistrictCode);
     });
 
@@ -178,22 +186,35 @@ function populateDistricts(provinceCode) {
   const wardSelect = document.getElementById("ward-input");
   districtSelect.innerHTML = `<option value="">Chọn quận/huyện</option>`;
   districtSelect.disabled = !provinceCode;
+  districtSelect.required = true;
   wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
   wardSelect.disabled = true;
 
-  const province  = vietnameseProvinces.find(province => province.Code === provinceCode);
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
   province.District.forEach((district) => {
-    districtSelect.innerHTML += `<option value="${district.code}">${district.name}</option>`;
+    districtSelect.innerHTML += `<option value="${district.Code}">${district.FullName}</option>`;
   });
 }
 
 function populateWards(districtCode) {
-  const wardSelect = document.getElementById("ward");
+  const wardSelect = document.getElementById("ward-input");
   wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
   wardSelect.disabled = !districtCode;
+  wardSelect.required = true;
 
-  const filteredWards = wards.filter((w) => w.district_code === districtCode);
-  filteredWards.forEach((ward) => {
-    wardSelect.innerHTML += `<option value="${ward.code}">${ward.name}</option>`;
+  const provinceCode = document.getElementById("province-input").value;
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
+  const district = province.District.find(
+    (district) => district.Code === districtCode
+  );
+  district.Ward.forEach((ward) => {
+    wardSelect.innerHTML += `<option value="${ward.Code}">${ward.FullName}</option>`;
   });
+
+  document.getElementById("address").disabled = false;
+  document.getElementById("address").required = true;
 }
