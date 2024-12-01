@@ -322,39 +322,6 @@ document.getElementById("refresh-button").addEventListener("click", () => {
   displayStatistics(orders);
 });
 
-// This function is triggered when the "eye" icon is clicked for a customer in the top 5 list.
-// function viewCustomerOrders(customerId) {
-//   console.log("Clicked view for customer:", customerId); // Kiểm tra khi nhấn vào biểu tượng
-//   const orders = getOrdersFromLocalStorage(); // Lấy tất cả đơn hàng từ localStorage
-//   const customerOrders = orders.filter(
-//     (order) => order.customerInfo.customerID === customerId
-//   );
-//   console.log("Found customer orders:", customerOrders); // Kiểm tra đơn hàng tìm thấy
-//   if (customerOrders.length > 0) {
-//     // Lấy phần tử để hiển thị đơn hàng
-//     const tableBody = document.querySelector("#customer-orders-table tbody");
-//     if (tableBody) {
-//       // Xóa nội dung cũ trước khi thêm mới
-//       tableBody.innerHTML = "";
-//       customerOrders.forEach((order) => {
-//         const row = document.createElement("tr");
-//         // Thêm thông tin đơn hàng vào bảng
-//         row.innerHTML = `
-//           <td>${order.orderID}</td>
-//           <td>${order.orderDate}</td>
-//           <td>${order.total}</td>
-//           <td>${order.orderStatus}</td>
-//         `;
-//         tableBody.appendChild(row);
-//       });
-//     } else {
-//       console.error("Không tìm thấy phần tử bảng để hiển thị đơn hàng!");
-//     }
-//   } else {
-//     console.log("No orders found for this customer.");
-//     alert("Không tìm thấy đơn hàng của khách hàng này.");
-//   }
-// }
 
 function isValidDateRange(startDate, endDate) {
   let start = new Date(startDate); // Chuyển đổi thành đối tượng Date
@@ -477,18 +444,11 @@ function viewOrdersOfProduct(e, productID) {
   displayOrdersByProductID(productID);
 }
 
-// Cancel model view product details
-const cancelViewDetailsID = document.getElementsByClassName(
-  "cancel-view-details"
-)[0];
-
-function cancelViewDetails(e) {
+function closeViewOrdersOfProduct(e) {
   document
     .getElementsByClassName("model-view-orders-product-container")[0]
     .classList.remove("open");
 }
-
-cancelViewDetailsID.addEventListener("click", cancelViewDetails);
 
 function viewOrderDetails(orderId) {
   const orders = getOrdersFromLocalStorage();
@@ -506,7 +466,7 @@ function viewOrderDetails(orderId) {
       order.orderDate || "Không xác định"
     }`;
     document.getElementById("order-address").innerText = `Địa chỉ: ${
-      order.customerInfo.address || "Không xác định"
+      getAddress(order.customerInfo.address) || "Không xác định"
     }`;
 
     // Hiển thị sản phẩm trong đơn hàng
@@ -611,7 +571,7 @@ function viewOrdersOfCustomer(e, customerID) {
             </div>
             <div class="product-attribute">
               <h2 class="attribute-header">Địa chỉ:</h2>
-              <p class="attribute-body">${customerFound.address}</p>
+              <p class="attribute-body">${getAddress(customerFound.address)}</p>
             </div>
           </div>
         </div>
@@ -691,7 +651,7 @@ function viewOrderDetailInCustomer(orderId) {
       order.orderDate || "Không xác định"
     }`;
     document.getElementById("order-address-customer").innerText = `Địa chỉ: ${
-      order.customerInfo.address || "Không xác định"
+      getAddress(order.customerInfo.address) || "Không xác định"
     }`;
 
     // Hiển thị sản phẩm trong đơn hàng
@@ -746,4 +706,9 @@ function closeOrderDetailsInCustomer() {
   document.querySelector(
     ".model-view-details-container"
   ).style.overflow = "auto";
+}
+
+
+function getAddress(addressObj) {
+  return `${addressObj.address}, ${addressObj.ward}, ${addressObj.district}, ${addressObj.province}.`;
 }

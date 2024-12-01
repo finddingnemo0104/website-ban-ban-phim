@@ -60,7 +60,9 @@ function showCustomerData(customerData) {
 
   for (let item = 0; item < customers.length; item++) {
     const customer = customers[item];
-    if (customer.role === listRole.admin) { continue};
+    if (customer.role === listRole.admin) {
+      continue;
+    }
     const html = `
             <tr>
               <td>${customer.ID}</td>
@@ -160,7 +162,10 @@ function addCustomer(event) {
   const email = formData.get("email");
   const phone = formData.get("phone");
   const dob = new Date(formData.get("dob"));
-  const address = formData.get("address");
+  const provinceCode = document.querySelector("#province-input").value;
+  const districtCode = document.querySelector("#district-input").value;
+  const wardCode = document.querySelector("#ward-input").value;
+  const address = document.querySelector("#address").value;
   let isError = false;
 
   const listCustomer = getCustomer();
@@ -217,18 +222,39 @@ function addCustomer(event) {
   }
   // --------------------------------------------------------------------------------- //
 
+  let province, district, ward;
+  if (provinceCode) {
+    province = vietnameseProvinces.find(
+      (province) => province.Code === provinceCode
+    );
+    district = province.District.find(
+      (district) => district.Code === districtCode
+    );
+    ward = district.Ward.find((ward) => ward.Code === wardCode);
+  }
+
   if (isError === true) {
     return;
   }
 
+  let addressObj = new Address("", "", "", "");
+  if (provinceCode) {
+    addressObj = new Address(
+      province.FullName,
+      district.FullName,
+      ward.FullName,
+      address
+    );
+  }
+
   const newCustomer = new Customer(
-    gennerateCustomerID(),
+    generateCustomerID(),
     name,
     gender,
     email,
     phone,
     dob,
-    address,
+    addressObj,
     true,
     "",
     "customer"
@@ -275,7 +301,6 @@ function viewDetails(e, customerID) {
       : customerFound.gender === "Nữ"
       ? "./assets/Image/quan-ly-khach-hang/female-customer.jpg"
       : "./assets/Image/quan-ly-khach-hang/other-customer.jpg";
-
   // Display customer details
   const htmlCustomerDetails = `
         <div style="display: flex; margin-bottom: 30px">
@@ -305,7 +330,7 @@ function viewDetails(e, customerID) {
             </div>
             <div class="product-attribute">
               <h2 class="attribute-header">Địa chỉ:</h2>
-              <p class="attribute-body">${customerFound.address}</p>
+              <p class="attribute-body">${getAddress(customerFound.address)}</p>
             </div>
             <button
               class="button-style"
@@ -459,20 +484,24 @@ function viewDetails(e, customerID) {
             <label for="address" style="width: 15%; margin-left: 20px"
               >Địa chỉ</label
             >
-            <div>
-              <textarea
-              name="address"
-              type="text"
-              placeholder="Địa chỉ"
+            <div
               style="
+                display: flex;
+                flex-direction: column;
                 margin-left: 40px;
-                width: 500px;
-                height: 50px;
-                padding: 3px;
-                border-radius: 5px;
-                border: 1px solid #636262;
+                gap: 1rem;
               "
-            >${customerFound.address}</textarea>
+            >
+              <select id="province-input-edit">
+                <option value="">Tỉnh / Thành phố</option>
+              </select>
+              <select id="district-input-edit">
+                <option value="">Quận / Huyện</option>
+              </select>
+              <select id="ward-input-edit">
+                <option value="">Xã / Phường / Thị trấn</option>
+              </select>
+              <input type="text" id="address-edit" placeholder="Địa chỉ" />
             </div>
           </div>
 
@@ -491,7 +520,88 @@ function viewDetails(e, customerID) {
     `;
     const editModelBody = document.querySelector("#edit-model-body");
     editModelBody.innerHTML = htmlEditCustomer;
+
+    // Chèn dữ liệu thành phố
+    populateProvinces("province-input-edit");
+
+    let province, district, ward;
+    if (customerFound.address.province !== "") {
+      province = vietnameseProvinces.find(
+        (province) => province.FullName === customerFound.address.province
+      );
+      district = province.District.find(
+        (district) => district.FullName === customerFound.address.district
+      );
+      ward = district.Ward.find(
+        (ward) => ward.FullName === customerFound.address.ward
+      );
+      document.querySelector("#province-input-edit").value = province.Code;
+      populateDistricts(
+        province.Code,
+        "district-input-edit",
+        "ward-input-edit"
+      );
+      document.querySelector("#district-input-edit").value = district.Code;
+      populateWards(
+        district.Code,
+        "province-input-edit",
+        "ward-input-edit",
+        "address-edit"
+      );
+      document.querySelector("#ward-input-edit").value = ward.Code;
+      document.querySelector("#address-edit").value =
+        customerFound.address.address;
+    }
+
+    // Chèn dữ liệu quận vào form chọn quận khi chọn xong thành phố
+    document
+      .getElementById("province-input-edit")
+      .addEventListener("change", function () {
+        const selectedProvinceCode = this.value;
+        if (
+          selectedProvinceCode === "" ||
+          selectedProvinceCode === null ||
+          selectedProvinceCode === undefined
+        ) {
+          document.getElementById("district-input-edit").required = false;
+          document.getElementById("district-input-edit").disabled = true;
+          document.getElementById("ward-input-edit").required = false;
+          document.getElementById("ward-input-edit").disabled = true;
+          document.getElementById("address-edit").required = false;
+          document.getElementById("address-edit").disabled = true;
+          return;
+        }
+        populateDistricts(
+          selectedProvinceCode,
+          "district-input-edit",
+          "ward-input-edit"
+        );
+      });
+
+    document
+      .getElementById("district-input-edit")
+      .addEventListener("change", function () {
+        const selectedDistrictCode = this.value;
+        if (
+          selectedDistrictCode === "" ||
+          selectedDistrictCode === null ||
+          selectedDistrictCode === undefined
+        ) {
+          document.getElementById("ward-input-edit").required = false;
+          document.getElementById("ward-input-edit").disabled = true;
+          document.getElementById("address-edit").required = false;
+          document.getElementById("address-edit").disabled = true;
+          return;
+        }
+        populateWards(
+          selectedDistrictCode,
+          "province-input-edit",
+          "ward-input-edit",
+          "address-edit"
+        );
+      });
   }
+
   editButton.addEventListener("click", () => {
     openEditCustomertModel(customerFound);
   });
@@ -526,7 +636,10 @@ function editCustomer(event, customerID) {
   const email = formData.get("email");
   const phone = formData.get("phone");
   const dob = new Date(formData.get("dob"));
-  const address = formData.get("address");
+  const provinceCode = document.querySelector("#province-input-edit").value;
+  const districtCode = document.querySelector("#district-input-edit").value;
+  const wardCode = document.querySelector("#ward-input-edit").value;
+  const address = document.querySelector("#address-edit").value;
   let isError = false;
 
   const phoneAlertEle = document.getElementById("phone-alert-edit");
@@ -540,7 +653,7 @@ function editCustomer(event, customerID) {
     (customer) => customer.email === email && customer.ID !== customerID
   );
 
-// --------------------------------------------------------------------------------- //
+  // --------------------------------------------------------------------------------- //
 
   // Check phone number
   if (phone === "") {
@@ -570,13 +683,13 @@ function editCustomer(event, customerID) {
   // --------------------------------------------------------------------------------- //
 
   // Check email
-  if (customerFoundEmail) {
-    emailAlertEle.innerHTML = "Email này đã tồn tại !";
+  if (email !== "" && !isValidEmail(email)) {
+    emailAlertEle.innerHTML = "Email không hợp lệ !";
     isError = true;
   }
 
-  if (email!== "" && !isValidEmail(email)) {
-    emailAlertEle.innerHTML = "Email không hợp lệ !";
+  if (email !== "" && customerFoundEmail) {
+    emailAlertEle.innerHTML = "Email này đã tồn tại !";
     isError = true;
   }
 
@@ -586,13 +699,33 @@ function editCustomer(event, customerID) {
     return;
   }
 
+  let province, district, ward;
+  if (provinceCode) {
+    province = vietnameseProvinces.find(
+      (province) => province.Code === provinceCode
+    );
+    district = province.District.find(
+      (district) => district.Code === districtCode
+    );
+    ward = district.Ward.find((ward) => ward.Code === wardCode);
+  }
+
+  let addresObj = new Address("", "", "", "");
+  if (provinceCode) {
+    addresObj = new Address(
+      province.FullName,
+      district.FullName,
+      ward.FullName,
+      address
+    );
+  }
+
   listCustomer[indexCustomer].name = name;
   listCustomer[indexCustomer].gender = gender;
   listCustomer[indexCustomer].email = email;
   listCustomer[indexCustomer].phone = phone;
   listCustomer[indexCustomer].dob = dob;
-  listCustomer[indexCustomer].address = address;
-
+  listCustomer[indexCustomer].address = addresObj;
   localStorage.setItem("customers", JSON.stringify(listCustomer));
   alert("Cập nhật thông tin khách hàng thành công!");
   cancelEditCustomerModel();
@@ -655,4 +788,123 @@ function filterCustomer(event) {
   });
 
   showCustomerData(foundCustomers);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Chèn dữ liệu thành phố
+  populateProvinces();
+
+  // Chèn dữ liệu quận vào form chọn quận khi chọn xong thành phố
+  document
+    .getElementById("province-input")
+    .addEventListener("change", function () {
+      const selectedProvinceCode = this.value;
+      if (
+        selectedProvinceCode === "" ||
+        selectedProvinceCode === null ||
+        selectedProvinceCode === undefined
+      ) {
+        document.getElementById("district-input").required = false;
+        document.getElementById("district-input").disabled = true;
+        document.getElementById("ward-input").required = false;
+        document.getElementById("ward-input").disabled = true;
+        document.getElementById("address").required = false;
+        document.getElementById("address").disabled = true;
+        return;
+      }
+
+      populateDistricts(selectedProvinceCode);
+    });
+
+  document
+    .getElementById("district-input")
+    .addEventListener("change", function () {
+      const selectedDistrictCode = this.value;
+      if (
+        selectedDistrictCode === "" ||
+        selectedDistrictCode === null ||
+        selectedDistrictCode === undefined
+      ) {
+        document.getElementById("ward-input").required = false;
+        document.getElementById("ward-input").disabled = true;
+        document.getElementById("address").required = false;
+        document.getElementById("address").disabled = true;
+        return;
+      }
+      populateWards(selectedDistrictCode);
+    });
+});
+
+// --------------------------------------------------------------------------------- //
+
+function populateProvinces(selectId = "province-input") {
+  const provinceSelect = document.getElementById(selectId);
+  provinceSelect.innerHTML = `<option value="">Chọn tỉnh/thành</option>`;
+  vietnameseProvinces.forEach((province) => {
+    provinceSelect.innerHTML += `<option value="${province.Code}">${province.FullName}</option>`;
+  });
+}
+
+function populateDistricts(
+  provinceCode,
+  selectDistrictId = "district-input",
+  selectWardId = "ward-input"
+) {
+  const districtSelect = document.getElementById(selectDistrictId);
+  const wardSelect = document.getElementById(selectWardId);
+  districtSelect.innerHTML = `<option value="">Chọn quận/huyện</option>`;
+  districtSelect.disabled = !provinceCode;
+  districtSelect.required = true;
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = true;
+
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
+  province.District.forEach((district) => {
+    districtSelect.innerHTML += `<option value="${district.Code}">${district.FullName}</option>`;
+  });
+}
+
+function populateWards(
+  districtCode,
+  selectProvinceId = "province-input",
+  selectWardId = "ward-input",
+  inputAddressId = "address"
+) {
+  const wardSelect = document.getElementById(selectWardId);
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = !districtCode;
+  wardSelect.required = true;
+
+  const provinceCode = document.getElementById(selectProvinceId).value;
+  console.log("provinceCode", provinceCode);
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
+  console.log(province);
+  const district = province.District.find(
+    (district) => district.Code === districtCode
+  );
+  district.Ward.forEach((ward) => {
+    wardSelect.innerHTML += `<option value="${ward.Code}">${ward.FullName}</option>`;
+  });
+
+  document.getElementById(inputAddressId).disabled = false;
+  document.getElementById(inputAddressId).required = true;
+}
+
+// Generate customer ID
+function generateCustomerID() {
+  const listCustomer = getCustomer();
+  const lastCustomer = listCustomer[listCustomer.length - 1];
+  const lastCustomerID = parseInt(lastCustomer.ID.split("#KH")[1]);
+  const numberID = lastCustomerID + 1;
+  let newCustomerID = numberID.toString().padStart(5, "0");
+
+  return `#KH${newCustomerID}`;
+}
+
+function getAddress(addressObj) {
+  return `${addressObj.address}, ${addressObj.ward}, ${addressObj.district}, ${addressObj.province}.`;
 }

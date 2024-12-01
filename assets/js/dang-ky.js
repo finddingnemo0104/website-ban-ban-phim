@@ -1,5 +1,3 @@
-import { vietnameseProvinces } from "../vietnamese-provinces-data.js";
-
 document.addEventListener("DOMContentLoaded", () => {
   // Chèn dữ liệu thành phố
   populateProvinces();
@@ -9,8 +7,18 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("province-input")
     .addEventListener("change", function () {
       const selectedProvinceCode = this.value;
-      if (selectedProvinceCode === "") {
+      if (
+        selectedProvinceCode === "" ||
+        selectedProvinceCode === null ||
+        selectedProvinceCode === undefined
+      ) {
         document.getElementById("district-input").required = false;
+        document.getElementById("district-input").disabled = true;
+        document.getElementById("ward-input").required = false;
+        document.getElementById("ward-input").disabled = true;
+        document.getElementById("address").required = false;
+        document.getElementById("address").disabled = true;
+        return;
       }
 
       populateDistricts(selectedProvinceCode);
@@ -20,9 +28,17 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("district-input")
     .addEventListener("change", function () {
       const selectedDistrictCode = this.value;
-      if (selectedDistrictCode === "") {
+      console.log(selectedDistrictCode);
+      if (
+        selectedDistrictCode === "" ||
+        selectedDistrictCode === null ||
+        selectedDistrictCode === undefined
+      ) {
         document.getElementById("ward-input").required = false;
+        document.getElementById("ward-input").disabled = true;
         document.getElementById("address").required = false;
+        document.getElementById("address").disabled = true;
+        return;
       }
       populateWards(selectedDistrictCode);
     });
@@ -35,9 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
     ).value;
     const gender = registrationForm.querySelector("select").value;
     const dob = registrationForm.querySelector('input[type="date"]').value;
-    const address = registrationForm.querySelector(
-      'input[placeholder="Địa chỉ"]'
-    ).value;
+    const provinceCode =
+      registrationForm.querySelector("#province-input").value;
+    const districtCode =
+      registrationForm.querySelector("#district-input").value;
+    const wardCode = registrationForm.querySelector("#ward-input").value;
+    const address = registrationForm.querySelector("#address").value;
+
     const email = registrationForm.querySelector('input[type="email"]').value;
     const phone = registrationForm.querySelector(
       'input[placeholder="Số điện thoại (*)"]'
@@ -56,6 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!isValidName(name)) {
       alert("Tên không hợp lệ !");
+      return;
+    }
+
+    if (!isEnough13(dob)) {
+      alert("Bạn cần đủ 13 tuổi để đăng ký thành viên !");
       return;
     }
 
@@ -96,7 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       return;
     }
-
+    let province, district, ward;
+    if (provinceCode) {
+      province = vietnameseProvinces.find(
+        (province) => province.Code === provinceCode
+      );
+      district = province.District.find(
+        (district) => district.Code === districtCode
+      );
+      ward = district.Ward.find((ward) => ward.Code === wardCode);
+    }
     // Register customer
     registerCustomer({
       ID: generateCustomerID(),
@@ -105,7 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
       email,
       phone,
       dob,
-      address,
+      address: new Address(
+        province.FullName,
+        district.FullName,
+        ward.FullName,
+        address
+      ),
       status: true,
       password,
       role: "customer",
@@ -115,6 +154,24 @@ document.addEventListener("DOMContentLoaded", () => {
     registrationForm.reset();
   });
 });
+
+function isEnough13(dob) {
+  const today = new Date();
+  const birthDate = new Date(dob);
+  const age = today.getFullYear() - birthDate.getFullYear();
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+
+  // Nếu chưa đến ngày sinh trong năm nay
+  if (
+    monthDifference < 0 ||
+    (monthDifference === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--;
+  }
+
+  return age >= 13;
+}
+
 function registerCustomer(customer) {
   const customers = JSON.parse(localStorage.getItem("customers")) || [];
   customers.push(customer);

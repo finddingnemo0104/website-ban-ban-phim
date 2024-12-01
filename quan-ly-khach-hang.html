@@ -11,7 +11,9 @@
   <body>
     <!-- Slogan bar -->
     <SloganBar class="slogan-bar">
-      <a href="quan-ly-san-pham.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
+      <a href="quan-ly-san-pham.html"
+        ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+      /></a>
       <p class="slogan" style="color: white">Chất phím, chất click !</p>
     </SloganBar>
 
@@ -19,14 +21,13 @@
       <!-- Navbar admin -->
       <Navbar-admin class="navbar-admin">
         <div class="hi-admin" style="height: 50px">
-          <div style="display: flex; position: relative" >
+          <div style="display: flex; position: relative">
             <i
-              class="fa-solid fa-circle-user user" onclick="showModel('model-user-info-container')"
+              class="fa-solid fa-circle-user user"
+              onclick="showModel('model-user-info-container')"
             >
             </i>
-            <i
-              class="fa-solid fa-circle-chevron-down show-user-info"
-            ></i>
+            <i class="fa-solid fa-circle-chevron-down show-user-info"></i>
           </div>
 
           <p style="margin-top: 12px">Xin chào Admin !</p>
@@ -39,8 +40,12 @@
         >
           Quản lý sản phẩm
         </button>
-        <button onclick="location.href='./quan-ly-don-hang.html';"
-        class="management-option-button">Quản lý đơn hàng</button>
+        <button
+          onclick="location.href='./quan-ly-don-hang.html';"
+          class="management-option-button"
+        >
+          Quản lý đơn hàng
+        </button>
 
         <button
           class="management-option-button"
@@ -49,12 +54,17 @@
         >
           Quản lý khách hàng
         </button>
-        <button class="management-option-button" onclick="location.href='./thong-ke.html';">Thống kê</button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./thong-ke.html';"
+        >
+          Thống kê
+        </button>
       </Navbar-admin>
 
       <div
         class="bg-color"
-        style="height: 100vh; width: 100%; overflow-y: auto"
+        style="height: calc(100vh - 30px); width: 100%; overflow-y: auto; padding-bottom: 1rem;"
       >
         <!-- Title page -->
         <div style="display: flex">
@@ -71,10 +81,7 @@
         </div>
 
         <!-- Search options -->
-        <form
-          class="search-options-style"
-          onsubmit="filterCustomer(event)"
-        >
+        <form class="search-options-style" onsubmit="filterCustomer(event)">
           <!-- Search by product name -->
           <div class="search-option">
             <input
@@ -86,7 +93,7 @@
           </div>
           <!-- Search by gender -->
           <div class="search-option">
-            <select name="gender" style="padding: 5px; width: 100px;">
+            <select name="gender" style="padding: 5px; width: 100px">
               <option value="all" selected>Tất cả</option>
               <option value="Nam">Nam</option>
               <option value="Nữ">Nữ</option>
@@ -266,20 +273,24 @@
             <label for="address" style="width: 15%; margin-left: 20px"
               >Địa chỉ</label
             >
-            <div>
-              <textarea
-                name="address"
-                type="text"
-                placeholder="Địa chi"
-                style="
-                  margin-left: 40px;
-                  width: 500px;
-                  height: 50px;
-                  padding: 3px;
-                  border-radius: 5px;
-                  border: 1px solid #636262;
-                "
-              ></textarea>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                margin-left: 40px;
+                gap: 1rem;
+              "
+            >
+              <select id="province-input">
+                <option value="">Tỉnh / Thành phố</option>
+              </select>
+              <select id="district-input" disabled>
+                <option value="">Quận / Huyện</option>
+              </select>
+              <select id="ward-input" disabled>
+                <option value="">Xã / Phường / Thị trấn</option>
+              </select>
+              <input type="text" id="address" placeholder="Địa chỉ" disabled />
             </div>
           </div>
         </div>
@@ -331,23 +342,28 @@
       </div>
     </div>
 
-        <!-- Model user info -->
-        <div class="model-user-info-container">
-          <div class="user-info-ele" onclick="showModel('login-info')">
-            <i class="fa-solid fa-circle-user user-info-icon"></i>
-            <div>Thông tin tài khoản</div>
-            <i class="fa-solid fa-angle-down" style="padding-left: 5px;"></i>
-          </div>
-    
-          <table class="login-info">
-            
-          </table>
-    
-          <div class="user-info-ele log-out" style="border-top: 1px solid gray;" onclick="logoutAdmin()">
-            <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
-            <div>Đăng xuất</div>
-          </div>
-         </div>
+    <!-- Model user info -->
+    <div class="model-user-info-container">
+      <div class="user-info-ele" onclick="showModel('login-info')">
+        <i class="fa-solid fa-circle-user user-info-icon"></i>
+        <div>Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+      </div>
+
+      <table class="login-info"></table>
+
+      <div
+        class="user-info-ele log-out"
+        style="border-top: 1px solid gray"
+        onclick="logoutAdmin()"
+      >
+        <i
+          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+          style="color: gray"
+        ></i>
+        <div>Đăng xuất</div>
+      </div>
+    </div>
 
     <script
       src="https://kit.fontawesome.com/793699135f.js"
@@ -355,7 +371,8 @@
     ></script>
 
     <script src="./assets/js/common.js"></script>
-    <script  type="module" src="./assets/js/customerData.js"></script>
+    <script src="./assets/vietnamese-provinces-data.js"></script>
+    <script src="./assets/js/customerData.js"></script>
     <script src="./assets/js/quan-ly-khach-hang.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-export const vietnameseProvinces = [
+const vietnameseProvinces = [
   {
     Code: "01",
     FullName: "Thành phố Hà Nội",

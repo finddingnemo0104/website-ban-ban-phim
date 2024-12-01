@@ -1,4 +1,3 @@
-import { vietnameseProvinces } from "../vietnamese-provinces-data.js";
 
 // Customer class
 class Address {
@@ -7,6 +6,10 @@ class Address {
     this.district = district;
     this.ward = ward;
     this.address = address;
+  }
+
+  getAddress() {
+    return `${this.address}, ${this.ward}, ${this.district}, ${this.province}.`;
   }
 }
 

@@ -34,6 +34,8 @@ function displayOrders() {
     row.innerHTML = `
         <td>${order.orderID}</td>
         <td>${order.customerInfo.name}</td>
+        <td>${order.customerInfo.address.province}</td>
+        <td>${order.customerInfo.address.district}</td>
         <td>${order.orderDate}</td>
         <td>${order.total.toLocaleString()}đ</td>
         <td>
@@ -232,6 +234,8 @@ function filterOrders(event) {
   const form = event.target;
   const customerName = form.customer.value.toLowerCase().trim(); // Tên khách hàng cần lọc
   const status = form.status.value; // Trạng thái đơn hàng cần lọc
+  const sortDistrict = form.sortDistrict.value;
+  console.log(sortDistrict);
 
   const { isValid, message, startDate, endDate } = isValidDateRange(
     form["start-date"].value,
@@ -266,6 +270,24 @@ function filterOrders(event) {
     return matchesCustomer && matchesStatus && matchesDateRange;
   });
 
+  console.log(filteredOrders);
+
+  if (sortDistrict !== "all") {
+    filteredOrders.sort((a, b) => {
+      const districtA = a.customerInfo.address.district.toUpperCase(); // Case insensitive sorting
+      const districtB = b.customerInfo.address.district.toUpperCase();
+      if (districtA < districtB) {
+        return sortDistrict === 'asc' ? -1 : 1;
+      }
+      if (districtA > districtB) {
+        return sortDistrict === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+  }
+  console.log(filteredOrders);
+
+
   // Hiển thị danh sách đơn hàng đã lọc
   displayFilteredOrders(filteredOrders);
 }
@@ -289,6 +311,8 @@ function displayFilteredOrders(filteredOrders) {
     row.innerHTML = `
       <td>${order.orderID}</td>
       <td>${order.customerInfo.name}</td>
+      <td>${order.customerInfo.address.province}</td>
+      <td>${order.customerInfo.address.district}</td>
       <td>${orderDate}</td>
       <td>${order.total.toLocaleString()}đ</td>
       <td>

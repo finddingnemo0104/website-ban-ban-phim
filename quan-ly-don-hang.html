@@ -1,189 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SGU Click</title>
-  <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
-  <link rel="stylesheet" href="./assets/css/quan-ly-don-hang.css" />
-</head>
-<body>
-  <!-- Slogan bar -->
-  <div class="slogan-bar">
-    <a href="quan-ly-don-hang.html">
-      <img class="logo" src="./assets/Image/logo.png" alt="logo" />
-    </a>
-    <p class="slogan" style="color: white">Chất phím, chất click!</p>
-  </div>
-
-  <div style="display: flex">
-    <!-- Navbar admin -->
-    <div class="navbar-admin">
-      <div class="hi-admin" style="height: 50px">
-        <div style="display: flex; position: relative">
-          <i
-            class="fa-solid fa-circle-user user"
-            onclick="showModel('model-user-info-container')"
-          ></i>
-          <i class="fa-solid fa-circle-chevron-down show-user-info"></i>
-        </div>
-        <p style="margin-top: 12px">Xin chào Admin!</p>
-      </div>
-
-      <!-- Management options -->
-      <button
-        class="management-option-button"
-        onclick="location.href='./quan-ly-san-pham.html';"
-      >
-        Quản lý sản phẩm
-      </button>
-      <button
-        class="management-option-button active"
-        onclick="location.href='./quan-ly-don-hang.html';"
-      >
-        Quản lý đơn hàng
-      </button>
-      <button
-        class="management-option-button"
-        onclick="location.href='./quan-ly-khach-hang.html';"
-      >
-        Quản lý khách hàng
-      </button>
-      <button
-        class="management-option-button"
-        onclick="location.href='./thong-ke.html';"
-      >
-        Thống kê
-      </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SGU Click</title>
+    <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
+    <link rel="stylesheet" href="./assets/css/quan-ly-don-hang.css" />
+  </head>
+  <body>
+    <!-- Slogan bar -->
+    <div class="slogan-bar">
+      <a href="quan-ly-don-hang.html">
+        <img class="logo" src="./assets/Image/logo.png" alt="logo" />
+      </a>
+      <p class="slogan" style="color: white">Chất phím, chất click!</p>
     </div>
 
-    <!-- Body page -->
-    <div class="bg-color" style="height: 100vh; width: 100%; overflow-y: auto">
-      <!-- Order Management Section -->
-      <div id="order-management">
-        <!-- Title page -->
-        <div style="display: flex">
-          <p class="title-page">Đơn hàng</p>
+    <div style="display: flex">
+      <!-- Navbar admin -->
+      <div class="navbar-admin">
+        <div class="hi-admin" style="height: 50px">
+          <div style="display: flex; position: relative">
+            <i
+              class="fa-solid fa-circle-user user"
+              onclick="showModel('model-user-info-container')"
+            ></i>
+            <i class="fa-solid fa-circle-chevron-down show-user-info"></i>
+          </div>
+          <p style="margin-top: 12px">Xin chào Admin!</p>
         </div>
 
-        <!-- Search options -->
-        <form class="search-options-style" onsubmit="filterOrders(event)">
-          <div class="search-option">
-            <input name="customer" type="text" placeholder="Tên khách hàng" />
-            <select name="status">
-              <option value="all" selected>Trạng thái đơn hàng</option>
-              <option value="Chưa xử lý">Chưa xử lý</option>
-              <option value="Đã xác nhận">Đã xác nhận</option>
-              <option value="Đã giao thành công">Đã giao thành công</option>
-              <option value="Đã hủy">Đã hủy</option>
-            </select>
-            <span>Từ ngày</span>
-            <input name="start-date" type="date" />
-            <span> - </span>
-            <input name="end-date" type="date" />
-            <button
-              class="button-style"
-              type="submit"
-              style="background-color: #15803d"
-            >
-              <i
-                class="fa-solid fa-filter"
-                style="font-size: 13px; padding-top: 1px"
-              ></i>
-              <div style="padding-left: 10px; font-size: 15px">
-                Lọc
-              </div>
-            </button>
-            <button class="button-style refresh-btn" type="button" onclick="refreshOrders()">
-              <i class="fa-solid fa-rotate-right"></i>
-              <span>Làm mới</span>
-            </button>
-          </div>
-        </form>
+        <!-- Management options -->
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-san-pham.html';"
+        >
+          Quản lý sản phẩm
+        </button>
+        <button
+          class="management-option-button active"
+          onclick="location.href='./quan-ly-don-hang.html';"
+        >
+          Quản lý đơn hàng
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-khach-hang.html';"
+        >
+          Quản lý khách hàng
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./thong-ke.html';"
+        >
+          Thống kê
+        </button>
+      </div>
 
-        <!-- Table order container -->
-        <div class="table-product-container">
-          <table>
+      <!-- Body page -->
+      <div
+        class="bg-color"
+        style="height: 100vh; width: 100%; overflow-y: auto"
+      >
+        <!-- Order Management Section -->
+        <div id="order-management">
+          <!-- Title page -->
+          <div style="display: flex">
+            <p class="title-page">Đơn hàng</p>
+          </div>
+
+          <!-- Search options -->
+          <form class="search-options-style" onsubmit="filterOrders(event)">
+            <div class="search-option">
+              <input name="customer" style="max-width: 20px;" type="text" placeholder="Tên khách hàng" />
+              <select name="status" style="max-width: 180px;" >
+                <option value="all" selected>Trạng thái đơn hàng</option>
+                <option value="Chưa xử lý">Chưa xử lý</option>
+                <option value="Đã xác nhận">Đã xác nhận</option>
+                <option value="Đã giao thành công">Đã giao thành công</option>
+                <option value="Đã hủy">Đã hủy</option>
+              </select>
+              <select name="sortDistrict" style="max-width: 215px;" >
+                <option value="all" selected>Sắp xếp theo quận / huyện</option>
+                <option value="asc">Sắp xếp tăng dần</option>
+                <option value="desc">Sắp xếp giảm dần</option>
+              </select>
+              <span>Từ</span>
+              <input name="start-date" type="date"  style="max-width: 50px;" />
+              <span> - </span>
+              <input name="end-date" type="date" style="max-width: 50px;"  />
+              <button
+                class="button-style"
+                type="submit"
+                style="background-color: #15803d"
+              >
+                <i
+                  class="fa-solid fa-filter"
+                  style="font-size: 13px; padding-top: 1px"
+                ></i>
+                <div style="padding-left: 10px; font-size: 15px">Lọc</div>
+              </button>
+              <button
+                class="button-style refresh-btn"
+                type="button"
+                onclick="refreshOrders()"
+              >
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Làm mới</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Table order container -->
+          <div class="table-product-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã hóa đơn</th>
+                  <th>Tên khách hàng</th>
+                  <th>Tỉnh / Thành phố</th>
+                  <th>Quận / Huyện</th>
+                  <th>Ngày đặt hàng</th>
+                  <th>Tổng tiền</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="order-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Order Details Section -->
+        <div id="order-details" style="display: none; padding: 20px">
+          <!-- Back Button -->
+          <button class="back-button" onclick="closeOrderDetails()">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại
+          </button>
+
+          <!-- Order Title -->
+          <h2 class="details-title">Chi tiết đơn hàng</h2>
+          <p class="customer-name" id="customer-name"></p>
+
+          <div class="order-header">
+            <h3 class="order-id" id="order-id"></h3>
+            <span class="order-status" id="order-status"></span>
+          </div>
+
+          <p class="order-date" id="order-date"></p>
+          <p class="order-address" id="order-address"></p>
+
+          <h3 class="product-list-title">Danh sách sản phẩm</h3>
+          <table class="product-list">
             <thead>
               <tr>
-                <th>Mã hóa đơn</th>
-                <th>Tên khách hàng</th>
-                <th>Ngày đặt hàng</th>
-                <th>Tổng tiền</th>
-                <th>Trạng thái</th>
-                <th>Thao tác</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
               </tr>
             </thead>
-            <tbody id="order-list">
-            </tbody>
+            <tbody id="order-products-list"></tbody>
           </table>
+
+          <p class="order-total" id="order-total"></p>
+
+          <h3 class="history-title">Lịch sử đơn hàng</h3>
+          <ul id="order-history" class="order-history"></ul>
         </div>
       </div>
+    </div>
 
-      <!-- Order Details Section -->
-      <div id="order-details" style="display: none; padding: 20px;">
-        <!-- Back Button -->
-        <button class="back-button" onclick="closeOrderDetails()">
-          <i class="fa-solid fa-arrow-left"></i> Quay lại
-        </button>
-      
-        <!-- Order Title -->
-        <h2 class="details-title">Chi tiết đơn hàng</h2>
-        <p class="customer-name" id="customer-name"></p>
-      
-        <div class="order-header">
-          <h3 class="order-id" id="order-id"></h3>
-          <span class="order-status" id="order-status"></span>
-        </div>
-      
-        <p class="order-date" id="order-date"></p>
-        <p class="order-address" id="order-address"></p>
-      
-        <h3 class="product-list-title">Danh sách sản phẩm</h3>
-        <table class="product-list">
-          <thead>
-            <tr>
-              <th>Tên sản phẩm</th>
-              <th>Số lượng</th>
-              <th>Giá</th>
-            </tr>
-          </thead>
-          <tbody id="order-products-list"></tbody>
-        </table>
-      
-        <p class="order-total" id="order-total"></p>
-      
-        <h3 class="history-title">Lịch sử đơn hàng</h3>
-        <ul id="order-history" class="order-history"></ul>
+    <!-- Model user info -->
+    <div class="model-user-info-container">
+      <div class="user-info-ele" onclick="showModel('login-info')">
+        <i class="fa-solid fa-circle-user user-info-icon"></i>
+        <div>Thông tin tài khoản</div>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
+      </div>
+
+      <table class="login-info"></table>
+
+      <div
+        class="user-info-ele log-out"
+        style="border-top: 1px solid gray"
+        onclick="logoutAdmin()"
+      >
+        <i
+          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+          style="color: gray"
+        ></i>
+        <div>Đăng xuất</div>
       </div>
     </div>
-  </div>
 
-  <!-- Model user info -->
-  <div class="model-user-info-container">
-    <div class="user-info-ele" onclick="showModel('login-info')">
-      <i class="fa-solid fa-circle-user user-info-icon"></i>
-      <div>Thông tin tài khoản</div>
-      <i class="fa-solid fa-angle-down" style="padding-left: 5px;"></i>
-    </div>
+    <script
+      src="https://kit.fontawesome.com/793699135f.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/common.js"></script>
+    <script src="/assets/js/orderData.js"></script>
 
-    <table class="login-info">
-      
-    </table>
-
-    <div class="user-info-ele log-out" style="border-top: 1px solid gray;" onclick="logoutAdmin()">
-      <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
-      <div>Đăng xuất</div>
-    </div>
-  </div>
-
-  <script
-    src="https://kit.fontawesome.com/793699135f.js"
-    crossorigin="anonymous"
-  ></script>
-  <script src="./assets/js/common.js"></script>
-  <script src="/assets/js/orderData.js"></script>
-
-  <script src="./assets/js/quan-ly-don-hang.js"></script>
-</body>
+    <script src="./assets/js/quan-ly-don-hang.js"></script>
+  </body>
 </html>

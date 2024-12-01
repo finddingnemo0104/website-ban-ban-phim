@@ -17,7 +17,9 @@
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossorigin="anonymous"
     />
-    <script type="module" src="/assets/js/dang-ky.js"></script>
+    <script src="/assets/vietnamese-provinces-data.js"></script>
+    <script src="/assets/js/customerData.js"></script>
+    <script src="/assets/js/dang-ky.js"></script>
   </head>
 
   <body style="background-color: #d1e2f4; position: relative">
@@ -66,12 +68,13 @@
                 <select id="province-input">
                   <option value="">Tỉnh / Thành phố</option>
                 </select>
-                <select id="district-input">
+                <select id="district-input" disabled>
                   <option value="">Quận / Huyện</option>
                 </select>
-                <select id="ward-input">
+                <select id="ward-input" disabled>
                   <option value="">Xã / Phường / Thị trấn</option>
                 </select>
+                <input type="text" id="address" placeholder="Địa chỉ" disabled />
 
                 <input type="password" placeholder="Mật khẩu (*)" required />
                 <input
@@ -97,7 +100,5 @@
         </div>
       </div>
     </section>
-
-
   </body>
 </html>
