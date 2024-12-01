@@ -111,12 +111,16 @@ function showCustomerInfoTable() {
           </tr>
           <tr>
             <td class="label-info">Địa chỉ</td>
-            <td class="value-info">${currentUser.address}</td>
+            <td class="value-info">${getAddress(currentUser.address)}</td>
           </tr>
     `;
 
   const userInfoTableEle = document.getElementsByClassName("login-info")[0];
   userInfoTableEle.innerHTML = html;
+}
+
+function getAddress(addressObj) {
+  return `${addressObj.address}, ${addressObj.ward}, ${addressObj.district}, ${addressObj.province}.`;
 }
 
 // Show admin information table
