@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const registrationForm = document.querySelector(".registration-form form");
   registrationForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const fullName = registrationForm.querySelector(
+    const name = registrationForm.querySelector(
       'input[placeholder="Họ và tên (*)"]'
     ).value;
     const gender = registrationForm.querySelector("select").value;
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ).value;
 
     if (
-      !fullName ||
+      !name ||
       !gender ||
       !dob ||
       !phone ||
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (!isValidName(fullName)) {
+    if (!isValidName(name)) {
       alert("Tên không hợp lệ !");
       return;
     }
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Register customer
     registerCustomer({
       ID: generateCustomerID(),
-      fullName,
+      name,
       gender,
       email,
       phone,
