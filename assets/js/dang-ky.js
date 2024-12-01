@@ -1,8 +1,28 @@
+import { vietnameseProvinces } from "../vietnamese-provinces-data.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Chèn dữ liệu thành phố
+  populateProvinces();
+
+  // Chèn dữ liệu quận vào form chọn quận khi chọn xong thành phố
+  document
+    .getElementById("province-input")
+    .addEventListener("change", function () {
+      const selectedProvinceCode = this.value;
+      populateDistricts(selectedProvinceCode);
+    });
+
+  document
+    .getElementById("district-input")
+    .addEventListener("change", function () {
+      const selectedDistrictCode = this.value;
+      populateWards(selectedDistrictCode);
+    });
+
   const registrationForm = document.querySelector(".registration-form form");
   registrationForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const fullName = registrationForm.querySelector(
+    const name = registrationForm.querySelector(
       'input[placeholder="Họ và tên (*)"]'
     ).value;
     const gender = registrationForm.querySelector("select").value;
@@ -21,19 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
       'input[placeholder="Xác nhận mật khẩu (*)"]'
     ).value;
 
-    if (
-      !fullName ||
-      !gender ||
-      !dob ||
-      !phone ||
-      !password ||
-      !confirmPassword
-    ) {
+    if (!name || !gender || !dob || !phone || !password || !confirmPassword) {
       alert("Vui lòng nhập đầy đủ thông tin đăng ký.");
       return;
     }
 
-    if (!isValidName(fullName)) {
+    if (!isValidName(name)) {
       alert("Tên không hợp lệ !");
       return;
     }
@@ -79,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Register customer
     registerCustomer({
       ID: generateCustomerID(),
-      fullName,
+      name,
       gender,
       email,
       phone,
@@ -151,3 +164,36 @@ function getCustomer() {
   return JSON.parse(localStorage.getItem("customers"));
 }
 // --------------------------------------------------------------------------------- //
+
+function populateProvinces() {
+  const provinceSelect = document.getElementById("province-input");
+  provinceSelect.innerHTML = `<option value="">Chọn tỉnh/thành</option>`;
+  vietnameseProvinces.forEach((province) => {
+    provinceSelect.innerHTML += `<option value="${province.Code}">${province.FullName}</option>`;
+  });
+}
+
+function populateDistricts(provinceCode) {
+  const districtSelect = document.getElementById("district-input");
+  const wardSelect = document.getElementById("ward-input");
+  districtSelect.innerHTML = `<option value="">Chọn quận/huyện</option>`;
+  districtSelect.disabled = !provinceCode;
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = true;
+
+  const province  = vietnameseProvinces.find(province => province.Code === provinceCode);
+  province.District.forEach((district) => {
+    districtSelect.innerHTML += `<option value="${district.code}">${district.name}</option>`;
+  });
+}
+
+function populateWards(districtCode) {
+  const wardSelect = document.getElementById("ward");
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = !districtCode;
+
+  const filteredWards = wards.filter((w) => w.district_code === districtCode);
+  filteredWards.forEach((ward) => {
+    wardSelect.innerHTML += `<option value="${ward.code}">${ward.name}</option>`;
+  });
+}
