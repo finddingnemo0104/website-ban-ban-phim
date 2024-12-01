@@ -12,12 +12,12 @@ function getOrders() {
 
 // Lấy thông tin email của admin từ localStorage và hiển thị
 document.addEventListener("DOMContentLoaded", () => {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (currentUser.role !== "admin") {
-      window.location.href = "dangnhap.html";
-    }
-    displayOrders();
-  });
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (currentUser.role !== "admin") {
+    window.location.href = "dangnhap.html";
+  }
+  displayOrders();
+});
 
 function displayOrders() {
   const orders = getOrders();
@@ -37,21 +37,32 @@ function displayOrders() {
         <td>${order.orderDate}</td>
         <td>${order.total.toLocaleString()}đ</td>
         <td>
-          <select class="status-dropdown" onchange="updateOrderStatus('${order.orderID}', this.value)">
-            <option value="Chưa xử lý" ${order.orderStatus === "Chưa xử lý" ? "selected" : ""}>Chưa xử lý</option>
-            <option value="Đã xác nhận" ${order.orderStatus === "Đã xác nhận" ? "selected" : ""}>Đã xác nhận</option>
-            <option value="Đã giao thành công" ${order.orderStatus === "Đã giao thành công" ? "selected" : ""}>Đã giao thành công</option>
-            <option value="Đã hủy" ${order.orderStatus === "Đã hủy" ? "selected" : ""}>Đã hủy</option>
+          <select class="status-dropdown" onchange="updateOrderStatus('${
+            order.orderID
+          }', this.value)">
+            <option value="Chưa xử lý" ${
+              order.orderStatus === "Chưa xử lý" ? "selected" : ""
+            }>Chưa xử lý</option>
+            <option value="Đã xác nhận" ${
+              order.orderStatus === "Đã xác nhận" ? "selected" : ""
+            }>Đã xác nhận</option>
+            <option value="Đã giao thành công" ${
+              order.orderStatus === "Đã giao thành công" ? "selected" : ""
+            }>Đã giao thành công</option>
+            <option value="Đã hủy" ${
+              order.orderStatus === "Đã hủy" ? "selected" : ""
+            }>Đã hủy</option>
           </select>
         </td>
         <td class="action-icons">
-          <i class="fa-solid fa-eye view-order" onclick="viewOrderDetails('${order.orderID}')"></i>
+          <i class="fa-solid fa-eye view-order" onclick="viewOrderDetails('${
+            order.orderID
+          }')"></i>
         </td>
       `;
     orderList.appendChild(row);
   });
 }
-
 
 function updateOrderStatus(orderID, newStatus) {
   const orders = getOrders();
@@ -80,11 +91,8 @@ function updateOrderStatus(orderID, newStatus) {
 
   displayOrders();
 
-  alert(
-    `Trạng thái đơn hàng ${orderID} đã được cập nhật thành: ${newStatus}`
-  );
+  alert(`Trạng thái đơn hàng ${orderID} đã được cập nhật thành: ${newStatus}`);
 }
-
 
 // function saveOrdersToLocalStorage(orders) {
 //   const existingOrders = Object.keys(localStorage).reduce((acc, key) => {
@@ -120,11 +128,12 @@ function saveOneOrder(updateOrder) {
   const customerID = updateOrder.customerInfo.customerID;
   const localStorageKey = `orders${customerID}`;
   const ordersOfCustomer = JSON.parse(localStorage.getItem(localStorageKey));
-  const updateOrderIndex = ordersOfCustomer.findIndex((order, index) => order.orderID === updateOrder.orderID);
+  const updateOrderIndex = ordersOfCustomer.findIndex(
+    (order, index) => order.orderID === updateOrder.orderID
+  );
   ordersOfCustomer[updateOrderIndex] = updateOrder;
   localStorage.setItem(localStorageKey, JSON.stringify(ordersOfCustomer));
 }
-
 
 function viewOrderDetails(orderId) {
   const orders = getOrders();
@@ -223,12 +232,15 @@ function filterOrders(event) {
   const form = event.target;
   const customerName = form.customer.value.toLowerCase().trim(); // Tên khách hàng cần lọc
   const status = form.status.value; // Trạng thái đơn hàng cần lọc
-  const startDate = form["start-date"].value
-    ? new Date(form["start-date"].value)
-    : null; // Ngày bắt đầu (nếu có)
-  const endDate = form["end-date"].value
-    ? new Date(form["end-date"].value)
-    : null; // Ngày kết thúc (nếu có)
+
+  const { isValid, message, startDate, endDate } = isValidDateRange(
+    form["start-date"].value,
+    form["end-date"].value
+  );
+  if (!isValid) {
+    alert(message);
+    return;
+  }
 
   // Lấy danh sách đơn hàng từ localStorage hoặc nguồn dữ liệu
   const orders = getOrders(); // Hàm này lấy đơn hàng từ localStorage hoặc nguồn dữ liệu khác
@@ -313,4 +325,40 @@ function refreshOrders() {
   form.reset(); // Reset toàn bộ form, bao gồm các trường nhập liệu và dropdowns
 
   displayOrders(); // Hiển thị lại tất cả đơn hàng
+}
+
+function isValidDateRange(startDate, endDate) {
+  let start = new Date(startDate); // Chuyển đổi thành đối tượng Date
+  let end = new Date(endDate);
+
+  if (isNaN(start)) {
+    start = new Date("2000-1-1");
+  }
+
+  if (isNaN(end)) {
+    end = new Date();
+  }
+
+  const today = new Date();
+  if (start > today || end > today) {
+    return {
+      isValid: false,
+      message: "Ngày tìm kiếm không được lớn hơn ngày hiện tại",
+    };
+  }
+
+  // Kiểm tra ngày bắt đầu nhỏ hơn hoặc bằng ngày kết thúc
+  if (start > end) {
+    return {
+      isValid: false,
+      message: "Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc",
+    };
+  }
+
+  return {
+    isValid: true,
+    message: "Khoảng ngày hợp lệ",
+    startDate: start,
+    endDate: end,
+  };
 }

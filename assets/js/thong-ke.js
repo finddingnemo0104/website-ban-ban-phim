@@ -356,13 +356,25 @@ document.getElementById("refresh-button").addEventListener("click", () => {
 //   }
 // }
 
-function isValidDateRange(startDate, endDate, maxDays) {
-  const start = new Date(startDate); // Chuyển đổi thành đối tượng Date
-  const end = new Date(endDate);
-
+function isValidDateRange(startDate, endDate) {
+  let start = new Date(startDate); // Chuyển đổi thành đối tượng Date
+  let end = new Date(endDate);
   // Kiểm tra ngày hợp lệ
-  if (isNaN(start) || isNaN(end)) {
-    return { isValid: false, message: "Ngày không hợp lệ" };
+  if (isNaN(start) && isNaN(end)) {
+    return { isValid: false, message: "Bạn cần nhập khoảng thời gian muốn tìm kiếm" };
+  }
+
+  if (isNaN(start)) {
+    start = new Date("2000-1-1");
+  }
+  
+  if (isNaN(end)) {
+    end = new Date();
+  }
+  
+  const today = new Date();
+  if (start > today || end > today) {
+    return { isValid: false, message: "Ngày tìm kiếm không được lớn hơn ngày hiện tại" };
   }
 
   // Kiểm tra ngày bắt đầu nhỏ hơn hoặc bằng ngày kết thúc
