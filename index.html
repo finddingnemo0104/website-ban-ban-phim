@@ -38,9 +38,9 @@
     </SloganBar>
 
     <div class="header-container">
-      <div class="user">
-        <div id="user-info-container" class="user-info-container" onclick="showModel('model-user-info-container')">
-          <i class="fa-solid fa-circle-user" ></i>
+      <div class="user open">
+        <div id="user-info-container" class="user-info-container">
+          <i class="fa-solid fa-circle-user" onclick="showModel('model-user-info-container')"></i>
           <i
             class="fa-solid fa-circle-chevron-down show-user-info"            
           ></i>
@@ -51,15 +51,16 @@
       </div>
 
       <div class="links">
-        <a href="#" data-category="Bàn phím cơ">Bàn phím <br/>cơ</a>
+        <a href="#" data-category="Bàn phím cơ">Bàn phím cơ</a>
         <a href="#" data-category="Bàn phím gaming">Bàn phím gaming</a>
         <a href="#" data-category="Bàn phím không dây">Bàn phím không dây</a>
         <a href="#" data-category="Bàn phím đối xứng">Bàn phím đối xứng</a>
         <a href="#" data-category="Bàn phím mini">Bàn phím mini</a>
       </div>
-      <div class="header-search">
+      <div class="header-search open">
         <span id = "cart-count" class="cart-count"></span>
         <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
+        </a>
       </div>
     </div>
 
@@ -87,8 +88,8 @@
       </select>
       <div class="search-filter-price">
         <p>Khoảng giá:</p>
-        <input id="filter-price-min" min="0"  type="number" /> -
-        <input id="filter-price-max" min="0"  type="number" />
+        <input id="filter-price-min" min="0" type="number" /> -
+        <input id="filter-price-max" min="0" type="number" />
       </div>
     </div>
     <section class="banner">
@@ -178,15 +179,15 @@
         <div>Đăng xuất</div>
       </div>
     </div>
-    <div id="notification" class="hidden">
+    <div id="notification" style="display: flex;">
       ✨ Sản phẩm đã được thêm vào giỏ hàng! 🛒
     </div>
     <footer class="footer"></footer>
+
     <script
       src="https://kit.fontawesome.com/793699135f.js"
       crossorigin="anonymous"
     ></script>
-
     <script src="./assets/js/common.js"></script>
     <script src="./assets/js/productData.js"></script>
     <script src="./assets/js/index.js"></script>
@@ -194,4 +195,3 @@
     <script src="./assets/js/add.js"></script>
   </body>
 </html>
-

@@ -194,7 +194,7 @@ body {
   }
   
   .search-container{
-    width: 1479px;
+    /* width: 1479px; */
     height:20px;
     display: flex;
     justify-content: space-between;
@@ -289,11 +289,12 @@ body {
   .cart{
     position: relative; 
   }
+
   .cart-count {
     z-index: 10; 
-    position: relative; 
-    top: -15px; 
-    right: -300px; 
+    position: absolute; 
+    top: 35px;
+    right: 52px; 
     background-color: red; 
     color: white; 
     border-radius: 50%;
@@ -303,6 +304,7 @@ body {
     text-align: center; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
   }
+
   #notification {
     position: fixed;
     top: 20px;

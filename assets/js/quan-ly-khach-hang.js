@@ -146,7 +146,7 @@ function isValidEmail(email) {
 }
 
 function isValidName(name) {
-  const regex = /^[A-Za-z\s]+$/;
+  const regex = /^[A-Za-zÀ-ỹ\s']+$/u;
   return regex.test(name);
 }
 

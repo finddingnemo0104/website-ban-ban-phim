@@ -40,14 +40,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const customers = getCustomer();
 
-    if (email && !isValidEmail(email)) {
-      alert("Email không hợp lệ !");
-      return;
-    } else {
-      const customer = customers.find((customer) => customer.email === email);
-      if (customer) {
-        alert("Email này đã được đăng ký !");
+    if (email || email != "") {
+      if (!isValidEmail(email)) {
+        alert("Email không hợp lệ !");
         return;
+      } else {
+        const customer = customers.find((customer) => customer.email === email);
+        if (customer) {
+          alert("Email này đã được đăng ký !");
+          return;
+        }
       }
     }
 
@@ -122,7 +124,7 @@ function isValidEmail(email) {
 }
 
 function isValidName(name) {
-  const regex = /^[A-Za-z\s]+$/;
+  const regex = /^[A-Za-zÀ-ỹ\s']+$/u;
   return regex.test(name);
 }
 

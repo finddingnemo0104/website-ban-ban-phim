@@ -15,6 +15,11 @@ const getData = async () => {
 };
 
 const findAndAddToCart = () => {
+  const currentUser = localStorage.getItem("currentUser");
+  if (!currentUser) {
+    alert("Bạn cần đăng nhập để mua hàng !");
+    window.location.href = "dangnhap.html";
+  }
   const product = listPro.find((p) => p.ID === proID);
 
   if (product) {
@@ -27,6 +32,7 @@ const findAndAddToCart = () => {
     }
 
     localStorage.setItem("cart"+IDUser, JSON.stringify(cart));
+    showNotification();
     updateCartCount();
   } 
 };
@@ -51,6 +57,12 @@ function updateCartCount() {
   
   document.addEventListener("DOMContentLoaded", updateCartCount);
   function addToCard(id) {
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+      alert("Bạn cần đăng nhập để mua hàng !");
+      window.location.href = "dangnhap.html";
+    }
+
     const product = listPro.find((p) => p.ID === id);
   
     if (product) {
@@ -61,11 +73,24 @@ function updateCartCount() {
       } else {
         cart.push({ ...product, quantity: 1 });
       }
-  
+
       localStorage.setItem("cart" + IDUser, JSON.stringify(cart));
-  
+      showNotification();
       updateCartCount();
     } else {
       console.error(`Product with ID ${id} not found.`);
     }
   }
+  function showNotification() {
+    const notification = document.getElementById("notification");
+    
+    // Thêm class 'show' để hiển thị thông báo
+    notification.classList.add("show");
+  
+    // Sau 2 giây, ẩn thông báo bằng cách xóa class 'show'
+    setTimeout(() => {
+      notification.classList.remove("show");
+    }, 2000); // 2000ms = 2 giây
+  }
+  
+  

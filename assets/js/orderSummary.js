@@ -116,26 +116,28 @@ if (orders.length === 0) {
             <a href="index.html" class="return-btn">Quay lại trang chủ</a>
         </div>`;
 } else {
-    if(orders.length>1) {
-        for (let i = 1; i <= orders.length; i++) {
-            let li = document.createElement("li");
-            li.style.display = "inline";
-            li.style.margin = "0 10px";
-            let button = document.createElement("button");
-            button.onclick = function() {
-                show(i); 
-            };
-            button.style.padding = "3px";
-            button.textContent = i;
-            li.appendChild(button);
-            sldonhang.appendChild(li);
-        }
-    }
-    show(1);
+    // if(orders.length>1) {
+    //     for (let i = 1; i <= orders.length; i++) {
+    //         let li = document.createElement("li");
+    //         li.style.display = "inline";
+    //         li.style.margin = "0 10px";
+    //         let button = document.createElement("button");
+    //         button.onclick = function() {
+    //             show(i); 
+    //         };
+    //         button.style.padding = "3px";
+    //         button.textContent = i;
+    //         li.appendChild(button);
+    //         sldonhang.appendChild(li);
+    //     }
+    // }
+    show(localStorage.getItem('orderIndex'));
+    let sl=JSON.parse(localStorage.getItem("cart" + IDUser));
+    document.getElementById("cart-count").innerHTML=sl.length;
     }
 function show(i){
-        let order = orders[i-1]; 
-        let customerInfo = order?.customerInfo || {};
+    let order = orders[i-1]; 
+    let customerInfo = order?.customerInfo || {};
     document.getElementById("name").innerHTML = `<p><strong>Tên khách hàng: </strong> ${customerInfo.name}</p>`;
     document.getElementById("sdt").innerHTML = `<p><strong>Số điện thoại: </strong> ${customerInfo.phone }</p>`;
     document.getElementById("adr").innerHTML = `<p><strong>Địa chỉ giao hàng: </strong> ${customerInfo.address }</p>`;
@@ -168,3 +170,6 @@ function show(i){
     document.getElementById("totalPrice").innerHTML = `<p id="totalPrice"><strong>Tổng tiền:</strong> ${formatPrice(sum)}</p><br>`  ;
 }
 
+function goBackToOrders() {
+    window.location.href = "don-hang.html";
+  }

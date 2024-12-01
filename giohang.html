@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">
     <link rel="stylesheet" href="./assets/css/detail.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <!-- Header -->
@@ -37,7 +38,7 @@
       </SloganBar>
   
       <div class="header-container">
-        <div class="user">
+        <div class="user open">
           <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
             <i class="fa-solid fa-circle-user"></i>
             <i
@@ -57,16 +58,16 @@
         <a href="index.html" data-category="Bàn phím đối xứng">Bàn phím đối xứng</a>
         <a href="index.html" data-category="Bàn phím mini">Bàn phím mini</a>
         </div>
-        <div class="header-search">
-          <img src="./assets/Image/search.png" />
+        <div class="header-search open">
+          <span id = "cart-count" class="cart-count"></span>
           <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
           </a>
-          <input type="text" placeholder="Tìm kiếm" />
         </div>
       </div>
 
-      
-    <a href="orderSummary.html"><button class="view-order-btn">Xem đơn hàng đã mua</button></a>
+
+    <!-- <a href="orderSummary.html"><button class="view-order-btn">Xem đơn hàng đã mua</button></a> -->
+
     <!-- Main Content -->
     <main class="main-content">
         <h1 class="title">Giỏ hàng</h1>
@@ -112,7 +113,8 @@
                     </div>
                 </div>
                 <a href="thongtin.html"><button class="checkout-btn">Thanh toán</button></a>
-                <button class="continue-btn">Tiếp tục mua sắm</button>
+                <a href="index.html"><button class="continue-btn">Tiếp tục mua sắm</button></a>
+                
             </div>
            
         </div>
@@ -163,5 +165,5 @@
     <script src="./assets/js/common.js"></script>
 </body>
 <script src="./assets/js/cart.js"></script>
-<script src="add.js"></script>
-<script type="module" src="./assets/js/Product.js"></script>
+<script src="./assets/js/add.js"></script>
+

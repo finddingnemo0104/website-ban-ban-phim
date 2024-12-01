@@ -18,7 +18,7 @@
 
 <div class="header-container">
         
-  <div class="user">
+  <div class="user open">
     <div style="display: flex; position: relative" onclick="showModel('model-user-info-container')">
       <i class="fa-solid fa-circle-user"></i>
       <i
@@ -32,21 +32,15 @@
   </div>
 
   <div class="links">
-      <a href="">Bàn phím <br/> cơ</a>
+      <a href="">Bàn phím cơ</a>
       <a href="">Bàn phím gaming</a>
       <a href="">Bàn phím không dây</a>
       <a href="">Bàn phím đối xứng</a>
       <a href="">Bàn phím mini</a>
-      
-
-      
-      
   </div>
-  <div class="header-search">
-    <img src="./assets/Image/search.png">
+  <div class="header-search open">
     <span id = "cart-count" class="cart-count"></span>
     <img src="./assets/Image/cart.png" class="cart" onclick="window.location.href='giohang.html';">
-    <input type="text"placeholder="Tìm kiếm">
   </div>
 </div>
 
@@ -82,7 +76,6 @@
     </div>
   <!-- <div class="line"></div> -->
   </div>
-  <br/>
   <div class="detail-container">
     <div class="detail-header">Chi tiết sản phẩm</div>
     <div id="product-detail"
@@ -117,14 +110,16 @@
         <div>Đăng xuất</div>
       </div>
     </div>
-    <div id="notification" class="hidden">
+    <div id="notification" style="display: flex;">
       ✨ Sản phẩm đã được thêm vào giỏ hàng! 🛒
     </div>
     <script
     src="https://kit.fontawesome.com/793699135f.js"
     crossorigin="anonymous"
   ></script>
-  <script src="./assets/js/common.js"></script><script src="./assets/js/Details.js"></script>
+  <script src="./assets/js/common.js"></script>
+  <script src="./assets/js/Details.js"></script>
+  <script src="./assets/js/add.js"></script>
 </body>
 </html>
-<script src="./assets/js/add.js"></script>
+

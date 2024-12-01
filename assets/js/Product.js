@@ -117,9 +117,11 @@ function productSearch(text){
 // }
 
  let minInputPrice, maxInputPrice
-//  if(minPrice.value==="" || maxPrice.value===""){
+
+//  if(minPrice.value=="" && maxPrice.value==""){
 //   minInputPrice=0
-//   maxInputPrice=1000000000
+//   maxInputPrice=Number.MAX_SAFE_INTEGER
+
 //  } else { 
 //   minInputPrice=minPrice.value
 //   maxInputPrice=maxPrice.value
@@ -132,7 +134,7 @@ if(minPrice.value===""){
 }
 
 if(maxPrice.value===""){
-  maxInputPrice=100000000;
+  maxInputPrice= Number.MAX_SAFE_INTEGER;
 } else{
   maxInputPrice=maxPrice.value
 }
