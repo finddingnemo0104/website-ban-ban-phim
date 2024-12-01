@@ -74,7 +74,7 @@ function updateOrderStatus(orderID, newStatus) {
 
   orders[orderIndex].orderStatus = newStatus;
 
-  saveOrdersToLocalStorage(orders);
+  saveOneOrder(orders[orderIndex]);
 
   displayOrders();
 
@@ -112,12 +112,14 @@ function updateOrderStatus(orderID, newStatus) {
 // }
 
 function saveOneOrder(updateOrder) {
+  console.log(updateOrder);
   const customerID = updateOrder.customerInfo.customerID;
   const localStorageKey = `orders${customerID}`;
   const ordersOfCustomer = JSON.parse(localStorage.getItem(localStorageKey));
   const updateOrderIndex = ordersOfCustomer.findIndex(
     (order, index) => order.orderID === updateOrder.orderID
   );
+  console.log(updateOrder);
   ordersOfCustomer[updateOrderIndex] = updateOrder;
   localStorage.setItem(localStorageKey, JSON.stringify(ordersOfCustomer));
 }
