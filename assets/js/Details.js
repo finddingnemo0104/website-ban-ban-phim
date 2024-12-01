@@ -32,10 +32,7 @@ function displayProductDetails(product) {
 
 
     productTitle.textContent = product.name;
-    productPrice.textContent = product.price.toLocaleString("vi-VN", {
-      style: "currency",
-      currency: "VND",
-    });
+    productPrice.textContent = Number(product.price).toLocaleString("vi-VN", { style: "currency", currency: "VND" });
     productCategory.textContent = product.category;
     productBrand.textContent = "Hãng: " + product.brand;
     productImage.src = product.image;

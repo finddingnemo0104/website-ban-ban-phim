@@ -234,7 +234,7 @@ body {
   
   .search-filter-brand{
     width: 11%;
-    /* height: 150%; */
+    height: 32px;
     display: flex;
     border: 2px double #21568A;
     background-color: #aec9e9;

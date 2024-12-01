@@ -117,9 +117,11 @@ function productSearch(text){
 // }
 
  let minInputPrice, maxInputPrice
+
 //  if(minPrice.value=="" && maxPrice.value==""){
 //   minInputPrice=0
 //   maxInputPrice=Number.MAX_SAFE_INTEGER
+
 //  } else { 
 //   minInputPrice=minPrice.value
 //   maxInputPrice=maxPrice.value
@@ -130,11 +132,13 @@ if(minPrice.value===""){
 } else{
   minInputPrice=minPrice.value
 }
+
 if(maxPrice.value===""){
   maxInputPrice= Number.MAX_SAFE_INTEGER;
 } else{
   maxInputPrice=maxPrice.value
 }
+
 
   for(const product of products)
     if(product.name.toLowerCase().includes(text.toLowerCase()) 
@@ -151,7 +155,7 @@ searchBTN.onclick = ()=>{
   createPagination(productSearch(searchText.value))
 }
 
-
+//Filter sp tren header
 function filterByCategory(category) {
   const filteredProducts = products.filter(product => product.category === category);
   renderProducts1(1, filteredProducts);
