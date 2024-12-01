@@ -119,14 +119,14 @@ function showCustomerInfoTable() {
   userInfoTableEle.innerHTML = html;
 }
 
-// Show user information table
+// Show admin information table
 function showAdminInfoTable() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const html = `
      <tr>
             <td class="label-info">Tên đăng nhập</td>
-            <td class="value-info">${currentUser.email}</td>
+            <td class="value-info">${currentUser.name}</td>
           </tr>
           <tr>
             <td class="label-info">Mật khẩu</td>

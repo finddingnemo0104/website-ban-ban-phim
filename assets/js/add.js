@@ -3,6 +3,7 @@ let IDUser = User.ID;
 let cart = JSON.parse(localStorage.getItem("cart"+IDUser)) || []; 
 let listPro = JSON.parse(localStorage.getItem("products")) || [];
 let proID;
+
 const getData = async () => {
   const path = new URLSearchParams(window.location.search);
   proID = path.get("id");
@@ -17,12 +18,19 @@ const getData = async () => {
 const findAndAddToCart = () => {
   const currentUser = localStorage.getItem("currentUser");
   if (!currentUser) {
-    alert("Bạn cần đăng nhập để mua hàng !");
+    alert("Bạn cần đăng nhập để mua hàng 💋");
     window.location.href = "dangnhap.html";
+    return;
   }
+
   const product = listPro.find((p) => p.ID === proID);
 
   if (product) {
+    // Kiểm tra nếu sản phẩm hết hàng
+    if (product.quantity === 0) {
+      showOutOfStockNotification();  
+      return;  
+    }
     const cartItem = cart.find((item) => item.ID === proID);
 
     if (cartItem) {
@@ -36,61 +44,71 @@ const findAndAddToCart = () => {
     updateCartCount();
   } 
 };
-
 getData();
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem("cart"+IDUser)) || [];
   const cartCountElement = document.getElementById("cart-count");
 
-  // Kiểm tra xem phần tử có tồn tại không
   if (cartCountElement) {
-      if (cart.length === 0) {
-          cartCountElement.style.display = "none"; // Ẩn phần tử nếu giỏ hàng rỗng
-      } else {
-          const SL = cart.length;
-          cartCountElement.innerHTML = SL; // Cập nhật số lượng giỏ hàng
-          cartCountElement.style.display = "inline-block"; // Hiển thị phần tử nếu có sản phẩm trong giỏ hàng
-      }
-  } 
+    if (cart.length === 0) {
+      cartCountElement.style.display = "none";
+    } else {
+      const SL = cart.length;
+      cartCountElement.innerHTML = SL;
+      cartCountElement.style.display = "inline-block";
+    }
+  }
+}
+document.addEventListener("DOMContentLoaded", updateCartCount);
+function addToCard(id) {
+  const currentUser = localStorage.getItem("currentUser");
+  if (!currentUser) {
+    alert("Bạn cần đăng nhập để mua hàng 💋");
+    window.location.href = "dangnhap.html";
+    return;
+  }
+
+  const product = listPro.find((p) => p.ID === id);
+
+  if (product) {
+    // Kiểm tra nếu sản phẩm hết hàng
+    if (product.quantity === 0) {
+      showOutOfStockNotification();  // Hiển thị thông báo sản phẩm hết hàng
+      return;
+    }
+    const cartItem = cart.find((item) => item.ID === id);
+
+    if (cartItem) {
+      cartItem.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+
+    localStorage.setItem("cart" + IDUser, JSON.stringify(cart));
+    showNotification();
+    updateCartCount();
+  } else {
+    console.error(`Product with ID ${id} not found.`);
+  }
 }
 
-  
-  document.addEventListener("DOMContentLoaded", updateCartCount);
-  function addToCard(id) {
-    const currentUser = localStorage.getItem("currentUser");
-    if (!currentUser) {
-      alert("Bạn cần đăng nhập để mua hàng !");
-      window.location.href = "dangnhap.html";
-    }
+function showNotification() {
+  const notification = document.getElementById("notification");
+  notification.classList.add("show");
 
-    const product = listPro.find((p) => p.ID === id);
-  
-    if (product) {
-      const cartItem = cart.find((item) => item.ID === id);
-  
-      if (cartItem) {
-        cartItem.quantity += 1;
-      } else {
-        cart.push({ ...product, quantity: 1 });
-      }
+  setTimeout(() => {
+    notification.classList.remove("show");
+  }, 2000);
+}
 
-      localStorage.setItem("cart" + IDUser, JSON.stringify(cart));
-      showNotification();
-      updateCartCount();
-    } else {
-      console.error(`Product with ID ${id} not found.`);
-    }
-  }
-  function showNotification() {
-    const notification = document.getElementById("notification");
-    
-    // Thêm class 'show' để hiển thị thông báo
-    notification.classList.add("show");
+function showOutOfStockNotification() {
+  const outOfStockNotification = document.getElementById("out-of-stock-notification");
   
-    // Sau 2 giây, ẩn thông báo bằng cách xóa class 'show'
+  if (outOfStockNotification) {
+    outOfStockNotification.classList.add("show");
+  
     setTimeout(() => {
-      notification.classList.remove("show");
-    }, 2000); // 2000ms = 2 giây
+      outOfStockNotification.classList.remove("show");
+    }, 2000);
   }
-  
-  
+}

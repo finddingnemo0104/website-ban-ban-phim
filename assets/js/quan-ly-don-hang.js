@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function displayOrders() {
   const orders = getOrders();
+  orders.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
   const orderList = document.getElementById("order-list");
   orderList.innerHTML = ""; // Clear existing rows
 
@@ -74,7 +75,19 @@ function updateOrderStatus(orderID, newStatus) {
 
   orders[orderIndex].orderStatus = newStatus;
 
-  saveOrdersToLocalStorage(orders);
+  const statusChange = {
+    status: newStatus,
+    date: new Date().toLocaleString("vi-VN"), // Lấy thời gian thay đổi trạng thái
+  };
+
+  if (!orders[orderIndex].history) {
+    orders[orderIndex].history = []; // Nếu chưa có lịch sử, khởi tạo mảng
+  }
+
+  // Thêm trạng thái mới vào lịch sử
+  orders[orderIndex].history.push(statusChange);
+
+  saveOneOrder(orders[orderIndex]);
 
   displayOrders();
 
@@ -127,11 +140,21 @@ function viewOrderDetails(orderId) {
   const order = orders.find((o) => o.orderID === orderId);
 
   if (order) {
-    document.getElementById("customer-name").innerText = `Tên khách hàng: ${order.customerInfo.name || "Không xác định"}`;
-    document.getElementById("order-id").innerText = `Mã đơn hàng: #${order.orderID}`;
-    document.getElementById("order-date").innerText = `Ngày đặt hàng: ${order.orderDate || "Không xác định"}`;
-    document.getElementById("order-address").innerText = `Địa chỉ:${order.customerInfo.address || "Không xác định"}`;
+    // Hiển thị thông tin cơ bản của đơn hàng
+    document.getElementById("customer-name").innerText = `Tên khách hàng: ${
+      order.customerInfo.name || "Không xác định"
+    }`;
+    document.getElementById(
+      "order-id"
+    ).innerText = `Mã đơn hàng: #${order.orderID}`;
+    document.getElementById("order-date").innerText = `Ngày đặt hàng: ${
+      order.orderDate || "Không xác định"
+    }`;
+    document.getElementById("order-address").innerText = `Địa chỉ: ${
+      order.customerInfo.address || "Không xác định"
+    }`;
 
+    // Hiển thị sản phẩm trong đơn hàng
     const productList = document.getElementById("order-products-list");
     productList.innerHTML = "";
     if (order.items && order.items.length > 0) {
@@ -150,20 +173,27 @@ function viewOrderDetails(orderId) {
       productList.appendChild(emptyRow);
     }
 
-    document.getElementById("order-total").innerText = `Tổng cộng: ${parseInt(order.total || 0).toLocaleString()}đ`;
+    // Hiển thị tổng cộng đơn hàng
+    document.getElementById("order-total").innerText = `Tổng cộng: ${parseInt(
+      order.total || 0
+    ).toLocaleString()}đ`;
+
+    // Hiển thị lịch sử trạng thái (nếu có)
     const historyList = document.getElementById("order-history");
-    historyList.innerHTML = ""; 
+    historyList.innerHTML = "";
     if (order.history && order.history.length > 0) {
       order.history.forEach((entry) => {
         const listItem = document.createElement("li");
-        listItem.innerText = `Trạng thái: ${entry.status || "Không rõ"} - Ngày: ${entry.date || "Không rõ"}`;
+        listItem.innerText = `Trạng thái: ${entry.status} - Ngày: ${entry.date}`;
         historyList.appendChild(listItem);
       });
     } else {
       const emptyHistory = document.createElement("li");
-      emptyHistory.innerText = "Không có lịch sử trạng thái.";
+      emptyHistory.innerText = "Chưa có lịch sử trạng thái.";
       historyList.appendChild(emptyHistory);
     }
+
+    // Hiển thị chi tiết đơn hàng
     document.getElementById("order-management").style.display = "none";
     document.getElementById("order-details").style.display = "block";
   } else {

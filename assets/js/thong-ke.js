@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  displayStatistics();
+  const orders = getOrdersFromLocalStorage();
+
+  displayStatistics(orders);
   // filterOrders();
 });
 
@@ -15,25 +17,23 @@ function getOrdersFromLocalStorage() {
   return orders;
 }
 
-const orders = getOrdersFromLocalStorage();
-
-function displayStatistics() {
+function displayStatistics(orders) {
   const today = new Date();
   const todayStr = today.toISOString().split("T")[0]; // YYYY-MM-DD
-  const lastMonth = new Date(
-    today.getFullYear(),
-    today.getMonth() - 1,
-    today.getDate()
-  );
-  const lastMonthStr = lastMonth.toISOString().split("T")[0]; // YYYY-MM-DD
+  const currentMonth = new Date().getMonth();
 
   let todayOrders = 0,
     allOrders = 0,
-    lastMonthOrders = 0;
+    currentMonthOrders = 0;
   let todayRevenue = 0,
     allRevenue = 0,
-    lastMonthRevenue = 0;
-  orders.forEach((order) => {
+    currentMonthRevenue = 0;
+
+  getOrdersFromLocalStorage().forEach((order) => {
+    if (order.orderStatus !== "Đã giao thành công") {
+      return;
+    }
+
     const orderDate = order.orderDate.split(" ")[0];
     // Đơn hàng và doanh thu hôm nay
     if (orderDate === todayStr) {
@@ -45,10 +45,18 @@ function displayStatistics() {
     allOrders++;
     allRevenue += calculateOrderTotal(order);
 
-    // Đơn hàng và doanh thu của tháng trước
-    if (orderDate >= lastMonthStr && orderDate < todayStr) {
-      lastMonthOrders++;
-      lastMonthRevenue += calculateOrderTotal(order);
+    // Đơn hàng và doanh thu của tháng hiện tại
+    const firstDayOfCurrentMonthStr = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      1
+    )
+      .toISOString()
+      .split("T")[0];
+
+    if (orderDate >= firstDayOfCurrentMonthStr && orderDate <= todayStr) {
+      currentMonthOrders++;
+      currentMonthRevenue += calculateOrderTotal(order);
     }
   });
 
@@ -63,8 +71,8 @@ function displayStatistics() {
                   ${allOrders} đơn`;
   document.querySelector(
     ".stat.last-month span"
-  ).innerText = `${lastMonthRevenue.toLocaleString()}đ
-                  ${lastMonthOrders} đơn`;
+  ).innerText = `${currentMonthRevenue.toLocaleString()}đ
+                  ${currentMonthOrders} đơn`;
 
   // Top 5 khách hàng
   const topCustomers = getTopCustomers(orders);
@@ -77,6 +85,10 @@ function displayStatistics() {
   // Top 5 sản phẩm bán ít
   const leastProducts = getLeastSellingProducts(orders);
   updateLeastProductsTable(leastProducts);
+
+  // Doanh thu tất cả sản phẩm
+  const allProductsSalesTable = getLeastSellingProducts(orders);
+  updateAllProductsSalesTable(allProductsSalesTable);
 }
 
 function calculateOrderTotal(order) {
@@ -117,9 +129,9 @@ function updateTopCustomersTable(customers) {
           <td>${customer.customerId}</td>
           <td>${customer.name}</td>
           <td>${customer.total.toLocaleString()}đ</td>
-          <td><button onclick="viewOrderDetails(${
-            customer.orderId
-          })">Xem</button></td>
+          <td><i class="fa-solid fa-eye view-order" onclick="viewOrdersOfCustomer(this, '${
+            customer.customerId
+          }')"></i></td>
         `;
     customerTable.appendChild(row);
   });
@@ -166,9 +178,9 @@ function updateTopProductsTable(products) {
           <td>${product.category}</td>
           <td>${product.sold}</td>
           <td>${product.totalRevenue.toLocaleString()}đ</td>
-          <td><button onclick="viewProductDetails(${
+          <td><button onclick="viewOrdersOfProduct(this, '${
             product.id
-          })">Xem</button></td>
+          }')">Xem</button></td>
         `;
     productTable.appendChild(row);
   });
@@ -204,6 +216,36 @@ function getLeastSellingProducts(orders) {
   return Object.values(productSales).sort((a, b) => a.sold - b.sold);
 }
 
+function getAllProductsSalesTable(orders) {
+  const productSales = {};
+
+  orders.forEach((order) => {
+    order.items.forEach((product) => {
+      const productId = product.ID;
+      const productName = product.name;
+      const productCategory = product.category || "Chưa có"; // Assuming category is available
+      const quantitySold = product.quantity;
+      const productRevenue = quantitySold * product.price;
+
+      if (!productSales[productId]) {
+        productSales[productId] = {
+          id: productId,
+          name: productName,
+          category: productCategory,
+          sold: 0,
+          totalRevenue: 0,
+        };
+      }
+
+      productSales[productId].sold += quantitySold;
+      productSales[productId].totalRevenue += productRevenue;
+    });
+  });
+
+  // Sort products by quantity sold in ascending order (least selling first)
+  return productSales;
+}
+
 function updateLeastProductsTable(products) {
   const leastProductTable = document.querySelector("#least-products tbody");
   leastProductTable.innerHTML = "";
@@ -216,69 +258,64 @@ function updateLeastProductsTable(products) {
           <td>${product.category}</td>
           <td>${product.sold}</td>
           <td>${product.totalRevenue.toLocaleString()}đ</td>
-          <td><button onclick="viewProductDetails(${
+          <td><button onclick="viewOrdersOfProduct(this, '${
             product.id
-          })">Xem</button></td>
+          }')">Xem</button></td>
         `;
     leastProductTable.appendChild(row);
   });
 }
 
-// function filterOrders() {
-//   const orders = getOrdersFromLocalStorage();
+function updateAllProductsSalesTable(products) {
+  const allProductsSalesTable = document.querySelector(
+    "#allProductsSalesTable tbody"
+  );
+  allProductsSalesTable.innerHTML = "";
+  products.forEach((product, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${product.id}</td>
+          <td>${product.name}</td>
+          <td>${product.category}</td>
+          <td>${product.sold}</td>
+          <td>${product.totalRevenue.toLocaleString()}đ</td>
+          <td><button onclick="viewOrdersOfProduct(this, '${
+            product.id
+          }')">Xem</button></td>
+        `;
+    allProductsSalesTable.appendChild(row);
+  });
+}
 
-//   const productType = document.getElementById("product-type").value;
-//   const startDate = document.getElementById("start-date").value;
-//   const endDate = document.getElementById("end-date").value;
+function filterOrders() {
+  const orders = getOrdersFromLocalStorage();
+  const startDate = document.getElementById("start-date").value;
+  const endDate = document.getElementById("end-date").value;
+  let filteredOrders = orders;
+  const { isValid, message } = isValidDateRange(startDate, endDate);
+  if (!isValid) {
+    alert(message);
+    return;
+  }
 
-//   let filteredOrders = orders;
-
-//   // Lọc theo loại sản phẩm
-//   if (productType !== "all") {
-//     filteredOrders = filteredOrders.filter((order) =>
-//       order.products.some((product) => product.name === productType)
-//     );
-//   }
-
-//   // Lọc theo khoảng thời gian
-//   if (startDate) {
-//     filteredOrders = filteredOrders.filter(
-//       (order) => new Date(order.date) >= new Date(startDate)
-//     );
-//   }
-//   if (endDate) {
-//     filteredOrders = filteredOrders.filter(
-//       (order) => new Date(order.date) <= new Date(endDate)
-//     );
-//   }
-
-//   // Hiển thị kết quả lọc trong bảng
-//   const tableBody = document.getElementById("filtered-orders");
-//   tableBody.innerHTML = "";
-
-//   filteredOrders.forEach((order, index) => {
-//     const row = document.createElement("tr");
-//     row.innerHTML = `
-//         <td>${index + 1}</td>
-//         <td>${order.id}</td>
-//         <td>${order.customer}</td>
-//         <td>${order.date}</td>
-//         <td>${calculateOrderTotal(order).toLocaleString()}đ</td>
-//         <td>${order.status}</td>
-//         <td>
-//           <button onclick="viewOrderDetails(${
-//             order.id
-//           })">Xem các hóa đơn</button>
-//         </td>
-//       `;
-//     tableBody.appendChild(row);
-//   });
-// }
-
-// Sự kiện lọc và cập nhật
-// document
-//   .getElementById("filter-button")
-//   .addEventListener("click", filterOrders);
+  // Lọc theo khoảng thời gian
+  if (startDate) {
+    filteredOrders = filteredOrders.filter(
+      (order) => new Date(order.orderDate) >= new Date(startDate)
+    );
+  }
+  if (endDate) {
+    filteredOrders = filteredOrders.filter(
+      (order) => new Date(order.orderDate) <= new Date(endDate)
+    );
+  }
+  return filteredOrders;
+}
+// Event listener for the filter button
+document.getElementById("filter-button").addEventListener("click", () => {
+  displayStatistics(filterOrders());
+});
 document.getElementById("refresh-button").addEventListener("click", () => {
   // Làm mới dữ liệu lọc
   const orders = getOrdersFromLocalStorage();

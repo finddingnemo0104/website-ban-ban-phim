@@ -219,3 +219,56 @@ tfoot {
   background-color: #f1f1f1;
   font-weight: bold;
 }
+
+/* Model product details container */
+.model-view-orders-product-container {
+  display: none;
+  overflow-y: auto;
+}
+
+.model-view-orders-product-container.open {
+  height: 100%;
+  width: 84%;
+  background-color: #eaf1fb;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  display: block;
+}
+
+.product-details {
+  margin: 50px 50px;
+}
+
+.product-attribute {
+  display: flex;
+  align-items: end;
+}
+
+.attribute-header {
+  width: 140px;
+  margin: 13px 0px;
+}
+
+.attribute-body {
+  font-size: 22px;
+  margin: 15px 0px;
+}
+
+#order-details {
+  background-color: #eaf1fb;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#order-details-customer {
+  background-color: #eaf1fb;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

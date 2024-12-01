@@ -6,170 +6,180 @@
     <title>SGU Click</title>
     <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
     <link rel="stylesheet" href="./assets/css/thongke.css" />
-    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css">
+    <link rel="stylesheet" href="./assets/css/quan-ly-san-pham.css" />
   </head>
   <body>
-        <!-- Slogan bar -->
-        <SloganBar class="slogan-bar">
-          <a href="quan-ly-san-pham.html"><img class="logo" src="./assets/Image/logo.png" alt="logo" /></a>
-          <p class="slogan" style="color: white">Chất phím, chất click !</p>
-        </SloganBar>
-    
-        <div style="display: flex">
-          <!-- Navbar admin -->
-          <Navbar-admin class="navbar-admin">
-            <div class="hi-admin" style="height: 50px">
-              <div style="display: flex; position: relative" >
-                <i
-                  class="fa-solid fa-circle-user user" onclick="showModel('model-user-info-container')"
-                >
-                </i>
-                <i
-                  class="fa-solid fa-circle-chevron-down show-user-info"
-                ></i>
-              </div>
-    
-              <p style="margin-top: 12px">Xin chào Admin !</p>
-            </div>
-    
-            <!-- Management options -->
-            <button
-              class="management-option-button"
-              onclick="location.href='./quan-ly-san-pham.html';"
-            >
-              Quản lý sản phẩm
-            </button>
-            <button class="management-option-button" onclick="location.href='./quan-ly-don-hang.html';">Quản lý đơn hàng</button>
-            <button class="management-option-button" onclick="location.href='./quan-ly-khach-hang.html';" >Quản lý khách hàng</button>
-            <button class="management-option-button" 
-            style="background-color: #558dc4; color: white" onclick="location.href='./thong-ke.html';">Thống kê</button>
-          </Navbar-admin>
-    <!-- Header -->
-    <!-- <header class="main-header">
-      <h1>Chất phím, chất click!</h1>
-    </header> -->
+    <!-- Slogan bar -->
+    <SloganBar class="slogan-bar">
+      <a href="quan-ly-san-pham.html"
+        ><img class="logo" src="./assets/Image/logo.png" alt="logo"
+      /></a>
+      <p class="slogan" style="color: white">Chất phím, chất click !</p>
+    </SloganBar>
 
-    <div class="container" style="width: 100%;">
-      <!-- Sidebar Navigation -->
-      <!-- <nav admin class="sidebar">
-        <ul>
-          <li>
-            <a>Quản lý sản phẩm</a>
-          </li>
-          <li>
-            <a>Quản lý đơn hàng</a>
-          </li>
-          <li>
-            <a 
-              >Quản lý khách hàng</a
+    <div style="display: flex">
+      <!-- Navbar admin -->
+      <Navbar-admin class="navbar-admin">
+        <div class="hi-admin" style="height: 50px">
+          <div style="display: flex; position: relative">
+            <i
+              class="fa-solid fa-circle-user user"
+              onclick="showModel('model-user-info-container')"
             >
-          </li>
-          <li><a href="#statistics" class="nav-link">Thống kê</a></li>
-        </ul>
-      </nav Admin> -->
-
-      <!-- Main Content -->
-      <main class="content" style="width: 100%;">
-        <header class="overview-header">
-          <h2>Tổng quan</h2>
-          <div class="stats">
-            <div class="stat today">
-              Hôm nay<br /><span ><!--tinh tien hom nay--></span>
-            </div>
-            <div class="stat all">
-              Tất cả<br /><span>  <!--tinh tien tat ca--></span>
-            </div>
-            <div class="stat last-month">
-              Tháng này<br /><span><!--tinh tien thang nay--></span>
-            </div>
+            </i>
+            <i class="fa-solid fa-circle-chevron-down show-user-info"></i>
           </div>
-        </header>
 
-        <div class="filters">
-          <label for="product-type">Loại sản phẩm:</label>
-          <select id="product-type">
-            <option value="all">Tất cả</option>
-            <option value="Bàn phím cơ">Bàn phím cơ</option>
-            <option value="Bàn phím gaming">Bàn phím gaming</option>
-            <option value="Bàn phím không dây">Bàn phím không dây</option>
-            <option value="Bàn phím đối xứng">Bàn phím đối xứng</option>
-            <option value="Bàn phím mini">Bàn phím mini</option>
-          </select>
-          <label for="start-date">Từ ngày:</label>
-          <input type="date" id="start-date">
-          <label for="end-date">Đến ngày:</label>
-          <input type="date" id="end-date">
-          <button id="filter-button">+ Lọc</button>
-          <button id="refresh-button">Cập nhật</button>
+          <p style="margin-top: 12px">Xin chào Admin !</p>
         </div>
-      
-        <!--top Khách Hàng-->
-        <!-- Top Orders -->
-<section class="top-section" id="top-orders">
-  <h3 style="font-size: 30px;color: rgb(33, 19, 95);">Top 5 Khách Hàng</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>STT</th>
-        <th>Mã khách hàng</th>
-        <th>Khách Hàng</th>
-        <th>Tổng Tiền</th>
-        <th>Thao Tác</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Các hóa đơn sẽ được điền vào đây thông qua JS -->
-    </tbody>
-  </table>
-</section>
 
-        <!-- Top Selling -->
-       <!-- Top Selling -->
-<section class="top-section" id="top-products">
-  <h3>Top 5 sản phẩm bán chạy nhất</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>STT</th>
-        <th>Mã sản phẩm</th>
-        <th>Tên sản phẩm</th>
-        <th>Danh mục</th>
-        <th>Đã bán</th>
-        <th>Tổng tiền</th>
-        <th>Thao tác</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Các sản phẩm bán chạy nhất sẽ được điền vào đây thông qua JS -->
-    </tbody>
-  </table>
-</section>
+        <!-- Management options -->
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-san-pham.html';"
+        >
+          Quản lý sản phẩm
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-don-hang.html';"
+        >
+          Quản lý đơn hàng
+        </button>
+        <button
+          class="management-option-button"
+          onclick="location.href='./quan-ly-khach-hang.html';"
+        >
+          Quản lý khách hàng
+        </button>
+        <button
+          class="management-option-button"
+          style="background-color: #558dc4; color: white"
+          onclick="location.href='./thong-ke.html';"
+        >
+          Thống kê
+        </button>
+      </Navbar-admin>
 
-<!-- Least Selling -->
-<section class="top-section" id="least-products">
-  <h3>Top 5 sản phẩm bán ế nhất</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>STT</th>
-        <th>Mã sản phẩm</th>
-        <th>Tên sản phẩm</th>
-        <th>Danh mục</th>
-        <th>Đã bán</th>
-        <th>Tổng tiền</th>
-        <th>Thao tác</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Các sản phẩm bán ế nhất sẽ được điền vào đây thông qua JS -->
-    </tbody>
-  </table>
-</section>
+      <div class="container" style="width: 100%">
+        <!-- Main Content -->
+        <main class="content" style="width: 100%">
+          <header class="overview-header">
+            <h2>Tổng quan</h2>
+            <div class="stats">
+              <div class="stat today">
+                Hôm nay<br /><span><!--tinh tien hom nay--></span>
+              </div>
+              <div class="stat all">
+                Tất cả<br /><span> <!--tinh tien tat ca--></span>
+              </div>
+              <div class="stat last-month">
+                Tháng này<br /><span><!--tinh tien thang nay--></span>
+              </div>
+            </div>
+          </header>
 
+          <div class="filters">
+            <label for="start-date">Từ ngày:</label>
+            <input type="date" id="start-date" />
+            <label for="end-date">Đến ngày:</label>
+            <input type="date" id="end-date" />
+            <button id="filter-button">+ Lọc</button>
+            <button id="refresh-button">Làm mới</button>
+          </div>
 
+          <!--top Khách Hàng-->
+          <!-- Top Orders -->
+          <section class="top-section" id="top-orders">
+            <h3 style="font-size: 30px; color: rgb(33, 19, 95)">
+              Top 5 Khách Hàng
+            </h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mã khách hàng</th>
+                  <th>Khách Hàng</th>
+                  <th>Tổng Tiền</th>
+                  <th>Thao Tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Các hóa đơn sẽ được điền vào đây thông qua JS -->
+              </tbody>
+            </table>
+          </section>
 
+          <!-- Top Selling -->
+          <!-- Top Selling -->
+          <section class="top-section" id="top-products">
+            <h3 style="font-size: 30px; color: rgb(33, 19, 95)">
+              Top 5 sản phẩm bán chạy nhất
+            </h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Danh mục</th>
+                  <th>Đã bán</th>
+                  <th>Tổng tiền</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Các sản phẩm bán chạy nhất sẽ được điền vào đây thông qua JS -->
+              </tbody>
+            </table>
+          </section>
 
-      </main>
+          <!-- Least Selling -->
+          <section class="top-section" id="least-products">
+            <h3 style="font-size: 30px; color: rgb(33, 19, 95)">
+              Top 5 sản phẩm bán ế nhất
+            </h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Danh mục</th>
+                  <th>Đã bán</th>
+                  <th>Tổng tiền</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Các sản phẩm bán ế nhất sẽ được điền vào đây thông qua JS -->
+              </tbody>
+            </table>
+          </section>
+
+          <section class="top-section" id="allProductsSalesTable">
+            <h3 style="font-size: 30px; color: rgb(33, 19, 95)">
+              Tình hình kinh doanh các sản phẩm
+            </h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Danh mục</th>
+                  <th>Đã bán</th>
+                  <th>Tổng tiền</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Các sản phẩm bán ế nhất sẽ được điền vào đây thông qua JS -->
+              </tbody>
+            </table>
+          </section>
+        </main>
+      </div>
     </div>
 
     <!-- Model user info -->
@@ -177,25 +187,168 @@
       <div class="user-info-ele" onclick="showModel('login-info')">
         <i class="fa-solid fa-circle-user user-info-icon"></i>
         <div>Thông tin tài khoản</div>
-        <i class="fa-solid fa-angle-down" style="padding-left: 5px;"></i>
+        <i class="fa-solid fa-angle-down" style="padding-left: 5px"></i>
       </div>
 
-      <table class="login-info">
-        
-      </table>
+      <table class="login-info"></table>
 
-      <div class="user-info-ele log-out" style="border-top: 1px solid gray;" onclick="logoutAdmin()">
-        <i class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon" style="color: gray;"></i>
+      <div
+        class="user-info-ele log-out"
+        style="border-top: 1px solid gray"
+        onclick="logoutAdmin()"
+      >
+        <i
+          class="fa-solid fa-right-from-bracket fa-rotate-180 user-info-icon"
+          style="color: gray"
+        ></i>
         <div>Đăng xuất</div>
       </div>
-     </div>
+    </div>
+
+    <!-- Model order detail of product -->
+    <div class="model-view-orders-product-container">
+      <div style="position: relative">
+        <div style="display: flex">
+          <i class="fa-solid fa-left-long cancel-view-details"></i>
+          <h1 style="color: #21568a">Các hoá đơn của sản phẩm</h1>
+        </div>
+
+        <div class="product-details"></div>
+
+        <!-- Table order container -->
+        <div class="table-order-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Mã hóa đơn</th>
+                <th>Tên khách hàng</th>
+                <th>Ngày đặt hàng</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="order-list"></tbody>
+          </table>
+        </div>
+
+        <!-- Order Details Section -->
+        <div id="order-details" style="display: none; padding: 20px">
+          <!-- Back Button -->
+          <button class="back-button" onclick="closeOrderDetails()">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại
+          </button>
+
+          <!-- Order Title -->
+          <h2 class="details-title">Chi tiết đơn hàng</h2>
+          <p class="customer-name" id="customer-name"></p>
+
+          <div class="order-header">
+            <h3 class="order-id" id="order-id"></h3>
+            <span class="order-status" id="order-status"></span>
+          </div>
+
+          <p class="order-date" id="order-date"></p>
+          <p class="order-address" id="order-address"></p>
+
+          <h3 class="product-list-title">Danh sách sản phẩm</h3>
+          <table class="product-list">
+            <thead>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+              </tr>
+            </thead>
+            <tbody id="order-products-list"></tbody>
+          </table>
+
+          <p class="order-total" id="order-total"></p>
+
+          <h3 class="history-title">Lịch sử đơn hàng</h3>
+          <ul id="order-history" class="order-history"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Model orders of customer  -->
+    <div class="model-view-details-container">
+      <div style="position: relative">
+        <div style="display: flex">
+          <i
+            class="fa-solid fa-left-long cancel-view-details"
+            onclick="cancelViewDetails()"
+          ></i>
+          <h1 style="color: #21568a">Thông tin chi tiết của khách hàng</h1>
+        </div>
+
+        <div class="customer-details"></div>
+
+        <!-- Table order container -->
+        <div class="table-order-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Mã hóa đơn</th>
+                <th>Tên khách hàng</th>
+                <th>Ngày đặt hàng</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="order-list-of-customer"></tbody>
+          </table>
+        </div>
+
+        <!-- Order Details Section -->
+        <div id="order-details-customer" style="display: none; padding: 20px">
+          <!-- Back Button -->
+          <button class="back-button" onclick="closeOrderDetailsInCustomer()">
+            <i class="fa-solid fa-arrow-left"></i> Quay lại
+          </button>
+
+          <!-- Order Title -->
+          <h2 class="details-title">Chi tiết đơn hàng</h2>
+          <p class="customer-name" id="customer-name-customer"></p>
+
+          <div class="order-header">
+            <h3 class="order-id" id="order-id-customer"></h3>
+            <span class="order-status" id="order-status"></span>
+          </div>
+
+          <p class="order-date" id="order-date-customer"></p>
+          <p class="order-address" id="order-address-customer"></p>
+
+          <h3 class="product-list-title">Danh sách sản phẩm</h3>
+          <table class="product-list">
+            <thead>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+              </tr>
+            </thead>
+            <tbody id="order-products-list-customer"></tbody>
+          </table>
+
+          <p class="order-total" id="order-total"></p>
+
+          <h3 class="history-title">Lịch sử đơn hàng</h3>
+          <ul id="order-history" class="order-history"></ul>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://kit.fontawesome.com/793699135f.js"
       crossorigin="anonymous"
     ></script>
 
-    <script src="./assets/js/common.js"></script> 
+    <script src="./assets/js/common.js"></script>
+    <script src="./assets/js/productData.js"></script>
+    <script src="./assets/js/customerData.js"></script>
+    <script src="/assets/js/orderData.js"></script>
     <script src="./assets/js/thong-ke.js"></script>
   </body>
 </html>

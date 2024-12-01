@@ -1,7 +1,3 @@
-import { getAdmins } from "./adminData.js";
-
-getAdmins();
-
 document.addEventListener("DOMContentLoaded", () => {
   // Login Form Validation
   const loginForm = document.querySelector(".login-form form");
@@ -17,10 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Authenticate user
     const admin = authenticateUser(name, password);
     if (admin) {
-      localStorage.setItem(
-        "currentUser",
-        JSON.stringify(admin)
-      );
+      localStorage.setItem("currentUser", JSON.stringify(admin));
       redirectToRolePage();
     } else {
       alert("Thông tin đăng nhập không chính xác.");
@@ -30,14 +23,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // Registration Form Validation
 });
 
+function getAdmins() {
+  if (
+    localStorage.getItem("admins") === null ||
+    JSON.parse(localStorage.getItem("admins")).length === 0
+  ) {
+    localStorage.setItem("admins", JSON.stringify(listAdmin));
+  }
+  return JSON.parse(localStorage.getItem("admins"));
+}
+
 // Authenticate user function
 function authenticateUser(name, password) {
   const admins = getAdmins();
   return admins.find(
-    (admin) =>
-      admin.name === name &&
-      admin.password === password &&
-      admin.role == "admin"
+    (admin) => admin.name === name && admin.password === password
   );
 }
 
