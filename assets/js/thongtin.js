@@ -10,11 +10,17 @@ const orderStatus = {
 };
 
 function showadr() {
-  document.getElementById("address-input").style.display = "block";
+  document.querySelectorAll(".input-address").forEach((input) => {
+    input.style.display = "block";
+    input.required = true;
+  });
 }
 
 function hideadr() {
-  document.getElementById("address-input").style.display = "none";
+  document.querySelectorAll(".address-input").forEach((input) => {
+    input.style.display = "none";
+    input.required = false;
+  });
 }
 
 function showBank() {
@@ -61,7 +67,7 @@ function checkDefault() {
   let adr = JSON.parse(localStorage.getItem("currentUser")) || [];
   let address = "( " + adr.address + " )";
   if (defaultAdr && adr.address !== "")
-    document.getElementById("defAdr").innerHTML = address;
+    document.getElementById("defAdr").innerHTML = getAddress(adr.address);
 }
 checkDefault();
 
@@ -73,7 +79,7 @@ function validateForm(event) {
   const name = document.getElementById("hoTen");
   const phone = document.getElementById("SDT");
   const otherAdr = document.getElementById("other-address").checked;
-  const adr = document.getElementById("address-input");
+  const adr = document.getElementById("input-address");
   const payCard = document.getElementById("PayByCard").checked;
   const soThe = document.getElementById("the");
   const thoiHan = document.getElementById("tg");
@@ -109,14 +115,36 @@ function validateForm(event) {
       return false;
     }
   }
-
+  const provinceCode = document.querySelector("#province-input").value;
+  const districtCode = document.querySelector("#district-input").value;
+  const wardCode = document.querySelector("#ward-input").value;
+  const address = document.querySelector("#address").value;
   // Validate address if "Nhập địa chỉ khác" is selected
-  if (adr.value.trim() === "" && otherAdr) {
-    alert("Vui lòng nhập địa chỉ!");
-    adr.focus();
-    event.preventDefault();
-    return false;
+  if (otherAdr) {
+    if (
+      provinceCode === "" ||
+      districtCode === "" ||
+      wardCode === "" ||
+      address === ""
+    ) {
+      alert("Vui lòng nhập địa chỉ!");
+      adr.focus();
+      event.preventDefault();
+      return false;
+    }
   }
+
+  let province, district, ward;
+  if (provinceCode) {
+    province = vietnameseProvinces.find(
+      (province) => province.Code === provinceCode
+    );
+    district = province.District.find(
+      (district) => district.Code === districtCode
+    );
+    ward = district.Ward.find((ward) => ward.Code === wardCode);
+  }
+
   if (bank && !isConfirmed) {
     alert("Bạn chưa xác nhận đã chuyển khoản thành công");
     checkBox.focus();
@@ -178,7 +206,7 @@ function validateForm(event) {
   const now = new Date();
   const formattedTime = now.toISOString().slice(0, 19).replace("T", " ");
   let dis = JSON.parse(localStorage.getItem("discnt"));
-  let addr = JSON.parse(localStorage.getItem("currentUser")) || [];
+  // let addr = JSON.parse(localStorage.getItem("currentUser")) || [];
   let sum = JSON.parse(localStorage.getItem("total")) || 0;
   // Prepare the order object, overwriting customer info
   const orderData = {
@@ -187,7 +215,9 @@ function validateForm(event) {
       customerID: infUser.ID,
       name: name.value.trim() || infUser.name,
       phone: phone.value.trim() || infUser.phone,
-      address: otherAdr ? adr.value.trim() : addr.address,
+      address: otherAdr
+        ? new Address(province.FullName, district.FullName, ward.FullName, address)
+        : infUser.address,
       paymentMethod: payCard ? "Thẻ" : "Khác",
       cardInfo: payCard
         ? {
@@ -287,4 +317,102 @@ function generateOrderID() {
   const maxOrderID = Math.max(...orderIDs);
   const nextOrderID = (maxOrderID + 1).toString().padStart(5, "0");
   return `#DH${nextOrderID}`;
+}
+
+function getAddress(addressObj) {
+  return `${addressObj.address}, ${addressObj.ward}, ${addressObj.district}, ${addressObj.province}.`;
+}
+
+// --------------------------------------------------------------------------------- //
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Chèn dữ liệu thành phố
+  populateProvinces();
+
+  // Chèn dữ liệu quận vào form chọn quận khi chọn xong thành phố
+  document
+    .getElementById("province-input")
+    .addEventListener("change", function () {
+      const selectedProvinceCode = this.value;
+      if (
+        selectedProvinceCode === "" ||
+        selectedProvinceCode === null ||
+        selectedProvinceCode === undefined
+      ) {
+        document.getElementById("district-input").required = false;
+        document.getElementById("district-input").disabled = true;
+        document.getElementById("ward-input").required = false;
+        document.getElementById("ward-input").disabled = true;
+        document.getElementById("address").required = false;
+        document.getElementById("address").disabled = true;
+        return;
+      }
+
+      populateDistricts(selectedProvinceCode);
+    });
+
+  document
+    .getElementById("district-input")
+    .addEventListener("change", function () {
+      const selectedDistrictCode = this.value;
+      console.log(selectedDistrictCode);
+      if (
+        selectedDistrictCode === "" ||
+        selectedDistrictCode === null ||
+        selectedDistrictCode === undefined
+      ) {
+        document.getElementById("ward-input").required = false;
+        document.getElementById("ward-input").disabled = true;
+        document.getElementById("address").required = false;
+        document.getElementById("address").disabled = true;
+        return;
+      }
+      populateWards(selectedDistrictCode);
+    });
+});
+
+function populateProvinces() {
+  const provinceSelect = document.getElementById("province-input");
+  provinceSelect.innerHTML = `<option value="">Chọn tỉnh/thành</option>`;
+  vietnameseProvinces.forEach((province) => {
+    provinceSelect.innerHTML += `<option value="${province.Code}">${province.FullName}</option>`;
+  });
+}
+
+function populateDistricts(provinceCode) {
+  const districtSelect = document.getElementById("district-input");
+  const wardSelect = document.getElementById("ward-input");
+  districtSelect.innerHTML = `<option value="">Chọn quận/huyện</option>`;
+  districtSelect.disabled = !provinceCode;
+  districtSelect.required = true;
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = true;
+
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
+  province.District.forEach((district) => {
+    districtSelect.innerHTML += `<option value="${district.Code}">${district.FullName}</option>`;
+  });
+}
+
+function populateWards(districtCode) {
+  const wardSelect = document.getElementById("ward-input");
+  wardSelect.innerHTML = `<option value="">Chọn phường/xã</option>`;
+  wardSelect.disabled = !districtCode;
+  wardSelect.required = true;
+
+  const provinceCode = document.getElementById("province-input").value;
+  const province = vietnameseProvinces.find(
+    (province) => province.Code === provinceCode
+  );
+  const district = province.District.find(
+    (district) => district.Code === districtCode
+  );
+  district.Ward.forEach((ward) => {
+    wardSelect.innerHTML += `<option value="${ward.Code}">${ward.FullName}</option>`;
+  });
+
+  document.getElementById("address").disabled = false;
+  document.getElementById("address").required = true;
 }

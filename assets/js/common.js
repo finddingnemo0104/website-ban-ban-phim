@@ -129,12 +129,8 @@ function showAdminInfoTable() {
 
   const html = `
      <tr>
-            <td class="label-info">Tên đăng nhập</td>
-            <td class="value-info">${currentUser.name}</td>
-          </tr>
-          <tr>
-            <td class="label-info">Mật khẩu</td>
-            <td class="value-info">${currentUser.password}</td>
+            <td class="label-info">Mã admin</td>
+            <td class="value-info">${currentUser.ID}</td>
           </tr>
     `;
 

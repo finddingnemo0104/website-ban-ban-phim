@@ -3,7 +3,7 @@ let IDUser = User.ID;
 let orders = JSON.parse(localStorage.getItem("orders" + IDUser)) || [];
 
 if (orders.length === 0) {
-    document.querySelector(".order-summary").innerHTML = `
+  document.querySelector(".order-summary").innerHTML = `
         <style>
         body {
             font-family: Arial, sans-serif;
@@ -116,60 +116,96 @@ if (orders.length === 0) {
             <a href="index.html" class="return-btn">Quay lại trang chủ</a>
         </div>`;
 } else {
-    // if(orders.length>1) {
-    //     for (let i = 1; i <= orders.length; i++) {
-    //         let li = document.createElement("li");
-    //         li.style.display = "inline";
-    //         li.style.margin = "0 10px";
-    //         let button = document.createElement("button");
-    //         button.onclick = function() {
-    //             show(i); 
-    //         };
-    //         button.style.padding = "3px";
-    //         button.textContent = i;
-    //         li.appendChild(button);
-    //         sldonhang.appendChild(li);
-    //     }
-    // }
-    show(localStorage.getItem('orderIndex'));
-    let sl=JSON.parse(localStorage.getItem("cart" + IDUser));
-    document.getElementById("cart-count").innerHTML=sl.length;
-    }
-function show(i){
-    let order = orders[i-1]; 
-    let customerInfo = order?.customerInfo || {};
-    document.getElementById("name").innerHTML = `<p><strong>Tên khách hàng: </strong> ${customerInfo.name}</p>`;
-    document.getElementById("sdt").innerHTML = `<p><strong>Số điện thoại: </strong> ${customerInfo.phone }</p>`;
-    document.getElementById("adr").innerHTML = `<p><strong>Địa chỉ giao hàng: </strong> ${customerInfo.address }</p>`;
-    document.getElementById("time").innerHTML = `<p><strong>Ngày giờ đặt hàng: </strong> ${order?.orderDate}</p>`;
+  // if(orders.length>1) {
+  //     for (let i = 1; i <= orders.length; i++) {
+  //         let li = document.createElement("li");
+  //         li.style.display = "inline";
+  //         li.style.margin = "0 10px";
+  //         let button = document.createElement("button");
+  //         button.onclick = function() {
+  //             show(i);
+  //         };
+  //         button.style.padding = "3px";
+  //         button.textContent = i;
+  //         li.appendChild(button);
+  //         sldonhang.appendChild(li);
+  //     }
+  // }
+  show(localStorage.getItem("orderIndex"));
+  let sl = JSON.parse(localStorage.getItem("cart" + IDUser));
+  document.getElementById("cart-count").innerHTML = sl.length;
+}
+function getAddress(addressObj) {
+  return `${addressObj.address}, ${addressObj.ward}, ${addressObj.district}, ${addressObj.province}.`;
+}
 
-    // Displaying the products in the order
-    function formatPrice(price) {
-        return new Intl.NumberFormat("vi-VN").format(price) + " VNĐ";
-    }
+function show(i) {
+  let order = orders[i - 1];
+  let customerInfo = order?.customerInfo || {};
+  document.getElementById(
+    "name"
+  ).innerHTML = `<p><strong>Tên khách hàng: </strong> ${customerInfo.name}</p>`;
+  document.getElementById(
+    "sdt"
+  ).innerHTML = `<p><strong>Số điện thoại: </strong> ${customerInfo.phone}</p>`;
+  document.getElementById(
+    "adr"
+  ).innerHTML = `<p><strong>Địa chỉ giao hàng: </strong> ${getAddress(
+    customerInfo.address
+  )}</p>`;
+  document.getElementById(
+    "time"
+  ).innerHTML = `<p><strong>Ngày giờ đặt hàng: </strong> ${order?.orderDate}</p>`;
 
-    document.querySelector(".order-items").innerHTML = `
+  // Displaying the products in the order
+  function formatPrice(price) {
+    return new Intl.NumberFormat("vi-VN").format(price) + " VNĐ";
+  }
+
+  document.querySelector(".order-items").innerHTML = `
         <div class="order-items">
             <h3>Sản phẩm đã mua:</h3>
             <ul>
-                ${order.items.map(item => `
+                ${order.items
+                  .map(
+                    (item) => `
                     <li>
-                        <img src="${item.image}" alt="${item.name}" class="product-image">
-                        <span class="product-name">${item.name}</span> - ${item.quantity} cái 
-                        <span class="product-price"> - ${formatPrice(item.price)}</span>
+                        <img src="${item.image}" alt="${
+                      item.name
+                    }" class="product-image">
+                        <span class="product-name">${item.name}</span> - ${
+                      item.quantity
+                    } cái 
+                        <span class="product-price"> - ${formatPrice(
+                          item.price
+                        )}</span>
                     </li>
-                `).join("")}
+                `
+                  )
+                  .join("")}
             </ul>
         </div>
     `;
-    let dis=order.discount;
-    let sum = order.items.reduce((acc, item) => acc + item.quantity * item.price, 0);
-    if(dis===1) {sum=sum*0.9
-    document.getElementById("giam_gia").innerHTML = `<strong>Giảm giá 10%</strong><br>`;}
-    else {document.getElementById("giam_gia").innerHTML = `<strong></strong><br>`;}
-    document.getElementById("totalPrice").innerHTML = `<p id="totalPrice"><strong>Tổng tiền:</strong> ${formatPrice(sum)}</p><br>`  ;
+  let dis = order.discount;
+  let sum = order.items.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
+  if (dis === 1) {
+    sum = sum * 0.9;
+    document.getElementById(
+      "giam_gia"
+    ).innerHTML = `<strong>Giảm giá 10%</strong><br>`;
+  } else {
+    document.getElementById("giam_gia").innerHTML = `<strong></strong><br>`;
+  }
+  document.getElementById(
+    "totalPrice"
+  ).innerHTML = `<p id="totalPrice"><strong>Tổng tiền:</strong> ${formatPrice(
+    sum
+  )}</p><br>`;
 }
 
 function goBackToOrders() {
-    window.location.href = "don-hang.html";
-  }
+  window.location.href = "don-hang.html";
+}

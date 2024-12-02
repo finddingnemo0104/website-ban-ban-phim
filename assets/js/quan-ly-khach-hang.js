@@ -878,11 +878,9 @@ function populateWards(
   wardSelect.required = true;
 
   const provinceCode = document.getElementById(selectProvinceId).value;
-  console.log("provinceCode", provinceCode);
   const province = vietnameseProvinces.find(
     (province) => province.Code === provinceCode
   );
-  console.log(province);
   const district = province.District.find(
     (district) => district.Code === districtCode
   );

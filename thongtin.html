@@ -1,64 +1,137 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SGU Click</title>
     <link rel="icon" type="image/x-icon" href="./assets/Image/logo.png" />
     <link rel="stylesheet" href="/assets/css/thongtin.css" />
-</head>
-<body>
-
-<!-- Modal Shipping Information -->
-<div class="modal">
-    <div class="modal-content">
+  </head>
+  <body>
+    <!-- Modal Shipping Information -->
+    <div class="modal">
+      <div class="modal-content">
         <div class="modal-header">
-            <h2>Thông tin giao hàng</h2>
-            <a href="giohang.html" style="text-decoration: none;"><span class="close-btn">&times;</span></a>
-            
+          <h2>Thông tin giao hàng</h2>
+          <a href="giohang.html" style="text-decoration: none"
+            ><span class="close-btn">&times;</span></a
+          >
         </div>
         <div class="modal-body">
-            <label>Họ Tên</label>
-            <input type="text" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" id="hoTen"><br><br>
-            <label>SĐT</label>
-            <input type="text" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" id="SDT">
-            <div class="shipping-address">
-                <p><strong>Địa chỉ giao hàng</strong></p>
-                <div class="radio-group">
-                    <label><input type="radio" name="address" id="default_address" checked onclick="hideadr()"> Sử dụng địa chỉ mặc định</label>
-                    <label id="defAdr" style="margin-left: 20px; color: #1e3a8a;"></label>
-                    <label><input type="radio" name="address" id="other-address" onclick="showadr()"> Nhập địa chỉ khác</label>
-                    <input type="text" placeholder="Địa chỉ giao hàng" class="input-address" id="address-input">
-                </div>
+          <label>Họ Tên</label>
+          <input
+            type="text"
+            style="
+              width: 100%;
+              padding: 8px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+            "
+            id="hoTen"
+          /><br /><br />
+          <label>SĐT</label>
+          <input
+            type="text"
+            style="
+              width: 100%;
+              padding: 8px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+            "
+            id="SDT"
+          />
+          <div class="shipping-address">
+            <p><strong>Địa chỉ giao hàng</strong></p>
+            <div class="radio-group">
+              <label
+                ><input
+                  type="radio"
+                  name="address"
+                  id="default_address"
+                  checked
+                  onclick="hideadr()"
+                />
+                Sử dụng địa chỉ mặc định</label
+              >
+              <label
+                id="defAdr"
+                style="margin-left: 20px; color: #1e3a8a"
+              ></label>
+              <label
+                ><input
+                  type="radio"
+                  name="address"
+                  id="other-address"
+                  onclick="showadr()"
+                />
+                Nhập địa chỉ khác</label
+              >
+              <select id="province-input" class="input-address">
+                <option value="">Tỉnh / Thành phố</option>
+              </select>
+              <select id="district-input" class="input-address" disabled>
+                <option value="">Quận / Huyện</option>
+              </select>
+              <select id="ward-input" class="input-address" disabled>
+                <option value="">Xã / Phường / Thị trấn</option>
+              </select>
+              <input
+                type="text"
+                id="address"
+                class="input-address"
+                placeholder="Địa chỉ"
+                disabled
+              />
             </div>
+          </div>
 
-            <div class="payment-method">
-                <p><strong>Phương thức thanh toán</strong></p>
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="payment" onclick="hideCard()" checked>
-                        Thanh toán khi nhận hàng
-                    </label>
-                    <label>
-                        <input type="radio" name="payment" onclick="showBank()" id="chuyen_khoan">
-                        Chuyển khoản
-                    </label>
-                    <div id="ttck" style="display: none;"></div>
-                    <label><input type="radio" name="payment" onclick="showCard()" id="PayByCard"> Thanh toán bằng thẻ</label>
-                    <input type="text" placeholder="Số thẻ" id="the">
-                    <input type="text" placeholder="Thời hạn MM/YY" id="tg">
-                    <input type="text" placeholder="CVV/CVC" id="cvv">
-                </div>
+          <div class="payment-method">
+            <p><strong>Phương thức thanh toán</strong></p>
+            <div class="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="payment"
+                  onclick="hideCard()"
+                  checked
+                />
+                Thanh toán khi nhận hàng
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="payment"
+                  onclick="showBank()"
+                  id="chuyen_khoan"
+                />
+                Chuyển khoản
+              </label>
+              <div id="ttck" style="display: none"></div>
+              <label
+                ><input
+                  type="radio"
+                  name="payment"
+                  onclick="showCard()"
+                  id="PayByCard"
+                />
+                Thanh toán bằng thẻ</label
+              >
+              <input type="text" placeholder="Số thẻ" id="the" />
+              <input type="text" placeholder="Thời hạn MM/YY" id="tg" />
+              <input type="text" placeholder="CVV/CVC" id="cvv" />
             </div>
+          </div>
         </div>
-        
+
         <div class="modal-footer">
-            <button type="submit" class="confirm-btn">Xác nhận</button>
-            <a href="giohang.html"><button class="cancel-btn">Hủy</button></a>
+          <button type="submit" class="confirm-btn">Xác nhận</button>
+          <a href="giohang.html"><button class="cancel-btn">Hủy</button></a>
         </div>
+      </div>
     </div>
-</div>
-</body>
-<script src="./assets/js/common.js"></script>
-<script src="./assets/js/thongtin.js"></script>
+  </body>
+  <script src="./assets/js/common.js"></script>
+  <script src="./assets/vietnamese-provinces-data.js"></script>
+  <script src="./assets/js/customerData.js"></script>
+  <script src="./assets/js/thongtin.js"></script>
 </html>

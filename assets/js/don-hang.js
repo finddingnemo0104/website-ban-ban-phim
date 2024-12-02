@@ -28,10 +28,11 @@ function displayOrders(ordersKey) {
       <p>Tổng chi tiêu: 0đ</p>
       <label for="status-filter">Lọc theo trạng thái:</label>
       <select id="status-filter" onchange="filterOrders(this.value)">
-        <option value="all">Chọn trạng thái</option>
-        <option value="Đã giao hàng">Đã giao hàng</option>
-        <option value="Chờ thanh toán">Chờ thanh toán</option>
-        <option value="Chưa xử lý">Chưa xử lý</option>
+      <option value="all">Chọn trạng thái</option>
+      <option value="Chưa xử lý">Chưa xử lý</option>
+      <option value="Đã xác nhận">Đã xác nhận</option>
+      <option value="Đã giao thành công">Đã giao thành công</option>
+      <option value="Đã hủy">Đã hủy</option>
       </select>
     `;
     return;
@@ -51,12 +52,12 @@ function displayOrders(ordersKey) {
     orderItem.className = "order-item";
     orderItem.innerHTML = `
       <div class="order-header">
-        <h3>Đơn hàng #000${index + 1}</h3>
-        <span class="order-status">${order.status || "Chưa xử lý"}</span>
+        <h3>Đơn hàng ${order.orderID}</h3>
+        <span class="order-status">${order.orderStatus}</span>
       </div>
       <div class="order-details">
         <p>Ngày đặt: ${order.orderDate}</p>
-        <p>Địa chỉ: ${order.customerInfo.address}</p>
+        <p>Địa chỉ: ${getAddress(order.customerInfo.address)}</p>
         ${order.items
           .map(
             (item) => `
@@ -79,9 +80,10 @@ function displayOrders(ordersKey) {
     <label for="status-filter">Lọc theo trạng thái:</label>
     <select id="status-filter" onchange="filterOrders(this.value)">
       <option value="all">Chọn trạng thái</option>
-      <option value="Đã giao hàng">Đã giao hàng</option>
-      <option value="Chờ thanh toán">Chờ thanh toán</option>
       <option value="Chưa xử lý">Chưa xử lý</option>
+      <option value="Đã xác nhận">Đã xác nhận</option>
+      <option value="Đã giao thành công">Đã giao thành công</option>
+      <option value="Đã hủy">Đã hủy</option>
     </select>
   `;
 }
@@ -127,8 +129,8 @@ function displayOrdersList(orders) {
     orderItem.className = "order-item";
     orderItem.innerHTML = `
       <div class="order-header">
-        <h3>Đơn hàng #000${index + 1}</h3>
-        <span class="order-status">${order.orderStatus || "Chưa xử lý"}</span>
+        <h3>Đơn hàng ${order.orderID}</h3>
+        <span class="order-status">${order.orderStatus}</span>
       </div>
       <div class="order-details">
         <p>Ngày đặt: ${order.orderDate}</p>
@@ -164,4 +166,8 @@ function viewOrderDetails(orderIndex) {
   } else {
     alert("Đơn hàng không tồn tại.");
   }
+}
+
+function getAddress(addressObj) {
+  return `${addressObj.address}, ${addressObj.ward}, ${addressObj.district}, ${addressObj.province}.`;
 }
